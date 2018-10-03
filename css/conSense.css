@@ -1,0 +1,160 @@
+/* CSS Document */
+
+/* ------------------------------------------------------------------------ */
+/* ConSense */
+
+.conSenseContainer {
+    background-color: gray;
+    background-image: url("../images/conSense/headerBg.png");
+    background-repeat: repeat-x;
+    color: white;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+    position: absolute;
+    width: 780px;
+    height: 450px;
+    /* Alpha settings for different browsers */
+    filter: alpha(opacity=95);
+    opacity: 0.95;
+    -moz-opacity: 0.95;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, .75);
+}
+
+.conSenseInnerContainer {
+    width: 780px;
+    height: 429px;
+    overflow: auto;
+    float: left;
+}
+
+.conSenseHeader {
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    border: 0;
+    width: 700px;   /* 770-710 = 60 pixels are left for Switch */
+    height: 21px;
+    cursor: move;
+    float: left;
+}
+
+.conSenseHeaderSwitch {
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: right;
+    text-decoration: underline;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    padding-right: 10px;
+    border: 0;
+    width: 60px;
+    height: 21px;
+    cursor: pointer;
+    float: right;
+}
+
+.conSenseOut {
+    margin: 0;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.conSenseIn {
+    background-color: white;
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border: 3px solid white;
+    margin: 0;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 0;
+    width: 700px;   /* Input slot */
+}
+
+.conSenseCounter {
+    background-color: white;
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border: 3px solid white;
+    margin: 0;
+    margin-top: 5px;
+    padding: 0px;
+    width: 38px;    /* Counter slot */
+}
+
+.conSenseHighlight {
+    background: #AAAAAA;
+    font-weight: bold;
+}
+
+.conSenseHighlightAppendLink {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.conSenseManualEntry {
+    padding: 0;
+    margin: 0;
+    margin-left: 40px;
+    margin-bottom: 2px;
+}
+
+.conSenseManualEntryHead {
+    margin-left: -20px;
+}
+
+.loadIndicator {
+    display: none;
+    z-index: 2000000000;
+    background: white;
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 1.5em;
+    border: 0;
+    margin: 0;
+    padding: 5px;
+    text-decoration: 0;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.inputBlocker {
+    display: none;
+    z-index: 1999999999; 
+    background-color: blue;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    /* BUG: 7402 mi? */
+    width: 5000px;
+    height: 10000px;
+    /* Alpha settings for different browsers */
+    filter: alpha(opacity=20);
+    opacity: 0.20;
+    -moz-opacity: 0.20;
+}
+
+/* ------------------------------------------------------------------------ */

@@ -1,0 +1,60 @@
+<pre>
+//////////////////////////////////////////////////////////////////////////////
+// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
+// TODO
+// v1.01
+// https://aladar.me/
+//////////////////////////////////////////////////////////////////////////////
+
+Legend
+------
+- severe
++ nice to have
+~ future feature
+x closed
+* any
+ticket count 0016
+
+TODO
+----
+- [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
+                      loader. If so, make it invisible through RedSendGenericLoader.
+                      That might bring back full IE compatibility, too.
+- [0016] [2018-10-01] Thinking about including Materialize and Velocity.js
+
++ [0004] [2018-09-23] Include in an include: the ability to load content from within a loaded
+                      content. E.g. load injectCommand.js directly from intro.txt, not from
+                      index.html
++ [0005] [2018-09-23] Warning message in FF when dynamically loading content:
+                      "The character encoding of a framed document was not declared.
+                      The document may appear different if viewed without the document
+                      framing it."
+                      An ability to set encoding for loaded files.
++ [0009] [2018-09-27] Responsive design for mobile screens. Maybe using Materialize?
+
+~ [0006] [2018-09-23] RedSand/GL : vector and pixel features
+~ [0007] [2018-09-23] RedSand/GL : game loop
+
+~ [0008] [2018-09-23] New feature: RedSandText, an old school text mode interface to implement
+                      an editor or anything
+~ [0011] [2018-09-30] OR BiturboVision as a TurboVision port?
+
+Done
+----
+x [0003] [2018-09-23] LightDown on loaded pages, e.g. in the Tests article
+x [0010] [2018-09-27] Option / default to skip the cache when dynamically loading !
+x [0001] [2018-09-23] Reloading the page does not reload content
+x [0002] [2018-09-23] Fix dynamic content loading in Chrome
+                      (It was the onLoad callback being called before adding a src URL to the
+                      new IFrame.)
+x [0012] [2018-09-30] Won't fix: hasOwnProperty() list() in ConSense, show only own properties
+x [0014] [2018-10-01] Page reload sometimes does not reload the dynamic content
+
+Maybe features
+--------------
+* SOAP client feature
+* Load timeout handling
+* Modular liteDown() design
+* Javadoc comments
+
+</pre>

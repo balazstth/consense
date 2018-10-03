@@ -1,0 +1,8 @@
+<p>
+    T&oacuteth, Bal&aacute;zs Alad&aacute;r : author<br>
+    https://aladar.me/ <br>
+    <br>
+    Sch&auml;fer, Zsolt : contributor<br>
+    <br>
+    Oszvald, Bal&aacute;zs : logo design
+</p>

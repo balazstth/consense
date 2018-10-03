@@ -1,0 +1,240 @@
+<pre>
+//////////////////////////////////////////////////////////////////////////////
+// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
+// Documentation
+// v2.04
+// https://aladar.me/
+//////////////////////////////////////////////////////////////////////////////
+
+//============================================================================
+// CONTENTS
+//============================================================================
+
+General documentation
+    About
+    System requirements
+
+Technical documentation
+    Keyboard shortcut for the ConSense console
+    Loading indicator
+    Z-indexes
+    RedSand windowlets
+
+Coding conventions
+    Special comments and versioning
+    Style guide
+    Java code style
+    Indentation
+
+License
+    ConSense MIT-like license
+    Third-party subsystems (full licenses are included in the source files)
+
+
+//============================================================================
+// General documentation
+//============================================================================
+
+About
+-----
+
+ConSense: a (once :) comprehensive JavaScript debug console.
+SimpleClasses: an essential, portable class set with cryptography, debug and
+general utility functionality.
+RedSand: a small, medium complexity client-side framework for web interfaces.
+
+ConSense features various debug methods (see help() in the console), a one-liner
+stub in your code, a keyboard shortcut to show it any time needed and other
+useful services.
+
+The use of SimpleClasses is a convenient ways to include the necessary basic
+tools in your client-side code - from keyboard handling to a simplified
+"markdown" language called liteDown. Also supports essentials like
+Base 64, MD5, SHA1, RC4.
+
+RedSand: an ultra-light middleware to create *really* fast portals. Covers
+automatic internationalization, hierarchical user interface elements, iframe
+loading.
+
+System requirements
+-------------------
+
+2018:
+ConSense should work well with all recent browsers.
+In IE 11 load() support coughs, the debug console works flawlessly nevertheless.
+
+Minimal requirements as of 2006 / legacy versions:
+Mozilla Firefox 1.5
+Microsoft Internet Explorer 6.0
+
+
+//============================================================================
+// Technical documentation
+//============================================================================
+
+Keyboard shortcut for the ConSense console
+------------------------------------------
+
+Alt+Shift+K
+
+Loading indicator
+-----------------
+
+redSandGenericLoader.indicate flag to toggle load indicator (spinner) display.
+
+Z-indexes
+---------
+
+2.000.000.001 - ConSense console
+2.000.000.000 - RedSandGenericLoader load indicator
+1.999.999.999 - Input blocker
+    1.000.000 - windowlets
+
+RedSand windowlets
+------------------
+
+Windowlets are simple, optionally draggable, fixed-size containers. To create
+one simply use the RedSandWindowlet() constructor. RedSandWindowletManager is
+used automatically and invisibly.
+
+Debug mode
+----------
+
+conSense.debug governs a couple of things. One of them is whether dynamically
+loading files (text content, css, js, etc.) are forced to reload each time
+from the server.
+The other thing is whether conSense.debugLn() prints an output.
+
+
+//============================================================================
+// Coding conventions
+//============================================================================
+
+Special comments and versioning
+-------------------------------
+
+    Version number: [major version].[minor percentage]
+                or: [major version].[minor version]
+
+    *NAMING* comments indicate that special care should be taken in
+    synchronizing JS names with HTLM element and CSS style names.
+
+    *VALUES* acts like *NAMING* for numeric/string values.
+
+    *STATIC* indicates statically programmed restrictions.
+
+    *GLOBAL* stands for global definitions/references.
+
+    *WORKAROUND* for special bug/feature avoiding solutions.
+
+    *ENV* denotes reference to a JS "environment" variable.
+
+    *DEPENDENCY* denotes dependency between classes.
+
+    *WARNING* for cases of taking extreme caution by handling different
+    elements
+    
+    Remark: to denote a point of interest.
+
+Style guide
+-----------
+
+    //////////////////////////////////////////////////////////////////////////
+    // Page width: 78 characters
+    //////////////////////////////////////////////////////////////////////////
+
+    function ExampleClass(constructorParameter)
+    {
+        this.constructorParameter = constructorParameter;
+
+        this.field = "deadbeef";
+
+        //--------------------------------------------------------------------
+        // Methods
+        //--------------------------------------------------------------------
+
+        // ExampleClass
+        this.aFunction = function(param0, param1)
+        {
+            var anArray = new Array();
+
+            anArray.push(param0);
+            anArray.push(param1);
+
+            for (int i in anArray)
+            {
+                write(anArray(i));
+            }
+        }
+
+        //--------------------------------------------------------------------
+
+        // ExampleClass
+        this.anotherFunction = function(...)
+        {
+            ...
+        }
+    }
+
+Java code style
+---------------
+
+Is also valid.
+
+    void someFunction() {
+        // TODO
+    }
+
+Indentation
+-----------
+
+Using spaces, end-of-line whitespaces trimmed.
+
+
+//============================================================================
+// License
+//============================================================================
+
+ConSense MIT-like license
+-------------------------
+
+Copyright (c) 2005-2018 Toth, Balazs Aladar (https://aladar.me/)
+
+Permission  is  hereby granted, free of charge, to any person obtaining a copy
+of  this software and associated documentation files (the "Software"), to deal
+in  the  Software without restriction, including without limitation the rights
+to  use,  copy,  modify,  merge,  publish, distribute, sublicense, and/or sell
+copies  of  the  Software,  and  to  permit  persons  to  whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE  SOFTWARE  IS  PROVIDED  "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED,  INCLUDING  BUT  NOT  LIMITED  TO  THE WARRANTIES OF MERCHANTABILITY,
+FITNESS  FOR  A  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS  OR  COPYRIGHT  HOLDERS  BE  LIABLE  FOR  ANY  CLAIM, DAMAGES OR OTHER
+LIABILITY,  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT  OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Third-party subsystems (full licenses are included in the source files)
+----------------------
+
+md5 2.1              (c) Paul Johnston (http://pajhome.org.uk/crypt/md5)
+sha1 2.1a            (c) Paul Johnston (http://pajhome.org.uk/crypt/md5)
+dom-drag 10.28.2001  (c) www.youngpup.net
+DateFormat 2001      (c) 2001 David A. Lindquist (http://www.gazingus.org)
+SortTable version 2  (c) Stuart Langridge,
+                         http://www.kryogenix.org/code/browser/sorttable/
+shortcut 2.01.A      (c) Binny V A
+                         http://www.openjs.com/scripts/events/keyboard_shortcuts/
+
+As of ConSense 1.11 these are not mandatory, just very convenient to have:
+Cash 1.0.0           @ http://kenwheeler.github.io/cash/
+Underscore.js 1.9.1  @ http://underscorejs.org
+Backbone.js 1.3.3    @ http://backbonejs.org
+
+//============================================================================
+</pre>
