@@ -14,7 +14,7 @@
 // *ENV* relativeConSensePath
 function Stub()
 {
-    this.version = "1.17";
+    this.version = "1.18";
     
     //------------------------------------------------------------------------
 

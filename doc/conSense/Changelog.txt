@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
 // Changelog
-// v2.01
+// v2.02
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,8 @@
 //         RedSandCore
 //         RedSandGL
 //         ConSense
-//         ConSenseStub*, build.*
+//         ConSenseStub*
+//         build.*
 //         SimpleClasses
 //
 // 2.) Client side tests
@@ -236,7 +237,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////
-// ConSenseStub*, build.*
+// ConSenseStub*
 //////////////////////////////////////////////////////////////////////////////
 //
 // version      date            description
@@ -261,10 +262,18 @@
 // 1.15         2018-09-28      forced reload of resources on each load in
 //                                  debug mode
 // 1.16         2018-09-30      added jQuery, Underscore, Backbone
-// 1.17         2018-09-30      prototype.lite removed (jQuery replaces it)
-// 1.18         2018-10-01      custom_rhino.jar replaced by ShrinkSafe
-//                              (a more recent Dojo compressor)
-//                              Source file encoding set to UTF-8.
+// 1.17         2018-09-30      prototype.lite --> jQuery
+// 1.18         2018-10-01      jQuery --> Cash
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// build.*
+//////////////////////////////////////////////////////////////////////////////
+// 1.18         2018-10-01      custom_rhino.jar --> ShrinkSafe
+//                                  (a more recent Dojo compressor)
+//                              source file encoding set to UTF-8
+//                              jQuery --> Cash
+// 1.19         2018-10-04      Ignore .git in 7z archive
 //
 //////////////////////////////////////////////////////////////////////////////
 

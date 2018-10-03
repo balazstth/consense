@@ -1,6 +1,6 @@
 
 REM ConSense build script
-REM 1.18
+REM 1.19
 
 del ..\releases\*.zip
 del ..\releases\*.7z
