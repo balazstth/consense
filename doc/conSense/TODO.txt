@@ -13,14 +13,15 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0016
+ticket count 0020
 
 TODO
 ----
+
 - [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
                       loader. If so, make it invisible through RedSendGenericLoader.
                       That might bring back full IE compatibility, too.
-- [0016] [2018-10-01] Thinking about including Materialize and Velocity.js
+- [0017] [2018-10-04] Load timeout handling
 
 + [0004] [2018-09-23] Include in an include: the ability to load content from within a loaded
                       content. E.g. load injectCommand.js directly from intro.txt, not from
@@ -29,15 +30,18 @@ TODO
                       "The character encoding of a framed document was not declared.
                       The document may appear different if viewed without the document
                       framing it."
-                      An ability to set encoding for loaded files.
-+ [0009] [2018-09-27] Responsive design for mobile screens. Maybe using Materialize?
+                      An ability to set encoding and MIME type for loaded files.
 
-~ [0006] [2018-09-23] RedSand/GL : vector and pixel features
-~ [0007] [2018-09-23] RedSand/GL : game loop
-
-~ [0008] [2018-09-23] New feature: RedSandText, an old school text mode interface to implement
-                      an editor or anything
-~ [0011] [2018-09-30] OR BiturboVision as a TurboVision port?
+~ [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
+                      an evolution of windowlets. Materialize? Velocity? Backbone?
+~ [0008] [2018-09-23] RedSandText: new feature, text mode windows
+                      an old school text mode interface to implement an editor or anything
+                      (Maybe BiturboVision?)
+~ [0018] [2018-09-23] RedSandAutoMenu: Dynamically populated navigation menus for RedSand
+~ [0006] [2018-09-23] RedSand/GL: vector and pixel features in windowlets
+~ [0007] [2018-09-23] RedSand/GL: game loop
+~ [0020] [2018-10-04] Dice roller with CSS 3D
+                      URL parameters to determine dice to roll
 
 Done
 ----
@@ -49,12 +53,10 @@ x [0002] [2018-09-23] Fix dynamic content loading in Chrome
                       new IFrame.)
 x [0012] [2018-09-30] Won't fix: hasOwnProperty() list() in ConSense, show only own properties
 x [0014] [2018-10-01] Page reload sometimes does not reload the dynamic content
-
-Maybe features
---------------
-* SOAP client feature
-* Load timeout handling
-* Modular liteDown() design
-* Javadoc comments
+x [0009] [2018-09-27] Won't fix: Responsive design for mobile screens.
+                          Comes naturally with Materialize or another framework.
+x [0016] [2018-10-01] Won't fix, covered in [0019]:
+                      Thinking about including Materialize and Velocity
+x [0011] [2018-09-30] Covered in [0008]: BiturboVision as a TurboVision port?
 
 </pre>
