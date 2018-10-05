@@ -84,7 +84,7 @@
 <p>
     *RedSand: the backbone of your page* <br>
     <br>
-    To understand how easily RedSand builds up your web document, have a look at <a href="articles/blueprint.js">articles/blueprint.js</a>. Those few lines hold all the secrets to be told. The blueprint is loaded by index.html in runtime with one single call. Notice that all references in blueprint.js could be changed to any URI, hence making your otherwise static page fully dynamic and able to utilize any database backend, web service, etc.<br>
+    To understand how easily RedSand builds up your web document, have a look at <a href="page-2018-10-05/js/blueprint.js">page-2018-10-05/js/blueprint.js</a>. Those few lines hold all the secrets to be told. The blueprint is loaded by index.html in runtime with one single call. Notice that all references in blueprint.js could be changed to any URI, hence making your otherwise static page fully dynamic and able to utilize any database backend, web service, etc.<br>
     <br>
     Under server/php/ you can find a reference server-side database layer implementation which accepts a query definition as parameter and returns either JS source code, CSV or document output as a result. Combined with load() all database backend tasks up to medium complexity can be very easily handled with that. More robust Java, .Net, PHP, Python, Perl, Ruby implementations can also be realized in relatively short time.<br>
 </p>

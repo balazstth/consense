@@ -5,7 +5,7 @@ ConSense
 
 **Have a look at the site for more info and to see where we are going. This software has a good amount of features and a good amount TODO. While maintaining to be lean and simple. The Changelog is also an interesting place to check.**
 
-**[Site index](https://cdn.rawgit.com/balazstth/consense/7227e377/index.html)**
+**[Site index](https://cdn.rawgit.com/balazstth/consense/master/index.html)**
 
 **Back from 2011:**
 
