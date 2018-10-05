@@ -1,0 +1,51 @@
+
+<!--------------------------------------------------------------------
+ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
+
+Document version 1.05
+--------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>ConSense demo</title>
+
+        <style type="text/css">
+        body {
+            background: url("../images/bg.png");
+            color: black;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+        </style>
+
+        <!-- ConSense specific parts -->
+        <script type="text/javascript">
+            // Optional, default relative path is "./", watch ConSenseStub*.js
+            // for details. Ending slash is not required.
+            var relativeConSensePath = "../../";
+        </script>
+
+        <script charset="UTF-8" type="text/javascript" src="../js/conSense/conSenseStubDebug.js"></script>
+
+        <script type="text/javascript">
+            function init()
+            {
+                conSense.init(conSense.show, 50, 50);
+                // You may add your own initialization routine here
+            }
+        </script>
+        <!-- End of ConSense specific parts -->
+    </head>
+
+    <body onLoad="init()">
+        <!-- Global ConSense show/hide demonstration -->
+        <button onClick="conSense.globalShowConsole(conSense.toggle)">Toggle</button>
+        <!-- Your content here -->
+    </body>
+</html>

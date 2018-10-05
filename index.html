@@ -1,14 +1,14 @@
-<!DOCTYPE html>
 
-<!-- ConSense by Toth, Balazs Aladar (c) 2005-2018 -->
+<!--------------------------------------------------------------------
+ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
 
-<!--
-Document version 2.03
+Document version 2.04
 Known bugs:
     B0 Body width problem due to the absolutely positioned draggable
     conSenseContainer. Causes background image misplacement in IE.
--->
+--------------------------------------------------------------------->
 
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,12 +18,12 @@ Known bugs:
         <!-- Page font -->
         <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
         <!-- Custom style definitions -->
-        <link href="css/page.css" rel="stylesheet" type="text/css" />
+        <link href="page-2018-10-05/css/page.css" rel="stylesheet" type="text/css" />
 
         <!-- Normal ConSense stub, either Debug or Release -->
-        <script charset="UTF-8" type="text/javascript" src="js/conSense/conSenseStubDebug.js"></script>
-        <!-- Code snippets for the teaser in intro.txt -->
-        <script charset="UTF-8" type="text/javascript" src="js/injectCommand.js"></script>
+        <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
+        <!-- Code snippets for the teaser in Intro.txt -->
+        <script charset="UTF-8" type="text/javascript" src="page-2018-10-05/js/injectCommand.js"></script>
 
         <script type="text/javascript">
             function init()
@@ -33,7 +33,7 @@ Known bugs:
                 conSense.init(conSense.hide, 40, 40);
                 conSense.debug = true;
                 // Load UI definition
-                load("articles/blueprint.js");
+                load("page-2018-10-05/js/blueprint.js");
                 //-----------------------------------------------------------------------------
             }
         </script>
@@ -55,7 +55,7 @@ Known bugs:
                 </div>
 
                 <div id="right" class="right">
-                    <a class="logoLink" href="https://aladar.me/"><img class="logoImage" src="images/conSense/conSenseLogo_empty.png" alt="ConSense logo" /></a>
+                    <a class="logoLink" href="https://aladar.me/"><img class="logoImage" src="conSense/images/conSenseLogo.png" alt="ConSense logo" /></a>
                 </div>
 
             </div>

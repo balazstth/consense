@@ -1,0 +1,151 @@
+
+<!--------------------------------------------------------------------
+ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
+
+Document version 1.05
+--------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>RedSandCore test 0</title>
+
+        <style type="text/css">
+            body {
+                background: url("../images/bg.png");
+                color: black;
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                line-height: 1.5;
+                margin: 0;
+                padding: 0;
+            }
+
+            .menuItem {
+                color: black;
+                padding-left: 10px;
+            }
+
+            .menuItemSelected {
+                color: black;
+                padding-left: 10px;
+                font-weight: bold;
+            }
+        </style>
+
+        <script type="text/javascript">
+            var relativeConSensePath = "../../";
+        </script>
+
+        <script charset="UTF-8" type="text/javascript" src="../js/conSense/conSenseStubDebug.js"></script>
+
+        <script type="text/javascript">
+            function init()
+            {
+                //-----------------------------------------------------------------------------
+                // Init ConSense
+                conSense.init(conSense.show, 200, 200);
+
+                //-----------------------------------------------------------------------------
+                // Demo windowlets
+                var nw0 = new RedSandWindowlet(25, 25, 400, 400, "default", "default", false);
+                var nw1 = new RedSandWindowlet(470, 25, 400, 400, "default", "default", false);
+                nw0.DOMContainer.style.padding = "10px 10px 10px 10px";
+                nw1.DOMContainer.style.padding = "10px 10px 10px 10px";
+
+                //-----------------------------------------------------------------------------
+                // Languages
+
+                // Multilingual UI text arrays
+                var uiHun = [
+                    {id: "hello0", text: "Szia! (0)"},
+                    {id: "hello1", text: "Szia! (1)"},
+                    {id: "hello2", text: "Szia! (2)"},
+                    {id: "hun", text: "Magyar"},
+                    {id: "ger", text: "N&eacute;met"},
+                    {id: "eng", text: "Angol"}
+                ];
+
+                var uiGer = [
+                    {id: "hello0", text: "Gr&uuml;ss Dich! (0)"},
+                    {id: "hello1", text: "Gr&uuml;ss Dich! (1)"},
+                    {id: "hello2", text: "Gr&uuml;ss Dich! (2)"},
+                    {id: "hun", text: "Ungarisch"},
+                    {id: "ger", text: "Deutsch"},
+                    {id: "eng", text: "Englisch"}
+                ];
+
+                var uiEng = [
+                    {id: "hello0", text: "Hi! (0)"},
+                    {id: "hello1", text: "Hi! (1)"},
+                    {id: "hello2", text: "Hi! (2)"},
+                    {id: "hun", text: "Hungarian"},
+                    {id: "ger", text: "German"},
+                    {id: "eng", text: "English"}
+                ];
+
+                uiHun = redSandUITextManager.initTextTable(uiHun);
+                uiGer = redSandUITextManager.initTextTable(uiGer);
+                uiEng = redSandUITextManager.initTextTable(uiEng);
+
+                // Default language
+                redSandUITextManager.setTextTable(uiEng);
+
+                //-----------------------------------------------------------------------------
+                // Menus
+                
+                // menu0 - language selector
+                var items = [];
+
+                items.push(new RedSandNode("menu0item0", "hun", "menuItem", "menuItemSelected", "#setlang=hun"));
+                items.push(new RedSandNode("menu0item1", "ger", "menuItem", "menuItemSelected", "#setlang=ger"));
+                items.push(new RedSandNode("menu0item2", "eng", "menuItem", "menuItemSelected", "#setlang=eng"));
+
+                var menu0 = new RedSandMenu("menu0", items, nw0.id);
+                redSandRegistry.addMenu(menu0);
+                menu0.render();
+
+                // menu1
+                items = [];
+
+                items.push(new RedSandNode("menu1item0", "hello0", "menuItem", "menuItemSelected", "#color=silver"));
+                items.push(new RedSandNode("menu1item1", "hello1", "menuItem", "menuItemSelected", "#color=yellow"));
+                items.push(new RedSandNode("menu1item2", "hello2", "menuItem", "menuItemSelected", "#color=white"));
+
+                var menu1 = new RedSandMenu("menu1", items, nw1.id);
+                redSandRegistry.addMenu(menu1);
+                menu1.render();
+
+                //-----------------------------------------------------------------------------
+                // Page
+
+                // Events
+                redSandHashHandler.addEvent("setlang", handleEventSetlang);
+                redSandHashHandler.addEvent("color", handleEventColor);
+
+                // Default hash
+                redSandHashHandler.setDefaultHash("#setlang=eng");
+
+                function handleEventSetlang(params)
+                {
+                    if (params.setlang === "hun") redSandUITextManager.setTextTable(uiHun);
+                    else if (params.setlang === "ger") redSandUITextManager.setTextTable(uiGer);
+                    else if (params.setlang === "eng") redSandUITextManager.setTextTable(uiEng);
+                }
+
+                function handleEventColor(params)
+                {
+                    if (params.color === "silver") nw1.DOMContainer.style.backgroundColor = params.color;
+                    else if (params.color === "yellow") nw1.DOMContainer.style.backgroundColor = params.color;
+                    else if (params.color === "white") nw1.DOMContainer.style.backgroundColor = params.color;
+                }
+            }
+        </script>
+    </head>
+
+    <body onLoad="init()">
+        <button onClick="conSense.globalShowConsole(conSense.toggle)">Toggle</button>
+    </body>
+</html>

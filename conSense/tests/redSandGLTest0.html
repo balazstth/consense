@@ -1,0 +1,48 @@
+
+<!--------------------------------------------------------------------
+ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
+
+Document version 1.05
+--------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>RedSand/GL test 0</title>
+        
+        <style type="text/css">
+            body {
+                background: white;
+                color: black;
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                line-height: 1.5;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+        
+        <script type="text/javascript">
+            var relativeConSensePath = "../../";
+        </script>
+
+        <script charset="UTF-8" type="text/javascript" src="../js/conSense/conSenseStubDebug.js"></script>
+        
+        <script type="text/javascript">
+            function init()
+            {
+                conSense.init(conSense.show, 300, 300);
+                
+                viewport = new RedSandGLViewport(200, 200);
+                line = new RedSandGLPrimitive(viewport);
+                line.line(-100, -100, 150, 100, {r:0, g:0, b:0, a:100}, false);
+            }
+        </script>
+    </head>
+    
+    <body onLoad="init()">
+        <button onClick="conSense.globalShowConsole(conSense.toggle)">Toggle</button>     
+    </body>
+</html>

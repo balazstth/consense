@@ -1,0 +1,120 @@
+
+body {
+    background: white url("../../conSense/images/bg_760_white_shadow.png") center repeat-y;
+    color: black;
+    /* font-family: Verdana, Arial, Helvetica, sans-serif; */
+    font-family: 'Cousine', monospace;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+pre {
+    font-family: 'Cousine', monospace;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+p {
+    margin: 0px;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.logoLink {
+    text-decoration: none;
+}
+
+img.logoImage {
+    border: 0;
+}
+
+.wrapper1 {
+    text-align: center;
+}
+
+.wrapper2 {
+    text-align: justify;
+    margin: auto;
+    width: 720px;
+}
+
+.left {
+    float: left;
+    width: 572px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.right {
+    float: right;
+    width: 128px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.mainMenuContainer {
+    background: white;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.contentContainer {
+    background: white;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 2px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+
+.mainMenuItem {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin: 0;
+    margin-right: 40px;
+    padding: 2px;
+    border-left: 2px dotted black;
+    border-bottom: 2px dotted black;
+}
+
+.mainMenuItemSelected {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin: 0;
+    margin-right: 40px;
+    padding: 2px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.copyright {
+    background: white;
+    color: silver;
+    font-size: 10px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.copyrightLink {
+    color: silver;
+    font-weight: normal;
+}
