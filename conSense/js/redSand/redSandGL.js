@@ -15,36 +15,40 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-var redSandGLVersion = "0.02";
+'use strict';
+
+let redSandGLVersion = "0.03";
 
 //----------------------------------------------------------------------------
 // RedSandGLScene
 //----------------------------------------------------------------------------
 
-// Parameters:
-//      viewport origin coordinates
-function RedSandGLViewport(originX, originY)
+class RedSandGLViewport
 {
     //------------------------------------------------------------------------
-    // Fields
-    //------------------------------------------------------------------------
 
-    this.version = redSandGLVersion;
-    
-    // Default origin is (0, 0)
-    if (originX === undefined) originX = 0;
-    if (originY === undefined) originY = 0;
-    // noinspection JSUnusedGlobalSymbols
-    this.originX = originX;
-    // noinspection JSUnusedGlobalSymbols
-    this.originY = originY;
+    // Params:
+    //     viewport origin coordinates
+    constructor(originX = 0, originY = 0)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGLViewport                                   Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandGLVersion;
+        //////////////////////////////////////////////////////////////////////
+
+        // noinspection JSUnusedGlobalSymbols
+        this.originX = originX;
+        // noinspection JSUnusedGlobalSymbols
+        this.originY = originY;
+    }
 
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // RedSandGLScene
-    this.setOrigin = function(originX, originY)
+    setOrigin(originX, originY)
     {
         // noinspection JSUnusedGlobalSymbols
         this.originX = originX;
@@ -57,41 +61,49 @@ function RedSandGLViewport(originX, originY)
 // RedSandGLPrimitive
 //----------------------------------------------------------------------------
 
-function RedSandGLPrimitive(viewport)
+class RedSandGLPrimitive
 {
     //------------------------------------------------------------------------
-    // Fields
-    //------------------------------------------------------------------------
 
-    this.version = redSandGLVersion;
-    if (viewport === undefined)
+    constructor(viewport)
     {
-        alert("RedSandGLViewport should be specified for RedSandGLPrimitive() call.");
-    }
-    // noinspection JSUnusedGlobalSymbols
-    this.viewport = viewport;
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGLViewport                                   Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandGLVersion;
 
+        // noinspection JSUnusedGlobalSymbols
+        this.viewport = viewport;
+        //////////////////////////////////////////////////////////////////////
+
+        if (viewport === undefined)
+        {
+            alert("RedSandGLViewport should be specified for RedSandGLPrimitive() call.");
+        }
+    }
+    
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
-    this.plot = function(x, y, color)
+    plot(x, y, color)
     {
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
-    this.line = function(x1, y1, x2, y2, color, antialias)
+    line(x1, y1, x2, y2, color, antialias)
     {
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
     // Erases current primitive graphics.
-    this.erase = function()
+    erase()
     {
-    };
+    }
+    
 }

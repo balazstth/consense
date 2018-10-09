@@ -1,64 +1,56 @@
-
-<!--------------------------------------------------------------------
-ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
-
-Document version 2.04
-Known bugs:
-    B0 Body width problem due to the absolutely positioned draggable
-    conSenseContainer. Causes background image misplacement in IE.
---------------------------------------------------------------------->
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        
-        <title>ConSense &rsaquo; simplicity recycled</title>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 
-        <!-- Page font -->
-        <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
-        <!-- Custom style definitions -->
-        <link href="page-2018-10-05/css/page.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="page/css/page.css"  media="screen,projection"/>
 
-        <!-- Normal ConSense stub, either Debug or Release -->
-        <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
-        <!-- Code snippets for the teaser in Intro.txt -->
-        <script charset="UTF-8" type="text/javascript" src="page-2018-10-05/js/injectCommand.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
 
-        <script type="text/javascript">
-            function init()
-            {
-                //-----------------------------------------------------------------------------
-                // Init ConSense
-                conSense.init(conSense.hide, 40, 40);
-                conSense.debug = true;
-                // Load UI definition
-                load("page-2018-10-05/js/blueprint.js");
-                //-----------------------------------------------------------------------------
-            }
-        </script>
-    </head>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-    <body onLoad="init()">
-        <div id="wrapper1" class="wrapper1">
-            <div id="wrapper2" class="wrapper2">
+<body>
 
-                <div id="left" class="left">
-                    <div id="mainMenuContainer" class="mainMenuContainer">
-                    </div>
-                    <div id="contentContainer" class="contentContainer">
-                        Loading...
-                    </div>
-                    <div class="copyright">
-                        ConSense, RedSand and SimpleClasses are © 2005-2018 T&oacute;th, Bal&aacute;zs Alad&aacute;r. <a class="copyrightLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.
+    <div class="side-menu" id="sideMenu">
+        <menu>
+            <ul class="nav nav-tabs nav-stacked">
+                <li><a href="#myModal" data-backdrop="false" data-toggle="modal">Click Me</a>
+                </li>
+            </ul>
+        </menu>
+    </div>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="myModalHeader" class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Settings</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="comment">
+                        /* load ide ui */
                     </div>
                 </div>
-
-                <div id="right" class="right">
-                    <a class="logoLink" href="https://aladar.me/"><img class="logoImage" src="conSense/images/conSenseLogo.png" alt="ConSense logo" /></a>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="loadpage" type="button" class="btn btn-primary">Save</button>
                 </div>
-
             </div>
+            <!-- /.modal-content -->
         </div>
-    </body>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+<!--JavaScript at end of body for optimized loading-->
+<!--May use materialize.min.js for production, this is a development build-->
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="page/js/page.js"></script>
+</body>
 </html>

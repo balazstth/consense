@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
 // Documentation
-// v2.04
+// v2.05
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -219,22 +219,24 @@ OUT  OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-Third-party subsystems (full licenses are included in the source files)
-----------------------
+Third-party libraries (full licenses are included in the source files)
+---------------------
 
-md5 2.1              (c) Paul Johnston (http://pajhome.org.uk/crypt/md5)
-sha1 2.1a            (c) Paul Johnston (http://pajhome.org.uk/crypt/md5)
-dom-drag 10.28.2001  (c) www.youngpup.net
-DateFormat 2001      (c) 2001 David A. Lindquist (http://www.gazingus.org)
+md5 2.1              (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
+sha1 2.1a            (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
+dom-drag 10.28.2001  (c) Aaron Boodman @ www.youngpup.net
+DateFormat 2001      (c) David A. Lindquist @ http://www.gazingus.org
 SortTable version 2  (c) Stuart Langridge,
-                         http://www.kryogenix.org/code/browser/sorttable/
+                         @ http://www.kryogenix.org/code/browser/sorttable/
 shortcut 2.01.A      (c) Binny V A
-                         http://www.openjs.com/scripts/events/keyboard_shortcuts/
+                         @ http://www.openjs.com/scripts/events/keyboard_shortcuts/
+sprintf-js 1.1.1     (c) Alexandru Marasteanu @ https://github.com/alexei/sprintf.js
 
-As of ConSense 1.11 these are not mandatory, just very convenient to have:
-Cash 1.0.0           @ http://kenwheeler.github.io/cash/
-Underscore.js 1.9.1  @ http://underscorejs.org
-Backbone.js 1.3.3    @ http://backbonejs.org
+-- Optional packages --
+
+Cash 1.0.0           (c) Ken Wheeler @ http://kenwheeler.github.io/cash/
+Underscore.js 1.9.1  (c) Jeremy Ashkenas @ http://underscorejs.org
+Backbone.js 1.3.3    (c) Jeremy Ashkenas @ http://backbonejs.org
 
 //============================================================================
 </pre>

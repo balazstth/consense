@@ -152,129 +152,141 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // ConSense class
 //----------------------------------------------------------------------------
 
-function ConSense()
+class ConSense
 {
+    //------------------------------------------------------------------------
+
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // ConSense                                            Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = "1.13";
+
+        // Toggle debug operation
+        this.debug = true;
+
+        // Toggle echo mode
+        this.echo = true;
+
+        // Toggle verbose mode
+        this.verbose = true;
+
+        // Command string
+        this.commandLine = "";
+        // For handleInput()
+        this.oldCommandLine = "";
+
+        // UI DOM elements
+        this.conSenseContainer = undefined;
+        this.conSenseInnerContainer = undefined;
+        this.conSenseHeader = undefined;
+        this.conSenseHeaderSwitch = undefined;
+        this.conSenseOut = undefined;
+        this.conSenseIn = undefined;
+        this.conSenseCounter = undefined;
+
+        this.containerHeight = undefined;
+        this.containerScrollTop = undefined;
+
+        // Top Z index
+        this.zTop = 2000000001;
+        this.scrollInfinite = 1000000000;
+
+        this.show = true;
+        this.hide = false;
+
+        // Indicates ConSense visibility - show by default
+        this.visible = this.show;
+        this.globalVisible = this.show;
+
+        // Indicates toggle mode for show functions
+        this.toggle = "toggle";
+
+        // Array of all interface texts
+        this.interfaceText =
+            {
+                showConsoleButton: "Show",
+                hideConsoleButton: "Hide"
+            };
+
+        // Used for DOM element outlining
+        this.outlineColor = "red";
+
+        // Used in handleInput()
+        this.lastKeyEventType = "deadbeef";
+
+        this.commandHistory = [];
+        this.commandHistoryPosition = 0;
+        this.currentlyTypedCommand = "";
+
+        this.tabPixelSize = 20;
+
+        // mapDOMSubtree() variables
+        this.mapResultBuffer = undefined;
+        this.mapTempObjects = undefined;
+        this.mapTempObjectCounter = 0;
+        this.mapExcerptSize = 40;
+        this.mapShowConSense = false;       // Details in help()
+        this.mapShowEmptyTexts = false;
+
+        this.lastWriteLn = "";
+        this.separatorString = "===============================";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Fields
     //------------------------------------------------------------------------
 
-    this.version = "1.12";
-
-    // Toggle debug operation
-    this.debug = true;
-
-    // Toggle echo mode
-    this.echo = true;
-
-    // Toggle verbose mode
-    this.verbose = true;
-
-    // Command string
-    this.commandLine = "";
-    // For handleInput()
-    this.oldCommandLine = "";
-
-    // UI DOM elements
-    this.conSenseContainer = undefined;
-    this.conSenseInnerContainer = undefined;
-    this.conSenseHeader = undefined;
-    this.conSenseHeaderSwitch = undefined;
-    this.conSenseOut = undefined;
-    this.conSenseIn = undefined;
-    this.conSenseCounter = undefined;
-
-    this.containerHeight = undefined;
-    this.containerScrollTop = undefined;
-
-    // Top Z index
-    this.zTop = 2000000001;
-    this.scrollInfinite = 1000000000;
-
-    // Indicates ConSense visibility - show by default
-    this.visible = this.show;
-    this.globalVisible = this.show;
-
-    this.show = true;
-    this.hide = false;
-    // Indicates toggle mode for show functions
-    this.toggle = "toggle";
-
-    // Array of all interface texts
-    this.interfaceText =
-    {
-        showConsoleButton: "Show",
-        hideConsoleButton: "Hide"
-    };
-
-    // Used for DOM element outlining
-    this.outlineColor = "red";
-    
-    // Used in handleInput()
-    this.lastKeyEventType = "deadbeef";
-
-    this.commandHistory = [];
-    this.commandHistoryPosition = 0;
-    this.currentlyTypedCommand = "";
-
-    this.tabPixelSize = 20;
-
-    // mapDOMSubtree() variables
-    this.mapResultBuffer = undefined;
-    this.mapTempObjects = undefined;
-    this.mapTempObjectCounter = 0;
-    this.mapExcerptSize = 40;
-    this.mapShowConSense = false;       // Details in help()
-    this.mapShowEmptyTexts = false;
-
-    this.lastWriteLn = "";
-    this.separatorString = "===============================";
 
     //------------------------------------------------------------------------
     // Input/Output methods
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeTitle = function()
+    writeTitle()
     {
         this.writeLn("Type " + conSense.highlightAppendLink("help()")
             + " + Enter for usage information.");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.clearScreen = function()
+    clearScreen()
     {
         this.conSenseOut.innerHTML = "";
         this.writeTitle();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.write = function(str)
+    write(str)
     {
         this.conSenseOut.innerHTML += str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeLn = function(str)
+    writeLn(str)
     {
         this.lastWriteLn = str;
         this.conSenseOut.innerHTML += str + "<br />";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeManualEntry = function(name, str)
+    writeManualEntry(name, str)
     {
         if (name !== "")
         {
@@ -291,27 +303,27 @@ function ConSense()
                 + "<span class='conSenseManualEntryHead'>"
                 + "</span> " + str + "</div>";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.separator = function()
+    separator()
     {
         if (this.lastWriteLn !== this.separatorString)
         {
             this.writeLn(this.separatorString);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.debugLn = function(value0, value1)
+    debugLn(value0, value1)
     {
         if (this.debug)
         {
-            var now = new Date();
+            let now = new Date();
 
             if (value0 === undefined)
             {
@@ -328,51 +340,51 @@ function ConSense()
                 + ") *" + value0
                 + "* *" + value1 + "*");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.echoLn = function(str)
+    echoLn(str)
     {
         if (this.echo)
         {
             this.writeLn("[echo: " + this.highlightAppendLink(str) + "]");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.verboseLn = function(str)
+    verboseLn(str)
     {
         if (this.verbose && str !== undefined)
         {
             this.writeLn("[result: " + str + "]");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.getInput = function()
+    getInput()
     {
         return simpleUtils.trimString(this.conSenseIn.value);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.setInput = function(str)
+    setInput(str)
     {
         this.conSenseIn.value = str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Not just generic append string!
-    this.appendInput = function(str)
+    appendInput(str)
     {
         if (this.conSenseIn.value.length === 0)
         {
@@ -383,51 +395,51 @@ function ConSense()
             this.conSenseIn.value += " " + str;
         }
         this.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML string.
     // Uses conSenseHighlight style.
-    this.highlight = function(str)
+    highlight(str)
     {
         return "<span class='conSenseHighlight'>&nbsp;" + str
                     + "&nbsp;</span>";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML append link string.
     // Uses conSenseHighlightAppendLink style.
-    this.highlightAppendLink = function(str)
+    highlightAppendLink(str)
     {
-        // *ENV* relativeConSensePath
+        // *ENV* stub.relativeConSensePath
         return "<a class='conSenseHighlightAppendLink' href='javascript:conSense.appendInput(\""
                     + str.replace(/"/g, "\\\"") + "\")'>"
-                    + "<img src='" + relativeConSensePath + "conSense/images/orangeArrow.png' style='border: 0;'>"
+                    + "<img src='" + stub.relativeConSensePath + "conSense/images/orangeArrow.png' style='border: 0;'>"
                     + simpleUtils.HTML2Source(str) + "</a>";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML append link string.
     // Uses conSenseHighlightAppendLink style.
-    this.highlightLabelledAppendLink = function(label, str)
+    highlightLabelledAppendLink(label, str)
     {
         return "<a class='conSenseHighlightAppendLink' href='javascript:conSense.appendInput(\""
                     + str.replace(/"/g, "\\\"") + "\")'>"
                     + label + "</a>";
-    };
+    }
 
     //------------------------------------------------------------------------
     // Core methods
     //------------------------------------------------------------------------
 
     // ConSense
-    this.init = function(show, startXPos, startYPos)
+    init(show, startXPos, startYPos)
     {
         simpleUtils.checkBrowser();
 
@@ -435,10 +447,11 @@ function ConSense()
         // Non-ConSense init
         
         // For RedSandGenericLoader load indication
+        // *ENV* stub.relativeConSensePath
         document.body.innerHTML +=
             '<!-- RedSand -->\
             <div id="loadIndicator" class="loadIndicator">\
-                <img src="' + relativeConSensePath + 'conSense/images/loader.gif" style="border: 0;">\
+                <img src="' + stub.relativeConSensePath + 'conSense/images/loader.gif" style="border: 0;">\
             </div>\
             <div id="inputBlocker" class="inputBlocker">\
             </div>\
@@ -511,8 +524,7 @@ function ConSense()
 
         // Used for show/hide
         this.containerHeight = this.conSenseInnerContainer.style.height;
-        // noinspection JSUnusedGlobalSymbols
-        this.innerContainerHeight = this.conSenseInnerContainer.style.height;
+        // this.innerContainerHeight = this.conSenseInnerContainer.style.height;
 
         this.conSenseHeader.innerHTML = "ConSense v" + this.version;
         this.showConsole(show);
@@ -550,23 +562,23 @@ function ConSense()
                 'target': document,
                 'propagate': false
             });
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.updateCounter = function()
+    updateCounter()
     {
         this.conSenseCounter.value = this.conSenseIn.value.length;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Valid key event types: down, press, up
-    this.handleInput = function(event, type)
+    handleInput(event, type)
     {
-        var thisEvent = (simpleUtils.getKeyName(event));
+        let thisEvent = (simpleUtils.getKeyName(event));
 
         //--------------------------------------------------------------------
         if (thisEvent === "Enter"
@@ -615,12 +627,12 @@ function ConSense()
         this.updateCounter();
         this.lastKeyEventType = type;
         this.oldCommandLine = this.getInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.handleCommand = function()
+    handleCommand()
     {
         // Split the trimmed input line by whitespaces
         // this.commandLine = this.getInput().split(/\s+/);
@@ -640,7 +652,7 @@ function ConSense()
         // Evaluate command line as JavaScript code
         try
         {
-            var result = eval(this.commandLine);
+            let result = eval(this.commandLine);
             this.verboseLn(result);
         }
         catch(ex)
@@ -652,13 +664,13 @@ function ConSense()
         this.separator();
 
         this.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // *VALUES*
-    this.showConsole = function(show)
+    showConsole(show)
     {
         // Toggle
         if (show === conSense.toggle)
@@ -693,12 +705,12 @@ function ConSense()
             // *VALUES*
             this.conSenseContainer.style.height = "21px";
         }
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // ConSense
-    this.scrollToBottomFocusInput = function()
+    scrollToBottomFocusInput()
     {
         // For the case of appended commands or any other kind of input line
         // manipulation
@@ -712,12 +724,12 @@ function ConSense()
             this.conSenseIn.focus();
             this.conSenseInnerContainer.scrollTop = this.scrollInfinite;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.globalShowConsole = function(show)
+    globalShowConsole(show)
     {
         // Toggle
         if (show === conSense.toggle)
@@ -745,7 +757,7 @@ function ConSense()
             this.containerScrollTop = this.conSenseInnerContainer.scrollTop;
             this.conSenseContainer.style.display = "none";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     // Utility methods
@@ -757,12 +769,12 @@ function ConSense()
     //------------------------------------------------------------------------
     
     // ConSense
-    this.listObject = function(obj)
+    listObject(obj)
     {
         obj = simpleUtils.toObject(obj);
 
         // List object
-        for (var i in obj)
+        for (let i in obj)
         {
             // Fix for exceptions caused by protected(?) items which would
             // stop listing (eg. in the document object)
@@ -776,45 +788,45 @@ function ConSense()
             {
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.listObjectStyle = function(obj)
+    listObjectStyle(obj)
     {
         obj = simpleUtils.toObject(obj);
         this.listObject(obj.style);
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.outlineDOMElement = function(obj)
+    outlineDOMElement(obj)
     {
         obj = simpleUtils.toObject(obj);
         obj.style.border = "1px solid " + this.outlineColor;
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // tagName: eg. "div"
-    this.outlineDOMElementsByTag = function(tagName)
+    outlineDOMElementsByTag(tagName)
     {
-        var elements = document.getElementsByTagName(tagName);
+        let elements = document.getElementsByTagName(tagName);
 
-        // Does not work as (var i in elements) in IE
-        for (var i=0; i < elements.length; i++)
+        // Does not work as (let i in elements) in IE
+        for (let i=0; i < elements.length; i++)
         {
             elements[i].style.border = "1px solid " + this.outlineColor;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.outlineDOMSubtree = function(obj, level)
+    outlineDOMSubtree(obj, level)
     {
         obj = simpleUtils.toObject(obj);
         if (level === undefined)
@@ -829,9 +841,9 @@ function ConSense()
         }
 
         // Outline children
-        for (var i=0; i < obj.childNodes.length; i++)
+        for (let i=0; i < obj.childNodes.length; i++)
         {
-            var childNode = obj.childNodes[i];
+            let childNode = obj.childNodes[i];
 
             // Element nodes
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
@@ -842,56 +854,54 @@ function ConSense()
             // Dive further
             this.outlineDOMSubtree(childNode, level+1);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Private
-    this.tabulator = function(times)
+    tabulator(times)
     {
         return "<span style='margin-left: "
             + times * this.tabPixelSize + "px'></span>";
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Private
     // *GLOBAL*
-    this.mapAppendObjectLink = function(childNode, level, i)
+    mapAppendObjectLink(childNode, level, i)
     {
-        var index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
+        let index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
         this.mapTempObjects[index] = childNode;
-        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer
             += this.tabulator(level)
                 + this.highlightLabelledAppendLink(
                     "(o)",
                     "conSense.mapTempObjects[\"" + index + "\"]")
                 + (" ");
-    };
+    }
     
     //------------------------------------------------------------------------
     
     // ConSense
     // *NAMING*, *GLOBAL*
-    this.mapDOMSubtree = function(obj, level)
+    mapDOMSubtree(obj, level)
     {
         obj = simpleUtils.toObject(obj);
         if (level === undefined)
         {
             level = 0;
             // *GLOBAL*
-            // noinspection JSUnusedGlobalSymbols
             this.mapResultBuffer = "";
             this.mapTempObjects = [];
             this.mapTempObjectCounter = 0;
         }
 
-        for (var i=0; i < obj.childNodes.length; i++)
+        for (let i=0; i < obj.childNodes.length; i++)
         {
-            var childNode = obj.childNodes[i];
+            let childNode = obj.childNodes[i];
             // *GLOBAL*
             this.mapTempObjectCounter++;
 
@@ -900,8 +910,8 @@ function ConSense()
             // Element node
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
             {
-                var id = "";
-                var className = "";
+                let id = "";
+                let className = "";
 
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
@@ -918,7 +928,6 @@ function ConSense()
                 }
 
                 // First line to display: tagname, id, class
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight(childNode.nodeName)
                         + id
@@ -930,7 +939,6 @@ function ConSense()
                 if (childNode.id === "conSenseContainer"
                     && !this.mapShowConSense)
                 {
-                    // noinspection JSUnusedGlobalSymbols
                     this.mapResultBuffer
                         += this.tabulator(level)
                             + "(...)<br />";
@@ -940,14 +948,13 @@ function ConSense()
                 // Display attributes if present - except id and class
                 if (childNode.attributes)
                 {
-                    for (var j=0; j < childNode.attributes.length; j++)
+                    for (let j=0; j < childNode.attributes.length; j++)
                     {
                         if (childNode.attributes[j].specified)
                         {
                             if (childNode.attributes[j].nodeName !== "id"
                                 && childNode.attributes[j].nodeName !== "class")
                             {
-                                // noinspection JSUnusedGlobalSymbols
                                 this.mapResultBuffer
                                     += this.tabulator(level)
                                         + childNode.attributes[j].nodeName
@@ -965,13 +972,13 @@ function ConSense()
             // Text node
             if (childNode.nodeType === simpleUtils.DOM_TEXT_NODE)
             {
-                var excerpt = "";
+                let excerpt = "";
 
                 // Hide empty text nodes if indicated
                 if (!this.mapShowEmptyTexts)
                 {
-                    var hide = true;
-                    for (j=0; j < childNode.nodeValue.length; j++)
+                    let hide = true;
+                    for (let j=0; j < childNode.nodeValue.length; j++)
                     {
                         if (childNode.nodeValue.charAt(j) !== "\n"
                             && childNode.nodeValue.charAt(j) !== "\t"
@@ -988,7 +995,6 @@ function ConSense()
                 this.mapAppendObjectLink(childNode, level, i);
                 
                 // Show text
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("text");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1002,7 +1008,6 @@ function ConSense()
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1011,12 +1016,11 @@ function ConSense()
             // Comment node
             if (childNode.nodeType === simpleUtils.DOM_COMMENT_NODE)
             {
-                excerpt = "";
+                let excerpt = "";
 
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("comment");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1030,7 +1034,6 @@ function ConSense()
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1042,7 +1045,6 @@ function ConSense()
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight("DOCTYPE")
                         + " "
@@ -1062,19 +1064,19 @@ function ConSense()
         {
             this.write(this.mapResultBuffer);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Lists all inline and dynamic style definitions of an object.
     // *GLOBAL*
-    this.mapDynamicCSS = function(obj, level)
+    mapDynamicCSS(obj, level)
     {
         obj = simpleUtils.toObject(obj);
-        var id = "";
-        var className = "";
-        var cssTextRows;
+        let id = "";
+        let className = "";
+        let cssTextRows;
 
         // First iteration only
         if (level === undefined)
@@ -1082,7 +1084,7 @@ function ConSense()
             level = 0;
         }
 
-        var deepestLevel;
+        let deepestLevel;
         
         // Iterate until root
         if (obj !== document.body
@@ -1130,7 +1132,7 @@ function ConSense()
         if (obj.style.cssText)
         {
             cssTextRows = obj.style.cssText.split(";");
-            for (var i=0; i < cssTextRows.length; i++)
+            for (let i=0; i < cssTextRows.length; i++)
             {
                 if (cssTextRows[i].length)
                 {
@@ -1139,30 +1141,30 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Lists full static CSS info of the page
-    this.listCSS = function()
+    listCSS()
     {
         // Looking up CSS definitions in document
 
-        var headNode = false;
+        let headNode = false;
 
         // Locate document/HTML/HEAD
-        for (var i=0; i < document.childNodes.length; i++)
+        for (let i=0; i < document.childNodes.length; i++)
         {
-            var childNode = document.childNodes[i];
+            let childNode = document.childNodes[i];
 
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE
                 && childNode.nodeName.toUpperCase() === "HTML")
             {
                 // HTML found
-                var foundNode = childNode;
+                let foundNode = childNode;
 
-                for (var j=0; j < foundNode.childNodes.length; j++)
+                for (let j=0; j < foundNode.childNodes.length; j++)
                 {
                     childNode = foundNode.childNodes[j];
 
@@ -1179,9 +1181,9 @@ function ConSense()
         // Browse head for css link and style entries
         if (headNode)
         {
-            for (i=0; i < headNode.childNodes.length; i++)
+            for (let i=0; i < headNode.childNodes.length; i++)
             {
-                childNode = headNode.childNodes[i];
+                let childNode = headNode.childNodes[i];
 
                 if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
                 {
@@ -1197,16 +1199,16 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Returns array of formatted CSS rule block lines.
     // Private
-    this.listCSS_getFormattedRule = function(ruleString)
+    listCSS_getFormattedRule(ruleString)
     {
-        var lines = [];
+        let lines = [];
 
         // For STYLE blocks
         if (simpleUtils.trimString(ruleString).search("\n") > 0)
@@ -1219,9 +1221,9 @@ function ConSense()
             lines = simpleUtils.trimString(ruleString).split(/;/);
         }
 
-        for (var i=0; i < lines.length; i++)
+        for (let i=0; i < lines.length; i++)
         {
-            var tab = "";
+            let tab = "";
 
             if (lines[i].search(/{/) > 0)
             {
@@ -1238,18 +1240,20 @@ function ConSense()
         }
 
         return lines;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Private
-    this.listCSS_HandleStyleNode = function(node)
+    listCSS_HandleStyleNode(node)
     {
+        let lines;
+
         // Firefox
         if (node.textContent)
         {
-            var lines = this.listCSS_getFormattedRule(node.textContent);
+            lines = this.listCSS_getFormattedRule(node.textContent);
         }
         // IE
         else if (node.innerHTML)
@@ -1263,17 +1267,17 @@ function ConSense()
             
         this.writeLn("/* STYLE node */");
 
-        for (var i=0; i < lines.length; i++)
+        for (let i=0; i < lines.length; i++)
         {
             this.writeLn(lines[i]);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Private
-    this.listCSS_HandleLinkNode = function(node)
+    listCSS_HandleLinkNode(node)
     {
         if (node.rel.toUpperCase() === "STYLESHEET"
             || node.type.toUpperCase() === "TEXT/CSS")
@@ -1284,16 +1288,16 @@ function ConSense()
             // Firefox
             if (node.sheet)
             {
-                for (var i=0; i < node.sheet.cssRules.length; i++)
+                for (let i=0; i < node.sheet.cssRules.length; i++)
                 {
-                    var lines = this.listCSS_getFormattedRule(
+                    let lines = this.listCSS_getFormattedRule(
                                     node.sheet.cssRules[i].cssText);
 
-                    for (var j=0; j < lines.length; j++)
+                    for (let j=0; j < lines.length; j++)
                     {
                         if (lines[j].search("{") > 0)
                         {
-                            var sublines = lines[j].split(/{/);
+                            let sublines = lines[j].split(/{/);
 
                             // Bad entry, simply dump to the screen
                             if (sublines.length !== 2)
@@ -1324,16 +1328,16 @@ function ConSense()
             // IE
             else if (node.styleSheet)
             {
-                // It's OK, it's IE...
+                // Deprecated symbol intentionally used for IE
                 // noinspection JSDeprecatedSymbols
-                lines = this.listCSS_getFormattedRule(
+                let lines = this.listCSS_getFormattedRule(
                                 node.styleSheet.cssText);
 
-                for (i=0; i < lines.length; i++)
+                for (let i=0; i < lines.length; i++)
                 {
                     if (lines[i].search("{") > 0)
                     {
-                        sublines = lines[i].split(/{/);
+                        let sublines = lines[i].split(/{/);
 
                         this.writeLn(sublines[0] + " {");
                     }
@@ -1345,12 +1349,12 @@ function ConSense()
                         }
                         else
                         {
-                            sublines =
+                            let sublines =
                                 simpleUtils.trimString(lines[i]).split(/;/);
 
-                            for (j=0; j < sublines.length; j++)
+                            for (let j=0; j < sublines.length; j++)
                             {
-                                var tab = "";
+                                let tab = "";
 
                                 if (j > 0)
                                 {
@@ -1364,12 +1368,12 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.license = function()
+    license()
     {
         this.writeLn("The ConSense MIT-like license:<br />");
         this.writeLn("---license---");
@@ -1379,12 +1383,12 @@ function ConSense()
         this.writeLn("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
         this.writeLn("---end of license---<br />");
         this.writeLn("For the third-party library licenses please see the documentation.");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.help = function()
+    help()
     {
         this.writeLn("Command shorthands:");
         this.writeManualEntry("", "All obj parameters may be JavaScript/DOM object references or DOM id strings (eg. conSenseIn or \"conSenseIn\").");
@@ -1410,7 +1414,7 @@ function ConSense()
         this.writeLn("Doubleclicking the output area focuses the input line. Up/down arrow keys control command history.");
         this.writeLn("Works best with Firefox 1.5+ and IE 6.0+.");
         this.writeLn("ConSense is (c) 2005-2007 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
-    };
+    }
 
 }
 
@@ -1419,13 +1423,14 @@ function ConSense()
 //----------------------------------------------------------------------------
 
 // Instantiate ConSense
-var conSense = new ConSense();
+let conSense = new ConSense();
 
 //----------------------------------------------------------------------------
 // Commands
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function clear()
 {
@@ -1435,6 +1440,7 @@ function clear()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function debug(value0, value1)
 {
@@ -1444,6 +1450,7 @@ function debug(value0, value1)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function help()
 {
@@ -1453,6 +1460,7 @@ function help()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 function license()
 {
     conSense.license();
@@ -1463,6 +1471,7 @@ function license()
 // Both commands for the same function
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function list(obj)
 {
@@ -1470,6 +1479,7 @@ function list(obj)
 }
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function inspect(obj)
 {
@@ -1479,6 +1489,7 @@ function inspect(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function listCSS()
 {
@@ -1488,6 +1499,7 @@ function listCSS()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function listStyle(obj)
 {
@@ -1498,6 +1510,7 @@ function listStyle(obj)
 
 // ConSense command
 // *DEPENDENCY*
+// GLOBAL
 // redSandGenericLoader
 function load(uri, callback)
 {
@@ -1507,6 +1520,7 @@ function load(uri, callback)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function map(obj)
 {
@@ -1520,6 +1534,7 @@ function map(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function mapCSS(obj)
 {
@@ -1529,6 +1544,7 @@ function mapCSS(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outline(obj)
 {
@@ -1538,6 +1554,7 @@ function outline(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outlineAll(tagName)
 {
@@ -1547,6 +1564,7 @@ function outlineAll(tagName)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outlineSub(obj)
 {
@@ -1556,6 +1574,7 @@ function outlineSub(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 function write(value)
 {
     conSense.writeLn(value);

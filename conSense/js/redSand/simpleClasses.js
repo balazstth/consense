@@ -13,51 +13,61 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // Version
 //----------------------------------------------------------------------------
 
-var simpleClassesVersion = "1.19";
+const simpleClassesVersion = "1.20";
 
 //----------------------------------------------------------------------------
 // Debug class
 //----------------------------------------------------------------------------
 
-function SimpleDebug()
+class SimpleDebug
 {
+    //------------------------------------------------------------------------
 
-    this.version = simpleClassesVersion;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleDebug                                         Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
 
-    this.messages = "";
+        this.messages = "";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Batch debug
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.add = function(description, value)
+    add(description, value)
     {
         this.messages += description + ": " + value + "\n";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.print = function()
+    print()
     {
         alert(this.messages);
         this.messages = "";
-    };
+    }
 
     //------------------------------------------------------------------------
     // Simple debug
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.alert = function(description, value)
+    alert(description, value)
     {
         alert(description + ": " + value);
-    };
+    }
 
 }
 
@@ -65,81 +75,89 @@ function SimpleDebug()
 // Utilities class
 //----------------------------------------------------------------------------
 
-function SimpleUtilities()
+class SimpleUtilities
 {
-
-    this.version = simpleClassesVersion;
-
     //------------------------------------------------------------------------
 
-    // DOM nodeType-s
-    this.DOM_ELEMENT_NODE = 1;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ATTRIBUTE_NODE = 2;
-    this.DOM_TEXT_NODE = 3;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_CDATA_SECTION_NODE = 4;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ENTITY_REFERENCE_NODE = 5;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ENTITY_NODE = 6;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_PROCESSING_INSTRUCTION_NODE = 7;
-    this.DOM_COMMENT_NODE = 8;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_DOCUMENT_NODE = 9;
-    this.DOM_DOCUMENT_TYPE_NODE = 10;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_NOTATION_NODE = 12;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleUtilities                                     Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
+
+        // DOM nodeType-s
+        this.DOM_ELEMENT_NODE = 1;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ATTRIBUTE_NODE = 2;
+        this.DOM_TEXT_NODE = 3;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_CDATA_SECTION_NODE = 4;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ENTITY_REFERENCE_NODE = 5;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ENTITY_NODE = 6;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_PROCESSING_INSTRUCTION_NODE = 7;
+        this.DOM_COMMENT_NODE = 8;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_DOCUMENT_NODE = 9;
+        this.DOM_DOCUMENT_TYPE_NODE = 10;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_NOTATION_NODE = 12;
+        //////////////////////////////////////////////////////////////////////
+
+        // let sprintfJs =
+        // this.sprintf =
+    }
 
     //------------------------------------------------------------------------
 
     // Used for generating random number URL parameters to force fresh loading
     // of content.
     // Generating only if conSense.debug!
-    this.randomSuffix = function()
+    randomSuffix()
     {
         if (!conSense.debug) return "";
         return "?random_suffix=" + this.random(0xdeadbeef);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // Generate random integer from 1 to limit
-    this.random = function(limit)
+    random(limit)
     {
         if (limit < 1) return 1;
         return Math.floor((Math.random() * limit) + 1);
-    };
+    }
 
     //------------------------------------------------------------------------
 
-    // noinspection JSUnusedGlobalSymbols
-    this.replaceAll = function(search, replacement)
+    replaceAll(search, replacement)
     {
-        var target = this;
+        let target = this;
         return target.replace(new RegExp(search, 'g'), replacement);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // Example: onClick="linkTo(formURI('main.jsp', {'lang': 'hun'}))"
 
     // SimpleUtilities
-    this.linkTo = function(dest)
+    linkTo(dest)
     {
         document.location.href = dest;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.formURI = function(target, paramArray)
+    formURI(target, paramArray)
     {
-        var result = target + "?";
-        var andSign = "";
+        let result = target + "?";
+        let andSign = "";
 
         // No parameters to add
         if (paramArray.length === 0)
@@ -147,7 +165,7 @@ function SimpleUtilities()
             return target;
         }
 
-        for (var i in paramArray)
+        for (let i in paramArray)
         {
             // noinspection JSUnfilteredForInLoop
             result += andSign + i + "=" + paramArray[i];
@@ -155,46 +173,46 @@ function SimpleUtilities()
         }
 
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Basic browser capabilities test
-    this.checkBrowser = function()
+    checkBrowser()
     {
         if (!(document.all || document.getElementById))
         {
             alert("SimpleUtilities.checkBrowser() error: Please upgrade to a more modern browser. This interactive web page will not operate properly.");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Accepts DOM element id as parameter
-    this.getDOMElement = function(elemId)
+    getDOMElement(elemId)
     {
-        var result = document.all
+        let result = document.all
                         ? document.all[elemId]
                         : document.getElementById(elemId);
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Helper function to handle onKeyDown, onKeyPress and onKeyUp events.
     // Gets event parameter, brings back key name or "Unknown".
-    this.getKeyName = function(keyEvent)
+    getKeyName(keyEvent)
     {
         if (!keyEvent)
         {
             keyEvent = window.event;
         }
 
-        var keyCode = keyEvent.keyCode;
-        var keyName = "Unknown";
+        let keyCode = keyEvent.keyCode;
+        let keyName = "Unknown";
 
         switch(keyCode)
         {
@@ -289,27 +307,26 @@ function SimpleUtilities()
         }
 
         return keyName;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.trimString = function(str)
+    trimString(str)
     {
         // To force auto-conversion to string
         return (str + "").replace(/^\s*|\s*$/g, "");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Avoids rendering of HTML strings when displayed.
-    this.HTML2Source = function(str)
+    HTML2Source(str)
     {
         // To force auto-conversion to string
-        // noinspection JSConstructorReturnsPrimitive
         return (str + "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -317,19 +334,19 @@ function SimpleUtilities()
     //   client side version of the useful Server.HtmlDecode method
     //   takes one string (encoded) and returns another (decoded)
     //   by Andy Oakley
-    this.HTMLDecode = function(s) {
-        var out = "";
+    HTMLDecode(s) {
+        let out = "";
         if (s==null) return;
 
-        var l = s.length;
-        for (var i=0; i<l; i++) {
-            var ch = s.charAt(i);
+        let l = s.length;
+        for (let i=0; i<l; i++) {
+            let ch = s.charAt(i);
 
             if (ch === '&') {
-                var semicolonIndex = s.indexOf(';', i+1);
+                let semicolonIndex = s.indexOf(';', i+1);
 
                 if (semicolonIndex > 0) {
-                    var entity = s.substring(i + 1, semicolonIndex);
+                    let entity = s.substring(i + 1, semicolonIndex);
                     if (entity.length > 1 && entity.charAt(0) === '#') {
                         if (entity.charAt(1) === 'x' || entity.charAt(1) === 'X')
                             ch = String.fromCharCode(eval('0'+entity.substring(1)));
@@ -599,59 +616,57 @@ function SimpleUtilities()
             out += ch;
         }
 
-        // noinspection JSConstructorReturnsPrimitive
         return out;
-
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Includes a JavaScript source file. Must be called from document head!
-    this.includeJavaScriptFile = function(filename)
+    includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
             + filename + this.randomSuffix()
             + '"></script>');
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Includes a CSS file. Must be called from document head!
-    this.includeCSSFile = function(filename)
+    includeCSSFile(filename)
     {
         document.write('<link href="'
             + filename + this.randomSuffix()
             + '" rel="stylesheet" type="text/css">');
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.isDefined = function(variable)
+    isDefined(letiable)
     {
-        return (typeof(window[variable]) === "undefined") ? false : true;
-    };
+        return (typeof(window[letiable]) === "undefined") ? false : true;
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.regexpResultLength = function(regexp, text)
+    regexpResultLength(regexp, text)
     {
-        var len = text.length - text.replace(regexp, "").length;
+        let len = text.length - text.replace(regexp, "").length;
 
         return len;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // TODO: add more accented characters
-    this.accented2HTML = function(str)
+    accented2HTML(str)
     {
-        var regexp;
-        var replacement;
+        let regexp;
+        let replacement;
 
         regexp = new RegExp("é", "g");
         replacement = "&eacute;";
@@ -738,7 +753,7 @@ function SimpleUtilities()
         str = str.replace(regexp, replacement);
 
         return str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -759,9 +774,10 @@ function SimpleUtilities()
     // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
     // (thumbnail)(CSSClass)relativePath >>> target
     //     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
-    this.liteDown = function(text) {
-        var regexp;
-        var replacement;
+    liteDown(text)
+    {
+        let regexp;
+        let replacement;
 
         // text = this.accented2HTML(text);
 
@@ -784,10 +800,11 @@ function SimpleUtilities()
 
         //--------------------------------------------------------------------
 
-        var text2;
+        let text2;
 
         // (rel)(str)relativePath --> <a href="relativePath">str</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(rel\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<a href="$3">$2</a>$4';
             text2 = text.replace(regexp, replacement);
@@ -801,7 +818,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         // (rel)relativePath --> <a href="relativePath">relativePath</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(rel\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<a href="$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -817,7 +835,8 @@ function SimpleUtilities()
         // (str)url --> <a href="url">str</a>
         // Remark: watch out for > and < that are allowed before and after the
         // url string in this current regexp. May cause problems.
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w\.\\/]+)(<|\\s|$)", "");
             replacement = '$1<a href="$3">$2</a>$4';
             text2 = text.replace(regexp, replacement);
@@ -832,7 +851,8 @@ function SimpleUtilities()
 
         // url --> <a href="url">url</a>
         // (url) --> <a href="url">url</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w\.\\/]+)(\\)|\\s|$)", "");
             replacement = '$1<a href="$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -846,7 +866,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         // x@y --> <a href="mailto:x@y">x@y</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)([\\w\.]+@[\\w\.]+)(<|\\s|$)", "");
             replacement = '$1<a href="mailto:$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -864,7 +885,8 @@ function SimpleUtilities()
         //          <tag>*bla habla*<tag>
         // Wrong:   bla *bla habla*.
         //          bla * habla * bla
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\*([^\*\\s][^\*]*[^\*\\s]|[^\*\\s])\\*(<|\\s|$)", "");
             replacement = "$1<em>$2</em>$3";
             text2 = text.replace(regexp, replacement);
@@ -882,7 +904,8 @@ function SimpleUtilities()
         //          <tag>_blabla_</tag>
         // Wrong:   bla _bla habla_.
         //          bla _ habla _ bla
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)_([^_\\s][^_]*[^_\\s]|[^_\\s])_(<|\\s|$)", "");
             replacement = "$1<cite>$2</cite>$3";
             text2 = text.replace(regexp, replacement);
@@ -898,7 +921,8 @@ function SimpleUtilities()
         // =bla= --> <h1>bla</h1>
         // ==bla== --> <h2>bla</h2>
         // ...
-        for (var level = 1; level <= 6; level++) {
+        for (let level = 1; level <= 6; level++)
+        {
             regexp = new RegExp("^(\\s*)(=){"+level+"}([^=].*[^=])(=){"+level+"}(\\s*)$", "gm");
             replacement = "<h" + level + ">$3</h" + level + ">";
             text = text.replace(regexp, replacement);
@@ -907,7 +931,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
         // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
         // requires a class definition in the document CSS (not mandatory)
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(image\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<img class="$2" src="$3"/>$4';
             text2 = text.replace(regexp, replacement);
@@ -933,14 +958,14 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         return text;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Accepts either JavaScript/DOM objects or DOM id string as parameter.
     // Returns JavaScript/DOM object.
-    this.toObject = function(obj)
+    toObject(obj)
     {
         // If obj is a string than it is handled as a DOM id
         if (typeof(obj) === "string")
@@ -948,7 +973,7 @@ function SimpleUtilities()
             obj = this.getDOMElement(obj);
         }
         return obj;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -964,7 +989,8 @@ function SimpleUtilities()
     // capturing or bubbling, use false (bubbling)."
     // Example:
     //      simpleUtils.attachEvent(newLink, "click", action);
-    this.attachEvent = function(element, eventName, callback, capturing ) {
+    attachEvent(element, eventName, callback, capturing )
+    {
         if ( element.addEventListener ) // the DOM2, W3C way
         {
             element.addEventListener( eventName, callback, capturing );
@@ -981,96 +1007,38 @@ function SimpleUtilities()
     // eg.:
     // Given: arr = [{a:1, b:2}, {a:3, b:4}]
     // objectArray2objectHashTable(arr, "a") --> [1:{a:1, b:2}, 3:{a:3, b:4}]
-    this.objectArray2objectHashTable = function(array, indexName) {
-        var hashTable = [];
+    objectArray2objectHashTable(array, indexName)
+    {
+        let hashTable = [];
 
-        for (var i in array) {
+        for (let i in array) {
             // noinspection JSUnfilteredForInLoop
             hashTable[array[i][indexName]] = array[i];
         }
 
         return hashTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
+    // NOTE: since EcmaScript 6 there is native templating support for strings
+    // Example:
+    //     let soMany = 10;
+    //     console.log(`This is ${soMany} times easier!`);
+    //     // "This is 10 times easier!
+    //     // Be aware that template strings are surrounded by backticks `
+    //     // instead of (single) quotes.
+
+    // A full, global sprintf() implementation is included from the libs
+
     // SimpleUtilities
-    // TODO: Consider switching to a more modern implementation
-	/*
-	 * sprintf() for JavaScript v.0.2
-	 *
-	 * Copyright (c) 2007 Alexandru Marasteanu <http://alexei.417.ro/>
-	 *
-	 * This program is free software; you can redistribute it and/or modify it under
-	 * the terms of the GNU General Public License as published by the Free Software
-	 * Foundation; either version 2 of the License, or (at your option) any later
-	 * version.
-	 *
-	 * This program is distributed in the hope that it will be useful, but WITHOUT
-	 * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-	 * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-	 * details.
-	 *
-	 * You should have received a copy of the GNU General Public License along with
-	 * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
-	 * Place, Suite 330, Boston, MA 02111-1307 USA
-	 *
-	 * Examples:
-	 *   echo = function(s) { document.write(s); };
-     *   var n =  43951789;
-     *   var u = -43951789;
-     *   var c = 65;
-     *   var d = 123.45678901234567890123456789;
-     *   var start = (new Date()).getTime();
-     *   echo(sprintf("%%b = '%b'<br />", n)); // binary representation
-     *   echo(sprintf("%%c = '%c'<br />", c)); // print the ascii character
-     *   echo(sprintf("%%d = '%+d'<br />", n)); // standard integer representation
-     *   echo(sprintf("%%d = '%d'<br />", u)); // standard integer representation
-     *   echo(sprintf("%%e = '%.10e'<br />", d)); // scientific notation
-     *   echo(sprintf("%%u = '%u'<br />", n)); // unsigned integer representation of a positive integer
-     *   echo(sprintf("%%u = '%u'<br />", u)); // unsigned integer representation of a negative integer
-     *   echo(sprintf("%%f = '%'-10.2f' and %%f = '%010.10f'<br />", d, d)); // floating point representation
-     *   echo(sprintf("%%o = '%o'<br />", n)); // octal representation
-     *   echo(sprintf("%%s = '%'~100.10s'<br />", "Ala-bala-portocala")); // string representation
-     *   echo(sprintf("%%x = '%x'<br />", n)); // hexadecimal representation (lower-case)
-     *   echo(sprintf("%%X = '%X'<br />", n)); // hexadecimal representation (upper-case)
-     *   echo(sprintf("<br />%4$s, %3$s, %1$s, %2$s", 'c', 'd', 'b', 'a'));
-     *   echo('<br />' + ((new Date()).getTime() - start) / 1000 );
-	 */
-	this.str_repeat = function(i, m) { for (var o = []; m > 0; o[--m] = i) {} return(o.join('')); };
-	
-	this.sprintf = function() {
-	  var i = 0, a, f = arguments[i++], o = [], m, p, c, x;
-	  while (f) {
-	    if (m = /^[^\x25]+/.exec(f)) o.push(m[0]);
-	    else if (m = /^\x25{2}/.exec(f)) o.push('%');
-	    else if (m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f)) {
-	      if (!(a = arguments[m[1] ? m[1] : i++])) throw("Too few arguments.");
-	      if (/[^s]/.test(m[7]) && (typeof(a) !== 'number'))
-	        throw("Expecting number but found " + typeof(a));
-	      switch (m[7]) {
-	        case 'b': a = a.toString(2); break;
-	        case 'c': a = String.fromCharCode(a); break;
-	        case 'd': a = parseInt(a); break;
-	        case 'e': a = m[6] ? a.toExponential(m[6]) : a.toExponential(); break;
-	        case 'f': a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a); break;
-	        case 'o': a = a.toString(8); break;
-	        case 's': a = ((a = String(a)) && m[6] ? a.substring(0, m[6]) : a); break;
-	        case 'u': a = Math.abs(a); break;
-	        case 'x': a = a.toString(16); break;
-	        case 'X': a = a.toString(16).toUpperCase(); break;
-	      }
-	      a = (/[def]/.test(m[7]) && m[2] && a > 0 ? '+' + a : a);
-	      c = m[3] ? m[3] === '0' ? '0' : m[3].charAt(1) : ' ';
-	      x = m[6] ? m[5] - String(a).length : m[5];
-	      p = m[5] ? this.str_repeat(c, x) : '';
-	      o.push(m[4] ? a + p : p + a);
-	    }
-	    else throw ("Huh ?!");
-	    f = f.substring(m[0].length);
-	  }
-	  return o.join('');
-	}
+    // Supported params: %s
+    // noinspection JSUnusedGlobalSymbols
+    microSprintf(format, ...args)
+    {
+        let i = 0;
+        return format.replace(/%s/g, () => args[i++]);
+    }
 
 }
 
@@ -1078,34 +1046,38 @@ function SimpleUtilities()
 // Cryptography class
 //----------------------------------------------------------------------------
 
-function SimpleCryptography()
+class SimpleCryptography
 {
-
-    //------------------------------------------------------------------------
-    // Fields
     //------------------------------------------------------------------------
 
-    this.version = simpleClassesVersion;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleCryptography                                  Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
 
-    // *Altered*, URL-safe base64 character palette
-    this.base64KeyStr
-        = "ABCDEFGHIJKLMNOP"
-        + "QRSTUVWXYZabcdef"
-        + "ghijklmnopqrstuv"
-        + "wxyz0123456789-_"
-        + ".";
+        // *Altered*, URL-safe base64 character palette
+        this.base64KeyStr
+            = "ABCDEFGHIJKLMNOP"
+            + "QRSTUVWXYZabcdef"
+            + "ghijklmnopqrstuv"
+            + "wxyz0123456789-_"
+            + ".";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.base64Encode = function(input)
+    base64Encode(input)
     {
-        var output = "";
-        var chr1, chr2, chr3 = "";
-        var enc1, enc2, enc3, enc4 = "";
-        var i = 0;
+        let output = "";
+        let chr1, chr2, chr3 = "";
+        let enc1, enc2, enc3, enc4 = "";
+        let i = 0;
 
         do
         {
@@ -1136,29 +1108,27 @@ function SimpleCryptography()
         } while (i < input.length);
 
         return output;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.base64Decode = function(input)
+    base64Decode(input)
     {
-        var output = "";
-        var chr1, chr2, chr3 = "";
-        var enc1, enc2, enc3, enc4 = "";
-        var i = 0;
+        let output = "";
+        let chr1, chr2, chr3 = "";
+        let enc1, enc2, enc3, enc4 = "";
+        let i = 0;
 
         // remove all characters that are not A-Z, a-z, 0-9, -, _, or .
-        // noinspection RegExpRedundantEscape
-        var base64Test = /[^A-Za-z0-9\-\_\.]/g;
+        let base64Test = /[^A-Za-z0-9\-_.]/g;
         if (base64Test.exec(input))
         {
             alert("There were invalid base64 characters in the input text.\n" +
                 "Valid base64 characters are A-Z, a-z, 0-9, '-', '_', and '.'\n" +
                 "Expect errors in decoding.");
         }
-        // noinspection RegExpRedundantEscape
-        input = input.replace(/[^A-Za-z0-9\-\_\.]/g, "");
+        input = input.replace(/[^A-Za-z0-9\-_.]/g, "");
 
         do
         {
@@ -1187,20 +1157,20 @@ function SimpleCryptography()
         } while (i < input.length);
 
         return output;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
     // Apparently RC4 cipher
-    this.RC4Encrypt = function(password, data)
+    RC4Encrypt(password, data)
     {
-        var buf = new Array(256);	// 256B cipher buffer
+        let buf = new Array(256);	// 256B cipher buffer
 
-        var passwordLength = password.length;
-        var dataLength = data.length;
+        let passwordLength = password.length;
+        let dataLength = data.length;
 
-        var i, j, k, n, tmp, cipher = "";
+        let i, j, k, n, tmp, cipher = "";
 
         for (i = 0; i < 256; i++)
         {
@@ -1228,69 +1198,65 @@ function SimpleCryptography()
             cipher += String.fromCharCode(data.charCodeAt(i) ^ k);
         }
 
-        // noinspection JSConstructorReturnsPrimitive
         return cipher;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
     // Apparently RC4 cipher
-    this.RC4Decrypt = function(password, data)
+    RC4Decrypt(password, data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return this.RC4Encrypt(password, data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.SHA1 = function(data)
+    SHA1(data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return hex_sha1(data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.MD5 = function(data)
+    MD5(data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return hex_md5(data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.generateRandomString = function(len)
+    generateRandomString(len)
     {
-        var charBuffer =
+        let charBuffer =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var result = "";
+        let result = "";
 
-        for (var i = 0; i < len; i++)
+        for (let i = 0; i < len; i++)
         {
             result
                 += charBuffer[Math.floor(Math.random() * charBuffer.length)];
         }
 
         return result;
-    };
+    }
 
 }
 
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
-function rem(str) {
+// GLOBAL
+function rem(str)
+{
 }
 
 //----------------------------------------------------------------------------
 // Instances
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
-var simpleDebug  = new SimpleDebug();
-var simpleUtils  = new SimpleUtilities();
-var simpleCrypto = new SimpleCryptography();
+const simpleDebug  = new SimpleDebug();
+const simpleUtils  = new SimpleUtilities();
+const simpleCrypto = new SimpleCryptography();

@@ -1,8 +1,12 @@
 
 //-----------------------------------------------------------------------------
+// Document version 1.00
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 // Languages
 
-var uiEng = [
+let uiEng = [
     {id: "intro",     text: "Intro"},
     {id: "changelog", text: "Changelog"},
     {id: "todo",      text: "TODO"},
@@ -20,7 +24,7 @@ redSandUITextManager.setTextTable(uiEng);
 // Menus
 
 // Main menu
-var items = [];
+let items = [];
 
 items.push(new RedSandNode("mainMenuIntro",     "intro",     "mainMenuItem", "mainMenuItemSelected", "#article=intro"));
 items.push(new RedSandNode("mainMenuChangelog", "changelog", "mainMenuItem", "mainMenuItemSelected", "#article=changelog"));
@@ -29,7 +33,7 @@ items.push(new RedSandNode("mainMenuDocs",      "docs",      "mainMenuItem", "ma
 items.push(new RedSandNode("mainMenuTests",     "tests",     "mainMenuItem", "mainMenuItemSelected", "#article=tests"));
 items.push(new RedSandNode("mainMenuContact",   "contact",   "mainMenuItem", "mainMenuItemSelected", "#article=contact"));
 
-var mainMenu = new RedSandMenu("mainMenu", items, "mainMenuContainer");
+let mainMenu = new RedSandMenu("mainMenu", items, "mainMenuContainer");
 redSandRegistry.addMenu(mainMenu);
 mainMenu.render();
 
@@ -49,23 +53,25 @@ function handleArticleEvent(params)
     // It is 2018... speeds are better now, maybe no UI blocking necessary any more
     // redSandUtils.blockInput();
 
-    if (params.article === "intro") {
-        redSandGenericLoader.load("page-2018-10-05/articles/eng/Intro.txt", contentRenderer);
-    }
-    else if (params.article === "changelog") {
-        redSandGenericLoader.load("conSense/doc/Changelog.txt", contentRenderer);
-    }
-    else if (params.article === "todo") {
-        redSandGenericLoader.load("conSense/doc/TODO.txt", contentRenderer);
-    }
-    else if (params.article === "docs") {
-        redSandGenericLoader.load("conSense/doc/Documentation.txt", contentRenderer);
-    }
-    else if (params.article === "tests") {
-        redSandGenericLoader.load("page-2018-10-05/articles/eng/Tests.txt", contentRenderer);
-    }
-    else if (params.article === "contact") {
-        redSandGenericLoader.load("page-2018-10-05/articles/eng/Contact.txt", contentRenderer);
+    switch (params.article) {
+        case "intro":
+            redSandGenericLoader.load("page-2018-10-05/articles/eng/Intro.txt", contentRenderer);
+            break;
+        case "changelog":
+            redSandGenericLoader.load("conSense/doc/Changelog.txt", contentRenderer);
+            break;
+        case "todo":
+            redSandGenericLoader.load("conSense/doc/TODO.txt", contentRenderer);
+            break;
+        case "docs":
+            redSandGenericLoader.load("conSense/doc/Documentation.txt", contentRenderer);
+            break;
+        case "tests":
+            redSandGenericLoader.load("page-2018-10-05/articles/eng/Tests.txt", contentRenderer);
+            break;
+        case "contact":
+            redSandGenericLoader.load("page-2018-10-05/articles/eng/Contact.txt", contentRenderer);
+            break;
     }
 }
 
@@ -76,7 +82,7 @@ function handleArticleEvent(params)
 
 function contentRenderer(content)
 {
-    var domElem = simpleUtils.getDOMElement("contentContainer");
+    let domElem = simpleUtils.getDOMElement("contentContainer");
 
     content = simpleUtils.liteDown(content);
     

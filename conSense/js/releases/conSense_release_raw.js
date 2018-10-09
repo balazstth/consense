@@ -1369,7 +1369,242 @@ shortcut = {
 		else if(ele.removeEventListener) ele.removeEventListener(type, callback, false);
 		else ele['on'+type] = false;
 	}
-}/* MIT https://github.com/kenwheeler/cash */
+}// sprintf-js (c) Alexandru Marasteanu, 2018
+// @ https://github.com/alexei/sprintf.js and http://alexei.ro/
+// Version: 1.1.1
+
+/* global window, exports, define */
+
+!function() {
+    'use strict'
+
+    var re = {
+        not_string: /[^s]/,
+        not_bool: /[^t]/,
+        not_type: /[^T]/,
+        not_primitive: /[^v]/,
+        number: /[diefg]/,
+        numeric_arg: /[bcdiefguxX]/,
+        json: /[j]/,
+        not_json: /[^j]/,
+        text: /^[^\x25]+/,
+        modulo: /^\x25{2}/,
+        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
+        key: /^([a-z_][a-z_\d]*)/i,
+        key_access: /^\.([a-z_][a-z_\d]*)/i,
+        index_access: /^\[(\d+)\]/,
+        sign: /^[\+\-]/
+    }
+
+    function sprintf(key) {
+        // `arguments` is not an array, but should be fine for this call
+        return sprintf_format(sprintf_parse(key), arguments)
+    }
+
+    function vsprintf(fmt, argv) {
+        return sprintf.apply(null, [fmt].concat(argv || []))
+    }
+
+    function sprintf_format(parse_tree, argv) {
+        var cursor = 1, tree_length = parse_tree.length, arg, output = '', i, k, ph, pad, pad_character, pad_length, is_positive, sign
+        for (i = 0; i < tree_length; i++) {
+            if (typeof parse_tree[i] === 'string') {
+                output += parse_tree[i]
+            }
+            else if (typeof parse_tree[i] === 'object') {
+                ph = parse_tree[i] // convenience purposes only
+                if (ph.keys) { // keyword argument
+                    arg = argv[cursor]
+                    for (k = 0; k < ph.keys.length; k++) {
+                        if (arg == undefined) {
+                            throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k-1]))
+                        }
+                        arg = arg[ph.keys[k]]
+                    }
+                }
+                else if (ph.param_no) { // positional argument (explicit)
+                    arg = argv[ph.param_no]
+                }
+                else { // positional argument (implicit)
+                    arg = argv[cursor++]
+                }
+
+                if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
+                    arg = arg()
+                }
+
+                if (re.numeric_arg.test(ph.type) && (typeof arg !== 'number' && isNaN(arg))) {
+                    throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg))
+                }
+
+                if (re.number.test(ph.type)) {
+                    is_positive = arg >= 0
+                }
+
+                switch (ph.type) {
+                    case 'b':
+                        arg = parseInt(arg, 10).toString(2)
+                        break
+                    case 'c':
+                        arg = String.fromCharCode(parseInt(arg, 10))
+                        break
+                    case 'd':
+                    case 'i':
+                        arg = parseInt(arg, 10)
+                        break
+                    case 'j':
+                        arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0)
+                        break
+                    case 'e':
+                        arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential()
+                        break
+                    case 'f':
+                        arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg)
+                        break
+                    case 'g':
+                        arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg)
+                        break
+                    case 'o':
+                        arg = (parseInt(arg, 10) >>> 0).toString(8)
+                        break
+                    case 's':
+                        arg = String(arg)
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 't':
+                        arg = String(!!arg)
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'T':
+                        arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase()
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'u':
+                        arg = parseInt(arg, 10) >>> 0
+                        break
+                    case 'v':
+                        arg = arg.valueOf()
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'x':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16)
+                        break
+                    case 'X':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase()
+                        break
+                }
+                if (re.json.test(ph.type)) {
+                    output += arg
+                }
+                else {
+                    if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
+                        sign = is_positive ? '+' : '-'
+                        arg = arg.toString().replace(re.sign, '')
+                    }
+                    else {
+                        sign = ''
+                    }
+                    pad_character = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' '
+                    pad_length = ph.width - (sign + arg).length
+                    pad = ph.width ? (pad_length > 0 ? pad_character.repeat(pad_length) : '') : ''
+                    output += ph.align ? sign + arg + pad : (pad_character === '0' ? sign + pad + arg : pad + sign + arg)
+                }
+            }
+        }
+        return output
+    }
+
+    var sprintf_cache = Object.create(null)
+
+    function sprintf_parse(fmt) {
+        if (sprintf_cache[fmt]) {
+            return sprintf_cache[fmt]
+        }
+
+        var _fmt = fmt, match, parse_tree = [], arg_names = 0
+        while (_fmt) {
+            if ((match = re.text.exec(_fmt)) !== null) {
+                parse_tree.push(match[0])
+            }
+            else if ((match = re.modulo.exec(_fmt)) !== null) {
+                parse_tree.push('%')
+            }
+            else if ((match = re.placeholder.exec(_fmt)) !== null) {
+                if (match[2]) {
+                    arg_names |= 1
+                    var field_list = [], replacement_field = match[2], field_match = []
+                    if ((field_match = re.key.exec(replacement_field)) !== null) {
+                        field_list.push(field_match[1])
+                        while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+                            if ((field_match = re.key_access.exec(replacement_field)) !== null) {
+                                field_list.push(field_match[1])
+                            }
+                            else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
+                                field_list.push(field_match[1])
+                            }
+                            else {
+                                throw new SyntaxError('[sprintf] failed to parse named argument key')
+                            }
+                        }
+                    }
+                    else {
+                        throw new SyntaxError('[sprintf] failed to parse named argument key')
+                    }
+                    match[2] = field_list
+                }
+                else {
+                    arg_names |= 2
+                }
+                if (arg_names === 3) {
+                    throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported')
+                }
+
+                parse_tree.push(
+                    {
+                        placeholder: match[0],
+                        param_no:    match[1],
+                        keys:        match[2],
+                        sign:        match[3],
+                        pad_char:    match[4],
+                        align:       match[5],
+                        width:       match[6],
+                        precision:   match[7],
+                        type:        match[8]
+                    }
+                )
+            }
+            else {
+                throw new SyntaxError('[sprintf] unexpected placeholder')
+            }
+            _fmt = _fmt.substring(match[0].length)
+        }
+        return sprintf_cache[fmt] = parse_tree
+    }
+
+    /**
+     * export to either browser or node.js
+     */
+    /* eslint-disable quote-props */
+    if (typeof exports !== 'undefined') {
+        exports['sprintf'] = sprintf
+        exports['vsprintf'] = vsprintf
+    }
+    if (typeof window !== 'undefined') {
+        window['sprintf'] = sprintf
+        window['vsprintf'] = vsprintf
+
+        if (typeof define === 'function' && define['amd']) {
+            define(function() {
+                return {
+                    'sprintf': sprintf,
+                    'vsprintf': vsprintf
+                }
+            })
+        }
+    }
+    /* eslint-enable quote-props */
+}()
+/* MIT https://github.com/kenwheeler/cash */
 (function(){
 "use strict";
 
@@ -6580,51 +6815,61 @@ fn.siblings = function () {
 //
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // Version
 //----------------------------------------------------------------------------
 
-var simpleClassesVersion = "1.19";
+const simpleClassesVersion = "1.20";
 
 //----------------------------------------------------------------------------
 // Debug class
 //----------------------------------------------------------------------------
 
-function SimpleDebug()
+class SimpleDebug
 {
+    //------------------------------------------------------------------------
 
-    this.version = simpleClassesVersion;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleDebug                                         Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
 
-    this.messages = "";
+        this.messages = "";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Batch debug
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.add = function(description, value)
+    add(description, value)
     {
         this.messages += description + ": " + value + "\n";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.print = function()
+    print()
     {
         alert(this.messages);
         this.messages = "";
-    };
+    }
 
     //------------------------------------------------------------------------
     // Simple debug
     //------------------------------------------------------------------------
 
     // SimpleDebug
-    this.alert = function(description, value)
+    alert(description, value)
     {
         alert(description + ": " + value);
-    };
+    }
 
 }
 
@@ -6632,81 +6877,89 @@ function SimpleDebug()
 // Utilities class
 //----------------------------------------------------------------------------
 
-function SimpleUtilities()
+class SimpleUtilities
 {
-
-    this.version = simpleClassesVersion;
-
     //------------------------------------------------------------------------
 
-    // DOM nodeType-s
-    this.DOM_ELEMENT_NODE = 1;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ATTRIBUTE_NODE = 2;
-    this.DOM_TEXT_NODE = 3;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_CDATA_SECTION_NODE = 4;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ENTITY_REFERENCE_NODE = 5;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_ENTITY_NODE = 6;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_PROCESSING_INSTRUCTION_NODE = 7;
-    this.DOM_COMMENT_NODE = 8;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_DOCUMENT_NODE = 9;
-    this.DOM_DOCUMENT_TYPE_NODE = 10;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
-    // noinspection JSUnusedGlobalSymbols
-    this.DOM_NOTATION_NODE = 12;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleUtilities                                     Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
+
+        // DOM nodeType-s
+        this.DOM_ELEMENT_NODE = 1;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ATTRIBUTE_NODE = 2;
+        this.DOM_TEXT_NODE = 3;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_CDATA_SECTION_NODE = 4;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ENTITY_REFERENCE_NODE = 5;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_ENTITY_NODE = 6;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_PROCESSING_INSTRUCTION_NODE = 7;
+        this.DOM_COMMENT_NODE = 8;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_DOCUMENT_NODE = 9;
+        this.DOM_DOCUMENT_TYPE_NODE = 10;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
+        // noinspection JSUnusedGlobalSymbols
+        this.DOM_NOTATION_NODE = 12;
+        //////////////////////////////////////////////////////////////////////
+
+        // let sprintfJs =
+        // this.sprintf =
+    }
 
     //------------------------------------------------------------------------
 
     // Used for generating random number URL parameters to force fresh loading
     // of content.
     // Generating only if conSense.debug!
-    this.randomSuffix = function()
+    randomSuffix()
     {
         if (!conSense.debug) return "";
         return "?random_suffix=" + this.random(0xdeadbeef);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // Generate random integer from 1 to limit
-    this.random = function(limit)
+    random(limit)
     {
         if (limit < 1) return 1;
         return Math.floor((Math.random() * limit) + 1);
-    };
+    }
 
     //------------------------------------------------------------------------
 
-    // noinspection JSUnusedGlobalSymbols
-    this.replaceAll = function(search, replacement)
+    replaceAll(search, replacement)
     {
-        var target = this;
+        let target = this;
         return target.replace(new RegExp(search, 'g'), replacement);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // Example: onClick="linkTo(formURI('main.jsp', {'lang': 'hun'}))"
 
     // SimpleUtilities
-    this.linkTo = function(dest)
+    linkTo(dest)
     {
         document.location.href = dest;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.formURI = function(target, paramArray)
+    formURI(target, paramArray)
     {
-        var result = target + "?";
-        var andSign = "";
+        let result = target + "?";
+        let andSign = "";
 
         // No parameters to add
         if (paramArray.length === 0)
@@ -6714,7 +6967,7 @@ function SimpleUtilities()
             return target;
         }
 
-        for (var i in paramArray)
+        for (let i in paramArray)
         {
             // noinspection JSUnfilteredForInLoop
             result += andSign + i + "=" + paramArray[i];
@@ -6722,46 +6975,46 @@ function SimpleUtilities()
         }
 
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Basic browser capabilities test
-    this.checkBrowser = function()
+    checkBrowser()
     {
         if (!(document.all || document.getElementById))
         {
             alert("SimpleUtilities.checkBrowser() error: Please upgrade to a more modern browser. This interactive web page will not operate properly.");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Accepts DOM element id as parameter
-    this.getDOMElement = function(elemId)
+    getDOMElement(elemId)
     {
-        var result = document.all
+        let result = document.all
                         ? document.all[elemId]
                         : document.getElementById(elemId);
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Helper function to handle onKeyDown, onKeyPress and onKeyUp events.
     // Gets event parameter, brings back key name or "Unknown".
-    this.getKeyName = function(keyEvent)
+    getKeyName(keyEvent)
     {
         if (!keyEvent)
         {
             keyEvent = window.event;
         }
 
-        var keyCode = keyEvent.keyCode;
-        var keyName = "Unknown";
+        let keyCode = keyEvent.keyCode;
+        let keyName = "Unknown";
 
         switch(keyCode)
         {
@@ -6856,27 +7109,26 @@ function SimpleUtilities()
         }
 
         return keyName;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.trimString = function(str)
+    trimString(str)
     {
         // To force auto-conversion to string
         return (str + "").replace(/^\s*|\s*$/g, "");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Avoids rendering of HTML strings when displayed.
-    this.HTML2Source = function(str)
+    HTML2Source(str)
     {
         // To force auto-conversion to string
-        // noinspection JSConstructorReturnsPrimitive
         return (str + "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -6884,19 +7136,19 @@ function SimpleUtilities()
     //   client side version of the useful Server.HtmlDecode method
     //   takes one string (encoded) and returns another (decoded)
     //   by Andy Oakley
-    this.HTMLDecode = function(s) {
-        var out = "";
+    HTMLDecode(s) {
+        let out = "";
         if (s==null) return;
 
-        var l = s.length;
-        for (var i=0; i<l; i++) {
-            var ch = s.charAt(i);
+        let l = s.length;
+        for (let i=0; i<l; i++) {
+            let ch = s.charAt(i);
 
             if (ch === '&') {
-                var semicolonIndex = s.indexOf(';', i+1);
+                let semicolonIndex = s.indexOf(';', i+1);
 
                 if (semicolonIndex > 0) {
-                    var entity = s.substring(i + 1, semicolonIndex);
+                    let entity = s.substring(i + 1, semicolonIndex);
                     if (entity.length > 1 && entity.charAt(0) === '#') {
                         if (entity.charAt(1) === 'x' || entity.charAt(1) === 'X')
                             ch = String.fromCharCode(eval('0'+entity.substring(1)));
@@ -7166,59 +7418,57 @@ function SimpleUtilities()
             out += ch;
         }
 
-        // noinspection JSConstructorReturnsPrimitive
         return out;
-
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Includes a JavaScript source file. Must be called from document head!
-    this.includeJavaScriptFile = function(filename)
+    includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
             + filename + this.randomSuffix()
             + '"></script>');
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Includes a CSS file. Must be called from document head!
-    this.includeCSSFile = function(filename)
+    includeCSSFile(filename)
     {
         document.write('<link href="'
             + filename + this.randomSuffix()
             + '" rel="stylesheet" type="text/css">');
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.isDefined = function(variable)
+    isDefined(letiable)
     {
-        return (typeof(window[variable]) === "undefined") ? false : true;
-    };
+        return (typeof(window[letiable]) === "undefined") ? false : true;
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    this.regexpResultLength = function(regexp, text)
+    regexpResultLength(regexp, text)
     {
-        var len = text.length - text.replace(regexp, "").length;
+        let len = text.length - text.replace(regexp, "").length;
 
         return len;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // TODO: add more accented characters
-    this.accented2HTML = function(str)
+    accented2HTML(str)
     {
-        var regexp;
-        var replacement;
+        let regexp;
+        let replacement;
 
         regexp = new RegExp("é", "g");
         replacement = "&eacute;";
@@ -7305,7 +7555,7 @@ function SimpleUtilities()
         str = str.replace(regexp, replacement);
 
         return str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -7326,9 +7576,10 @@ function SimpleUtilities()
     // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
     // (thumbnail)(CSSClass)relativePath >>> target
     //     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
-    this.liteDown = function(text) {
-        var regexp;
-        var replacement;
+    liteDown(text)
+    {
+        let regexp;
+        let replacement;
 
         // text = this.accented2HTML(text);
 
@@ -7351,10 +7602,11 @@ function SimpleUtilities()
 
         //--------------------------------------------------------------------
 
-        var text2;
+        let text2;
 
         // (rel)(str)relativePath --> <a href="relativePath">str</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(rel\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<a href="$3">$2</a>$4';
             text2 = text.replace(regexp, replacement);
@@ -7368,7 +7620,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         // (rel)relativePath --> <a href="relativePath">relativePath</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(rel\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<a href="$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -7384,7 +7637,8 @@ function SimpleUtilities()
         // (str)url --> <a href="url">str</a>
         // Remark: watch out for > and < that are allowed before and after the
         // url string in this current regexp. May cause problems.
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w\.\\/]+)(<|\\s|$)", "");
             replacement = '$1<a href="$3">$2</a>$4';
             text2 = text.replace(regexp, replacement);
@@ -7399,7 +7653,8 @@ function SimpleUtilities()
 
         // url --> <a href="url">url</a>
         // (url) --> <a href="url">url</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w\.\\/]+)(\\)|\\s|$)", "");
             replacement = '$1<a href="$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -7413,7 +7668,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         // x@y --> <a href="mailto:x@y">x@y</a>
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)([\\w\.]+@[\\w\.]+)(<|\\s|$)", "");
             replacement = '$1<a href="mailto:$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
@@ -7431,7 +7687,8 @@ function SimpleUtilities()
         //          <tag>*bla habla*<tag>
         // Wrong:   bla *bla habla*.
         //          bla * habla * bla
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\*([^\*\\s][^\*]*[^\*\\s]|[^\*\\s])\\*(<|\\s|$)", "");
             replacement = "$1<em>$2</em>$3";
             text2 = text.replace(regexp, replacement);
@@ -7449,7 +7706,8 @@ function SimpleUtilities()
         //          <tag>_blabla_</tag>
         // Wrong:   bla _bla habla_.
         //          bla _ habla _ bla
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)_([^_\\s][^_]*[^_\\s]|[^_\\s])_(<|\\s|$)", "");
             replacement = "$1<cite>$2</cite>$3";
             text2 = text.replace(regexp, replacement);
@@ -7465,7 +7723,8 @@ function SimpleUtilities()
         // =bla= --> <h1>bla</h1>
         // ==bla== --> <h2>bla</h2>
         // ...
-        for (var level = 1; level <= 6; level++) {
+        for (let level = 1; level <= 6; level++)
+        {
             regexp = new RegExp("^(\\s*)(=){"+level+"}([^=].*[^=])(=){"+level+"}(\\s*)$", "gm");
             replacement = "<h" + level + ">$3</h" + level + ">";
             text = text.replace(regexp, replacement);
@@ -7474,7 +7733,8 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
         // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
         // requires a class definition in the document CSS (not mandatory)
-        while (true) {
+        while (true)
+        {
             regexp = new RegExp("(>|\\s|^)\\(image\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
             replacement = '$1<img class="$2" src="$3"/>$4';
             text2 = text.replace(regexp, replacement);
@@ -7500,14 +7760,14 @@ function SimpleUtilities()
         //--------------------------------------------------------------------
 
         return text;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleUtilities
     // Accepts either JavaScript/DOM objects or DOM id string as parameter.
     // Returns JavaScript/DOM object.
-    this.toObject = function(obj)
+    toObject(obj)
     {
         // If obj is a string than it is handled as a DOM id
         if (typeof(obj) === "string")
@@ -7515,7 +7775,7 @@ function SimpleUtilities()
             obj = this.getDOMElement(obj);
         }
         return obj;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -7531,7 +7791,8 @@ function SimpleUtilities()
     // capturing or bubbling, use false (bubbling)."
     // Example:
     //      simpleUtils.attachEvent(newLink, "click", action);
-    this.attachEvent = function(element, eventName, callback, capturing ) {
+    attachEvent(element, eventName, callback, capturing )
+    {
         if ( element.addEventListener ) // the DOM2, W3C way
         {
             element.addEventListener( eventName, callback, capturing );
@@ -7548,96 +7809,38 @@ function SimpleUtilities()
     // eg.:
     // Given: arr = [{a:1, b:2}, {a:3, b:4}]
     // objectArray2objectHashTable(arr, "a") --> [1:{a:1, b:2}, 3:{a:3, b:4}]
-    this.objectArray2objectHashTable = function(array, indexName) {
-        var hashTable = [];
+    objectArray2objectHashTable(array, indexName)
+    {
+        let hashTable = [];
 
-        for (var i in array) {
+        for (let i in array) {
             // noinspection JSUnfilteredForInLoop
             hashTable[array[i][indexName]] = array[i];
         }
 
         return hashTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
+    // NOTE: since EcmaScript 6 there is native templating support for strings
+    // Example:
+    //     let soMany = 10;
+    //     console.log(`This is ${soMany} times easier!`);
+    //     // "This is 10 times easier!
+    //     // Be aware that template strings are surrounded by backticks `
+    //     // instead of (single) quotes.
+
+    // A full, global sprintf() implementation is included from the libs
+
     // SimpleUtilities
-    // TODO: Consider switching to a more modern implementation
-	/*
-	 * sprintf() for JavaScript v.0.2
-	 *
-	 * Copyright (c) 2007 Alexandru Marasteanu <http://alexei.417.ro/>
-	 *
-	 * This program is free software; you can redistribute it and/or modify it under
-	 * the terms of the GNU General Public License as published by the Free Software
-	 * Foundation; either version 2 of the License, or (at your option) any later
-	 * version.
-	 *
-	 * This program is distributed in the hope that it will be useful, but WITHOUT
-	 * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-	 * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-	 * details.
-	 *
-	 * You should have received a copy of the GNU General Public License along with
-	 * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
-	 * Place, Suite 330, Boston, MA 02111-1307 USA
-	 *
-	 * Examples:
-	 *   echo = function(s) { document.write(s); };
-     *   var n =  43951789;
-     *   var u = -43951789;
-     *   var c = 65;
-     *   var d = 123.45678901234567890123456789;
-     *   var start = (new Date()).getTime();
-     *   echo(sprintf("%%b = '%b'<br />", n)); // binary representation
-     *   echo(sprintf("%%c = '%c'<br />", c)); // print the ascii character
-     *   echo(sprintf("%%d = '%+d'<br />", n)); // standard integer representation
-     *   echo(sprintf("%%d = '%d'<br />", u)); // standard integer representation
-     *   echo(sprintf("%%e = '%.10e'<br />", d)); // scientific notation
-     *   echo(sprintf("%%u = '%u'<br />", n)); // unsigned integer representation of a positive integer
-     *   echo(sprintf("%%u = '%u'<br />", u)); // unsigned integer representation of a negative integer
-     *   echo(sprintf("%%f = '%'-10.2f' and %%f = '%010.10f'<br />", d, d)); // floating point representation
-     *   echo(sprintf("%%o = '%o'<br />", n)); // octal representation
-     *   echo(sprintf("%%s = '%'~100.10s'<br />", "Ala-bala-portocala")); // string representation
-     *   echo(sprintf("%%x = '%x'<br />", n)); // hexadecimal representation (lower-case)
-     *   echo(sprintf("%%X = '%X'<br />", n)); // hexadecimal representation (upper-case)
-     *   echo(sprintf("<br />%4$s, %3$s, %1$s, %2$s", 'c', 'd', 'b', 'a'));
-     *   echo('<br />' + ((new Date()).getTime() - start) / 1000 );
-	 */
-	this.str_repeat = function(i, m) { for (var o = []; m > 0; o[--m] = i) {} return(o.join('')); };
-	
-	this.sprintf = function() {
-	  var i = 0, a, f = arguments[i++], o = [], m, p, c, x;
-	  while (f) {
-	    if (m = /^[^\x25]+/.exec(f)) o.push(m[0]);
-	    else if (m = /^\x25{2}/.exec(f)) o.push('%');
-	    else if (m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f)) {
-	      if (!(a = arguments[m[1] ? m[1] : i++])) throw("Too few arguments.");
-	      if (/[^s]/.test(m[7]) && (typeof(a) !== 'number'))
-	        throw("Expecting number but found " + typeof(a));
-	      switch (m[7]) {
-	        case 'b': a = a.toString(2); break;
-	        case 'c': a = String.fromCharCode(a); break;
-	        case 'd': a = parseInt(a); break;
-	        case 'e': a = m[6] ? a.toExponential(m[6]) : a.toExponential(); break;
-	        case 'f': a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a); break;
-	        case 'o': a = a.toString(8); break;
-	        case 's': a = ((a = String(a)) && m[6] ? a.substring(0, m[6]) : a); break;
-	        case 'u': a = Math.abs(a); break;
-	        case 'x': a = a.toString(16); break;
-	        case 'X': a = a.toString(16).toUpperCase(); break;
-	      }
-	      a = (/[def]/.test(m[7]) && m[2] && a > 0 ? '+' + a : a);
-	      c = m[3] ? m[3] === '0' ? '0' : m[3].charAt(1) : ' ';
-	      x = m[6] ? m[5] - String(a).length : m[5];
-	      p = m[5] ? this.str_repeat(c, x) : '';
-	      o.push(m[4] ? a + p : p + a);
-	    }
-	    else throw ("Huh ?!");
-	    f = f.substring(m[0].length);
-	  }
-	  return o.join('');
-	}
+    // Supported params: %s
+    // noinspection JSUnusedGlobalSymbols
+    microSprintf(format, ...args)
+    {
+        let i = 0;
+        return format.replace(/%s/g, () => args[i++]);
+    }
 
 }
 
@@ -7645,34 +7848,38 @@ function SimpleUtilities()
 // Cryptography class
 //----------------------------------------------------------------------------
 
-function SimpleCryptography()
+class SimpleCryptography
 {
-
-    //------------------------------------------------------------------------
-    // Fields
     //------------------------------------------------------------------------
 
-    this.version = simpleClassesVersion;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // SimpleCryptography                                  Class letiables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
 
-    // *Altered*, URL-safe base64 character palette
-    this.base64KeyStr
-        = "ABCDEFGHIJKLMNOP"
-        + "QRSTUVWXYZabcdef"
-        + "ghijklmnopqrstuv"
-        + "wxyz0123456789-_"
-        + ".";
+        // *Altered*, URL-safe base64 character palette
+        this.base64KeyStr
+            = "ABCDEFGHIJKLMNOP"
+            + "QRSTUVWXYZabcdef"
+            + "ghijklmnopqrstuv"
+            + "wxyz0123456789-_"
+            + ".";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.base64Encode = function(input)
+    base64Encode(input)
     {
-        var output = "";
-        var chr1, chr2, chr3 = "";
-        var enc1, enc2, enc3, enc4 = "";
-        var i = 0;
+        let output = "";
+        let chr1, chr2, chr3 = "";
+        let enc1, enc2, enc3, enc4 = "";
+        let i = 0;
 
         do
         {
@@ -7703,29 +7910,27 @@ function SimpleCryptography()
         } while (i < input.length);
 
         return output;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.base64Decode = function(input)
+    base64Decode(input)
     {
-        var output = "";
-        var chr1, chr2, chr3 = "";
-        var enc1, enc2, enc3, enc4 = "";
-        var i = 0;
+        let output = "";
+        let chr1, chr2, chr3 = "";
+        let enc1, enc2, enc3, enc4 = "";
+        let i = 0;
 
         // remove all characters that are not A-Z, a-z, 0-9, -, _, or .
-        // noinspection RegExpRedundantEscape
-        var base64Test = /[^A-Za-z0-9\-\_\.]/g;
+        let base64Test = /[^A-Za-z0-9\-_.]/g;
         if (base64Test.exec(input))
         {
             alert("There were invalid base64 characters in the input text.\n" +
                 "Valid base64 characters are A-Z, a-z, 0-9, '-', '_', and '.'\n" +
                 "Expect errors in decoding.");
         }
-        // noinspection RegExpRedundantEscape
-        input = input.replace(/[^A-Za-z0-9\-\_\.]/g, "");
+        input = input.replace(/[^A-Za-z0-9\-_.]/g, "");
 
         do
         {
@@ -7754,20 +7959,20 @@ function SimpleCryptography()
         } while (i < input.length);
 
         return output;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
     // Apparently RC4 cipher
-    this.RC4Encrypt = function(password, data)
+    RC4Encrypt(password, data)
     {
-        var buf = new Array(256);	// 256B cipher buffer
+        let buf = new Array(256);	// 256B cipher buffer
 
-        var passwordLength = password.length;
-        var dataLength = data.length;
+        let passwordLength = password.length;
+        let dataLength = data.length;
 
-        var i, j, k, n, tmp, cipher = "";
+        let i, j, k, n, tmp, cipher = "";
 
         for (i = 0; i < 256; i++)
         {
@@ -7795,72 +8000,68 @@ function SimpleCryptography()
             cipher += String.fromCharCode(data.charCodeAt(i) ^ k);
         }
 
-        // noinspection JSConstructorReturnsPrimitive
         return cipher;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
     // Apparently RC4 cipher
-    this.RC4Decrypt = function(password, data)
+    RC4Decrypt(password, data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return this.RC4Encrypt(password, data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.SHA1 = function(data)
+    SHA1(data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return hex_sha1(data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.MD5 = function(data)
+    MD5(data)
     {
-        // noinspection JSConstructorReturnsPrimitive
         return hex_md5(data);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    this.generateRandomString = function(len)
+    generateRandomString(len)
     {
-        var charBuffer =
+        let charBuffer =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var result = "";
+        let result = "";
 
-        for (var i = 0; i < len; i++)
+        for (let i = 0; i < len; i++)
         {
             result
                 += charBuffer[Math.floor(Math.random() * charBuffer.length)];
         }
 
         return result;
-    };
+    }
 
 }
 
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
-function rem(str) {
+// GLOBAL
+function rem(str)
+{
 }
 
 //----------------------------------------------------------------------------
 // Instances
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
-var simpleDebug  = new SimpleDebug();
-var simpleUtils  = new SimpleUtilities();
-var simpleCrypto = new SimpleCryptography();
+const simpleDebug  = new SimpleDebug();
+const simpleUtils  = new SimpleUtilities();
+const simpleCrypto = new SimpleCryptography();
 //////////////////////////////////////////////////////////////////////////////
 // RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2018
 // For detailed licensing information see conSense.js.
@@ -7868,43 +8069,52 @@ var simpleCrypto = new SimpleCryptography();
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // Globals
 //----------------------------------------------------------------------------
 
-var redSandVersion = "0.43";
-// Used for RedSandNode Id assignment
-var redSandId = 0;
+const redSandVersion = "0.44";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
 //----------------------------------------------------------------------------
 
-function RedSandUtilities()
+class RedSandUtilities
 {
-    this.version = redSandVersion;
-    
+    //------------------------------------------------------------------------
+
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandUtilities                                    Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+        //////////////////////////////////////////////////////////////////////
+    }
+
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // The second password is optional
-    this.generateCredentials = function(encodePassword, packetPassword)
+    generateCredentials(encodePassword, packetPassword)
     {
         if (packetPassword === undefined) {
             packetPassword = encodePassword;
         }
-        var encodePasswordHash = simpleCrypto.SHA1(encodePassword);
-        var packetPasswordHash = simpleCrypto.SHA1(packetPassword);
-        var thisDate = new Date().format("YYYY-MM-DD HH:mm:ss");
-        var randomString = simpleCrypto.generateRandomString(16);
+        let encodePasswordHash = simpleCrypto.SHA1(encodePassword);
+        let packetPasswordHash = simpleCrypto.SHA1(packetPassword);
+        let thisDate = new Date().format("YYYY-MM-DD HH:mm:ss");
+        let randomString = simpleCrypto.generateRandomString(16);
 
-        var credentialsPackage
+        let credentialsPackage
             = simpleCrypto.base64Encode(
                 simpleCrypto.RC4Encrypt(
                     encodePasswordHash, packetPasswordHash + thisDate + randomString));
 
         return credentialsPackage;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -7917,9 +8127,9 @@ function RedSandUtilities()
     //      userIdentifier
     //      password
     // Returns "deadbeef" on error.
-    this.formAuthenticatedURI = function(uri, params, userId, password)
+    formAuthenticatedURI(uri, params, userId, password)
     {
-        var credentialsPackage = this.generateCredentials(password, password);
+        let credentialsPackage = this.generateCredentials(password, password);
 
         if (params === null)
         {
@@ -7942,29 +8152,29 @@ function RedSandUtilities()
         }
 
         return uri;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // Screen blocker div
-    this.blockInput = function(color)
+    blockInput(color)
     {
         if (color === undefined) {
             color = "blue";
         }
         simpleUtils.getDOMElement("inputBlocker").style.background = color;
         simpleUtils.getDOMElement("inputBlocker").style.display = "block";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // Remove screen blocker div
-    this.unblockInput = function()
+    unblockInput()
     {
         simpleUtils.getDOMElement("inputBlocker").style.display = "none";
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -7974,29 +8184,38 @@ function RedSandUtilities()
 // *DEPENDENCY*
 // Uses conSenseContainer as parent for loader divs.
 // Uses conSense console methods.
-function RedSandGenericLoader()
+class RedSandGenericLoader
 {
-    this.version = redSandVersion;
-
-    this.containers = [];
-    this.frameNames = [];
-    this.callbacks = [];
-    // Loading process counter
-    this.lastProcess = 0;
-
-    // Green point. To recycle already used loader divs.
-    this.oldContainerPool = [];
-
     //------------------------------------------------------------------------
-    // Load indication
 
-    // Trigger
-    this.indicate = true;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGenericLoader                                Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    // Number of loading processes in queue
-    this.loadsInProgress = 0;
+        this.containers = [];
+        this.frameNames = [];
+        this.callbacks = [];
+        // Loading process counter
+        this.lastProcess = 0;
 
-    this.showIndicator = function() {
+        // Green point. To recycle already used loader divs.
+        this.oldContainerPool = [];
+
+        //------------------------------------------------------------------------
+        // Load indication
+
+        // Trigger
+        this.indicate = true;
+
+        // Number of loading processes in queue
+        this.loadsInProgress = 0;
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    showIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
         }
@@ -8005,9 +8224,9 @@ function RedSandGenericLoader()
         {
             simpleUtils.getDOMElement("loadIndicator").style.display = "block";
         }
-    };
+    }
 
-    this.hideIndicator = function() {
+    hideIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
         }
@@ -8016,14 +8235,14 @@ function RedSandGenericLoader()
         {
             simpleUtils.getDOMElement("loadIndicator").style.display = "none";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
     // If no callback is given, loaded content is evaluated as JavaScript
     // source
-    this.load = function(uri, callback)
+    load(uri, callback)
     {
         this.showIndicator();
 
@@ -8046,7 +8265,7 @@ function RedSandGenericLoader()
         else
         {
             // Create loader div "RedSandRegistryContainerNNN" if necessary
-            var newContainer = document.createElement('div');
+            let newContainer = document.createElement('div');
             newContainer.setAttribute(
                 "id", "RedSandRegistryContainer" + this.lastProcess);
             newContainer.style.display = "none";
@@ -8055,7 +8274,7 @@ function RedSandGenericLoader()
             this.containers.push(newContainer);
         }
 
-        var uriRandom = uri + simpleUtils.randomSuffix();
+        let uriRandom = uri + simpleUtils.randomSuffix();
 
         // Create loader IFrame "RedSandRegistryNNN" if necessary
         this.frameNames.push("RedSandRegistry" + this.lastProcess);
@@ -8070,15 +8289,15 @@ function RedSandGenericLoader()
             + ")' src='"
             + uriRandom
             + "' style='width: 0px; height: 0px; border: 0px;'></iframe>";
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
     // Receives an index of loader arrays
-    this.loadedCallback = function(processNum)
+    loadedCallback(processNum)
     {
-        var content = "deadbeef";
+        let content = "deadbeef";
 
         // Firefox
         if (window.frames[this.frameNames[processNum]].document.body.innerText === undefined)
@@ -8100,7 +8319,7 @@ function RedSandGenericLoader()
             content = window.frames[this.frameNames[processNum]].document.body.innerText;
         }
 
-        var callback = this.callbacks[processNum];
+        let callback = this.callbacks[processNum];
         this.callbacks[processNum] = undefined;
 
         // Recycle old loader container DOM elements
@@ -8120,12 +8339,12 @@ function RedSandGenericLoader()
 
         conSense.separator();
         conSense.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
-    this.javaScriptEvaluatorCallback = function(content)
+    javaScriptEvaluatorCallback(content)
     {
         try
         {
@@ -8146,50 +8365,59 @@ function RedSandGenericLoader()
 // RedSandHashHandler
 //----------------------------------------------------------------------------
 
-function RedSandHashHandler()
+class RedSandHashHandler
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.hashSeparator = "#";
-    this.paramSeparator = ";";
-    this.equalsString = "=";
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandHashHandler                                  Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    this.lastHash = "deadbeef";
+        this.hashSeparator = "#";
+        this.paramSeparator = ";";
+        this.equalsString = "=";
 
-    // noinspection JSUnusedGlobalSymbols
-    this.defaultHash = "deadbeef";
+        this.lastHash = "deadbeef";
 
-    // onHashChanged() event registry
-    // Format: "hashParameterName": callbackFunction
-    this.eventRegistry = [];
+        // noinspection JSUnusedGlobalSymbols
+        this.defaultHash = "deadbeef";
 
-    // Indicate if it is the first RedSandHashHandler.onHashChanged() call
-    this.firstRun = true;
+        // onHashChanged() event registry
+        // Format: "hashParameterName": callbackFunction
+        this.eventRegistry = [];
+
+        // Indicate if it is the first RedSandHashHandler.onHashChanged() call
+        this.firstRun = true;
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.addEvent = function(hashParameterName, callbackFunction)
+    addEvent(hashParameterName, callbackFunction)
     {
     	this.eventRegistry[hashParameterName] = callbackFunction;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.onHashChanged = function()
+    onHashChanged()
     {
-	    var params = this.processCurrentURIHash();
+	    let params = this.processCurrentURIHash();
 	    if (params === undefined) {
 	        return;
 	    }
 
         redSandHashHandler.updateNodeStyles();
 	    
-        for (var i in params) {
+        for (let i in params) {
 			// Bloody forEach()...
 			if (i === "each" || i === "forEach") continue;
-			for (var j in this.eventRegistry) {
+			for (let j in this.eventRegistry) {
 				if (j === i) {
 					// Callback found - do it for each found param -
 					// passing along full parameter list every time
@@ -8205,13 +8433,13 @@ function RedSandHashHandler()
 		    this.firstRun = false;
             window.setInterval(function() { if (redSandHashHandler.changed()) redSandHashHandler.onHashChanged(); }, 100);
         }
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Returns a boolean.
-    this.changed = function()
+    changed()
     {
         if (window.location.hash !== this.lastHash)
         {
@@ -8222,12 +8450,12 @@ function RedSandHashHandler()
         {
             return false;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.setDefaultHash = function(hash)
+    setDefaultHash(hash)
     {
         // noinspection JSUnusedGlobalSymbols
         this.defaultHash = hash;
@@ -8245,18 +8473,18 @@ function RedSandHashHandler()
         }
         this.updateNodeStyles();
         this.onHashChanged();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // {param0: "value0", param1: "value1", ...}
     //      --> "#param0=value0;param1=value1;..."
-    this.array2Hash = function(params)
+    array2Hash(params)
     {
-        var hash = this.hashSeparator;   // hash = "#"
+        let hash = this.hashSeparator;   // hash = "#"
 
-        for (var i in params)
+        for (let i in params)
         {
             // hash += "paramN=valueN;"
             // noinspection JSUnfilteredForInLoop
@@ -8270,7 +8498,7 @@ function RedSandHashHandler()
         }
 
         return hash;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -8278,7 +8506,7 @@ function RedSandHashHandler()
     // "#param0=value0;param1=value1;..."
     //      --> {param0: "value0", param1: "value1", ...}
     // TODO: eliminate duplicated parameters
-    this.hash2Array = function(hash)
+    hash2Array(hash)
     {
         // remove trailing paramSeparator if present
         if (hash.substr(hash.length - this.paramSeparator.length) === this.paramSeparator)
@@ -8286,38 +8514,38 @@ function RedSandHashHandler()
             hash = hash.substr(0, hash.length - this.paramSeparator.length);
         }
 
-        var params = [];
+        let params = [];
         // "#param0=value0;param1=value1;..."
         //      --> {"param0=value0", "param1=value1", ...}
-        var paramsTemp
+        let paramsTemp
             = hash.substr(this.hashSeparator.length).split(this.paramSeparator);
 
         // {"param0=value0", "param1=value1", ...}
         //      --> {param0: "value0", param1: "value1", ...}
-        for (var i = 0; i < paramsTemp.length; i++)
+        for (let i = 0; i < paramsTemp.length; i++)
         {
-            var splitInTwo = paramsTemp[i].split(this.equalsString);
+            let splitInTwo = paramsTemp[i].split(this.equalsString);
             params[splitInTwo[0]] = splitInTwo[1];
         }
 
         return params;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Returns an array of anchors present in the document.
-    this.getDocumentAnchors = function()
+    getDocumentAnchors()
     {
-        var anchors = [];
+        let anchors = [];
 
-        for (var i = 0; i < document.anchors.length; i++)
+        for (let i = 0; i < document.anchors.length; i++)
         {
             anchors[this.hashSeparator + document.anchors[i].name] = true;
         }
 
         return anchors;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -8327,9 +8555,9 @@ function RedSandHashHandler()
     // the resulting *associative array* of parameter name-value pairs is
     // returned.
     // Otherwise the resulting value will be *undefined*.
-    this.processCurrentURIHash = function()
+    processCurrentURIHash()
     {
-        var anchors = this.getDocumentAnchors();
+        let anchors = this.getDocumentAnchors();
 
         if (anchors[window.location.hash] === undefined)
         {
@@ -8338,7 +8566,7 @@ function RedSandHashHandler()
         }
 
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -8347,22 +8575,22 @@ function RedSandHashHandler()
     // Returns with the first matching menu item for which:
     // all link parameters are present in the menu item link.
     // *PRIVATE*
-    this.menuContainsLink = function(menu, link)
+    menuContainsLink(menu, link)
     {
-        for (var i in menu.items)
+        for (let i in menu.items)
         {
             if (i === "each" || i === "forEach") continue;
             // noinspection JSUnfilteredForInLoop
-            var itemParamArray = this.hash2Array(menu.items[i].link);
-            var linkParamArray = this.hash2Array(link);
-            var itemParamCount = 0;
-            var matchCount = 0;
+            let itemParamArray = this.hash2Array(menu.items[i].link);
+            let linkParamArray = this.hash2Array(link);
+            let itemParamCount = 0;
+            let matchCount = 0;
             // Parse through current item params
-            for (var j in itemParamArray) {
+            for (let j in itemParamArray) {
             	if (j === "each"  || j === "forEach") continue;
             	itemParamCount++;
             	// Parse through link params
-	            for (var k in linkParamArray) {
+	            for (let k in linkParamArray) {
 	                if (k === "each" || k === "forEach") continue;
                     // noinspection JSUnfilteredForInLoop
 	                if (j === k && itemParamArray[j] === linkParamArray[k]) {
@@ -8377,21 +8605,21 @@ function RedSandHashHandler()
         }
         
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Trigger visual effects defined by node.deselectedClassName and
     // node.selectedClassName
-    this.updateNodeStyles = function()
+    updateNodeStyles()
     {
-        for (var i in redSandRegistry.menus)
+        for (let i in redSandRegistry.menus)
         {
-            var menu = redSandRegistry.menus[i];
+            let menu = redSandRegistry.menus[i];
             if (!menu.items) continue;
             
-            var item = this.menuContainsLink(menu, window.location.hash);
+            let item = this.menuContainsLink(menu, window.location.hash);
             if (item === undefined) continue;
             // Select new node
             simpleUtils.getDOMElement(item.DOMid).className = item.selectedClassName;
@@ -8404,7 +8632,7 @@ function RedSandHashHandler()
             // Register new node as lastly selected
             menu.lastSelectedNode = item;
         }
-    };
+    }
 
 }
 
@@ -8414,32 +8642,40 @@ function RedSandHashHandler()
 
 // Mainly a register class for load operations - the whole loading framework
 // is fully functional without it.
-function RedSandRegistry()
+class RedSandRegistry
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.menus = [];
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandRegistry                                     Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        this.menus = [];
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandRegistry
     // Returns a two dimensional array of RedSandNodes or undefined if no result.
     // Return format: nodes[menu] --> nodeArray
-    // noinspection JSUnusedGlobalSymbols
-    this.findMenuNodesByLink = function(link)
+    findMenuNodesByLink(link)
     {
-        var menuNodes = [];
-        var empty = true;
+        let menuNodes = [];
+        let empty = true;
 
-        for (var i in this.menus)
+        for (let i in this.menus)
         {
-            var menu = this.menus[i];
+            let menu = this.menus[i];
             if (!menu.items) continue;
-            var nodes = [];
-            for (var j in menu.items)
+            let nodes = [];
+            for (let j in menu.items)
             {
                 // noinspection JSUnfilteredForInLoop
-                var item = menu.items[j];
+                let item = menu.items[j];
                 if (!item.link) continue;
                 if (item.link === link)
                 {
@@ -8456,15 +8692,15 @@ function RedSandRegistry()
             return menuNodes;
         }
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandRegistry
-    this.addMenu = function(obj)
+    addMenu(obj)
     {
         this.menus[obj.id] = obj;
-    };
+    }
 
 }
 
@@ -8473,20 +8709,29 @@ function RedSandRegistry()
 //----------------------------------------------------------------------------
 
 // Class for handling dynamic UI text changes
-function RedSandUITextManager()
+class RedSandUITextManager
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // Private
-    // UI text registry with items like "DOMid; field; textId": textTable
-    // eg.: "aboutBox; innerHTML; aboutUs": interfaceTexts
-    this.registry = [];
-    // Default UI text table. Used when creating new RedSandNodes.
-    this.currentTable = undefined;
-    
-    // Text table field names
-    this.fieldId = "id";
-    this.fieldText = "text";
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandRegistry                                     Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Private
+        // UI text registry with items like "DOMid; field; textId": textTable
+        // eg.: "aboutBox; innerHTML; aboutUs": interfaceTexts
+        this.registry = [];
+        // Default UI text table. Used when creating new RedSandNodes.
+        this.currentTable = undefined;
+
+        // Text table field names
+        this.fieldId = "id";
+        this.fieldText = "text";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
@@ -8512,12 +8757,12 @@ function RedSandUITextManager()
         );
     */
     // call.
-    this.initTextTable = function(table)
+    initTextTable(table)
     {
-        var newTable = simpleUtils.objectArray2objectHashTable(table, this.fieldId);
+        let newTable = simpleUtils.objectArray2objectHashTable(table, this.fieldId);
 
         // Mass liteDown()
-        for (var i in newTable) {
+        for (let i in newTable) {
             // noinspection JSUnfilteredForInLoop
             if (newTable[i][this.fieldText]) {
                 // noinspection JSUnfilteredForInLoop
@@ -8526,15 +8771,15 @@ function RedSandUITextManager()
         }
 
         return newTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
     // Sets new UI text array for registry items and redisplays them
-    this.setTextTable = function(table)
+    setTextTable(table)
     {
-        for (var i in this.registry) {
+        for (let i in this.registry) {
             // Skip if the textTable is empty
             if (this.registry[i] === undefined || typeof(this.registry[i]) !== "object") {
                 continue;
@@ -8543,34 +8788,34 @@ function RedSandUITextManager()
         }
         this.currentTable = table;
         this.refresh();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
-    this.setText = function(DOMid, field, textId)
+    setText(DOMid, field, textId)
     {
         // Skip display if textId is empty
         if (textId !== "") {
-            var domElem = simpleUtils.getDOMElement(DOMid);
+            let domElem = simpleUtils.getDOMElement(DOMid);
             if (domElem === undefined) return;
             domElem[field] = this.currentTable[textId][this.fieldText];
         }
         this.registry[DOMid + "; " + field + "; " + textId] = this.currentTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
     // Reparses and redisplays UI text registry items
-    this.refresh = function()
+    refresh()
     {
-        for (var i in this.registry) {
+        for (let i in this.registry) {
             // Skip if the textTable is empty
             if (this.registry[i] === undefined || typeof(this.registry[i]) !== "object") {
                 continue;
             }
-            var elem = i;
+            let elem = i;
             elem = elem.split(";");
             elem[0] = simpleUtils.trimString(elem[0]);	// DOMid
             elem[1] = simpleUtils.trimString(elem[1]);	// field
@@ -8583,7 +8828,7 @@ function RedSandUITextManager()
             }
             simpleUtils.getDOMElement(elem[0])[elem[1]] = this.registry[i][elem[2]][this.fieldText];
         }
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -8594,28 +8839,36 @@ function RedSandUITextManager()
 // Special custom parameters:
 //      "fullPageload" - denotes a node which should be rendered as full page
 //          contents
-function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link, custom)
+class RedSandNode
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // Constructor parameters
-    this.DOMid = DOMid;
-    this.textId = textId;           // Node label UI text id
-    this.selectedClassName = selectedClassName;     // CSS class name in case node is activated
-    this.deselectedClassName = deselectedClassName; // CSS class name in case node is deactivated
-    this.className = this.deselectedClassName;      // CSS class name
-    this.link = link;               // link URI
-    // noinspection JSUnusedGlobalSymbols
-    this.custom = custom;           // Custom parameter object
+    constructor(DOMid, textId, deselectedClassName, selectedClassName, link, custom)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandNode                                         Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Constructor parameters
+        this.DOMid = DOMid;
+        this.textId = textId;           // Node label UI text id
+        this.selectedClassName = selectedClassName;     // CSS class name in case node is activated
+        this.deselectedClassName = deselectedClassName; // CSS class name in case node is deactivated
+        this.className = this.deselectedClassName;      // CSS class name
+        this.link = link;               // link URI
+        this.custom = custom;           // Custom parameter object
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandNode
-    this.renderString = function()
+    renderString()
     {
     	// Creating node *without* text content yet! Content is added in
     	// RedSand*.render() or manually.
-        var result = "<a "
+        let result = "<a "
             + "id='"
             + this.DOMid
             + "' class='"
@@ -8625,12 +8878,12 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
             + "'></a>";
 
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandNode
-    this.render = function(container)
+    render(container)
     {
         container.innerHTML += this.renderString();
         // Auto UI text registration, no manual UI text registry entry needed
@@ -8639,7 +8892,7 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
             "innerHTML",
             this.textId
         );
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -8650,27 +8903,35 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
 // items - an array of redSandNodes
 // menuContainer - DOM id
 // *DEPENDENCY* with redSandRegistry
-function RedSandMenu(id, items, menuContainer)
+class RedSandMenu
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // noinspection JSUnusedGlobalSymbols
-    this.id = id;
-    this.items = items;
-    this.menuContainer = simpleUtils.getDOMElement(menuContainer);
+    constructor(id, items, menuContainer)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandMenu                                         Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    // For RedSandHashHandler.updateNodeStyles()
-    // noinspection JSUnusedGlobalSymbols
-    this.lastSelectedNode = undefined;
-    
+        this.id = id;
+        this.items = items;
+        this.menuContainer = simpleUtils.getDOMElement(menuContainer);
+
+        // For RedSandHashHandler.updateNodeStyles()
+        // noinspection JSUnusedGlobalSymbols
+        this.lastSelectedNode = undefined;
+        //////////////////////////////////////////////////////////////////////
+    }
+
     //------------------------------------------------------------------------
 
     // RedSandMenu
-    this.render = function()
+    render()
     {
         if (!this.items.length) return "";
 
-        for (var i=0; i < this.items.length; i++)
+        for (let i=0; i < this.items.length; i++)
         {
         	if (this.items[i].DOMid === undefined) continue;
             this.menuContainer.innerHTML += this.items[i].renderString();
@@ -8681,165 +8942,186 @@ function RedSandMenu(id, items, menuContainer)
                 this.items[i].textId
             );
         }
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // RedSandWindowlet
 //----------------------------------------------------------------------------
 
+// Used for RedSandNode Id assignment
+// GLOBAL
+// TODO: make it a static class variable as soon as supported by EcmaScript
+let staticRedSandId = 0;
+
 // Creates a basic draggable window
-function RedSandWindowlet(left, top, width, height, background, border,
-                            draggable)
+class RedSandWindowlet
 {
-    this.version = redSandVersion;
-
-    // Constructor params
-
-    // Defaults
-    if (background === undefined || background === "default")
-    {
-        background = "white";
-    }
-    if (border === undefined || border === "default")
-    {
-        border = "1px solid gray";
-    }
-    if (draggable === undefined)
-    {
-        draggable = true;
-    }
-
-    // Fields
-    this.left = left;
-    this.top = top;
-    this.width = width;
-    this.height = height;
-    // noinspection JSUnusedGlobalSymbols
-    this.background = background;
-    this.border = border;
-    this.draggable = draggable;     // Flag
-
-    this.DOMContainer = undefined;
-    this.id = "RedSandId" + redSandId++;
-        
-    // noinspection JSUnusedGlobalSymbols
-    this.borderVisible = true;
 
     //------------------------------------------------------------------------
-    // Constructor code
-    //------------------------------------------------------------------------
 
-    this.DOMContainer = document.createElement('div');
-
-    this.DOMContainer.id = this.id;
-    this.DOMContainer.style.display = "block";
-    this.DOMContainer.style.position = "absolute";
-    this.DOMContainer.style.overflow = "auto";
-    this.DOMContainer.style.width  = this.width  + "px";    // "px" for HTML5
-    this.DOMContainer.style.height = this.height + "px";
-    this.DOMContainer.style.left   = this.left   + "px";
-    this.DOMContainer.style.top    = this.top    + "px";
-    this.DOMContainer.style.background = background;
-    this.DOMContainer.style.border = this.border;
-    redSandWindowletManager.initZIndex(this);
-    
-    document.body.appendChild(this.DOMContainer);
-
-    if (this.draggable)
+    constructor(left, top, width, height, background, border, draggable)
     {
-        // Make it draggable
-        Drag.init(this.DOMContainer, null, 0, 1000000000, 0, 1000000000);
-        // Update Z-index
-        var windowlet = this;
-        this.DOMContainer.onDragStart = function()
+        //////////////////////////////////////////////////////////////////////
+        // RedSandWindowlet                                    Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Constructor params
+
+        // Defaults
+        if (background === undefined || background === "default")
         {
-            redSandWindowletManager.updateZIndex(windowlet);
+            background = "white";
+        }
+        if (border === undefined || border === "default")
+        {
+            border = "1px solid gray";
+        }
+        if (draggable === undefined)
+        {
+            draggable = true;
+        }
+
+        // Fields
+        this.left = left;
+        this.top = top;
+        this.width = width;
+        this.height = height;
+        this.background = background;
+        this.border = border;
+        this.draggable = draggable;     // Flag
+
+        this.DOMContainer = undefined;
+        this.id = "RedSandId" + staticRedSandId++;
+
+        // noinspection JSUnusedGlobalSymbols
+        this.borderVisible = true;
+        //////////////////////////////////////////////////////////////////////
+        
+        this.DOMContainer = document.createElement('div');
+
+        this.DOMContainer.id = this.id;
+        this.DOMContainer.style.display = "block";
+        this.DOMContainer.style.position = "absolute";
+        this.DOMContainer.style.overflow = "auto";
+        this.DOMContainer.style.width  = this.width  + "px";    // "px" for HTML5
+        this.DOMContainer.style.height = this.height + "px";
+        this.DOMContainer.style.left   = this.left   + "px";
+        this.DOMContainer.style.top    = this.top    + "px";
+        this.DOMContainer.style.background = background;
+        this.DOMContainer.style.border = this.border;
+        redSandWindowletManager.initZIndex(this);
+
+        document.body.appendChild(this.DOMContainer);
+
+        if (this.draggable)
+        {
+            // Make it draggable
+            Drag.init(this.DOMContainer, null, 0, 1000000000, 0, 1000000000);
+            // Update Z-index
+            let windowlet = this;
+            this.DOMContainer.onDragStart = function()
+            {
+                redSandWindowletManager.updateZIndex(windowlet);
+            }
         }
     }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.show = function()
+    show()
     {
         this.DOMContainer.style.display = "block";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.hide = function()
+    hide()
     {
         this.DOMContainer.style.display = "none";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.borderOn = function()
+    borderOn()
     {
         this.DOMContainer.style.border = this.border;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.borderOff = function()
+    borderOff()
     {
         this.DOMContainer.style.border = "none";
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // RedSandWindowletManager
 //----------------------------------------------------------------------------
 
-function RedSandWindowletManager()
+class RedSandWindowletManager
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.topmostWindowlet = undefined;
-    this.highestZIndex = 1000000;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandWindowletManager                             Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        this.topmostWindowlet = undefined;
+        this.highestZIndex = 1000000;
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowletManager
     // Assigns new z-index and sets topmostWindowlet
-    this.initZIndex = function(windowlet)
+    initZIndex(windowlet)
     {
         // Set new z-index
         windowlet.DOMContainer.style.zIndex = "" + this.highestZIndex++;
         // Set topmost windowlet
         this.topmostWindowlet = windowlet;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowletManager
-    this.updateZIndex = function(windowlet)
+    updateZIndex(windowlet)
     {
         // Switch z-index with that of the topmost windowlet and update
         // topmostWindowlet to windowlet
-        var windowletZIndex = windowlet.DOMContainer.style.zIndex;
+        let windowletZIndex = windowlet.DOMContainer.style.zIndex;
         windowlet.DOMContainer.style.zIndex
             = this.topmostWindowlet.DOMContainer.style.zIndex;
         this.topmostWindowlet.DOMContainer.style.zIndex = windowletZIndex;
         this.topmostWindowlet = windowlet;
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // Instances
+// GLOBAL
 //----------------------------------------------------------------------------
 
 // noinspection JSUnusedGlobalSymbols
-var redSandUtils = new RedSandUtilities();
+let redSandUtils = new RedSandUtilities();
+// This class is used in ConSense, gives an error if "let"
+// noinspection ES6ConvertVarToLetConst
 var redSandGenericLoader = new RedSandGenericLoader();
-var redSandHashHandler = new RedSandHashHandler();
-var redSandRegistry = new RedSandRegistry();
-var redSandUITextManager = new RedSandUITextManager();
-var redSandWindowletManager = new RedSandWindowletManager();
+let redSandHashHandler = new RedSandHashHandler();
+let redSandRegistry = new RedSandRegistry();
+let redSandUITextManager = new RedSandUITextManager();
+let redSandWindowletManager = new RedSandWindowletManager();
 
 //----------------------------------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////
@@ -8859,36 +9141,40 @@ var redSandWindowletManager = new RedSandWindowletManager();
 //
 //////////////////////////////////////////////////////////////////////////////
 
-var redSandGLVersion = "0.02";
+'use strict';
+
+let redSandGLVersion = "0.03";
 
 //----------------------------------------------------------------------------
 // RedSandGLScene
 //----------------------------------------------------------------------------
 
-// Parameters:
-//      viewport origin coordinates
-function RedSandGLViewport(originX, originY)
+class RedSandGLViewport
 {
     //------------------------------------------------------------------------
-    // Fields
-    //------------------------------------------------------------------------
 
-    this.version = redSandGLVersion;
-    
-    // Default origin is (0, 0)
-    if (originX === undefined) originX = 0;
-    if (originY === undefined) originY = 0;
-    // noinspection JSUnusedGlobalSymbols
-    this.originX = originX;
-    // noinspection JSUnusedGlobalSymbols
-    this.originY = originY;
+    // Params:
+    //     viewport origin coordinates
+    constructor(originX = 0, originY = 0)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGLViewport                                   Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandGLVersion;
+        //////////////////////////////////////////////////////////////////////
+
+        // noinspection JSUnusedGlobalSymbols
+        this.originX = originX;
+        // noinspection JSUnusedGlobalSymbols
+        this.originY = originY;
+    }
 
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // RedSandGLScene
-    this.setOrigin = function(originX, originY)
+    setOrigin(originX, originY)
     {
         // noinspection JSUnusedGlobalSymbols
         this.originX = originX;
@@ -8901,43 +9187,51 @@ function RedSandGLViewport(originX, originY)
 // RedSandGLPrimitive
 //----------------------------------------------------------------------------
 
-function RedSandGLPrimitive(viewport)
+class RedSandGLPrimitive
 {
     //------------------------------------------------------------------------
-    // Fields
-    //------------------------------------------------------------------------
 
-    this.version = redSandGLVersion;
-    if (viewport === undefined)
+    constructor(viewport)
     {
-        alert("RedSandGLViewport should be specified for RedSandGLPrimitive() call.");
-    }
-    // noinspection JSUnusedGlobalSymbols
-    this.viewport = viewport;
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGLViewport                                   Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandGLVersion;
 
+        // noinspection JSUnusedGlobalSymbols
+        this.viewport = viewport;
+        //////////////////////////////////////////////////////////////////////
+
+        if (viewport === undefined)
+        {
+            alert("RedSandGLViewport should be specified for RedSandGLPrimitive() call.");
+        }
+    }
+    
     //------------------------------------------------------------------------
     // Methods
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
-    this.plot = function(x, y, color)
+    plot(x, y, color)
     {
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
-    this.line = function(x1, y1, x2, y2, color, antialias)
+    line(x1, y1, x2, y2, color, antialias)
     {
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
     // Erases current primitive graphics.
-    this.erase = function()
+    erase()
     {
-    };
+    }
+    
 }
 //////////////////////////////////////////////////////////////////////////////
 // ConSense by Toth, Balazs Aladar (c) 2005-2018, comes under the terms of the
@@ -9093,129 +9387,141 @@ function RedSandGLPrimitive(viewport)
 //
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // ConSense class
 //----------------------------------------------------------------------------
 
-function ConSense()
+class ConSense
 {
+    //------------------------------------------------------------------------
+
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // ConSense                                            Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = "1.13";
+
+        // Toggle debug operation
+        this.debug = true;
+
+        // Toggle echo mode
+        this.echo = true;
+
+        // Toggle verbose mode
+        this.verbose = true;
+
+        // Command string
+        this.commandLine = "";
+        // For handleInput()
+        this.oldCommandLine = "";
+
+        // UI DOM elements
+        this.conSenseContainer = undefined;
+        this.conSenseInnerContainer = undefined;
+        this.conSenseHeader = undefined;
+        this.conSenseHeaderSwitch = undefined;
+        this.conSenseOut = undefined;
+        this.conSenseIn = undefined;
+        this.conSenseCounter = undefined;
+
+        this.containerHeight = undefined;
+        this.containerScrollTop = undefined;
+
+        // Top Z index
+        this.zTop = 2000000001;
+        this.scrollInfinite = 1000000000;
+
+        this.show = true;
+        this.hide = false;
+
+        // Indicates ConSense visibility - show by default
+        this.visible = this.show;
+        this.globalVisible = this.show;
+
+        // Indicates toggle mode for show functions
+        this.toggle = "toggle";
+
+        // Array of all interface texts
+        this.interfaceText =
+            {
+                showConsoleButton: "Show",
+                hideConsoleButton: "Hide"
+            };
+
+        // Used for DOM element outlining
+        this.outlineColor = "red";
+
+        // Used in handleInput()
+        this.lastKeyEventType = "deadbeef";
+
+        this.commandHistory = [];
+        this.commandHistoryPosition = 0;
+        this.currentlyTypedCommand = "";
+
+        this.tabPixelSize = 20;
+
+        // mapDOMSubtree() variables
+        this.mapResultBuffer = undefined;
+        this.mapTempObjects = undefined;
+        this.mapTempObjectCounter = 0;
+        this.mapExcerptSize = 40;
+        this.mapShowConSense = false;       // Details in help()
+        this.mapShowEmptyTexts = false;
+
+        this.lastWriteLn = "";
+        this.separatorString = "===============================";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
     // Fields
     //------------------------------------------------------------------------
 
-    this.version = "1.12";
-
-    // Toggle debug operation
-    this.debug = true;
-
-    // Toggle echo mode
-    this.echo = true;
-
-    // Toggle verbose mode
-    this.verbose = true;
-
-    // Command string
-    this.commandLine = "";
-    // For handleInput()
-    this.oldCommandLine = "";
-
-    // UI DOM elements
-    this.conSenseContainer = undefined;
-    this.conSenseInnerContainer = undefined;
-    this.conSenseHeader = undefined;
-    this.conSenseHeaderSwitch = undefined;
-    this.conSenseOut = undefined;
-    this.conSenseIn = undefined;
-    this.conSenseCounter = undefined;
-
-    this.containerHeight = undefined;
-    this.containerScrollTop = undefined;
-
-    // Top Z index
-    this.zTop = 2000000001;
-    this.scrollInfinite = 1000000000;
-
-    // Indicates ConSense visibility - show by default
-    this.visible = this.show;
-    this.globalVisible = this.show;
-
-    this.show = true;
-    this.hide = false;
-    // Indicates toggle mode for show functions
-    this.toggle = "toggle";
-
-    // Array of all interface texts
-    this.interfaceText =
-    {
-        showConsoleButton: "Show",
-        hideConsoleButton: "Hide"
-    };
-
-    // Used for DOM element outlining
-    this.outlineColor = "red";
-    
-    // Used in handleInput()
-    this.lastKeyEventType = "deadbeef";
-
-    this.commandHistory = [];
-    this.commandHistoryPosition = 0;
-    this.currentlyTypedCommand = "";
-
-    this.tabPixelSize = 20;
-
-    // mapDOMSubtree() variables
-    this.mapResultBuffer = undefined;
-    this.mapTempObjects = undefined;
-    this.mapTempObjectCounter = 0;
-    this.mapExcerptSize = 40;
-    this.mapShowConSense = false;       // Details in help()
-    this.mapShowEmptyTexts = false;
-
-    this.lastWriteLn = "";
-    this.separatorString = "===============================";
 
     //------------------------------------------------------------------------
     // Input/Output methods
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeTitle = function()
+    writeTitle()
     {
         this.writeLn("Type " + conSense.highlightAppendLink("help()")
             + " + Enter for usage information.");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.clearScreen = function()
+    clearScreen()
     {
         this.conSenseOut.innerHTML = "";
         this.writeTitle();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.write = function(str)
+    write(str)
     {
         this.conSenseOut.innerHTML += str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeLn = function(str)
+    writeLn(str)
     {
         this.lastWriteLn = str;
         this.conSenseOut.innerHTML += str + "<br />";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.writeManualEntry = function(name, str)
+    writeManualEntry(name, str)
     {
         if (name !== "")
         {
@@ -9232,27 +9538,27 @@ function ConSense()
                 + "<span class='conSenseManualEntryHead'>"
                 + "</span> " + str + "</div>";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.separator = function()
+    separator()
     {
         if (this.lastWriteLn !== this.separatorString)
         {
             this.writeLn(this.separatorString);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.debugLn = function(value0, value1)
+    debugLn(value0, value1)
     {
         if (this.debug)
         {
-            var now = new Date();
+            let now = new Date();
 
             if (value0 === undefined)
             {
@@ -9269,51 +9575,51 @@ function ConSense()
                 + ") *" + value0
                 + "* *" + value1 + "*");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.echoLn = function(str)
+    echoLn(str)
     {
         if (this.echo)
         {
             this.writeLn("[echo: " + this.highlightAppendLink(str) + "]");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.verboseLn = function(str)
+    verboseLn(str)
     {
         if (this.verbose && str !== undefined)
         {
             this.writeLn("[result: " + str + "]");
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.getInput = function()
+    getInput()
     {
         return simpleUtils.trimString(this.conSenseIn.value);
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.setInput = function(str)
+    setInput(str)
     {
         this.conSenseIn.value = str;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Not just generic append string!
-    this.appendInput = function(str)
+    appendInput(str)
     {
         if (this.conSenseIn.value.length === 0)
         {
@@ -9324,51 +9630,51 @@ function ConSense()
             this.conSenseIn.value += " " + str;
         }
         this.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML string.
     // Uses conSenseHighlight style.
-    this.highlight = function(str)
+    highlight(str)
     {
         return "<span class='conSenseHighlight'>&nbsp;" + str
                     + "&nbsp;</span>";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML append link string.
     // Uses conSenseHighlightAppendLink style.
-    this.highlightAppendLink = function(str)
+    highlightAppendLink(str)
     {
-        // *ENV* relativeConSensePath
+        // *ENV* stub.relativeConSensePath
         return "<a class='conSenseHighlightAppendLink' href='javascript:conSense.appendInput(\""
                     + str.replace(/"/g, "\\\"") + "\")'>"
-                    + "<img src='" + relativeConSensePath + "conSense/images/orangeArrow.png' style='border: 0;'>"
+                    + "<img src='" + stub.relativeConSensePath + "conSense/images/orangeArrow.png' style='border: 0;'>"
                     + simpleUtils.HTML2Source(str) + "</a>";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Return highlighted HTML append link string.
     // Uses conSenseHighlightAppendLink style.
-    this.highlightLabelledAppendLink = function(label, str)
+    highlightLabelledAppendLink(label, str)
     {
         return "<a class='conSenseHighlightAppendLink' href='javascript:conSense.appendInput(\""
                     + str.replace(/"/g, "\\\"") + "\")'>"
                     + label + "</a>";
-    };
+    }
 
     //------------------------------------------------------------------------
     // Core methods
     //------------------------------------------------------------------------
 
     // ConSense
-    this.init = function(show, startXPos, startYPos)
+    init(show, startXPos, startYPos)
     {
         simpleUtils.checkBrowser();
 
@@ -9376,10 +9682,11 @@ function ConSense()
         // Non-ConSense init
         
         // For RedSandGenericLoader load indication
+        // *ENV* stub.relativeConSensePath
         document.body.innerHTML +=
             '<!-- RedSand -->\
             <div id="loadIndicator" class="loadIndicator">\
-                <img src="' + relativeConSensePath + 'conSense/images/loader.gif" style="border: 0;">\
+                <img src="' + stub.relativeConSensePath + 'conSense/images/loader.gif" style="border: 0;">\
             </div>\
             <div id="inputBlocker" class="inputBlocker">\
             </div>\
@@ -9452,8 +9759,7 @@ function ConSense()
 
         // Used for show/hide
         this.containerHeight = this.conSenseInnerContainer.style.height;
-        // noinspection JSUnusedGlobalSymbols
-        this.innerContainerHeight = this.conSenseInnerContainer.style.height;
+        // this.innerContainerHeight = this.conSenseInnerContainer.style.height;
 
         this.conSenseHeader.innerHTML = "ConSense v" + this.version;
         this.showConsole(show);
@@ -9491,23 +9797,23 @@ function ConSense()
                 'target': document,
                 'propagate': false
             });
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.updateCounter = function()
+    updateCounter()
     {
         this.conSenseCounter.value = this.conSenseIn.value.length;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Valid key event types: down, press, up
-    this.handleInput = function(event, type)
+    handleInput(event, type)
     {
-        var thisEvent = (simpleUtils.getKeyName(event));
+        let thisEvent = (simpleUtils.getKeyName(event));
 
         //--------------------------------------------------------------------
         if (thisEvent === "Enter"
@@ -9556,12 +9862,12 @@ function ConSense()
         this.updateCounter();
         this.lastKeyEventType = type;
         this.oldCommandLine = this.getInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.handleCommand = function()
+    handleCommand()
     {
         // Split the trimmed input line by whitespaces
         // this.commandLine = this.getInput().split(/\s+/);
@@ -9581,7 +9887,7 @@ function ConSense()
         // Evaluate command line as JavaScript code
         try
         {
-            var result = eval(this.commandLine);
+            let result = eval(this.commandLine);
             this.verboseLn(result);
         }
         catch(ex)
@@ -9593,13 +9899,13 @@ function ConSense()
         this.separator();
 
         this.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // *VALUES*
-    this.showConsole = function(show)
+    showConsole(show)
     {
         // Toggle
         if (show === conSense.toggle)
@@ -9634,12 +9940,12 @@ function ConSense()
             // *VALUES*
             this.conSenseContainer.style.height = "21px";
         }
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // ConSense
-    this.scrollToBottomFocusInput = function()
+    scrollToBottomFocusInput()
     {
         // For the case of appended commands or any other kind of input line
         // manipulation
@@ -9653,12 +9959,12 @@ function ConSense()
             this.conSenseIn.focus();
             this.conSenseInnerContainer.scrollTop = this.scrollInfinite;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.globalShowConsole = function(show)
+    globalShowConsole(show)
     {
         // Toggle
         if (show === conSense.toggle)
@@ -9686,7 +9992,7 @@ function ConSense()
             this.containerScrollTop = this.conSenseInnerContainer.scrollTop;
             this.conSenseContainer.style.display = "none";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     // Utility methods
@@ -9698,12 +10004,12 @@ function ConSense()
     //------------------------------------------------------------------------
     
     // ConSense
-    this.listObject = function(obj)
+    listObject(obj)
     {
         obj = simpleUtils.toObject(obj);
 
         // List object
-        for (var i in obj)
+        for (let i in obj)
         {
             // Fix for exceptions caused by protected(?) items which would
             // stop listing (eg. in the document object)
@@ -9717,45 +10023,45 @@ function ConSense()
             {
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.listObjectStyle = function(obj)
+    listObjectStyle(obj)
     {
         obj = simpleUtils.toObject(obj);
         this.listObject(obj.style);
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.outlineDOMElement = function(obj)
+    outlineDOMElement(obj)
     {
         obj = simpleUtils.toObject(obj);
         obj.style.border = "1px solid " + this.outlineColor;
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // tagName: eg. "div"
-    this.outlineDOMElementsByTag = function(tagName)
+    outlineDOMElementsByTag(tagName)
     {
-        var elements = document.getElementsByTagName(tagName);
+        let elements = document.getElementsByTagName(tagName);
 
-        // Does not work as (var i in elements) in IE
-        for (var i=0; i < elements.length; i++)
+        // Does not work as (let i in elements) in IE
+        for (let i=0; i < elements.length; i++)
         {
             elements[i].style.border = "1px solid " + this.outlineColor;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.outlineDOMSubtree = function(obj, level)
+    outlineDOMSubtree(obj, level)
     {
         obj = simpleUtils.toObject(obj);
         if (level === undefined)
@@ -9770,9 +10076,9 @@ function ConSense()
         }
 
         // Outline children
-        for (var i=0; i < obj.childNodes.length; i++)
+        for (let i=0; i < obj.childNodes.length; i++)
         {
-            var childNode = obj.childNodes[i];
+            let childNode = obj.childNodes[i];
 
             // Element nodes
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
@@ -9783,56 +10089,54 @@ function ConSense()
             // Dive further
             this.outlineDOMSubtree(childNode, level+1);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Private
-    this.tabulator = function(times)
+    tabulator(times)
     {
         return "<span style='margin-left: "
             + times * this.tabPixelSize + "px'></span>";
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Private
     // *GLOBAL*
-    this.mapAppendObjectLink = function(childNode, level, i)
+    mapAppendObjectLink(childNode, level, i)
     {
-        var index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
+        let index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
         this.mapTempObjects[index] = childNode;
-        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer
             += this.tabulator(level)
                 + this.highlightLabelledAppendLink(
                     "(o)",
                     "conSense.mapTempObjects[\"" + index + "\"]")
                 + (" ");
-    };
+    }
     
     //------------------------------------------------------------------------
     
     // ConSense
     // *NAMING*, *GLOBAL*
-    this.mapDOMSubtree = function(obj, level)
+    mapDOMSubtree(obj, level)
     {
         obj = simpleUtils.toObject(obj);
         if (level === undefined)
         {
             level = 0;
             // *GLOBAL*
-            // noinspection JSUnusedGlobalSymbols
             this.mapResultBuffer = "";
             this.mapTempObjects = [];
             this.mapTempObjectCounter = 0;
         }
 
-        for (var i=0; i < obj.childNodes.length; i++)
+        for (let i=0; i < obj.childNodes.length; i++)
         {
-            var childNode = obj.childNodes[i];
+            let childNode = obj.childNodes[i];
             // *GLOBAL*
             this.mapTempObjectCounter++;
 
@@ -9841,8 +10145,8 @@ function ConSense()
             // Element node
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
             {
-                var id = "";
-                var className = "";
+                let id = "";
+                let className = "";
 
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
@@ -9859,7 +10163,6 @@ function ConSense()
                 }
 
                 // First line to display: tagname, id, class
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight(childNode.nodeName)
                         + id
@@ -9871,7 +10174,6 @@ function ConSense()
                 if (childNode.id === "conSenseContainer"
                     && !this.mapShowConSense)
                 {
-                    // noinspection JSUnusedGlobalSymbols
                     this.mapResultBuffer
                         += this.tabulator(level)
                             + "(...)<br />";
@@ -9881,14 +10183,13 @@ function ConSense()
                 // Display attributes if present - except id and class
                 if (childNode.attributes)
                 {
-                    for (var j=0; j < childNode.attributes.length; j++)
+                    for (let j=0; j < childNode.attributes.length; j++)
                     {
                         if (childNode.attributes[j].specified)
                         {
                             if (childNode.attributes[j].nodeName !== "id"
                                 && childNode.attributes[j].nodeName !== "class")
                             {
-                                // noinspection JSUnusedGlobalSymbols
                                 this.mapResultBuffer
                                     += this.tabulator(level)
                                         + childNode.attributes[j].nodeName
@@ -9906,13 +10207,13 @@ function ConSense()
             // Text node
             if (childNode.nodeType === simpleUtils.DOM_TEXT_NODE)
             {
-                var excerpt = "";
+                let excerpt = "";
 
                 // Hide empty text nodes if indicated
                 if (!this.mapShowEmptyTexts)
                 {
-                    var hide = true;
-                    for (j=0; j < childNode.nodeValue.length; j++)
+                    let hide = true;
+                    for (let j=0; j < childNode.nodeValue.length; j++)
                     {
                         if (childNode.nodeValue.charAt(j) !== "\n"
                             && childNode.nodeValue.charAt(j) !== "\t"
@@ -9929,7 +10230,6 @@ function ConSense()
                 this.mapAppendObjectLink(childNode, level, i);
                 
                 // Show text
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("text");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -9943,7 +10243,6 @@ function ConSense()
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -9952,12 +10251,11 @@ function ConSense()
             // Comment node
             if (childNode.nodeType === simpleUtils.DOM_COMMENT_NODE)
             {
-                excerpt = "";
+                let excerpt = "";
 
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("comment");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -9971,7 +10269,6 @@ function ConSense()
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -9983,7 +10280,6 @@ function ConSense()
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight("DOCTYPE")
                         + " "
@@ -10003,19 +10299,19 @@ function ConSense()
         {
             this.write(this.mapResultBuffer);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Lists all inline and dynamic style definitions of an object.
     // *GLOBAL*
-    this.mapDynamicCSS = function(obj, level)
+    mapDynamicCSS(obj, level)
     {
         obj = simpleUtils.toObject(obj);
-        var id = "";
-        var className = "";
-        var cssTextRows;
+        let id = "";
+        let className = "";
+        let cssTextRows;
 
         // First iteration only
         if (level === undefined)
@@ -10023,7 +10319,7 @@ function ConSense()
             level = 0;
         }
 
-        var deepestLevel;
+        let deepestLevel;
         
         // Iterate until root
         if (obj !== document.body
@@ -10071,7 +10367,7 @@ function ConSense()
         if (obj.style.cssText)
         {
             cssTextRows = obj.style.cssText.split(";");
-            for (var i=0; i < cssTextRows.length; i++)
+            for (let i=0; i < cssTextRows.length; i++)
             {
                 if (cssTextRows[i].length)
                 {
@@ -10080,30 +10376,30 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
     // Lists full static CSS info of the page
-    this.listCSS = function()
+    listCSS()
     {
         // Looking up CSS definitions in document
 
-        var headNode = false;
+        let headNode = false;
 
         // Locate document/HTML/HEAD
-        for (var i=0; i < document.childNodes.length; i++)
+        for (let i=0; i < document.childNodes.length; i++)
         {
-            var childNode = document.childNodes[i];
+            let childNode = document.childNodes[i];
 
             if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE
                 && childNode.nodeName.toUpperCase() === "HTML")
             {
                 // HTML found
-                var foundNode = childNode;
+                let foundNode = childNode;
 
-                for (var j=0; j < foundNode.childNodes.length; j++)
+                for (let j=0; j < foundNode.childNodes.length; j++)
                 {
                     childNode = foundNode.childNodes[j];
 
@@ -10120,9 +10416,9 @@ function ConSense()
         // Browse head for css link and style entries
         if (headNode)
         {
-            for (i=0; i < headNode.childNodes.length; i++)
+            for (let i=0; i < headNode.childNodes.length; i++)
             {
-                childNode = headNode.childNodes[i];
+                let childNode = headNode.childNodes[i];
 
                 if (childNode.nodeType === simpleUtils.DOM_ELEMENT_NODE)
                 {
@@ -10138,16 +10434,16 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Returns array of formatted CSS rule block lines.
     // Private
-    this.listCSS_getFormattedRule = function(ruleString)
+    listCSS_getFormattedRule(ruleString)
     {
-        var lines = [];
+        let lines = [];
 
         // For STYLE blocks
         if (simpleUtils.trimString(ruleString).search("\n") > 0)
@@ -10160,9 +10456,9 @@ function ConSense()
             lines = simpleUtils.trimString(ruleString).split(/;/);
         }
 
-        for (var i=0; i < lines.length; i++)
+        for (let i=0; i < lines.length; i++)
         {
-            var tab = "";
+            let tab = "";
 
             if (lines[i].search(/{/) > 0)
             {
@@ -10179,18 +10475,20 @@ function ConSense()
         }
 
         return lines;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Private
-    this.listCSS_HandleStyleNode = function(node)
+    listCSS_HandleStyleNode(node)
     {
+        let lines;
+
         // Firefox
         if (node.textContent)
         {
-            var lines = this.listCSS_getFormattedRule(node.textContent);
+            lines = this.listCSS_getFormattedRule(node.textContent);
         }
         // IE
         else if (node.innerHTML)
@@ -10204,17 +10502,17 @@ function ConSense()
             
         this.writeLn("/* STYLE node */");
 
-        for (var i=0; i < lines.length; i++)
+        for (let i=0; i < lines.length; i++)
         {
             this.writeLn(lines[i]);
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
     // Private
-    this.listCSS_HandleLinkNode = function(node)
+    listCSS_HandleLinkNode(node)
     {
         if (node.rel.toUpperCase() === "STYLESHEET"
             || node.type.toUpperCase() === "TEXT/CSS")
@@ -10225,16 +10523,16 @@ function ConSense()
             // Firefox
             if (node.sheet)
             {
-                for (var i=0; i < node.sheet.cssRules.length; i++)
+                for (let i=0; i < node.sheet.cssRules.length; i++)
                 {
-                    var lines = this.listCSS_getFormattedRule(
+                    let lines = this.listCSS_getFormattedRule(
                                     node.sheet.cssRules[i].cssText);
 
-                    for (var j=0; j < lines.length; j++)
+                    for (let j=0; j < lines.length; j++)
                     {
                         if (lines[j].search("{") > 0)
                         {
-                            var sublines = lines[j].split(/{/);
+                            let sublines = lines[j].split(/{/);
 
                             // Bad entry, simply dump to the screen
                             if (sublines.length !== 2)
@@ -10265,16 +10563,16 @@ function ConSense()
             // IE
             else if (node.styleSheet)
             {
-                // It's OK, it's IE...
+                // Deprecated symbol intentionally used for IE
                 // noinspection JSDeprecatedSymbols
-                lines = this.listCSS_getFormattedRule(
+                let lines = this.listCSS_getFormattedRule(
                                 node.styleSheet.cssText);
 
-                for (i=0; i < lines.length; i++)
+                for (let i=0; i < lines.length; i++)
                 {
                     if (lines[i].search("{") > 0)
                     {
-                        sublines = lines[i].split(/{/);
+                        let sublines = lines[i].split(/{/);
 
                         this.writeLn(sublines[0] + " {");
                     }
@@ -10286,12 +10584,12 @@ function ConSense()
                         }
                         else
                         {
-                            sublines =
+                            let sublines =
                                 simpleUtils.trimString(lines[i]).split(/;/);
 
-                            for (j=0; j < sublines.length; j++)
+                            for (let j=0; j < sublines.length; j++)
                             {
-                                var tab = "";
+                                let tab = "";
 
                                 if (j > 0)
                                 {
@@ -10305,12 +10603,12 @@ function ConSense()
                 }
             }
         }
-    };
+    }
 
     //------------------------------------------------------------------------
     
     // ConSense
-    this.license = function()
+    license()
     {
         this.writeLn("The ConSense MIT-like license:<br />");
         this.writeLn("---license---");
@@ -10320,12 +10618,12 @@ function ConSense()
         this.writeLn("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
         this.writeLn("---end of license---<br />");
         this.writeLn("For the third-party library licenses please see the documentation.");
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // ConSense
-    this.help = function()
+    help()
     {
         this.writeLn("Command shorthands:");
         this.writeManualEntry("", "All obj parameters may be JavaScript/DOM object references or DOM id strings (eg. conSenseIn or \"conSenseIn\").");
@@ -10351,7 +10649,7 @@ function ConSense()
         this.writeLn("Doubleclicking the output area focuses the input line. Up/down arrow keys control command history.");
         this.writeLn("Works best with Firefox 1.5+ and IE 6.0+.");
         this.writeLn("ConSense is (c) 2005-2007 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
-    };
+    }
 
 }
 
@@ -10360,13 +10658,14 @@ function ConSense()
 //----------------------------------------------------------------------------
 
 // Instantiate ConSense
-var conSense = new ConSense();
+let conSense = new ConSense();
 
 //----------------------------------------------------------------------------
 // Commands
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function clear()
 {
@@ -10376,6 +10675,7 @@ function clear()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function debug(value0, value1)
 {
@@ -10385,6 +10685,7 @@ function debug(value0, value1)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function help()
 {
@@ -10394,6 +10695,7 @@ function help()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 function license()
 {
     conSense.license();
@@ -10404,6 +10706,7 @@ function license()
 // Both commands for the same function
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function list(obj)
 {
@@ -10411,6 +10714,7 @@ function list(obj)
 }
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function inspect(obj)
 {
@@ -10420,6 +10724,7 @@ function inspect(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function listCSS()
 {
@@ -10429,6 +10734,7 @@ function listCSS()
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function listStyle(obj)
 {
@@ -10439,6 +10745,7 @@ function listStyle(obj)
 
 // ConSense command
 // *DEPENDENCY*
+// GLOBAL
 // redSandGenericLoader
 function load(uri, callback)
 {
@@ -10448,6 +10755,7 @@ function load(uri, callback)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function map(obj)
 {
@@ -10461,6 +10769,7 @@ function map(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function mapCSS(obj)
 {
@@ -10470,6 +10779,7 @@ function mapCSS(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outline(obj)
 {
@@ -10479,6 +10789,7 @@ function outline(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outlineAll(tagName)
 {
@@ -10488,6 +10799,7 @@ function outlineAll(tagName)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 // noinspection JSUnusedGlobalSymbols
 function outlineSub(obj)
 {
@@ -10497,6 +10809,7 @@ function outlineSub(obj)
 //----------------------------------------------------------------------------
 
 // ConSense command
+// GLOBAL
 function write(value)
 {
     conSense.writeLn(value);

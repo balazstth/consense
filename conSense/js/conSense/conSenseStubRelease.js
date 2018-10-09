@@ -12,64 +12,67 @@
 // Stub class
 //----------------------------------------------------------------------------
 
-// A subset of SimpleUtilities hence it still is not loaded.
-// *ENV* relativeConSensePath
-function Stub()
+// A subset of SimpleUtilities since it is not yet loaded.
+// *ENV* Stub.relativeConSensePath
+class Stub
 {
-    this.version = "1.20";
-    
     //------------------------------------------------------------------------
 
-    this.includeJavaScriptFile = function(filename)
+    // Optional relativeConSensePath
+    constructor(relativeConSensePath = "./")
+    {
+        //////////////////////////////////////////////////////////////////////
+        // Stub                                                Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = "1.21";
+
+        this.relativeConSensePath = relativeConSensePath;
+        //////////////////////////////////////////////////////////////////////
+
+        // Make sure there is a trailing /
+        if (this.relativeConSensePath.substr(-1) !== "/")
+        {
+            this.relativeConSensePath += "/";
+        }
+    }
+
+    //------------------------------------------------------------------------
+
+    includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
-            + relativeConSensePath
-            + filename
+            + this.relativeConSensePath
+            + filename + "?random_suffix=" + Math.floor((Math.random() * 0xdeadbeef) + 1)
             + '"></script>');
-    };
+    }
 
     //------------------------------------------------------------------------
 
-    this.includeCSSFile = function(filename)
+    includeCSSFile(filename)
     {
         document.write('<link href="'
-            + relativeConSensePath
-            + filename
+            + this.relativeConSensePath
+            + filename + "?random_suffix=" + Math.floor((Math.random() * 0xdeadbeef) + 1)
             + '" rel="stylesheet" type="text/css">');
-    };
+    }
 
     //------------------------------------------------------------------------
 
-    this.isDefined = function(variable)
+    static isDefined(variable)
     {
         return (typeof(window[variable]) === "undefined") ? false : true;
-    };
-}
-
-//----------------------------------------------------------------------------
-
-var stub = new Stub();
-
-//----------------------------------------------------------------------------
-
-// relativeConSensePath init
-// If already present
-if (stub.isDefined("relativeConSensePath"))
-{
-    // noinspection JSUnusedAssignment
-    if (relativeConSensePath.substr(-1) !== "/")
-    {
-        // noinspection JSUnusedAssignment
-        relativeConSensePath += "/";
     }
 }
-// Default
-else
-{
-    var relativeConSensePath = "./";
-}
 
 //----------------------------------------------------------------------------
+
+let stub;
+if (!Stub.isDefined("relativeConSensePath"))
+{
+    stub = new Stub();
+} else {
+    stub = new Stub(relativeConSensePath);
+}
 
 // Load JS and CSS dependencies
 stub.includeCSSFile("conSense/css/conSense.css");

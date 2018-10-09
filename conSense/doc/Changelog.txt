@@ -19,7 +19,7 @@
 //         SimpleClasses
 //
 // 2.) Client side tests
-//         index.html
+//         index-2018-10-05.html
 //         tests/conSense.html
 //         tests/redSandCoreTest0.html
 //         tests/redSandGLTest0.html
@@ -122,6 +122,10 @@
 // 0.42         2018-10-01      "px" fix for HTML5
 // 0.43         2018-10-02      heavy RedSandGenericLoader and RedSandHashHandler
 //                                  robustness fix
+// 0.44         2018-10-09      EcmaScript 6
+//                              removal of unnecessary noinspects
+//                              redSandId --> staticRedSandId
+//                              'use strict';
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -133,6 +137,8 @@
 // 0.01         2006-09-21      creation of redSandGL dummy
 // 0.02         2018-09-23      added semicolons
 //                              added noinspection JSUnusedGlobalSymbols statements
+// 0.03         2018-10-09      EcmaScript 6
+//                              'use strict';
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -234,6 +240,9 @@
 //                                  incompatible types, semicolons, etc.
 // 1.11         2018-10-01      "px" fix for HTML5
 // 1.12         2018-10-05      image path fix due to reorganization
+// 1.13         2018-10-09      EcmaScript 6
+//                              removal of unnecessary noinspects
+//                              'use strict';
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -267,6 +276,10 @@
 // 1.18         2018-10-01      jQuery --> Cash
 // 1.19         2018-10-05      'use strict'
 // 1.20         2018-10-05      reorganized the project
+// 1.21         2018-10-09      EcmaScript 6
+//                              relativeConSensePath redesigned
+//                              +sprintf.js
+//                              'use strict';
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -280,6 +293,7 @@
 //                              jQuery --> Cash
 // 1.19         2018-10-04      ignore .git in 7z archive
 // 1.20         2018-10-05      reorganized the project
+// 1.21         2018-10-09      +sprintf.js
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -333,6 +347,10 @@
 // 1.19         2018-09-28      added SimpleUtils.random(), .randomSuffix()
 //                              added random suffixes to JS and CSS URLs to
 //                                  force fresh reload
+// 1.20         2018-10-09      EcmaScript 6
+//                              'use strict';
+//                              removal of unnecessary noinspects
+//                              -sprintf(), +microSprintf()
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -341,7 +359,7 @@
 //----------------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////////
-// index.html
+// index-2018-10-05.html
 //////////////////////////////////////////////////////////////////////////////
 //
 // version      date            description
@@ -358,6 +376,7 @@
 // 1.03         2018-09-27      minimal ConSense demo
 // 1.04         2018-10-01      HTML5
 // 1.05         2018-10-05      reorganized the project
+// 1.06         2018-10-09      EcmaScript 6
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -370,6 +389,7 @@
 // 1.03         2018-09-30      fix
 // 1.04         2018-10-01      HTML5
 // 1.05         2018-10-05      reorganized the project
+// 1.06         2018-10-09      EcmaScript 6
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -382,6 +402,7 @@
 // 1.03         2018-09-30      fix
 // 1.04         2018-10-01      HTML5
 // 1.05         2018-10-05      reorganized the project
+// 1.06         2018-10-09      EcmaScript 6
 //
 //////////////////////////////////////////////////////////////////////////////
 

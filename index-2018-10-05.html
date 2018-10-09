@@ -1,0 +1,64 @@
+
+<!--------------------------------------------------------------------
+ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
+
+Document version 2.04
+Known bugs:
+    B0 Body width problem due to the absolutely positioned draggable
+    conSenseContainer. Causes background image misplacement in IE.
+--------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <title>ConSense &rsaquo; simplicity recycled</title>
+
+        <!-- Page font -->
+        <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+        <!-- Custom style definitions -->
+        <link href="page-2018-10-05/css/page.css" rel="stylesheet" type="text/css" />
+
+        <!-- Normal ConSense stub, either Debug or Release -->
+        <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
+        <!-- Code snippets for the teaser in Intro.txt -->
+        <script charset="UTF-8" type="text/javascript" src="page-2018-10-05/js/injectCommand.js"></script>
+
+        <script type="text/javascript">
+            function init()
+            {
+                //-----------------------------------------------------------------------------
+                // Init ConSense
+                conSense.init(conSense.hide, 40, 40);
+                conSense.debug = true;
+                // Load UI definition
+                load("page-2018-10-05/js/blueprint.js");
+                //-----------------------------------------------------------------------------
+            }
+        </script>
+    </head>
+
+    <body onLoad="init()">
+        <div id="wrapper1" class="wrapper1">
+            <div id="wrapper2" class="wrapper2">
+
+                <div id="left" class="left">
+                    <div id="mainMenuContainer" class="mainMenuContainer">
+                    </div>
+                    <div id="contentContainer" class="contentContainer">
+                        Loading...
+                    </div>
+                    <div class="copyright">
+                        ConSense, RedSand and SimpleClasses are © 2005-2018 T&oacute;th, Bal&aacute;zs Alad&aacute;r. <a class="copyrightLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.
+                    </div>
+                </div>
+
+                <div id="right" class="right">
+                    <a class="logoLink" href="https://aladar.me/"><img class="logoImage" src="conSense/images/conSenseLogo.png" alt="ConSense logo" /></a>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -2,7 +2,7 @@
 <!--------------------------------------------------------------------
 ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
 
-Document version 1.05
+Document version 1.06
 --------------------------------------------------------------------->
 
 <!DOCTYPE html>
@@ -25,6 +25,8 @@ Document version 1.05
         </style>
         
         <script type="text/javascript">
+            // Should remain var for visibility from the Stub
+            // noinspection ES6ConvertVarToLetConst
             var relativeConSensePath = "../../";
         </script>
 
@@ -35,8 +37,8 @@ Document version 1.05
             {
                 conSense.init(conSense.show, 300, 300);
                 
-                viewport = new RedSandGLViewport(200, 200);
-                line = new RedSandGLPrimitive(viewport);
+                let viewport = new RedSandGLViewport(200, 200);
+                let line = new RedSandGLPrimitive(viewport);
                 line.line(-100, -100, 150, 100, {r:0, g:0, b:0, a:100}, false);
             }
         </script>

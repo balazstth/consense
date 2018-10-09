@@ -5,43 +5,52 @@
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //----------------------------------------------------------------------------
 // Globals
 //----------------------------------------------------------------------------
 
-var redSandVersion = "0.43";
-// Used for RedSandNode Id assignment
-var redSandId = 0;
+const redSandVersion = "0.44";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
 //----------------------------------------------------------------------------
 
-function RedSandUtilities()
+class RedSandUtilities
 {
-    this.version = redSandVersion;
-    
+    //------------------------------------------------------------------------
+
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandUtilities                                    Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+        //////////////////////////////////////////////////////////////////////
+    }
+
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // The second password is optional
-    this.generateCredentials = function(encodePassword, packetPassword)
+    generateCredentials(encodePassword, packetPassword)
     {
         if (packetPassword === undefined) {
             packetPassword = encodePassword;
         }
-        var encodePasswordHash = simpleCrypto.SHA1(encodePassword);
-        var packetPasswordHash = simpleCrypto.SHA1(packetPassword);
-        var thisDate = new Date().format("YYYY-MM-DD HH:mm:ss");
-        var randomString = simpleCrypto.generateRandomString(16);
+        let encodePasswordHash = simpleCrypto.SHA1(encodePassword);
+        let packetPasswordHash = simpleCrypto.SHA1(packetPassword);
+        let thisDate = new Date().format("YYYY-MM-DD HH:mm:ss");
+        let randomString = simpleCrypto.generateRandomString(16);
 
-        var credentialsPackage
+        let credentialsPackage
             = simpleCrypto.base64Encode(
                 simpleCrypto.RC4Encrypt(
                     encodePasswordHash, packetPasswordHash + thisDate + randomString));
 
         return credentialsPackage;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -54,9 +63,9 @@ function RedSandUtilities()
     //      userIdentifier
     //      password
     // Returns "deadbeef" on error.
-    this.formAuthenticatedURI = function(uri, params, userId, password)
+    formAuthenticatedURI(uri, params, userId, password)
     {
-        var credentialsPackage = this.generateCredentials(password, password);
+        let credentialsPackage = this.generateCredentials(password, password);
 
         if (params === null)
         {
@@ -79,29 +88,29 @@ function RedSandUtilities()
         }
 
         return uri;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // Screen blocker div
-    this.blockInput = function(color)
+    blockInput(color)
     {
         if (color === undefined) {
             color = "blue";
         }
         simpleUtils.getDOMElement("inputBlocker").style.background = color;
         simpleUtils.getDOMElement("inputBlocker").style.display = "block";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUtilities
     // Remove screen blocker div
-    this.unblockInput = function()
+    unblockInput()
     {
         simpleUtils.getDOMElement("inputBlocker").style.display = "none";
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -111,29 +120,38 @@ function RedSandUtilities()
 // *DEPENDENCY*
 // Uses conSenseContainer as parent for loader divs.
 // Uses conSense console methods.
-function RedSandGenericLoader()
+class RedSandGenericLoader
 {
-    this.version = redSandVersion;
-
-    this.containers = [];
-    this.frameNames = [];
-    this.callbacks = [];
-    // Loading process counter
-    this.lastProcess = 0;
-
-    // Green point. To recycle already used loader divs.
-    this.oldContainerPool = [];
-
     //------------------------------------------------------------------------
-    // Load indication
 
-    // Trigger
-    this.indicate = true;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandGenericLoader                                Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    // Number of loading processes in queue
-    this.loadsInProgress = 0;
+        this.containers = [];
+        this.frameNames = [];
+        this.callbacks = [];
+        // Loading process counter
+        this.lastProcess = 0;
 
-    this.showIndicator = function() {
+        // Green point. To recycle already used loader divs.
+        this.oldContainerPool = [];
+
+        //------------------------------------------------------------------------
+        // Load indication
+
+        // Trigger
+        this.indicate = true;
+
+        // Number of loading processes in queue
+        this.loadsInProgress = 0;
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    showIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
         }
@@ -142,9 +160,9 @@ function RedSandGenericLoader()
         {
             simpleUtils.getDOMElement("loadIndicator").style.display = "block";
         }
-    };
+    }
 
-    this.hideIndicator = function() {
+    hideIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
         }
@@ -153,14 +171,14 @@ function RedSandGenericLoader()
         {
             simpleUtils.getDOMElement("loadIndicator").style.display = "none";
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
     // If no callback is given, loaded content is evaluated as JavaScript
     // source
-    this.load = function(uri, callback)
+    load(uri, callback)
     {
         this.showIndicator();
 
@@ -183,7 +201,7 @@ function RedSandGenericLoader()
         else
         {
             // Create loader div "RedSandRegistryContainerNNN" if necessary
-            var newContainer = document.createElement('div');
+            let newContainer = document.createElement('div');
             newContainer.setAttribute(
                 "id", "RedSandRegistryContainer" + this.lastProcess);
             newContainer.style.display = "none";
@@ -192,7 +210,7 @@ function RedSandGenericLoader()
             this.containers.push(newContainer);
         }
 
-        var uriRandom = uri + simpleUtils.randomSuffix();
+        let uriRandom = uri + simpleUtils.randomSuffix();
 
         // Create loader IFrame "RedSandRegistryNNN" if necessary
         this.frameNames.push("RedSandRegistry" + this.lastProcess);
@@ -207,15 +225,15 @@ function RedSandGenericLoader()
             + ")' src='"
             + uriRandom
             + "' style='width: 0px; height: 0px; border: 0px;'></iframe>";
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
     // Receives an index of loader arrays
-    this.loadedCallback = function(processNum)
+    loadedCallback(processNum)
     {
-        var content = "deadbeef";
+        let content = "deadbeef";
 
         // Firefox
         if (window.frames[this.frameNames[processNum]].document.body.innerText === undefined)
@@ -237,7 +255,7 @@ function RedSandGenericLoader()
             content = window.frames[this.frameNames[processNum]].document.body.innerText;
         }
 
-        var callback = this.callbacks[processNum];
+        let callback = this.callbacks[processNum];
         this.callbacks[processNum] = undefined;
 
         // Recycle old loader container DOM elements
@@ -257,12 +275,12 @@ function RedSandGenericLoader()
 
         conSense.separator();
         conSense.scrollToBottomFocusInput();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandGenericLoader
-    this.javaScriptEvaluatorCallback = function(content)
+    javaScriptEvaluatorCallback(content)
     {
         try
         {
@@ -283,50 +301,59 @@ function RedSandGenericLoader()
 // RedSandHashHandler
 //----------------------------------------------------------------------------
 
-function RedSandHashHandler()
+class RedSandHashHandler
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.hashSeparator = "#";
-    this.paramSeparator = ";";
-    this.equalsString = "=";
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandHashHandler                                  Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    this.lastHash = "deadbeef";
+        this.hashSeparator = "#";
+        this.paramSeparator = ";";
+        this.equalsString = "=";
 
-    // noinspection JSUnusedGlobalSymbols
-    this.defaultHash = "deadbeef";
+        this.lastHash = "deadbeef";
 
-    // onHashChanged() event registry
-    // Format: "hashParameterName": callbackFunction
-    this.eventRegistry = [];
+        // noinspection JSUnusedGlobalSymbols
+        this.defaultHash = "deadbeef";
 
-    // Indicate if it is the first RedSandHashHandler.onHashChanged() call
-    this.firstRun = true;
+        // onHashChanged() event registry
+        // Format: "hashParameterName": callbackFunction
+        this.eventRegistry = [];
+
+        // Indicate if it is the first RedSandHashHandler.onHashChanged() call
+        this.firstRun = true;
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.addEvent = function(hashParameterName, callbackFunction)
+    addEvent(hashParameterName, callbackFunction)
     {
     	this.eventRegistry[hashParameterName] = callbackFunction;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.onHashChanged = function()
+    onHashChanged()
     {
-	    var params = this.processCurrentURIHash();
+	    let params = this.processCurrentURIHash();
 	    if (params === undefined) {
 	        return;
 	    }
 
         redSandHashHandler.updateNodeStyles();
 	    
-        for (var i in params) {
+        for (let i in params) {
 			// Bloody forEach()...
 			if (i === "each" || i === "forEach") continue;
-			for (var j in this.eventRegistry) {
+			for (let j in this.eventRegistry) {
 				if (j === i) {
 					// Callback found - do it for each found param -
 					// passing along full parameter list every time
@@ -342,13 +369,13 @@ function RedSandHashHandler()
 		    this.firstRun = false;
             window.setInterval(function() { if (redSandHashHandler.changed()) redSandHashHandler.onHashChanged(); }, 100);
         }
-    };
+    }
     
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Returns a boolean.
-    this.changed = function()
+    changed()
     {
         if (window.location.hash !== this.lastHash)
         {
@@ -359,12 +386,12 @@ function RedSandHashHandler()
         {
             return false;
         }
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    this.setDefaultHash = function(hash)
+    setDefaultHash(hash)
     {
         // noinspection JSUnusedGlobalSymbols
         this.defaultHash = hash;
@@ -382,18 +409,18 @@ function RedSandHashHandler()
         }
         this.updateNodeStyles();
         this.onHashChanged();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // {param0: "value0", param1: "value1", ...}
     //      --> "#param0=value0;param1=value1;..."
-    this.array2Hash = function(params)
+    array2Hash(params)
     {
-        var hash = this.hashSeparator;   // hash = "#"
+        let hash = this.hashSeparator;   // hash = "#"
 
-        for (var i in params)
+        for (let i in params)
         {
             // hash += "paramN=valueN;"
             // noinspection JSUnfilteredForInLoop
@@ -407,7 +434,7 @@ function RedSandHashHandler()
         }
 
         return hash;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -415,7 +442,7 @@ function RedSandHashHandler()
     // "#param0=value0;param1=value1;..."
     //      --> {param0: "value0", param1: "value1", ...}
     // TODO: eliminate duplicated parameters
-    this.hash2Array = function(hash)
+    hash2Array(hash)
     {
         // remove trailing paramSeparator if present
         if (hash.substr(hash.length - this.paramSeparator.length) === this.paramSeparator)
@@ -423,38 +450,38 @@ function RedSandHashHandler()
             hash = hash.substr(0, hash.length - this.paramSeparator.length);
         }
 
-        var params = [];
+        let params = [];
         // "#param0=value0;param1=value1;..."
         //      --> {"param0=value0", "param1=value1", ...}
-        var paramsTemp
+        let paramsTemp
             = hash.substr(this.hashSeparator.length).split(this.paramSeparator);
 
         // {"param0=value0", "param1=value1", ...}
         //      --> {param0: "value0", param1: "value1", ...}
-        for (var i = 0; i < paramsTemp.length; i++)
+        for (let i = 0; i < paramsTemp.length; i++)
         {
-            var splitInTwo = paramsTemp[i].split(this.equalsString);
+            let splitInTwo = paramsTemp[i].split(this.equalsString);
             params[splitInTwo[0]] = splitInTwo[1];
         }
 
         return params;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Returns an array of anchors present in the document.
-    this.getDocumentAnchors = function()
+    getDocumentAnchors()
     {
-        var anchors = [];
+        let anchors = [];
 
-        for (var i = 0; i < document.anchors.length; i++)
+        for (let i = 0; i < document.anchors.length; i++)
         {
             anchors[this.hashSeparator + document.anchors[i].name] = true;
         }
 
         return anchors;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -464,9 +491,9 @@ function RedSandHashHandler()
     // the resulting *associative array* of parameter name-value pairs is
     // returned.
     // Otherwise the resulting value will be *undefined*.
-    this.processCurrentURIHash = function()
+    processCurrentURIHash()
     {
-        var anchors = this.getDocumentAnchors();
+        let anchors = this.getDocumentAnchors();
 
         if (anchors[window.location.hash] === undefined)
         {
@@ -475,7 +502,7 @@ function RedSandHashHandler()
         }
 
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
@@ -484,22 +511,22 @@ function RedSandHashHandler()
     // Returns with the first matching menu item for which:
     // all link parameters are present in the menu item link.
     // *PRIVATE*
-    this.menuContainsLink = function(menu, link)
+    menuContainsLink(menu, link)
     {
-        for (var i in menu.items)
+        for (let i in menu.items)
         {
             if (i === "each" || i === "forEach") continue;
             // noinspection JSUnfilteredForInLoop
-            var itemParamArray = this.hash2Array(menu.items[i].link);
-            var linkParamArray = this.hash2Array(link);
-            var itemParamCount = 0;
-            var matchCount = 0;
+            let itemParamArray = this.hash2Array(menu.items[i].link);
+            let linkParamArray = this.hash2Array(link);
+            let itemParamCount = 0;
+            let matchCount = 0;
             // Parse through current item params
-            for (var j in itemParamArray) {
+            for (let j in itemParamArray) {
             	if (j === "each"  || j === "forEach") continue;
             	itemParamCount++;
             	// Parse through link params
-	            for (var k in linkParamArray) {
+	            for (let k in linkParamArray) {
 	                if (k === "each" || k === "forEach") continue;
                     // noinspection JSUnfilteredForInLoop
 	                if (j === k && itemParamArray[j] === linkParamArray[k]) {
@@ -514,21 +541,21 @@ function RedSandHashHandler()
         }
         
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
     // Trigger visual effects defined by node.deselectedClassName and
     // node.selectedClassName
-    this.updateNodeStyles = function()
+    updateNodeStyles()
     {
-        for (var i in redSandRegistry.menus)
+        for (let i in redSandRegistry.menus)
         {
-            var menu = redSandRegistry.menus[i];
+            let menu = redSandRegistry.menus[i];
             if (!menu.items) continue;
             
-            var item = this.menuContainsLink(menu, window.location.hash);
+            let item = this.menuContainsLink(menu, window.location.hash);
             if (item === undefined) continue;
             // Select new node
             simpleUtils.getDOMElement(item.DOMid).className = item.selectedClassName;
@@ -541,7 +568,7 @@ function RedSandHashHandler()
             // Register new node as lastly selected
             menu.lastSelectedNode = item;
         }
-    };
+    }
 
 }
 
@@ -551,32 +578,40 @@ function RedSandHashHandler()
 
 // Mainly a register class for load operations - the whole loading framework
 // is fully functional without it.
-function RedSandRegistry()
+class RedSandRegistry
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.menus = [];
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandRegistry                                     Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        this.menus = [];
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandRegistry
     // Returns a two dimensional array of RedSandNodes or undefined if no result.
     // Return format: nodes[menu] --> nodeArray
-    // noinspection JSUnusedGlobalSymbols
-    this.findMenuNodesByLink = function(link)
+    findMenuNodesByLink(link)
     {
-        var menuNodes = [];
-        var empty = true;
+        let menuNodes = [];
+        let empty = true;
 
-        for (var i in this.menus)
+        for (let i in this.menus)
         {
-            var menu = this.menus[i];
+            let menu = this.menus[i];
             if (!menu.items) continue;
-            var nodes = [];
-            for (var j in menu.items)
+            let nodes = [];
+            for (let j in menu.items)
             {
                 // noinspection JSUnfilteredForInLoop
-                var item = menu.items[j];
+                let item = menu.items[j];
                 if (!item.link) continue;
                 if (item.link === link)
                 {
@@ -593,15 +628,15 @@ function RedSandRegistry()
             return menuNodes;
         }
         return undefined;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandRegistry
-    this.addMenu = function(obj)
+    addMenu(obj)
     {
         this.menus[obj.id] = obj;
-    };
+    }
 
 }
 
@@ -610,20 +645,29 @@ function RedSandRegistry()
 //----------------------------------------------------------------------------
 
 // Class for handling dynamic UI text changes
-function RedSandUITextManager()
+class RedSandUITextManager
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // Private
-    // UI text registry with items like "DOMid; field; textId": textTable
-    // eg.: "aboutBox; innerHTML; aboutUs": interfaceTexts
-    this.registry = [];
-    // Default UI text table. Used when creating new RedSandNodes.
-    this.currentTable = undefined;
-    
-    // Text table field names
-    this.fieldId = "id";
-    this.fieldText = "text";
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandRegistry                                     Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Private
+        // UI text registry with items like "DOMid; field; textId": textTable
+        // eg.: "aboutBox; innerHTML; aboutUs": interfaceTexts
+        this.registry = [];
+        // Default UI text table. Used when creating new RedSandNodes.
+        this.currentTable = undefined;
+
+        // Text table field names
+        this.fieldId = "id";
+        this.fieldText = "text";
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
@@ -649,12 +693,12 @@ function RedSandUITextManager()
         );
     */
     // call.
-    this.initTextTable = function(table)
+    initTextTable(table)
     {
-        var newTable = simpleUtils.objectArray2objectHashTable(table, this.fieldId);
+        let newTable = simpleUtils.objectArray2objectHashTable(table, this.fieldId);
 
         // Mass liteDown()
-        for (var i in newTable) {
+        for (let i in newTable) {
             // noinspection JSUnfilteredForInLoop
             if (newTable[i][this.fieldText]) {
                 // noinspection JSUnfilteredForInLoop
@@ -663,15 +707,15 @@ function RedSandUITextManager()
         }
 
         return newTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
     // Sets new UI text array for registry items and redisplays them
-    this.setTextTable = function(table)
+    setTextTable(table)
     {
-        for (var i in this.registry) {
+        for (let i in this.registry) {
             // Skip if the textTable is empty
             if (this.registry[i] === undefined || typeof(this.registry[i]) !== "object") {
                 continue;
@@ -680,34 +724,34 @@ function RedSandUITextManager()
         }
         this.currentTable = table;
         this.refresh();
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
-    this.setText = function(DOMid, field, textId)
+    setText(DOMid, field, textId)
     {
         // Skip display if textId is empty
         if (textId !== "") {
-            var domElem = simpleUtils.getDOMElement(DOMid);
+            let domElem = simpleUtils.getDOMElement(DOMid);
             if (domElem === undefined) return;
             domElem[field] = this.currentTable[textId][this.fieldText];
         }
         this.registry[DOMid + "; " + field + "; " + textId] = this.currentTable;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandUITextManager
     // Reparses and redisplays UI text registry items
-    this.refresh = function()
+    refresh()
     {
-        for (var i in this.registry) {
+        for (let i in this.registry) {
             // Skip if the textTable is empty
             if (this.registry[i] === undefined || typeof(this.registry[i]) !== "object") {
                 continue;
             }
-            var elem = i;
+            let elem = i;
             elem = elem.split(";");
             elem[0] = simpleUtils.trimString(elem[0]);	// DOMid
             elem[1] = simpleUtils.trimString(elem[1]);	// field
@@ -720,7 +764,7 @@ function RedSandUITextManager()
             }
             simpleUtils.getDOMElement(elem[0])[elem[1]] = this.registry[i][elem[2]][this.fieldText];
         }
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -731,28 +775,36 @@ function RedSandUITextManager()
 // Special custom parameters:
 //      "fullPageload" - denotes a node which should be rendered as full page
 //          contents
-function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link, custom)
+class RedSandNode
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // Constructor parameters
-    this.DOMid = DOMid;
-    this.textId = textId;           // Node label UI text id
-    this.selectedClassName = selectedClassName;     // CSS class name in case node is activated
-    this.deselectedClassName = deselectedClassName; // CSS class name in case node is deactivated
-    this.className = this.deselectedClassName;      // CSS class name
-    this.link = link;               // link URI
-    // noinspection JSUnusedGlobalSymbols
-    this.custom = custom;           // Custom parameter object
+    constructor(DOMid, textId, deselectedClassName, selectedClassName, link, custom)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandNode                                         Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Constructor parameters
+        this.DOMid = DOMid;
+        this.textId = textId;           // Node label UI text id
+        this.selectedClassName = selectedClassName;     // CSS class name in case node is activated
+        this.deselectedClassName = deselectedClassName; // CSS class name in case node is deactivated
+        this.className = this.deselectedClassName;      // CSS class name
+        this.link = link;               // link URI
+        this.custom = custom;           // Custom parameter object
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandNode
-    this.renderString = function()
+    renderString()
     {
     	// Creating node *without* text content yet! Content is added in
     	// RedSand*.render() or manually.
-        var result = "<a "
+        let result = "<a "
             + "id='"
             + this.DOMid
             + "' class='"
@@ -762,12 +814,12 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
             + "'></a>";
 
         return result;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandNode
-    this.render = function(container)
+    render(container)
     {
         container.innerHTML += this.renderString();
         // Auto UI text registration, no manual UI text registry entry needed
@@ -776,7 +828,7 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
             "innerHTML",
             this.textId
         );
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -787,27 +839,35 @@ function RedSandNode(DOMid, textId, deselectedClassName, selectedClassName, link
 // items - an array of redSandNodes
 // menuContainer - DOM id
 // *DEPENDENCY* with redSandRegistry
-function RedSandMenu(id, items, menuContainer)
+class RedSandMenu
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    // noinspection JSUnusedGlobalSymbols
-    this.id = id;
-    this.items = items;
-    this.menuContainer = simpleUtils.getDOMElement(menuContainer);
+    constructor(id, items, menuContainer)
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandMenu                                         Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
 
-    // For RedSandHashHandler.updateNodeStyles()
-    // noinspection JSUnusedGlobalSymbols
-    this.lastSelectedNode = undefined;
-    
+        this.id = id;
+        this.items = items;
+        this.menuContainer = simpleUtils.getDOMElement(menuContainer);
+
+        // For RedSandHashHandler.updateNodeStyles()
+        // noinspection JSUnusedGlobalSymbols
+        this.lastSelectedNode = undefined;
+        //////////////////////////////////////////////////////////////////////
+    }
+
     //------------------------------------------------------------------------
 
     // RedSandMenu
-    this.render = function()
+    render()
     {
         if (!this.items.length) return "";
 
-        for (var i=0; i < this.items.length; i++)
+        for (let i=0; i < this.items.length; i++)
         {
         	if (this.items[i].DOMid === undefined) continue;
             this.menuContainer.innerHTML += this.items[i].renderString();
@@ -818,164 +878,185 @@ function RedSandMenu(id, items, menuContainer)
                 this.items[i].textId
             );
         }
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // RedSandWindowlet
 //----------------------------------------------------------------------------
 
+// Used for RedSandNode Id assignment
+// GLOBAL
+// TODO: make it a static class variable as soon as supported by EcmaScript
+let staticRedSandId = 0;
+
 // Creates a basic draggable window
-function RedSandWindowlet(left, top, width, height, background, border,
-                            draggable)
+class RedSandWindowlet
 {
-    this.version = redSandVersion;
-
-    // Constructor params
-
-    // Defaults
-    if (background === undefined || background === "default")
-    {
-        background = "white";
-    }
-    if (border === undefined || border === "default")
-    {
-        border = "1px solid gray";
-    }
-    if (draggable === undefined)
-    {
-        draggable = true;
-    }
-
-    // Fields
-    this.left = left;
-    this.top = top;
-    this.width = width;
-    this.height = height;
-    // noinspection JSUnusedGlobalSymbols
-    this.background = background;
-    this.border = border;
-    this.draggable = draggable;     // Flag
-
-    this.DOMContainer = undefined;
-    this.id = "RedSandId" + redSandId++;
-        
-    // noinspection JSUnusedGlobalSymbols
-    this.borderVisible = true;
 
     //------------------------------------------------------------------------
-    // Constructor code
-    //------------------------------------------------------------------------
 
-    this.DOMContainer = document.createElement('div');
-
-    this.DOMContainer.id = this.id;
-    this.DOMContainer.style.display = "block";
-    this.DOMContainer.style.position = "absolute";
-    this.DOMContainer.style.overflow = "auto";
-    this.DOMContainer.style.width  = this.width  + "px";    // "px" for HTML5
-    this.DOMContainer.style.height = this.height + "px";
-    this.DOMContainer.style.left   = this.left   + "px";
-    this.DOMContainer.style.top    = this.top    + "px";
-    this.DOMContainer.style.background = background;
-    this.DOMContainer.style.border = this.border;
-    redSandWindowletManager.initZIndex(this);
-    
-    document.body.appendChild(this.DOMContainer);
-
-    if (this.draggable)
+    constructor(left, top, width, height, background, border, draggable)
     {
-        // Make it draggable
-        Drag.init(this.DOMContainer, null, 0, 1000000000, 0, 1000000000);
-        // Update Z-index
-        var windowlet = this;
-        this.DOMContainer.onDragStart = function()
+        //////////////////////////////////////////////////////////////////////
+        // RedSandWindowlet                                    Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        // Constructor params
+
+        // Defaults
+        if (background === undefined || background === "default")
         {
-            redSandWindowletManager.updateZIndex(windowlet);
+            background = "white";
+        }
+        if (border === undefined || border === "default")
+        {
+            border = "1px solid gray";
+        }
+        if (draggable === undefined)
+        {
+            draggable = true;
+        }
+
+        // Fields
+        this.left = left;
+        this.top = top;
+        this.width = width;
+        this.height = height;
+        this.background = background;
+        this.border = border;
+        this.draggable = draggable;     // Flag
+
+        this.DOMContainer = undefined;
+        this.id = "RedSandId" + staticRedSandId++;
+
+        // noinspection JSUnusedGlobalSymbols
+        this.borderVisible = true;
+        //////////////////////////////////////////////////////////////////////
+        
+        this.DOMContainer = document.createElement('div');
+
+        this.DOMContainer.id = this.id;
+        this.DOMContainer.style.display = "block";
+        this.DOMContainer.style.position = "absolute";
+        this.DOMContainer.style.overflow = "auto";
+        this.DOMContainer.style.width  = this.width  + "px";    // "px" for HTML5
+        this.DOMContainer.style.height = this.height + "px";
+        this.DOMContainer.style.left   = this.left   + "px";
+        this.DOMContainer.style.top    = this.top    + "px";
+        this.DOMContainer.style.background = background;
+        this.DOMContainer.style.border = this.border;
+        redSandWindowletManager.initZIndex(this);
+
+        document.body.appendChild(this.DOMContainer);
+
+        if (this.draggable)
+        {
+            // Make it draggable
+            Drag.init(this.DOMContainer, null, 0, 1000000000, 0, 1000000000);
+            // Update Z-index
+            let windowlet = this;
+            this.DOMContainer.onDragStart = function()
+            {
+                redSandWindowletManager.updateZIndex(windowlet);
+            }
         }
     }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.show = function()
+    show()
     {
         this.DOMContainer.style.display = "block";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.hide = function()
+    hide()
     {
         this.DOMContainer.style.display = "none";
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.borderOn = function()
+    borderOn()
     {
         this.DOMContainer.style.border = this.border;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    this.borderOff = function()
+    borderOff()
     {
         this.DOMContainer.style.border = "none";
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // RedSandWindowletManager
 //----------------------------------------------------------------------------
 
-function RedSandWindowletManager()
+class RedSandWindowletManager
 {
-    this.version = redSandVersion;
+    //------------------------------------------------------------------------
 
-    this.topmostWindowlet = undefined;
-    this.highestZIndex = 1000000;
+    constructor()
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandWindowletManager                             Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandVersion;
+
+        this.topmostWindowlet = undefined;
+        this.highestZIndex = 1000000;
+        //////////////////////////////////////////////////////////////////////
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowletManager
     // Assigns new z-index and sets topmostWindowlet
-    this.initZIndex = function(windowlet)
+    initZIndex(windowlet)
     {
         // Set new z-index
         windowlet.DOMContainer.style.zIndex = "" + this.highestZIndex++;
         // Set topmost windowlet
         this.topmostWindowlet = windowlet;
-    };
+    }
 
     //------------------------------------------------------------------------
 
     // RedSandWindowletManager
-    this.updateZIndex = function(windowlet)
+    updateZIndex(windowlet)
     {
         // Switch z-index with that of the topmost windowlet and update
         // topmostWindowlet to windowlet
-        var windowletZIndex = windowlet.DOMContainer.style.zIndex;
+        let windowletZIndex = windowlet.DOMContainer.style.zIndex;
         windowlet.DOMContainer.style.zIndex
             = this.topmostWindowlet.DOMContainer.style.zIndex;
         this.topmostWindowlet.DOMContainer.style.zIndex = windowletZIndex;
         this.topmostWindowlet = windowlet;
-    };
+    }
 }
 
 //----------------------------------------------------------------------------
 // Instances
+// GLOBAL
 //----------------------------------------------------------------------------
 
 // noinspection JSUnusedGlobalSymbols
-var redSandUtils = new RedSandUtilities();
+let redSandUtils = new RedSandUtilities();
+// This class is used in ConSense, gives an error if "let"
+// noinspection ES6ConvertVarToLetConst
 var redSandGenericLoader = new RedSandGenericLoader();
-var redSandHashHandler = new RedSandHashHandler();
-var redSandRegistry = new RedSandRegistry();
-var redSandUITextManager = new RedSandUITextManager();
-var redSandWindowletManager = new RedSandWindowletManager();
+let redSandHashHandler = new RedSandHashHandler();
+let redSandRegistry = new RedSandRegistry();
+let redSandUITextManager = new RedSandUITextManager();
+let redSandWindowletManager = new RedSandWindowletManager();
 
 //----------------------------------------------------------------------------

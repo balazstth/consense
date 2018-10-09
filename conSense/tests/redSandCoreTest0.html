@@ -2,7 +2,7 @@
 <!--------------------------------------------------------------------
 ConSense (c) Toth, Balazs Aladar, 2005-2018, https://aladar.me/
 
-Document version 1.05
+Document version 1.06
 --------------------------------------------------------------------->
 
 <!DOCTYPE html>
@@ -36,6 +36,8 @@ Document version 1.05
         </style>
 
         <script type="text/javascript">
+            // Should remain var for visibility from the Stub
+            // noinspection ES6ConvertVarToLetConst
             var relativeConSensePath = "../../";
         </script>
 
@@ -50,8 +52,8 @@ Document version 1.05
 
                 //-----------------------------------------------------------------------------
                 // Demo windowlets
-                var nw0 = new RedSandWindowlet(25, 25, 400, 400, "default", "default", false);
-                var nw1 = new RedSandWindowlet(470, 25, 400, 400, "default", "default", false);
+                let nw0 = new RedSandWindowlet(25, 25, 400, 400, "default", "default", true);
+                let nw1 = new RedSandWindowlet(470, 25, 400, 400, "default", "default", false);
                 nw0.DOMContainer.style.padding = "10px 10px 10px 10px";
                 nw1.DOMContainer.style.padding = "10px 10px 10px 10px";
 
@@ -59,7 +61,7 @@ Document version 1.05
                 // Languages
 
                 // Multilingual UI text arrays
-                var uiHun = [
+                let uiHun = [
                     {id: "hello0", text: "Szia! (0)"},
                     {id: "hello1", text: "Szia! (1)"},
                     {id: "hello2", text: "Szia! (2)"},
@@ -68,7 +70,7 @@ Document version 1.05
                     {id: "eng", text: "Angol"}
                 ];
 
-                var uiGer = [
+                let uiGer = [
                     {id: "hello0", text: "Gr&uuml;ss Dich! (0)"},
                     {id: "hello1", text: "Gr&uuml;ss Dich! (1)"},
                     {id: "hello2", text: "Gr&uuml;ss Dich! (2)"},
@@ -77,7 +79,7 @@ Document version 1.05
                     {id: "eng", text: "Englisch"}
                 ];
 
-                var uiEng = [
+                let uiEng = [
                     {id: "hello0", text: "Hi! (0)"},
                     {id: "hello1", text: "Hi! (1)"},
                     {id: "hello2", text: "Hi! (2)"},
@@ -97,15 +99,22 @@ Document version 1.05
                 // Menus
                 
                 // menu0 - language selector
-                var items = [];
+                let items = [];
 
                 items.push(new RedSandNode("menu0item0", "hun", "menuItem", "menuItemSelected", "#setlang=hun"));
                 items.push(new RedSandNode("menu0item1", "ger", "menuItem", "menuItemSelected", "#setlang=ger"));
                 items.push(new RedSandNode("menu0item2", "eng", "menuItem", "menuItemSelected", "#setlang=eng"));
 
-                var menu0 = new RedSandMenu("menu0", items, nw0.id);
+                let menu0 = new RedSandMenu("menu0", items, nw0.id);
                 redSandRegistry.addMenu(menu0);
                 menu0.render();
+
+                // Make nw0 fancy
+                let style =
+                    "color:  rgb(100, 100, 100); \
+                     padding-left: 50px;";
+
+                nw0.DOMContainer.innerHTML += `<br><br><span style="${style}">This windowlet is also draggable.</span>`;
 
                 // menu1
                 items = [];
@@ -114,7 +123,7 @@ Document version 1.05
                 items.push(new RedSandNode("menu1item1", "hello1", "menuItem", "menuItemSelected", "#color=yellow"));
                 items.push(new RedSandNode("menu1item2", "hello2", "menuItem", "menuItemSelected", "#color=white"));
 
-                var menu1 = new RedSandMenu("menu1", items, nw1.id);
+                let menu1 = new RedSandMenu("menu1", items, nw1.id);
                 redSandRegistry.addMenu(menu1);
                 menu1.render();
 
