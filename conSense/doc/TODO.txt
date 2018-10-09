@@ -13,16 +13,20 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0020
+ticket count 0022
 
 TODO
 ----
 
-- [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
+- [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that supports ES6
+- [0021] [2018-10-09] BUG: when Ctrl+clicking an anchor link the new tab cannot load
+                      url#anchor since #... denotes an article to be loaded. Works in
+                      the original page though (simple clicking of the link).
+
++ [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
                       loader. If so, make it invisible through RedSendGenericLoader.
                       That might bring back full IE compatibility, too.
-- [0017] [2018-10-04] Load timeout handling
-
++ [0017] [2018-10-04] Load timeout handling
 + [0004] [2018-09-23] Include in an include: the ability to load content from within a loaded
                       content. E.g. load injectCommand.js directly from intro.txt, not from
                       index.html

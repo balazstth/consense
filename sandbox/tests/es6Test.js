@@ -1,6 +1,6 @@
 
 class Shape {
-    version = "1.00";
+    // version = "1.00";
 
     constructor(id, x, y) {
         this.id = id;
