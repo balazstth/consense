@@ -18,7 +18,6 @@ ticket count 0022
 TODO
 ----
 
-- [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that supports ES6
 - [0021] [2018-10-09] BUG: when Ctrl+clicking an anchor link the new tab cannot load
                       url#anchor since #... denotes an article to be loaded. Works in
                       the original page though (simple clicking of the link).
@@ -62,5 +61,6 @@ x [0009] [2018-09-27] Won't fix: Responsive design for mobile screens.
 x [0016] [2018-10-01] Won't fix, covered in [0019]:
                       Thinking about including Materialize and Velocity
 x [0011] [2018-09-30] Covered in [0008]: BiturboVision as a TurboVision port?
+x [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that supports ES6
 
 </pre>
