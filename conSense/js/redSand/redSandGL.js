@@ -48,6 +48,7 @@ class RedSandGLViewport
     //------------------------------------------------------------------------
 
     // RedSandGLScene
+    // noinspection JSUnusedGlobalSymbols
     setOrigin(originX, originY)
     {
         // noinspection JSUnusedGlobalSymbols
@@ -87,6 +88,7 @@ class RedSandGLPrimitive
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
+    // noinspection JSUnusedGlobalSymbols
     plot(x, y, color)
     {
     }
@@ -102,6 +104,7 @@ class RedSandGLPrimitive
 
     // RedSandGLPrimitive
     // Erases current primitive graphics.
+    // noinspection JSUnusedGlobalSymbols
     erase()
     {
     }

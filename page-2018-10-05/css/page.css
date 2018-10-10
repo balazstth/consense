@@ -3,7 +3,7 @@ body {
     background: white url("../images/bg_760_white_shadow.png") center repeat-y;
     color: black;
     /* font-family: Verdana, Arial, Helvetica, sans-serif; */
-    font-family: 'Cousine', monospace;
+    font-family: 'Cousine', 'IBM Plex Mono', monospace;
     font-size: 12px;
     font-weight: normal;
     line-height: 1.5;
@@ -12,7 +12,7 @@ body {
 }
 
 pre {
-    font-family: 'Cousine', monospace;
+    font-family: 'Cousine', 'IBM Plex Mono', monospace;
     font-size: 12px;
     font-weight: normal;
     line-height: 1.5;

@@ -1147,463 +1147,507 @@ var forEach = function(object, block, context) {
 	}
 };
 
+/*! keydrown - v1.2.2 - 2016-03-23 - http://jeremyckahn.github.com/keydrown */
+;(function (window) {
+
+var util = (function () {
+
+  var util = {};
+
+  /**
+   * @param {Object} obj The Object to iterate through.
+   * @param {function(*, string)} iterator The function to call for each property.
+   */
+  util.forEach = function (obj, iterator) {
+    var prop;
+    for (prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        iterator(obj[prop], prop);
+      }
+    }
+  };
+  var forEach = util.forEach;
+
+
+  /**
+   * Create a transposed copy of an Object.
+   *
+   * @param {Object} obj
+   * @return {Object}
+   */
+  util.getTranspose = function (obj) {
+    var transpose = {};
+
+    forEach(obj, function (val, key) {
+      transpose[val] = key;
+    });
+
+    return transpose;
+  };
+
+
+  /**
+   * Implementation of Array#indexOf because IE<9 doesn't support it.
+   *
+   * @param {Array} arr
+   * @param {*} val
+   * @return {number} Index of the found element or -1 if not found.
+   */
+  util.indexOf = function (arr, val) {
+    if (arr.indexOf) {
+      return arr.indexOf(val);
+    }
+
+    var i, len = arr.length;
+    for (i = 0; i < len; i++) {
+      if (arr[i] === val) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+  var indexOf = util.indexOf;
+
+
+  /**
+   * Push a value onto an array if it is not present in the array already.  Otherwise, this is a no-op.
+   *
+   * @param {Array} arr
+   * @param {*} val
+   * @return {boolean} Whether or not the value was added to the array.
+   */
+  util.pushUnique = function (arr, val) {
+    if (indexOf(arr, val) === -1) {
+      arr.push(val);
+      return true;
+    }
+
+    return false;
+  };
+
+
+  /**
+   * Remove a value from an array.  Assumes there is only one instance of the
+   * value present in the array.
+   *
+   * @param {Array} arr
+   * @param {*} val
+   * @return {*} The value that was removed from arr.  Returns undefined if
+   * nothing was removed.
+   */
+  util.removeValue = function (arr, val) {
+    var index = indexOf(arr, val);
+
+    if (index !== -1) {
+      return arr.splice(index, 1)[0];
+    }
+  };
+
+
+  /**
+   * Cross-browser function for listening for and handling an event on the
+   * document element.
+   *
+   * @param {string} eventName
+   * @param {function} handler
+   */
+  util.documentOn = function (eventName, handler) {
+    if (window.addEventListener) {
+      window.addEventListener(eventName, handler, false);
+    } else if (document.attachEvent) {
+      document.attachEvent('on' + eventName, handler);
+    }
+  };
+
+
+  /**
+   * Shim for requestAnimationFrame.  See:
+   * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+   */
+  util.requestAnimationFrame = (function () {
+    return window.requestAnimationFrame  ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame    ||
+      function( callback ){
+        window.setTimeout(callback, 1000 / 60);
+      };
+  })();
+
+
+  /**
+   * An empty function.  NOOP!
+   */
+  util.noop = function () {};
+
+  return util;
+
+}());
+
 /**
- * http://www.openjs.com/scripts/events/keyboard_shortcuts/
- * Version : 2.01.A
- * By Binny V A
- * License : BSD
+ * Lookup table of keys to keyCodes.
+ *
+ * @type {Object.<number>}
  */
-shortcut = {
-	'all_shortcuts':{},//All the shortcuts are stored in this array
-	'add': function(shortcut_combination,callback,opt) {
-		//Provide a set of default options
-		var default_options = {
-			'type':'keydown',
-			'propagate':false,
-			'disable_in_input':false,
-			'target':document,
-			'keycode':false
-		}
-		if(!opt) opt = default_options;
-		else {
-			for(var dfo in default_options) {
-				if(typeof opt[dfo] == 'undefined') opt[dfo] = default_options[dfo];
-			}
-		}
+var KEY_MAP = {
+  'A': 65
+  ,'B': 66
+  ,'C': 67
+  ,'D': 68
+  ,'E': 69
+  ,'F': 70
+  ,'G': 71
+  ,'H': 72
+  ,'I': 73
+  ,'J': 74
+  ,'K': 75
+  ,'L': 76
+  ,'M': 77
+  ,'N': 78
+  ,'O': 79
+  ,'P': 80
+  ,'Q': 81
+  ,'R': 82
+  ,'S': 83
+  ,'T': 84
+  ,'U': 85
+  ,'V': 86
+  ,'W': 87
+  ,'X': 88
+  ,'Y': 89
+  ,'Z': 90
+  ,'ENTER': 13
+  ,'SHIFT': 16
+  ,'ESC': 27
+  ,'SPACE': 32
+  ,'LEFT': 37
+  ,'UP': 38
+  ,'RIGHT': 39
+  ,'DOWN': 40
+  ,'BACKSPACE': 8
+  ,'DELETE': 46
+};
 
-		var ele = opt.target
-		if(typeof opt.target == 'string') ele = document.getElementById(opt.target);
-		var ths = this;
-		shortcut_combination = shortcut_combination.toLowerCase();
 
-		//The function to be called at keypress
-		var func = function(e) {
-			e = e || window.event;
-			
-			if(opt['disable_in_input']) { //Don't enable shortcut keys in Input, Textarea fields
-				var element;
-				if(e.target) element=e.target;
-				else if(e.srcElement) element=e.srcElement;
-				if(element.nodeType==3) element=element.parentNode;
+/**
+ * The transposed version of KEY_MAP.
+ *
+ * @type {Object.<string>}
+ */
+var TRANSPOSED_KEY_MAP = util.getTranspose(KEY_MAP);
 
-				if(element.tagName == 'INPUT' || element.tagName == 'TEXTAREA') return;
-			}
-	
-			//Find Which key is pressed
-			if (e.keyCode) code = e.keyCode;
-			else if (e.which) code = e.which;
-			var character = String.fromCharCode(code).toLowerCase();
-			
-			if(code == 188) character=","; //If the user presses , when the type is onkeydown
-			if(code == 190) character="."; //If the user presses , when the type is onkeydown
-	
-			var keys = shortcut_combination.split("+");
-			//Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
-			var kp = 0;
-			
-			//Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
-			var shift_nums = {
-				"`":"~",
-				"1":"!",
-				"2":"@",
-				"3":"#",
-				"4":"$",
-				"5":"%",
-				"6":"^",
-				"7":"&",
-				"8":"*",
-				"9":"(",
-				"0":")",
-				"-":"_",
-				"=":"+",
-				";":":",
-				"'":"\"",
-				",":"<",
-				".":">",
-				"/":"?",
-				"\\":"|"
-			}
-			//Special Keys - and their codes
-			var special_keys = {
-				'esc':27,
-				'escape':27,
-				'tab':9,
-				'space':32,
-				'return':13,
-				'enter':13,
-				'backspace':8,
-	
-				'scrolllock':145,
-				'scroll_lock':145,
-				'scroll':145,
-				'capslock':20,
-				'caps_lock':20,
-				'caps':20,
-				'numlock':144,
-				'num_lock':144,
-				'num':144,
-				
-				'pause':19,
-				'break':19,
-				
-				'insert':45,
-				'home':36,
-				'delete':46,
-				'end':35,
-				
-				'pageup':33,
-				'page_up':33,
-				'pu':33,
-	
-				'pagedown':34,
-				'page_down':34,
-				'pd':34,
-	
-				'left':37,
-				'up':38,
-				'right':39,
-				'down':40,
-	
-				'f1':112,
-				'f2':113,
-				'f3':114,
-				'f4':115,
-				'f5':116,
-				'f6':117,
-				'f7':118,
-				'f8':119,
-				'f9':120,
-				'f10':121,
-				'f11':122,
-				'f12':123
-			}
-	
-			var modifiers = { 
-				shift: { wanted:false, pressed:false},
-				ctrl : { wanted:false, pressed:false},
-				alt  : { wanted:false, pressed:false},
-				meta : { wanted:false, pressed:false}	//Meta is Mac specific
-			};
-                        
-			if(e.ctrlKey)	modifiers.ctrl.pressed = true;
-			if(e.shiftKey)	modifiers.shift.pressed = true;
-			if(e.altKey)	modifiers.alt.pressed = true;
-			if(e.metaKey)   modifiers.meta.pressed = true;
-                        
-			for(var i=0; k=keys[i],i<keys.length; i++) {
-				//Modifiers
-				if(k == 'ctrl' || k == 'control') {
-					kp++;
-					modifiers.ctrl.wanted = true;
+/*!
+ * @type Array.<string>
+ */
+var keysDown = [];
 
-				} else if(k == 'shift') {
-					kp++;
-					modifiers.shift.wanted = true;
+var Key = (function () {
 
-				} else if(k == 'alt') {
-					kp++;
-					modifiers.alt.wanted = true;
-				} else if(k == 'meta') {
-					kp++;
-					modifiers.meta.wanted = true;
-				} else if(k.length > 1) { //If it is a special key
-					if(special_keys[k] == code) kp++;
-					
-				} else if(opt['keycode']) {
-					if(opt['keycode'] == code) kp++;
+  'use strict';
 
-				} else { //The special keys did not match
-					if(character == k) kp++;
-					else {
-						if(shift_nums[character] && e.shiftKey) { //Stupid Shift key bug created by using lowercase
-							character = shift_nums[character]; 
-							if(character == k) kp++;
-						}
-					}
-				}
-			}
+  /**
+   * Represents a key on the keyboard.  You'll never actually call this method
+   * directly; Key Objects for every key that Keydrown supports are created for
+   * you when the library is initialized (as in, when the file is loaded).  You
+   * will, however, use the `prototype` methods below to bind functions to key
+   * states.
+   *
+   * @param {number} keyCode The keyCode of the key.
+   * @constructor
+   * @class kd.Key
+   */
+  function Key (keyCode) {
+    this.keyCode = keyCode;
+    this.cachedKeypressEvent = null;
+  }
 
-			if(kp == keys.length && 
-						modifiers.ctrl.pressed == modifiers.ctrl.wanted &&
-						modifiers.shift.pressed == modifiers.shift.wanted &&
-						modifiers.alt.pressed == modifiers.alt.wanted &&
-						modifiers.meta.pressed == modifiers.meta.wanted) {
-				callback(e);
-	
-				if(!opt['propagate']) { //Stop the event
-					//e.cancelBubble is supported by IE - this will kill the bubbling process.
-					e.cancelBubble = true;
-					e.returnValue = false;
-	
-					//e.stopPropagation works in Firefox.
-					if (e.stopPropagation) {
-						e.stopPropagation();
-						e.preventDefault();
-					}
-					return false;
-				}
-			}
-		}
-		this.all_shortcuts[shortcut_combination] = {
-			'callback':func, 
-			'target':ele, 
-			'event': opt['type']
-		};
-		//Attach the function with the event
-		if(ele.addEventListener) ele.addEventListener(opt['type'], func, false);
-		else if(ele.attachEvent) ele.attachEvent('on'+opt['type'], func);
-		else ele['on'+opt['type']] = func;
-	},
 
-	//Remove the shortcut - just specify the shortcut and I will remove the binding
-	'remove':function(shortcut_combination) {
-		shortcut_combination = shortcut_combination.toLowerCase();
-		var binding = this.all_shortcuts[shortcut_combination];
-		delete(this.all_shortcuts[shortcut_combination])
-		if(!binding) return;
-		var type = binding['event'];
-		var ele = binding['target'];
-		var callback = binding['callback'];
+  /*!
+   * The function to be invoked on every tick that the key is held down for.
+   *
+   * @type {function}
+   */
+  Key.prototype._downHandler = util.noop;
 
-		if(ele.detachEvent) ele.detachEvent('on'+type, callback);
-		else if(ele.removeEventListener) ele.removeEventListener(type, callback, false);
-		else ele['on'+type] = false;
-	}
-}// sprintf-js (c) Alexandru Marasteanu, 2018
-// @ https://github.com/alexei/sprintf.js and http://alexei.ro/
-// Version: 1.1.1
 
-/* global window, exports, define */
+  /*!
+   * The function to be invoked when the key is released.
+   *
+   * @type {function}
+   */
+  Key.prototype._upHandler = util.noop;
 
-!function() {
-    'use strict'
 
-    var re = {
-        not_string: /[^s]/,
-        not_bool: /[^t]/,
-        not_type: /[^T]/,
-        not_primitive: /[^v]/,
-        number: /[diefg]/,
-        numeric_arg: /[bcdiefguxX]/,
-        json: /[j]/,
-        not_json: /[^j]/,
-        text: /^[^\x25]+/,
-        modulo: /^\x25{2}/,
-        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
-        key: /^([a-z_][a-z_\d]*)/i,
-        key_access: /^\.([a-z_][a-z_\d]*)/i,
-        index_access: /^\[(\d+)\]/,
-        sign: /^[\+\-]/
+  /*!
+   * The function to be invoked when the key is pressed.
+   *
+   * @type {function}
+   */
+  Key.prototype._pressHandler = util.noop;
+
+
+  /*!
+   * Private helper function that binds or invokes a hander for `down`, `up',
+   * or `press` for a `Key`.
+   *
+   * @param {Key} key
+   * @param {string} handlerName
+   * @param {function=} opt_handler If omitted, the handler is invoked.
+   * @param {KeyboardEvent=} opt_evt If this function is being called by a
+   * keyboard event handler, this is the raw KeyboardEvent Object provided from
+   * the browser.
+   */
+  function bindOrFire (key, handlerName, opt_handler, opt_evt) {
+    if (opt_handler) {
+      key[handlerName] = opt_handler;
+    } else {
+      key[handlerName](opt_evt);
     }
+  }
 
-    function sprintf(key) {
-        // `arguments` is not an array, but should be fine for this call
-        return sprintf_format(sprintf_parse(key), arguments)
+
+  /**
+   * Returns whether the key is currently pressed or not.
+   *
+   * @method isDown
+   * @return {boolean} True if the key is down, otherwise false.
+   */
+  Key.prototype.isDown = function () {
+    return util.indexOf(keysDown, this.keyCode) !== -1;
+  };
+
+
+  /**
+   * Bind a function to be called when the key is held down.
+   *
+   * @method down
+   * @param {function=} opt_handler The function to be called when the key is
+   * held down.  If omitted, this function invokes whatever handler was
+   * previously bound.
+   */
+  Key.prototype.down = function (opt_handler) {
+    bindOrFire(this, '_downHandler', opt_handler, this.cachedKeypressEvent);
+  };
+
+
+  /**
+   * Bind a function to be called when the key is released.
+   *
+   * @method up
+   * @param {function=} opt_handler The function to be called when the key is
+   * released.  If omitted, this function invokes whatever handler was
+   * previously bound.
+   * @param {KeyboardEvent=} opt_evt If this function is being called by the
+   * keyup event handler, this is the raw KeyboardEvent Object provided from
+   * the browser.  This should generally not be provided by client code.
+   */
+  Key.prototype.up = function (opt_handler, opt_evt) {
+    bindOrFire(this, '_upHandler', opt_handler, opt_evt);
+  };
+
+
+  /**
+   * Bind a function to be called when the key is pressed.  This handler will
+   * not fire again until the key is released — it does not repeat.
+   *
+   * @method press
+   * @param {function=} opt_handler The function to be called once when the key
+   * is pressed.  If omitted, this function invokes whatever handler was
+   * previously bound.
+   * @param {KeyboardEvent=} opt_evt If this function is being called by the
+   * keydown event handler, this is the raw KeyboardEvent Object provided from
+   * the browser.  This should generally not be provided by client code.
+   */
+  Key.prototype.press = function (opt_handler, opt_evt) {
+    this.cachedKeypressEvent = opt_evt;
+    bindOrFire(this, '_pressHandler', opt_handler, opt_evt);
+  };
+
+
+  /**
+   * Remove the handler that was bound with `{{#crossLink
+   * "kd.Key/down:method"}}{{/crossLink}}`.
+   * @method unbindDown
+   */
+  Key.prototype.unbindDown = function () {
+    this._downHandler = util.noop;
+  };
+
+
+  /**
+   * Remove the handler that was bound with `{{#crossLink
+   * "kd.Key/up:method"}}{{/crossLink}}`.
+   * @method unbindUp
+   */
+  Key.prototype.unbindUp = function () {
+    this._upHandler = util.noop;
+  };
+
+
+  /**
+   * Remove the handler that was bound with `{{#crossLink
+   * "kd.Key/press:method"}}{{/crossLink}}`.
+   * @method unbindPress
+   */
+  Key.prototype.unbindPress = function () {
+    this._pressHandler = util.noop;
+  };
+
+  return Key;
+
+}());
+
+var kd = (function (keysDown) {
+
+  'use strict';
+
+  /**
+   * @class kd
+   */
+  var kd = {};
+  kd.Key = Key;
+
+  var isRunning = false;
+
+  var now = Date.now
+     ? Date.now
+     : function () {return +new Date();};
+
+  var previousUpdateTime = now();
+
+  /**
+   * Evaluate which keys are held down and invoke their handler functions.
+   * @method tick
+   */
+  kd.tick = function () {
+    var i, len = keysDown.length;
+    for (i = 0; i < len; i++) {
+      var keyCode = keysDown[i];
+
+      var keyName = TRANSPOSED_KEY_MAP[keyCode];
+      if (keyName) {
+        kd[keyName].down();
+      }
     }
+  };
 
-    function vsprintf(fmt, argv) {
-        return sprintf.apply(null, [fmt].concat(argv || []))
+
+  /**
+   * A basic run loop.  `handler` gets called approximately 60 times a second.
+   *
+   * @param {Function(number, number)} handler The callback function to call on
+   * every tick.  You likely want to call [kd.tick](#method_tick) in this
+   * function.  This callback receives the time elapsed since the previous
+   * execution of the callback as the first parameter, and the current time
+   * stamp as the second.
+   * @method run
+   */
+  kd.run = function (handler) {
+    isRunning = true;
+    var currentTime = now();
+    var timeSinceLastUpdate = currentTime - previousUpdateTime;
+
+    util.requestAnimationFrame.call(window, function () {
+      if (!isRunning) {
+        return;
+      }
+
+      kd.run(handler);
+      handler(timeSinceLastUpdate, currentTime);
+    });
+
+    previousUpdateTime = currentTime;
+  };
+
+
+  /**
+   * Cancels the loop created by [run](#method_run).
+   * @method stop
+   */
+  kd.stop = function () {
+    isRunning = false;
+  };
+
+
+  // SETUP
+  //
+
+
+  // Initialize the KEY Objects
+  util.forEach(KEY_MAP, function (keyCode, keyName) {
+    kd[keyName] = new Key(keyCode);
+  });
+
+  util.documentOn('keydown', function (evt) {
+    var keyCode = evt.keyCode;
+    var keyName = TRANSPOSED_KEY_MAP[keyCode];
+    var isNew = util.pushUnique(keysDown, keyCode);
+    var key = kd[keyName];
+
+    if (key) {
+      var cachedKeypressEvent = key.cachedKeypressEvent || {};
+
+      // If a modifier key was held down the last time that this button was
+      // pressed, and it is pressed again without the modifier key being
+      // released, it is considered a newly-pressed key.  This is to work
+      // around the fact that the "keyup" event does not fire for the modified
+      // key until the modifier button is also released, which poses a problem
+      // for repeated, modified key presses such as hitting ctrl/meta+Z for
+      // rapid "undo" actions.
+      if (cachedKeypressEvent.ctrlKey ||
+          cachedKeypressEvent.shiftKey ||
+          cachedKeypressEvent.metaKey) {
+        isNew = true;
+      }
+
+      if (isNew) {
+        key.press(null, evt);
+      }
     }
+  });
 
-    function sprintf_format(parse_tree, argv) {
-        var cursor = 1, tree_length = parse_tree.length, arg, output = '', i, k, ph, pad, pad_character, pad_length, is_positive, sign
-        for (i = 0; i < tree_length; i++) {
-            if (typeof parse_tree[i] === 'string') {
-                output += parse_tree[i]
-            }
-            else if (typeof parse_tree[i] === 'object') {
-                ph = parse_tree[i] // convenience purposes only
-                if (ph.keys) { // keyword argument
-                    arg = argv[cursor]
-                    for (k = 0; k < ph.keys.length; k++) {
-                        if (arg == undefined) {
-                            throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k-1]))
-                        }
-                        arg = arg[ph.keys[k]]
-                    }
-                }
-                else if (ph.param_no) { // positional argument (explicit)
-                    arg = argv[ph.param_no]
-                }
-                else { // positional argument (implicit)
-                    arg = argv[cursor++]
-                }
+  util.documentOn('keyup', function (evt) {
+    var keyCode = util.removeValue(keysDown, evt.keyCode);
 
-                if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
-                    arg = arg()
-                }
-
-                if (re.numeric_arg.test(ph.type) && (typeof arg !== 'number' && isNaN(arg))) {
-                    throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg))
-                }
-
-                if (re.number.test(ph.type)) {
-                    is_positive = arg >= 0
-                }
-
-                switch (ph.type) {
-                    case 'b':
-                        arg = parseInt(arg, 10).toString(2)
-                        break
-                    case 'c':
-                        arg = String.fromCharCode(parseInt(arg, 10))
-                        break
-                    case 'd':
-                    case 'i':
-                        arg = parseInt(arg, 10)
-                        break
-                    case 'j':
-                        arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0)
-                        break
-                    case 'e':
-                        arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential()
-                        break
-                    case 'f':
-                        arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg)
-                        break
-                    case 'g':
-                        arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg)
-                        break
-                    case 'o':
-                        arg = (parseInt(arg, 10) >>> 0).toString(8)
-                        break
-                    case 's':
-                        arg = String(arg)
-                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
-                        break
-                    case 't':
-                        arg = String(!!arg)
-                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
-                        break
-                    case 'T':
-                        arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase()
-                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
-                        break
-                    case 'u':
-                        arg = parseInt(arg, 10) >>> 0
-                        break
-                    case 'v':
-                        arg = arg.valueOf()
-                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
-                        break
-                    case 'x':
-                        arg = (parseInt(arg, 10) >>> 0).toString(16)
-                        break
-                    case 'X':
-                        arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase()
-                        break
-                }
-                if (re.json.test(ph.type)) {
-                    output += arg
-                }
-                else {
-                    if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
-                        sign = is_positive ? '+' : '-'
-                        arg = arg.toString().replace(re.sign, '')
-                    }
-                    else {
-                        sign = ''
-                    }
-                    pad_character = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' '
-                    pad_length = ph.width - (sign + arg).length
-                    pad = ph.width ? (pad_length > 0 ? pad_character.repeat(pad_length) : '') : ''
-                    output += ph.align ? sign + arg + pad : (pad_character === '0' ? sign + pad + arg : pad + sign + arg)
-                }
-            }
-        }
-        return output
+    var keyName = TRANSPOSED_KEY_MAP[keyCode];
+    if (keyName) {
+      kd[keyName].up(null, evt);
     }
+  });
 
-    var sprintf_cache = Object.create(null)
+  // Stop firing the "down" handlers if the user loses focus of the browser
+  // window.
+  util.documentOn('blur', function (evt) {
+    // Fire the "up" handler for each key that is currently held down
+    util.forEach(keysDown, function (keyCode) {
+      var mappedKey = TRANSPOSED_KEY_MAP[keyCode];
+      if (mappedKey) {
+        kd[mappedKey].up();
+      }
+    });
 
-    function sprintf_parse(fmt) {
-        if (sprintf_cache[fmt]) {
-            return sprintf_cache[fmt]
-        }
+    keysDown.length = 0;
+  });
 
-        var _fmt = fmt, match, parse_tree = [], arg_names = 0
-        while (_fmt) {
-            if ((match = re.text.exec(_fmt)) !== null) {
-                parse_tree.push(match[0])
-            }
-            else if ((match = re.modulo.exec(_fmt)) !== null) {
-                parse_tree.push('%')
-            }
-            else if ((match = re.placeholder.exec(_fmt)) !== null) {
-                if (match[2]) {
-                    arg_names |= 1
-                    var field_list = [], replacement_field = match[2], field_match = []
-                    if ((field_match = re.key.exec(replacement_field)) !== null) {
-                        field_list.push(field_match[1])
-                        while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
-                            if ((field_match = re.key_access.exec(replacement_field)) !== null) {
-                                field_list.push(field_match[1])
-                            }
-                            else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
-                                field_list.push(field_match[1])
-                            }
-                            else {
-                                throw new SyntaxError('[sprintf] failed to parse named argument key')
-                            }
-                        }
-                    }
-                    else {
-                        throw new SyntaxError('[sprintf] failed to parse named argument key')
-                    }
-                    match[2] = field_list
-                }
-                else {
-                    arg_names |= 2
-                }
-                if (arg_names === 3) {
-                    throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported')
-                }
 
-                parse_tree.push(
-                    {
-                        placeholder: match[0],
-                        param_no:    match[1],
-                        keys:        match[2],
-                        sign:        match[3],
-                        pad_char:    match[4],
-                        align:       match[5],
-                        width:       match[6],
-                        precision:   match[7],
-                        type:        match[8]
-                    }
-                )
-            }
-            else {
-                throw new SyntaxError('[sprintf] unexpected placeholder')
-            }
-            _fmt = _fmt.substring(match[0].length)
-        }
-        return sprintf_cache[fmt] = parse_tree
-    }
+  return kd;
 
-    /**
-     * export to either browser or node.js
-     */
-    /* eslint-disable quote-props */
-    if (typeof exports !== 'undefined') {
-        exports['sprintf'] = sprintf
-        exports['vsprintf'] = vsprintf
-    }
-    if (typeof window !== 'undefined') {
-        window['sprintf'] = sprintf
-        window['vsprintf'] = vsprintf
+ // The variables passed into the closure here are defined in kd.key.js.
+}(keysDown));
 
-        if (typeof define === 'function' && define['amd']) {
-            define(function() {
-                return {
-                    'sprintf': sprintf,
-                    'vsprintf': vsprintf
-                }
-            })
-        }
-    }
-    /* eslint-enable quote-props */
-}()
+if (typeof module === "object" && typeof module.exports === "object") {
+  // Keydrown was loaded as a CommonJS module (by Browserify, for example).
+  module.exports = kd;
+} else if (typeof define === "function" && define.amd) {
+  // Keydrown was loaded as an AMD module.
+  define(function () {
+    return kd;
+  });
+} else {
+  window.kd = kd;
+}
+
+} (window));
 /* MIT https://github.com/kenwheeler/cash */
 (function(){
 "use strict";
@@ -6821,7 +6865,7 @@ fn.siblings = function () {
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.20";
+const simpleClassesVersion = "1.21";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -6910,9 +6954,6 @@ class SimpleUtilities
         // noinspection JSUnusedGlobalSymbols
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
-
-        // let sprintfJs =
-        // this.sprintf =
     }
 
     //------------------------------------------------------------------------
@@ -6948,6 +6989,7 @@ class SimpleUtilities
     // Example: onClick="linkTo(formURI('main.jsp', {'lang': 'hun'}))"
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     linkTo(dest)
     {
         document.location.href = dest;
@@ -7136,6 +7178,7 @@ class SimpleUtilities
     //   client side version of the useful Server.HtmlDecode method
     //   takes one string (encoded) and returns another (decoded)
     //   by Andy Oakley
+    // noinspection JSUnusedGlobalSymbols
     HTMLDecode(s) {
         let out = "";
         if (s==null) return;
@@ -7425,6 +7468,7 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a JavaScript source file. Must be called from document head!
+    // noinspection JSUnusedGlobalSymbols
     includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
@@ -7436,6 +7480,7 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a CSS file. Must be called from document head!
+    // noinspection JSUnusedGlobalSymbols
     includeCSSFile(filename)
     {
         document.write('<link href="'
@@ -7446,6 +7491,7 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     isDefined(letiable)
     {
         return (typeof(window[letiable]) === "undefined") ? false : true;
@@ -7454,6 +7500,7 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     regexpResultLength(regexp, text)
     {
         let len = text.length - text.replace(regexp, "").length;
@@ -7465,10 +7512,33 @@ class SimpleUtilities
 
     // SimpleUtilities
     // TODO: add more accented characters
+    // noinspection JSUnusedGlobalSymbols
     accented2HTML(str)
     {
         let regexp;
         let replacement;
+
+        // őŐ űŰ éÉ áÁ íÍ óÓ úÚ öÖ üÜ õÕ ûÛ äÄ ß
+
+        regexp = new RegExp("ő", "g");
+        replacement = "&odblac;";
+        str = str.replace(regexp, replacement);
+
+        regexp = new RegExp("Ő", "g");
+        replacement = "&Odblac;";
+        str = str.replace(regexp, replacement);
+
+        //--
+
+        regexp = new RegExp("ű", "g");
+        replacement = "&udblac;";
+        str = str.replace(regexp, replacement);
+
+        regexp = new RegExp("Ű", "g");
+        replacement = "&Udblac;";
+        str = str.replace(regexp, replacement);
+
+        // --
 
         regexp = new RegExp("é", "g");
         replacement = "&eacute;";
@@ -7478,6 +7548,8 @@ class SimpleUtilities
         replacement = "&Eacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("á", "g");
         replacement = "&aacute;";
         str = str.replace(regexp, replacement);
@@ -7486,13 +7558,17 @@ class SimpleUtilities
         replacement = "&Aacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("í", "g");
         replacement = "&iacute;";
         str = str.replace(regexp, replacement);
 
-        regexp = new RegExp("I", "g");
+        regexp = new RegExp("Í", "g");
         replacement = "&Iacute;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ó", "g");
         replacement = "&oacute;";
@@ -7502,6 +7578,8 @@ class SimpleUtilities
         replacement = "&Oacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ú", "g");
         replacement = "&uacute;";
         str = str.replace(regexp, replacement);
@@ -7509,6 +7587,8 @@ class SimpleUtilities
         regexp = new RegExp("Ú", "g");
         replacement = "&Uacute;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ö", "g");
         replacement = "&ouml;";
@@ -7518,6 +7598,8 @@ class SimpleUtilities
         replacement = "&Ouml;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ü", "g");
         replacement = "&uuml;";
         str = str.replace(regexp, replacement);
@@ -7525,6 +7607,8 @@ class SimpleUtilities
         regexp = new RegExp("Ü", "g");
         replacement = "&Uuml;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("õ", "g");
         replacement = "&otilde;";
@@ -7534,6 +7618,8 @@ class SimpleUtilities
         replacement = "&Otilde;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("û", "g");
         replacement = "&ucirc;";
         str = str.replace(regexp, replacement);
@@ -7542,6 +7628,8 @@ class SimpleUtilities
         replacement = "&Ucirc;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ä", "g");
         replacement = "&auml;";
         str = str.replace(regexp, replacement);
@@ -7549,6 +7637,8 @@ class SimpleUtilities
         regexp = new RegExp("Ä", "g");
         replacement = "&Auml;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ß", "g");
         replacement = "&szlig;";
@@ -7830,9 +7920,7 @@ class SimpleUtilities
     //     // "This is 10 times easier!
     //     // Be aware that template strings are surrounded by backticks `
     //     // instead of (single) quotes.
-
-    // A full, global sprintf() implementation is included from the libs
-
+    
     // SimpleUtilities
     // Supported params: %s
     // noinspection JSUnusedGlobalSymbols
@@ -7915,6 +8003,7 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
+    // noinspection JSUnusedGlobalSymbols
     base64Decode(input)
     {
         let output = "";
@@ -8007,6 +8096,7 @@ class SimpleCryptography
 
     // SimpleCryptography
     // Apparently RC4 cipher
+    // noinspection JSUnusedGlobalSymbols
     RC4Decrypt(password, data)
     {
         return this.RC4Encrypt(password, data);
@@ -8023,6 +8113,7 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
+    // noinspection JSUnusedGlobalSymbols
     MD5(data)
     {
         return hex_md5(data);
@@ -8051,6 +8142,7 @@ class SimpleCryptography
 //----------------------------------------------------------------------------
 
 // GLOBAL
+// noinspection JSUnusedGlobalSymbols
 function rem(str)
 {
 }
@@ -8059,6 +8151,7 @@ function rem(str)
 // Instances
 //----------------------------------------------------------------------------
 
+// noinspection JSUnusedGlobalSymbols
 const simpleDebug  = new SimpleDebug();
 const simpleUtils  = new SimpleUtilities();
 const simpleCrypto = new SimpleCryptography();
@@ -8127,6 +8220,7 @@ class RedSandUtilities
     //      userIdentifier
     //      password
     // Returns "deadbeef" on error.
+    // noinspection JSUnusedGlobalSymbols
     formAuthenticatedURI(uri, params, userId, password)
     {
         let credentialsPackage = this.generateCredentials(password, password);
@@ -8158,6 +8252,7 @@ class RedSandUtilities
 
     // RedSandUtilities
     // Screen blocker div
+    // noinspection JSUnusedGlobalSymbols
     blockInput(color)
     {
         if (color === undefined) {
@@ -8171,6 +8266,7 @@ class RedSandUtilities
 
     // RedSandUtilities
     // Remove screen blocker div
+    // noinspection JSUnusedGlobalSymbols
     unblockInput()
     {
         simpleUtils.getDOMElement("inputBlocker").style.display = "none";
@@ -8480,6 +8576,7 @@ class RedSandHashHandler
     // RedSandHashHandler
     // {param0: "value0", param1: "value1", ...}
     //      --> "#param0=value0;param1=value1;..."
+    // noinspection JSUnusedGlobalSymbols
     array2Hash(params)
     {
         let hash = this.hashSeparator;   // hash = "#"
@@ -8662,6 +8759,7 @@ class RedSandRegistry
     // RedSandRegistry
     // Returns a two dimensional array of RedSandNodes or undefined if no result.
     // Return format: nodes[menu] --> nodeArray
+    // noinspection JSUnusedGlobalSymbols
     findMenuNodesByLink(link)
     {
         let menuNodes = [];
@@ -9047,6 +9145,7 @@ class RedSandWindowlet
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
+    // noinspection JSUnusedGlobalSymbols
     borderOn()
     {
         this.DOMContainer.style.border = this.border;
@@ -9055,6 +9154,7 @@ class RedSandWindowlet
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
+    // noinspection JSUnusedGlobalSymbols
     borderOff()
     {
         this.DOMContainer.style.border = "none";
@@ -9174,6 +9274,7 @@ class RedSandGLViewport
     //------------------------------------------------------------------------
 
     // RedSandGLScene
+    // noinspection JSUnusedGlobalSymbols
     setOrigin(originX, originY)
     {
         // noinspection JSUnusedGlobalSymbols
@@ -9213,6 +9314,7 @@ class RedSandGLPrimitive
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
+    // noinspection JSUnusedGlobalSymbols
     plot(x, y, color)
     {
     }
@@ -9228,6 +9330,7 @@ class RedSandGLPrimitive
 
     // RedSandGLPrimitive
     // Erases current primitive graphics.
+    // noinspection JSUnusedGlobalSymbols
     erase()
     {
     }
@@ -9402,7 +9505,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.13";
+        this.version = "1.14";
 
         // Toggle debug operation
         this.debug = true;
@@ -9464,6 +9567,7 @@ class ConSense
         this.tabPixelSize = 20;
 
         // mapDOMSubtree() variables
+        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer = undefined;
         this.mapTempObjects = undefined;
         this.mapTempObjectCounter = 0;
@@ -9619,6 +9723,7 @@ class ConSense
 
     // ConSense
     // Not just generic append string!
+    // noinspection JSUnusedGlobalSymbols
     appendInput(str)
     {
         if (this.conSenseIn.value.length === 0)
@@ -9784,19 +9889,15 @@ class ConSense
         
         //--------------------------------------------------------------------
 
-        // Shortcut for ConSense
-        shortcut.add("Alt+Shift+K",
-            function() {
+        // Keyboard shortcut to show/hide the ConSense console
+        kd.K.press(function (evt) {
+            if (evt.altKey && evt.shiftKey)
+            {
                 conSense.showConsole(conSense.toggle);
                 conSense.globalShowConsole(conSense.toggle);
                 conSense.scrollToBottomFocusInput();
-            }, 
-            {
-                'type': 'keydown',  // 'keyup', 'keypress'
-                'disable_in_input': false,
-                'target': document,
-                'propagate': false
-            });
+            }
+        });
     }
 
     //------------------------------------------------------------------------
@@ -10110,6 +10211,7 @@ class ConSense
     {
         let index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
         this.mapTempObjects[index] = childNode;
+        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer
             += this.tabulator(level)
                 + this.highlightLabelledAppendLink(
@@ -10129,6 +10231,7 @@ class ConSense
         {
             level = 0;
             // *GLOBAL*
+            // noinspection JSUnusedGlobalSymbols
             this.mapResultBuffer = "";
             this.mapTempObjects = [];
             this.mapTempObjectCounter = 0;
@@ -10163,6 +10266,7 @@ class ConSense
                 }
 
                 // First line to display: tagname, id, class
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight(childNode.nodeName)
                         + id
@@ -10174,6 +10278,7 @@ class ConSense
                 if (childNode.id === "conSenseContainer"
                     && !this.mapShowConSense)
                 {
+                    // noinspection JSUnusedGlobalSymbols
                     this.mapResultBuffer
                         += this.tabulator(level)
                             + "(...)<br />";
@@ -10190,6 +10295,7 @@ class ConSense
                             if (childNode.attributes[j].nodeName !== "id"
                                 && childNode.attributes[j].nodeName !== "class")
                             {
+                                // noinspection JSUnusedGlobalSymbols
                                 this.mapResultBuffer
                                     += this.tabulator(level)
                                         + childNode.attributes[j].nodeName
@@ -10230,6 +10336,7 @@ class ConSense
                 this.mapAppendObjectLink(childNode, level, i);
                 
                 // Show text
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("text");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -10243,6 +10350,7 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -10256,6 +10364,7 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("comment");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -10269,6 +10378,7 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -10280,6 +10390,7 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight("DOCTYPE")
                         + " "

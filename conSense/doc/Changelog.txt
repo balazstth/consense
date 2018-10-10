@@ -243,6 +243,7 @@
 // 1.13         2018-10-09      EcmaScript 6
 //                              removal of unnecessary noinspects
 //                              'use strict';
+// 1.14         2018-10-10      keyboard shortcut reimplemented
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -280,6 +281,7 @@
 //                              relativeConSensePath redesigned
 //                              +sprintf.js
 //                              'use strict';
+// 1.22         2018-10-10      -sprintf.js, -shortcut.js, +keydrown.js
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -294,6 +296,8 @@
 // 1.19         2018-10-04      ignore .git in 7z archive
 // 1.20         2018-10-05      reorganized the project
 // 1.21         2018-10-09      +sprintf.js
+// 1.22         2018-10-10      -sprintf.js, -shortcut.js, +keydrown.js
+//                              -ShrinkSafe, +minify (node/npm dependency)
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -351,6 +355,8 @@
 //                              'use strict';
 //                              removal of unnecessary noinspects
 //                              -sprintf(), +microSprintf()
+// 1.21         2018-10-10      SimpleUtilities.accented2HTML(): new characters
+//                              removed comment
 //
 //////////////////////////////////////////////////////////////////////////////
 

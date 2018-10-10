@@ -228,9 +228,8 @@ dom-drag 10.28.2001    (c) Aaron Boodman @ www.youngpup.net
 DateFormat 2001        (c) David A. Lindquist @ http://www.gazingus.org
 SortTable version 2    (c) Stuart Langridge,
                            @ http://www.kryogenix.org/code/browser/sorttable/
-shortcut 2.01.A        (c) Binny V A
-                           @ http://www.openjs.com/scripts/events/keyboard_shortcuts/
-sprintf-js 1.1.1       (c) Alexandru Marasteanu @ https://github.com/alexei/sprintf.js
+// also game focused keyboard library
+keydrown v1.2.2        (c) http://jeremyckahn.github.com/keydrown
 
 -- Optional packages --
 

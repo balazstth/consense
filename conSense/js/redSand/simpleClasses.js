@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.20";
+const simpleClassesVersion = "1.21";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -108,9 +108,6 @@ class SimpleUtilities
         // noinspection JSUnusedGlobalSymbols
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
-
-        // let sprintfJs =
-        // this.sprintf =
     }
 
     //------------------------------------------------------------------------
@@ -146,6 +143,7 @@ class SimpleUtilities
     // Example: onClick="linkTo(formURI('main.jsp', {'lang': 'hun'}))"
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     linkTo(dest)
     {
         document.location.href = dest;
@@ -334,6 +332,7 @@ class SimpleUtilities
     //   client side version of the useful Server.HtmlDecode method
     //   takes one string (encoded) and returns another (decoded)
     //   by Andy Oakley
+    // noinspection JSUnusedGlobalSymbols
     HTMLDecode(s) {
         let out = "";
         if (s==null) return;
@@ -623,6 +622,7 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a JavaScript source file. Must be called from document head!
+    // noinspection JSUnusedGlobalSymbols
     includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
@@ -634,6 +634,7 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a CSS file. Must be called from document head!
+    // noinspection JSUnusedGlobalSymbols
     includeCSSFile(filename)
     {
         document.write('<link href="'
@@ -644,6 +645,7 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     isDefined(letiable)
     {
         return (typeof(window[letiable]) === "undefined") ? false : true;
@@ -652,6 +654,7 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
+    // noinspection JSUnusedGlobalSymbols
     regexpResultLength(regexp, text)
     {
         let len = text.length - text.replace(regexp, "").length;
@@ -663,10 +666,33 @@ class SimpleUtilities
 
     // SimpleUtilities
     // TODO: add more accented characters
+    // noinspection JSUnusedGlobalSymbols
     accented2HTML(str)
     {
         let regexp;
         let replacement;
+
+        // őŐ űŰ éÉ áÁ íÍ óÓ úÚ öÖ üÜ õÕ ûÛ äÄ ß
+
+        regexp = new RegExp("ő", "g");
+        replacement = "&odblac;";
+        str = str.replace(regexp, replacement);
+
+        regexp = new RegExp("Ő", "g");
+        replacement = "&Odblac;";
+        str = str.replace(regexp, replacement);
+
+        //--
+
+        regexp = new RegExp("ű", "g");
+        replacement = "&udblac;";
+        str = str.replace(regexp, replacement);
+
+        regexp = new RegExp("Ű", "g");
+        replacement = "&Udblac;";
+        str = str.replace(regexp, replacement);
+
+        // --
 
         regexp = new RegExp("é", "g");
         replacement = "&eacute;";
@@ -676,6 +702,8 @@ class SimpleUtilities
         replacement = "&Eacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("á", "g");
         replacement = "&aacute;";
         str = str.replace(regexp, replacement);
@@ -684,13 +712,17 @@ class SimpleUtilities
         replacement = "&Aacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("í", "g");
         replacement = "&iacute;";
         str = str.replace(regexp, replacement);
 
-        regexp = new RegExp("I", "g");
+        regexp = new RegExp("Í", "g");
         replacement = "&Iacute;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ó", "g");
         replacement = "&oacute;";
@@ -700,6 +732,8 @@ class SimpleUtilities
         replacement = "&Oacute;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ú", "g");
         replacement = "&uacute;";
         str = str.replace(regexp, replacement);
@@ -707,6 +741,8 @@ class SimpleUtilities
         regexp = new RegExp("Ú", "g");
         replacement = "&Uacute;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ö", "g");
         replacement = "&ouml;";
@@ -716,6 +752,8 @@ class SimpleUtilities
         replacement = "&Ouml;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ü", "g");
         replacement = "&uuml;";
         str = str.replace(regexp, replacement);
@@ -723,6 +761,8 @@ class SimpleUtilities
         regexp = new RegExp("Ü", "g");
         replacement = "&Uuml;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("õ", "g");
         replacement = "&otilde;";
@@ -732,6 +772,8 @@ class SimpleUtilities
         replacement = "&Otilde;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("û", "g");
         replacement = "&ucirc;";
         str = str.replace(regexp, replacement);
@@ -740,6 +782,8 @@ class SimpleUtilities
         replacement = "&Ucirc;";
         str = str.replace(regexp, replacement);
 
+        //--
+
         regexp = new RegExp("ä", "g");
         replacement = "&auml;";
         str = str.replace(regexp, replacement);
@@ -747,6 +791,8 @@ class SimpleUtilities
         regexp = new RegExp("Ä", "g");
         replacement = "&Auml;";
         str = str.replace(regexp, replacement);
+
+        //--
 
         regexp = new RegExp("ß", "g");
         replacement = "&szlig;";
@@ -1028,9 +1074,7 @@ class SimpleUtilities
     //     // "This is 10 times easier!
     //     // Be aware that template strings are surrounded by backticks `
     //     // instead of (single) quotes.
-
-    // A full, global sprintf() implementation is included from the libs
-
+    
     // SimpleUtilities
     // Supported params: %s
     // noinspection JSUnusedGlobalSymbols
@@ -1113,6 +1157,7 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
+    // noinspection JSUnusedGlobalSymbols
     base64Decode(input)
     {
         let output = "";
@@ -1205,6 +1250,7 @@ class SimpleCryptography
 
     // SimpleCryptography
     // Apparently RC4 cipher
+    // noinspection JSUnusedGlobalSymbols
     RC4Decrypt(password, data)
     {
         return this.RC4Encrypt(password, data);
@@ -1221,6 +1267,7 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
+    // noinspection JSUnusedGlobalSymbols
     MD5(data)
     {
         return hex_md5(data);
@@ -1249,6 +1296,7 @@ class SimpleCryptography
 //----------------------------------------------------------------------------
 
 // GLOBAL
+// noinspection JSUnusedGlobalSymbols
 function rem(str)
 {
 }
@@ -1257,6 +1305,7 @@ function rem(str)
 // Instances
 //----------------------------------------------------------------------------
 
+// noinspection JSUnusedGlobalSymbols
 const simpleDebug  = new SimpleDebug();
 const simpleUtils  = new SimpleUtilities();
 const simpleCrypto = new SimpleCryptography();

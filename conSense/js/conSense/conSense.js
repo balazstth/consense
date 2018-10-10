@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.13";
+        this.version = "1.14";
 
         // Toggle debug operation
         this.debug = true;
@@ -229,6 +229,7 @@ class ConSense
         this.tabPixelSize = 20;
 
         // mapDOMSubtree() variables
+        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer = undefined;
         this.mapTempObjects = undefined;
         this.mapTempObjectCounter = 0;
@@ -384,6 +385,7 @@ class ConSense
 
     // ConSense
     // Not just generic append string!
+    // noinspection JSUnusedGlobalSymbols
     appendInput(str)
     {
         if (this.conSenseIn.value.length === 0)
@@ -549,19 +551,15 @@ class ConSense
         
         //--------------------------------------------------------------------
 
-        // Shortcut for ConSense
-        shortcut.add("Alt+Shift+K",
-            function() {
+        // Keyboard shortcut to show/hide the ConSense console
+        kd.K.press(function (evt) {
+            if (evt.altKey && evt.shiftKey)
+            {
                 conSense.showConsole(conSense.toggle);
                 conSense.globalShowConsole(conSense.toggle);
                 conSense.scrollToBottomFocusInput();
-            }, 
-            {
-                'type': 'keydown',  // 'keyup', 'keypress'
-                'disable_in_input': false,
-                'target': document,
-                'propagate': false
-            });
+            }
+        });
     }
 
     //------------------------------------------------------------------------
@@ -875,6 +873,7 @@ class ConSense
     {
         let index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
         this.mapTempObjects[index] = childNode;
+        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer
             += this.tabulator(level)
                 + this.highlightLabelledAppendLink(
@@ -894,6 +893,7 @@ class ConSense
         {
             level = 0;
             // *GLOBAL*
+            // noinspection JSUnusedGlobalSymbols
             this.mapResultBuffer = "";
             this.mapTempObjects = [];
             this.mapTempObjectCounter = 0;
@@ -928,6 +928,7 @@ class ConSense
                 }
 
                 // First line to display: tagname, id, class
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight(childNode.nodeName)
                         + id
@@ -939,6 +940,7 @@ class ConSense
                 if (childNode.id === "conSenseContainer"
                     && !this.mapShowConSense)
                 {
+                    // noinspection JSUnusedGlobalSymbols
                     this.mapResultBuffer
                         += this.tabulator(level)
                             + "(...)<br />";
@@ -955,6 +957,7 @@ class ConSense
                             if (childNode.attributes[j].nodeName !== "id"
                                 && childNode.attributes[j].nodeName !== "class")
                             {
+                                // noinspection JSUnusedGlobalSymbols
                                 this.mapResultBuffer
                                     += this.tabulator(level)
                                         + childNode.attributes[j].nodeName
@@ -995,6 +998,7 @@ class ConSense
                 this.mapAppendObjectLink(childNode, level, i);
                 
                 // Show text
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("text");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1008,6 +1012,7 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1021,6 +1026,7 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("comment");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1034,6 +1040,7 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1045,6 +1052,7 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
+                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight("DOCTYPE")
                         + " "
