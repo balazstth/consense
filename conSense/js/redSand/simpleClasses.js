@@ -1131,8 +1131,11 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // Make container draggable by handle
+    // Usage:
+    //    simpleUtils.draggable(container);
+    //    simpleUtils.draggable(handle, container);
     // Drag range: [(0, 0), (infinite, infinite))
-    draggable(handle, container)
+    draggable(handle, container = null)
     {
         Drag.init(handle, container, 0, 1000000000, 0, 1000000000);
     }

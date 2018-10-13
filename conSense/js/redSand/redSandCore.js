@@ -959,7 +959,7 @@ class RedSandWindowlet
         if (this.draggable)
         {
             // Make it draggable
-            Drag.init(this.DOMContainer, null, 0, 1000000000, 0, 1000000000);
+            simpleUtils.draggable(this.DOMContainer);
             // Update Z-index
             let windowlet = this;
             this.DOMContainer.onDragStart = function()
