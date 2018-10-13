@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.21";
+const simpleClassesVersion = "1.22";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -32,7 +32,7 @@ class SimpleDebug
     constructor()
     {
         //////////////////////////////////////////////////////////////////////
-        // SimpleDebug                                         Class letiables
+        // SimpleDebug                                         Class variables
         //////////////////////////////////////////////////////////////////////
         this.version = simpleClassesVersion;
 
@@ -82,7 +82,7 @@ class SimpleUtilities
     constructor()
     {
         //////////////////////////////////////////////////////////////////////
-        // SimpleUtilities                                     Class letiables
+        // SimpleUtilities                                     Class variables
         //////////////////////////////////////////////////////////////////////
         this.version = simpleClassesVersion;
 
@@ -646,9 +646,9 @@ class SimpleUtilities
 
     // SimpleUtilities
     // noinspection JSUnusedGlobalSymbols
-    isDefined(letiable)
+    isDefined(variable)
     {
-        return (typeof(window[letiable]) === "undefined") ? false : true;
+        return (typeof(window[variable]) === "undefined") ? false : true;
     }
 
     //------------------------------------------------------------------------
@@ -820,6 +820,8 @@ class SimpleUtilities
     // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
     // (thumbnail)(CSSClass)relativePath >>> target
     //     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
+    //
+    // TODO: URL and email address patterns can be further improved
     liteDown(text)
     {
         let regexp;
@@ -883,7 +885,7 @@ class SimpleUtilities
         // url string in this current regexp. May cause problems.
         while (true)
         {
-            regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w\.\\/]+)(<|\\s|$)", "");
+            regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w-\.\\/]+)(<|\\s|$)", "");
             replacement = '$1<a href="$3">$2</a>$4';
             text2 = text.replace(regexp, replacement);
             if (text === text2) {
@@ -899,7 +901,7 @@ class SimpleUtilities
         // (url) --> <a href="url">url</a>
         while (true)
         {
-            regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w\.\\/]+)(\\)|\\s|$)", "");
+            regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w-\.\\/]+)(\\)|\\s|$)", "");
             replacement = '$1<a href="$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
             if (text === text2) {
@@ -912,9 +914,51 @@ class SimpleUtilities
         //--------------------------------------------------------------------
 
         // x@y --> <a href="mailto:x@y">x@y</a>
-        while (true)
+        //
+        // This should be further extended, according to the specification:
+        //
+        //     addr-spec   =  local-part "@" domain        ; global address
+        //     local-part  =  word *("." word)             ; uninterpreted
+        //                                                 ; case-preserved
+        //
+        //     domain      =  sub-domain *("." sub-domain)
+        //     sub-domain  =  domain-ref / domain-literal
+        //     domain-ref  =  atom                         ; symbolic reference
+        //
+        // The local-part of the email address may use any of these ASCII characters:
+        //     ----------
+        // uppercase and lowercase Latin letters A to Z and a to z;
+        // digits 0 to 9;
+        // special characters !#$%&'*+-/=?^_`{|}~;
+        // dot ., provided that it is not the first or last character unless quoted,
+        // and provided also that it does not appear consecutively unless quoted
+        // (e.g. John..Doe@example.com is not allowed but "John..Doe"@example.com is allowed);
+        // space and "(),:;<>@[\] characters are allowed with restrictions
+        // (they are only allowed inside a quoted string, as described in the paragraph
+        // below, and in addition, a backslash or double-quote must be preceded by a backslash);
+        // comments are allowed with parentheses at either end of the local-part;
+        // e.g. john.smith(comment)@example.com and (comment)john.smith@example.com
+        // are both equivalent to john.smith@example.com.
+        //
+        // domain-part
+        // -----------
+        // The Internet standards (Request for Comments) for protocols mandate that
+        // component hostname labels may contain only the ASCII letters a through z
+        // (in a case-insensitive manner), the digits 0 through 9, and the hyphen (-).
+        // The original specification of hostnames in RFC 952, mandated that labels
+        // could not start with a digit or with a hyphen, and must not end with a hyphen.
+        // However, a subsequent specification (RFC 1123) permitted hostname labels
+        // to start with digits. No other symbols, punctuation characters, or blank
+        // spaces are permitted.
+        //
+        // Something like this might work as well for a pattern:
+        // function validateEmail(email) {
+        //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        //     return re.test(String(email).toLowerCase());
+        // }
+    while (true)
         {
-            regexp = new RegExp("(>|\\s|^)([\\w\.]+@[\\w\.]+)(<|\\s|$)", "");
+            regexp = new RegExp("(\\s|^)([\\w-.]+@[\\w-.]+)(\\s|$)", "");
             replacement = '$1<a href="mailto:$2">$2</a>$3';
             text2 = text.replace(regexp, replacement);
             if (text === text2) {
@@ -1084,6 +1128,15 @@ class SimpleUtilities
         return format.replace(/%s/g, () => args[i++]);
     }
 
+    //------------------------------------------------------------------------
+
+    // Make container draggable by handle
+    // Drag range: [(0, 0), (infinite, infinite))
+    draggable(handle, container)
+    {
+        Drag.init(handle, container, 0, 1000000000, 0, 1000000000);
+    }
+
 }
 
 //----------------------------------------------------------------------------
@@ -1097,7 +1150,7 @@ class SimpleCryptography
     constructor()
     {
         //////////////////////////////////////////////////////////////////////
-        // SimpleCryptography                                  Class letiables
+        // SimpleCryptography                                  Class variables
         //////////////////////////////////////////////////////////////////////
         this.version = simpleClassesVersion;
 

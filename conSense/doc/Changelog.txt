@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
 // Changelog
-// v2.02
+// v2.03
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -11,12 +11,12 @@
 // Table of Contents
 //
 // 1.) Client side modules
-//         RedSandCore
-//         RedSandGL
 //         ConSense
 //         ConSenseStub*
-//         build.*
+//         build.*, minify.*, pack.*
 //         SimpleClasses
+//         RedSandCore
+//         RedSandGL
 //
 // 2.) Client side tests
 //         index-2018-10-05.html
@@ -42,105 +42,6 @@
 //----------------------------------------------------------------------------
 // 1.) Client side modules
 //----------------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////////
-// RedSandCore
-//////////////////////////////////////////////////////////////////////////////
-//
-// version      date            description
-// 0.01         2006-02-12      creation of redSand.js
-// 0.02         2006-02-15      comment addition
-// 0.03         2006-02-22      RedSandMenuItem, RedSandMenu
-// 0.04         2006-02-24      menu functionality additions/rearchitecture
-// 0.05         2006-02-25      RedSandLoader
-// 0.06         2006-02-27      IE fixes
-// 0.07         2006-03-17      comment addition
-// 0.08         2006-03-19      RedSandLabelPalette work in progress
-// 0.09         2006-03-24      RedSandChangelogNews work in progress
-// 0.10         2006-03-25      RedSandNetwork
-// 0.11         2006-03-27      RedSandGenericLoader
-//                              RedSandLoader modifications
-// 0.12         2006-04-03      RedSandNetwork --> RedSandUtilities
-// 0.13         2006-04-03      formAuthenticatedURI() URL parameter name fix
-// 0.14         2006-04-06      formAuthenticatedURI() fix
-// 0.15         2006-04-12      RedSandLabel
-//                              RedSandLabelPalette --> RedSandLabelCollection
-//                              RedSandLabelCollection.addLabelObject()
-//                              RedSandChangelogNews removed
-// 0.16         2006-04-25      RedSandTreeNode, RedSandTree work in progress
-// 0.17         2006-04-29      RedSandWindowlet
-//                              RedSandWindowletManager
-// 0.18         2006-04-30      New unified RedSand model
-//                              common RedSandNode class instead of
-//                                  RedSandMenuItem, RedSandTreeNode and
-//                                  RedSandLabel
-//                              Documentation.html changes
-//                              RedSandTree additions
-// 0.19         2006-05-01      RedSandNode additions
-// 0.20         2006-05-02      RedSandTree fix
-// 0.21         2006-05-03      RedSandTree fix
-// 0.22         2006-05-03      RedSandTree additions
-// 0.23         2006-09-28      Compatibility change for Firefox 2.0 in
-//                                  RedSandGenericLoader.loadedCallback()
-// 0.24         2006-10-08      RedSandMenu.render() extended with support for
-//                                  full pageloading buttons via
-//                                  RedSandNode.custom field
-// 0.25         2006-10-31      RedSandURIHashParser
-// 0.26         2006-10-31      RedSandURIHashParser.array2Hash() fix
-// 0.27         2007-03-07      RedSandMenu, RedSandLoader,
-//                                  RedSandURIHashParser changes
-// 0.28         2007-03-08      RedSandURIHashParser, RedSandMenu fix
-// 0.29         2007-03-09      RedSandURIHashParser renamed to
-//                                  RedSandHashHandler
-//                              RedSandHashHandler, RedSandLoader, RedSandNode
-//                                  modified; selected node style handling
-// 0.30         2007-03-13      RedSandHashHandler.updateNodeStyles()
-// 0.31         2007-03-25      RedSandGenericLoader load indication
-// 0.32         2007-03-26      RedSandUtilities.formAuthenticatedURI() fix
-// 0.33         2007-03-28      RedSandUtilities.generateCredentials()
-// 0.34         2007-04-03      RedSandGenericLoader.load() fix - eliminated
-//                                  duplicate page loads
-// 0.35         2007-04-21      RedSandUtils.blockInput(), unblockInput()
-//                              RedSandNode.id generation changed
-// 0.36         2007-06-10      URL-safe base64 credentials encoding
-// 0.37         2007-12-18      RedSand refactor:
-//                                  RedSandUITextManager
-//                                  RedSandHashHandler event handling
-//                                  per-RedSandMenu node style auto-update
-//                                  load() logging
-//                                  cleanup
-// 0.38         2008-02-10      RedSandLoader --> RedSandRegistry
-//                              RedSandGenericLoader --> RedSandIFrameLoader
-// 0.39         2018-09-22      unexpected type coercion fix all over
-//                              added semicolons
-//                              array instantiation fixes
-//                              added noinspection JSUnfilteredForInLoop statements !
-//                              added noinspection JSUnusedGlobalSymbols statements
-//                              number --> string conversion fix
-// 0.40         2018-09-23      RedSandIFrameLoader --> RedSandGenericLoader
-// 0.41         2018-09-30      IFrame loader fixes for Firefox and Chrome
-// 0.42         2018-10-01      "px" fix for HTML5
-// 0.43         2018-10-02      heavy RedSandGenericLoader and RedSandHashHandler
-//                                  robustness fix
-// 0.44         2018-10-09      EcmaScript 6
-//                              removal of unnecessary noinspects
-//                              redSandId --> staticRedSandId
-//                              'use strict';
-//
-//////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////
-// RedSandGL
-//////////////////////////////////////////////////////////////////////////////
-//
-// version      date            description
-// 0.01         2006-09-21      creation of redSandGL dummy
-// 0.02         2018-09-23      added semicolons
-//                              added noinspection JSUnusedGlobalSymbols statements
-// 0.03         2018-10-09      EcmaScript 6
-//                              'use strict';
-//
-//////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////
 // ConSense
@@ -244,6 +145,8 @@
 //                              removal of unnecessary noinspects
 //                              'use strict';
 // 1.14         2018-10-10      keyboard shortcut reimplemented
+// 1.15         2018-10-13      const conSense
+//                              drag init abstracted out to SimpleUtilities
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -282,11 +185,12 @@
 //                              +sprintf.js
 //                              'use strict';
 // 1.22         2018-10-10      -sprintf.js, -shortcut.js, +keydrown.js
+// 1.23         2018-10-13      -underscore.js, -backbone.js, +dragula
 //
 //////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////
-// build.*
+// build.*, minify.*, pack.*
 //////////////////////////////////////////////////////////////////////////////
 //
 // 1.18         2018-10-01      custom_rhino.jar --> ShrinkSafe
@@ -298,6 +202,8 @@
 // 1.21         2018-10-09      +sprintf.js
 // 1.22         2018-10-10      -sprintf.js, -shortcut.js, +keydrown.js
 //                              -ShrinkSafe, +minify (node/npm dependency)
+// 1.23         2018-10-13      -underscore.js, -backbone.js, +dragula
+// 1.24         2018-10-13      build, minify and zip in separate scripts
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -357,6 +263,111 @@
 //                              -sprintf(), +microSprintf()
 // 1.21         2018-10-10      SimpleUtilities.accented2HTML(): new characters
 //                              removed comment
+// 1.22         2018-10-13      liteDown():
+//                                  '-' also supported in URLs and email addresses
+//                                  email address pattern fix
+//                              SimpleUtilities.draggable()
+//
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// RedSandCore
+//////////////////////////////////////////////////////////////////////////////
+//
+// version      date            description
+// 0.01         2006-02-12      creation of redSand.js
+// 0.02         2006-02-15      comment addition
+// 0.03         2006-02-22      RedSandMenuItem, RedSandMenu
+// 0.04         2006-02-24      menu functionality additions/rearchitecture
+// 0.05         2006-02-25      RedSandLoader
+// 0.06         2006-02-27      IE fixes
+// 0.07         2006-03-17      comment addition
+// 0.08         2006-03-19      RedSandLabelPalette work in progress
+// 0.09         2006-03-24      RedSandChangelogNews work in progress
+// 0.10         2006-03-25      RedSandNetwork
+// 0.11         2006-03-27      RedSandGenericLoader
+//                              RedSandLoader modifications
+// 0.12         2006-04-03      RedSandNetwork --> RedSandUtilities
+// 0.13         2006-04-03      formAuthenticatedURI() URL parameter name fix
+// 0.14         2006-04-06      formAuthenticatedURI() fix
+// 0.15         2006-04-12      RedSandLabel
+//                              RedSandLabelPalette --> RedSandLabelCollection
+//                              RedSandLabelCollection.addLabelObject()
+//                              RedSandChangelogNews removed
+// 0.16         2006-04-25      RedSandTreeNode, RedSandTree work in progress
+// 0.17         2006-04-29      RedSandWindowlet
+//                              RedSandWindowletManager
+// 0.18         2006-04-30      New unified RedSand model
+//                              common RedSandNode class instead of
+//                                  RedSandMenuItem, RedSandTreeNode and
+//                                  RedSandLabel
+//                              Documentation.html changes
+//                              RedSandTree additions
+// 0.19         2006-05-01      RedSandNode additions
+// 0.20         2006-05-02      RedSandTree fix
+// 0.21         2006-05-03      RedSandTree fix
+// 0.22         2006-05-03      RedSandTree additions
+// 0.23         2006-09-28      Compatibility change for Firefox 2.0 in
+//                                  RedSandGenericLoader.loadedCallback()
+// 0.24         2006-10-08      RedSandMenu.render() extended with support for
+//                                  full pageloading buttons via
+//                                  RedSandNode.custom field
+// 0.25         2006-10-31      RedSandURIHashParser
+// 0.26         2006-10-31      RedSandURIHashParser.array2Hash() fix
+// 0.27         2007-03-07      RedSandMenu, RedSandLoader,
+//                                  RedSandURIHashParser changes
+// 0.28         2007-03-08      RedSandURIHashParser, RedSandMenu fix
+// 0.29         2007-03-09      RedSandURIHashParser renamed to
+//                                  RedSandHashHandler
+//                              RedSandHashHandler, RedSandLoader, RedSandNode
+//                                  modified; selected node style handling
+// 0.30         2007-03-13      RedSandHashHandler.updateNodeStyles()
+// 0.31         2007-03-25      RedSandGenericLoader load indication
+// 0.32         2007-03-26      RedSandUtilities.formAuthenticatedURI() fix
+// 0.33         2007-03-28      RedSandUtilities.generateCredentials()
+// 0.34         2007-04-03      RedSandGenericLoader.load() fix - eliminated
+//                                  duplicate page loads
+// 0.35         2007-04-21      RedSandUtils.blockInput(), unblockInput()
+//                              RedSandNode.id generation changed
+// 0.36         2007-06-10      URL-safe base64 credentials encoding
+// 0.37         2007-12-18      RedSand refactor:
+//                                  RedSandUITextManager
+//                                  RedSandHashHandler event handling
+//                                  per-RedSandMenu node style auto-update
+//                                  load() logging
+//                                  cleanup
+// 0.38         2008-02-10      RedSandLoader --> RedSandRegistry
+//                              RedSandGenericLoader --> RedSandIFrameLoader
+// 0.39         2018-09-22      unexpected type coercion fix all over
+//                              added semicolons
+//                              array instantiation fixes
+//                              added noinspection JSUnfilteredForInLoop statements !
+//                              added noinspection JSUnusedGlobalSymbols statements
+//                              number --> string conversion fix
+// 0.40         2018-09-23      RedSandIFrameLoader --> RedSandGenericLoader
+// 0.41         2018-09-30      IFrame loader fixes for Firefox and Chrome
+// 0.42         2018-10-01      "px" fix for HTML5
+// 0.43         2018-10-02      heavy RedSandGenericLoader and RedSandHashHandler
+//                                  robustness fix
+// 0.44         2018-10-09      EcmaScript 6
+//                              removal of unnecessary noinspects
+//                              redSandId --> staticRedSandId
+//                              'use strict';
+// 0.45         2018-10-13      const redSand*
+//
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// RedSandGL
+//////////////////////////////////////////////////////////////////////////////
+//
+// version      date            description
+// 0.01         2006-09-21      creation of redSandGL dummy
+// 0.02         2018-09-23      added semicolons
+//                              added noinspection JSUnusedGlobalSymbols statements
+// 0.03         2018-10-09      EcmaScript 6
+//                              'use strict';
+// 0.04         2018-10-13      const
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -371,6 +382,7 @@
 // version      date            description
 // 2.02         2018-10-01      HTML5
 // 2.04         2018-10-05      reorganized the project
+// 2.05         2018-10-13      style fix
 //
 //////////////////////////////////////////////////////////////////////////////
 

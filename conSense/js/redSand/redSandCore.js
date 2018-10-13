@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandVersion = "0.44";
+const redSandVersion = "0.45";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -1057,13 +1057,13 @@ class RedSandWindowletManager
 //----------------------------------------------------------------------------
 
 // noinspection JSUnusedGlobalSymbols
-let redSandUtils = new RedSandUtilities();
-// This class is used in ConSense, gives an error if "let"
+const redSandUtils = new RedSandUtilities();
+// This class is used in ConSense, gives an error if "let" or "const"
 // noinspection ES6ConvertVarToLetConst
-var redSandGenericLoader = new RedSandGenericLoader();
-let redSandHashHandler = new RedSandHashHandler();
-let redSandRegistry = new RedSandRegistry();
-let redSandUITextManager = new RedSandUITextManager();
-let redSandWindowletManager = new RedSandWindowletManager();
+var   redSandGenericLoader = new RedSandGenericLoader();
+const redSandHashHandler = new RedSandHashHandler();
+const redSandRegistry = new RedSandRegistry();
+const redSandUITextManager = new RedSandUITextManager();
+const redSandWindowletManager = new RedSandWindowletManager();
 
 //----------------------------------------------------------------------------

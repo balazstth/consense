@@ -13,11 +13,14 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0022
+ticket count 0025
 
 TODO
 ----
 
+- [0025] [2018-10-13] add local storage functions to SimpleUtilities
+- [0023] [2018-10-13] add Sass/Scss and/or Bulma
+- [0022] [2018-10-11] add Bootstrap and/or Materialize
 - [0021] [2018-10-09] BUG: when Ctrl+clicking an anchor link the new tab cannot load
                       url#anchor since #... denotes an article to be loaded. Works in
                       the original page though (simple clicking of the link).
@@ -62,5 +65,6 @@ x [0016] [2018-10-01] Won't fix, covered in [0019]:
                       Thinking about including Materialize and Velocity
 x [0011] [2018-09-30] Covered in [0008]: BiturboVision as a TurboVision port?
 x [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that supports ES6
+x [0024] [2018-10-13] add draggable() to SimpleUtilities
 
 </pre>

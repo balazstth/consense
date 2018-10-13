@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.14";
+        this.version = "1.15";
 
         // Toggle debug operation
         this.debug = true;
@@ -545,10 +545,8 @@ class ConSense
         //--------------------------------------------------------------------
 
         // Make conSenseContainer draggable in the range of
-        // [(0, 0), (infinite, infinite))
-        Drag.init(this.conSenseHeader, this.conSenseContainer,
-            0, 1000000000, 0, 1000000000);
-        
+        simpleUtils.draggable(this.conSenseHeader, this.conSenseContainer);
+
         //--------------------------------------------------------------------
 
         // Keyboard shortcut to show/hide the ConSense console
@@ -1431,7 +1429,7 @@ class ConSense
 //----------------------------------------------------------------------------
 
 // Instantiate ConSense
-let conSense = new ConSense();
+const conSense = new ConSense();
 
 //----------------------------------------------------------------------------
 // Commands

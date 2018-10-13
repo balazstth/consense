@@ -17,7 +17,7 @@
 
 'use strict';
 
-let redSandGLVersion = "0.03";
+const redSandGLVersion = "0.04";
 
 //----------------------------------------------------------------------------
 // RedSandGLScene
