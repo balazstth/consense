@@ -58,6 +58,22 @@
 .conSenseContainer .conSenseInnerContainer .conSenseOut {
   margin: 10px 10px 0;
 }
+.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlight {
+  background: #AAAAAA;
+  font-weight: bold;
+}
+.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlightAppendLink {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntry {
+  padding: 0;
+  margin: 0 0 2px 40px;
+}
+.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntryHead {
+  margin-left: -20px;
+}
 .conSenseContainer .conSenseInnerContainer .conSenseIn {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
@@ -81,26 +97,6 @@
   padding: 0px;
   width: 38px;
   /* Counter slot */
-}
-
-.conSenseHighlight {
-  background: #AAAAAA;
-  font-weight: bold;
-}
-
-.conSenseHighlightAppendLink {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.conSenseManualEntry {
-  padding: 0;
-  margin: 0 0 2px 40px;
-}
-
-.conSenseManualEntryHead {
-  margin-left: -20px;
 }
 
 .loadIndicator {
