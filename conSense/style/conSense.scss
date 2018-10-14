@@ -5,14 +5,10 @@
 
 $fontStack: Verdana, Arial, Helvetica, sans-serif;
 
-@mixin typographyMinor {
+@mixin typography {
     font-family: $fontStack;
     font-size: 12px;
     line-height: 1.5em;
-}
-
-@mixin typography {
-    @include typographyMinor;
     font-weight: normal;
     text-align: left;
 }
@@ -38,7 +34,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
     box-shadow: 10px 10px 5px rgba(0, 0, 0, .75);
 
     .conSenseHeader {
-        @include typographyMinor;
         color: black;
         font-weight: bold;
         padding: 0 0 0 10px;
@@ -50,7 +45,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
     }
 
     .conSenseHeaderSwitch {
-        @include typographyMinor;
         color: black;
         text-align: right;
         text-decoration: underline;
@@ -93,7 +87,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
         }
 
         .conSenseIn {
-            @include typographyMinor;
             background-color: white;
             color: black;
             border: 3px solid white;
@@ -103,7 +96,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
         }
 
         .conSenseCounter {
-            @include typographyMinor;
             background-color: white;
             color: black;
             border: 3px solid white;

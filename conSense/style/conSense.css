@@ -22,9 +22,6 @@
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 }
 .conSenseContainer .conSenseHeader {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1.5em;
   color: black;
   font-weight: bold;
   padding: 0 0 0 10px;
@@ -36,9 +33,6 @@
   float: left;
 }
 .conSenseContainer .conSenseHeaderSwitch {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1.5em;
   color: black;
   text-align: right;
   text-decoration: underline;
@@ -75,9 +69,6 @@
   margin-left: -20px;
 }
 .conSenseContainer .conSenseInnerContainer .conSenseIn {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1.5em;
   background-color: white;
   color: black;
   border: 3px solid white;
@@ -87,9 +78,6 @@
   /* Input slot */
 }
 .conSenseContainer .conSenseInnerContainer .conSenseCounter {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1.5em;
   background-color: white;
   color: black;
   border: 3px solid white;
