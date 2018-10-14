@@ -41,7 +41,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
         @include typographyMinor;
         color: black;
         font-weight: bold;
-        margin: 0;
         padding: 0 0 0 10px;
         border: 0;
         width: 700px;   /* 770-710 = 60 pixels are left for Switch */
@@ -55,7 +54,6 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
         color: black;
         text-align: right;
         text-decoration: underline;
-        margin: 0;
         padding: 0 10px 0 0;
         border: 0;
         width: 60px;
@@ -79,9 +77,9 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
             background-color: white;
             color: black;
             border: 3px solid white;
-            margin: 5px 0 0 10px;
+            margin: 5px 0 5px 10px;
             padding: 0;
-            width: 700px;   /* Input slot */
+            width: 690px;   /* Input slot */
         }
 
         .conSenseCounter {
@@ -89,7 +87,7 @@ $fontStack: Verdana, Arial, Helvetica, sans-serif;
             background-color: white;
             color: black;
             border: 3px solid white;
-            margin: 5px 0 0;
+            margin: 5px 5px 0;
             padding: 0px;
             width: 38px;    /* Counter slot */
         }

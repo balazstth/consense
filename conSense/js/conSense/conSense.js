@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.16";
+        this.version = "1.17";
 
         // Toggle debug operation
         this.debug = true;
