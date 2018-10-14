@@ -14,7 +14,7 @@ ConSense
 
 **Have a look at the site for more info and to see where we are going. This software has a good amount of features and a good amount TODO. While maintaining to be lean and simple. The Changelog is also an interesting place to check.**
 
-**[Site index](https://balazstth.github.io/consense/index-2018-10-05.html)**
+**[Site index](https://balazstth.github.io/consense/indexN0001.html)**
 
 **Back from 2011:**
 
