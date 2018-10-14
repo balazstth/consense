@@ -1,6 +1,15 @@
 ConSense
 ===
 
+**2018-10-14: This was done since**
+
+- switch to HTML 5
+- switch to EcmaScript 6
+- CSS --> SCSS
+- libraries yanked, libraries added
+- new build system, compiler, compressor
+- all documented, many TODOs
+
 **2018-09-22: ConSense is being revived. That means linting and sorting out obvious problems. Using what still can be used. Having a look at what is still working ten years after! I was a very young man when I started working on ConSense - a brat, - let's see how it fares today. A fun project.**
 
 **Have a look at the site for more info and to see where we are going. This software has a good amount of features and a good amount TODO. While maintaining to be lean and simple. The Changelog is also an interesting place to check.**

@@ -147,6 +147,7 @@
 // 1.14         2018-10-10      keyboard shortcut reimplemented
 // 1.15         2018-10-13      const conSense
 //                              drag init abstracted out to SimpleUtilities
+// 1.16         2018-10-14      css --> scss
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -186,6 +187,7 @@
 //                              'use strict';
 // 1.22         2018-10-10      -sprintf.js, -shortcut.js, +keydrown.js
 // 1.23         2018-10-13      -underscore.js, -backbone.js, +dragula
+// 1.24         2018-10-13      css --> style, for scss
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -383,6 +385,7 @@
 // 2.02         2018-10-01      HTML5
 // 2.04         2018-10-05      reorganized the project
 // 2.05         2018-10-13      style fix
+// 2.06         2018-10-14      new naming convention
 //
 //////////////////////////////////////////////////////////////////////////////
 

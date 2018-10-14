@@ -24,7 +24,7 @@ class Stub
         //////////////////////////////////////////////////////////////////////
         // Stub                                                Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.23";
+        this.version = "1.24";
 
         this.relativeConSensePath = relativeConSensePath;
         //////////////////////////////////////////////////////////////////////
@@ -76,6 +76,6 @@ if (!Stub.isDefined("relativeConSensePath"))
 
 // Load JS and CSS dependencies
 stub.includeCSSFile("conSense/lib/dragula.css");
-stub.includeCSSFile("conSense/css/conSense.css");
+stub.includeCSSFile("conSense/style/conSense.css");
 
 stub.includeJavaScriptFile("conSense/js/releases/conSense_release_compressed.js");

@@ -55,7 +55,7 @@ function handleArticleEvent(params)
 
     switch (params.article) {
         case "intro":
-            redSandGenericLoader.load("page-2018-10-05/articles/eng/Intro.txt", contentRenderer);
+            redSandGenericLoader.load("pageN0001/articles/eng/Intro.txt", contentRenderer);
             break;
         case "changelog":
             redSandGenericLoader.load("conSense/doc/Changelog.txt", contentRenderer);
@@ -67,10 +67,10 @@ function handleArticleEvent(params)
             redSandGenericLoader.load("conSense/doc/Documentation.txt", contentRenderer);
             break;
         case "tests":
-            redSandGenericLoader.load("page-2018-10-05/articles/eng/Tests.txt", contentRenderer);
+            redSandGenericLoader.load("pageN0001/articles/eng/Tests.txt", contentRenderer);
             break;
         case "contact":
-            redSandGenericLoader.load("page-2018-10-05/articles/eng/Contact.txt", contentRenderer);
+            redSandGenericLoader.load("pageN0001/articles/eng/Contact.txt", contentRenderer);
             break;
     }
 }

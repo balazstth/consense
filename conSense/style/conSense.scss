@@ -1,0 +1,150 @@
+/* CSS Document */
+
+/* ------------------------------------------------------------------------ */
+/* ConSense */
+
+$fontStack: Verdana, Arial, Helvetica, sans-serif;
+
+@mixin typographyMinor {
+    font-family: $fontStack;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+@mixin typography {
+    @include typographyMinor;
+    font-weight: normal;
+    text-align: left;
+}
+
+@mixin alpha($value) {
+    filter: alpha(opacity=$value*100);
+    opacity: $value;
+    -moz-opacity: $value;
+}
+
+.conSenseContainer {
+    @include typography;
+    background: gray url("../images/headerBg.png") repeat-x;
+    color: white;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+    position: absolute;
+    width: 780px;
+    height: 450px;
+    /* Alpha settings for different browsers */
+    @include alpha(0.95);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, .75);
+
+    .conSenseHeader {
+        @include typographyMinor;
+        color: black;
+        font-weight: bold;
+        margin: 0;
+        padding: 0 0 0 10px;
+        border: 0;
+        width: 700px;   /* 770-710 = 60 pixels are left for Switch */
+        height: 21px;
+        cursor: move;
+        float: left;
+    }
+
+    .conSenseHeaderSwitch {
+        @include typographyMinor;
+        color: black;
+        text-align: right;
+        text-decoration: underline;
+        margin: 0;
+        padding: 0 10px 0 0;
+        border: 0;
+        width: 60px;
+        height: 21px;
+        cursor: pointer;
+        float: right;
+    }
+
+    .conSenseInnerContainer {
+        width: 780px;
+        height: 429px;
+        overflow: auto;
+        float: left;
+
+        .conSenseOut {
+            margin: 10px 10px 0;
+        }
+
+        .conSenseIn {
+            @include typographyMinor;
+            background-color: white;
+            color: black;
+            border: 3px solid white;
+            margin: 5px 0 0 10px;
+            padding: 0;
+            width: 700px;   /* Input slot */
+        }
+
+        .conSenseCounter {
+            @include typographyMinor;
+            background-color: white;
+            color: black;
+            border: 3px solid white;
+            margin: 5px 0 0;
+            padding: 0px;
+            width: 38px;    /* Counter slot */
+        }
+    }
+}
+
+.conSenseHighlight {
+    background: #AAAAAA;
+    font-weight: bold;
+}
+
+.conSenseHighlightAppendLink {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.conSenseManualEntry {
+    padding: 0;
+    margin: 0 0 2px 40px;
+}
+
+.conSenseManualEntryHead {
+    margin-left: -20px;
+}
+
+.loadIndicator {
+    @include typography;
+    display: none;
+    z-index: 2000000000;
+    background: white;
+    color: black;
+    border: 0;
+    margin: 0;
+    padding: 5px;
+    text-decoration: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.inputBlocker {
+    display: none;
+    z-index: 1999999999; 
+    background-color: blue;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    /* Compensating an old IE bug: max width was 7402px for this */
+    width: 7000px;
+    height: 10000px;
+    /* Alpha settings for different browsers */
+    @include alpha(0.20);
+}
+
+/* ------------------------------------------------------------------------ */

@@ -229,37 +229,41 @@ sha1 2.1a              (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
 dom-drag 10.28.2001    (c) Aaron Boodman @ http://www.aaronboodman.com/
 DateFormat 2001        (c) David A. Lindquist @ http://www.gazingus.org
 keydrown v1.2.2        (c) http://jeremyckahn.github.com/keydrown
+// Sass / Scss compilation for debug mode
+Sass 3.5.4             (c) Hampton Catlin, Natalie Weizenbaum, Chris Eppstein,
+                           and numerous contributors. @ https://sass-lang.com/
+// Modified
+browser-scss           (c) Ben Balentine @ https://github.com/myrcutio/browser-scss
 
 Optional packages, these are already loaded by the ConSense stub
 -----------------
 
-SortTable version 2    (c) Stuart Langridge,
-                           @ http://www.kryogenix.org/code/browser/sorttable/
+SortTable version 2  (c) Stuart Langridge,
+                         @ http://www.kryogenix.org/code/browser/sorttable/
 // jQuery replacement
-Cash 1.0.0             (c) Ken Wheeler @ http://kenwheeler.github.io/cash/
-// Advanced drag and drop library
-Dragula                (c) Nicolás Bevacqua
-                           @ https://bevacqua.github.io/dragula/
+Cash 1.0.0           (c) Ken Wheeler @ http://kenwheeler.github.io/cash/
+Dragula              (c) Nicolás Bevacqua
+                         @ https://bevacqua.github.io/dragula/
 
 Even more optional packages, not loaded by the stub. Include them via
 ---------------------------  load("...js") at runtime from the lib/_optional
                              folder, or if necessary include stylesheets in the
                              document header.
                              
-Lodash 4.17.10         (c) JS Foundation and other contributors
-                           @ https://js.foundation/
-bulma.io v0.7.1        (c) Jeremy Thomas @ https://github.com/jgthms/bulma
+Lodash 4.17.10       (c) JS Foundation and other contributors
+                         @ https://js.foundation/
+bulma.io v0.7.1      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 // Full text search
-lunr 2.3.3             (c) Oliver Nightingale @ http://lunrjs.com
+lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com
 // Animation library
-Velocity 1.0.0         (c) Julian Shapiro @ http://velocityjs.org/
+Velocity 1.0.0       (c) Julian Shapiro @ http://velocityjs.org/
 // Music players, wave and mods
-howler.js v2.0.15      (c) James Simpson of GoldFire Studios
+howler.js v2.0.15    (c) James Simpson of GoldFire Studios
                            @ https://goldfirestudios.com
-chiptune2.js           (c) The chiptune2.js contributers
+chiptune2.js         (c) The chiptune2.js contributers
                            @ https://github.com/deskjet/chiptune2.js/
 // Game programming library
-Phaser 3.14.0          (c) Photon Storm Ltd. @ http://phaser.io/
+Phaser 3.14.0        (c) Photon Storm Ltd. @ http://phaser.io/
 
 //============================================================================
 </pre>
