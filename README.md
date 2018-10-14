@@ -1,7 +1,7 @@
 ConSense
 ===
 
-**2018-10-14: This was done since**
+**2018-10-14: This was done since last checking in**
 
 - switch to HTML 5
 - switch to EcmaScript 6
