@@ -37,9 +37,7 @@ class RedSandGLViewport
         this.version = redSandGLVersion;
         //////////////////////////////////////////////////////////////////////
 
-        // noinspection JSUnusedGlobalSymbols
         this.originX = originX;
-        // noinspection JSUnusedGlobalSymbols
         this.originY = originY;
     }
 
@@ -48,12 +46,9 @@ class RedSandGLViewport
     //------------------------------------------------------------------------
 
     // RedSandGLScene
-    // noinspection JSUnusedGlobalSymbols
     setOrigin(originX, originY)
     {
-        // noinspection JSUnusedGlobalSymbols
         this.originX = originX;
-        // noinspection JSUnusedGlobalSymbols
         this.originY = originY;
     }
 }
@@ -73,7 +68,6 @@ class RedSandGLPrimitive
         //////////////////////////////////////////////////////////////////////
         this.version = redSandGLVersion;
 
-        // noinspection JSUnusedGlobalSymbols
         this.viewport = viewport;
         //////////////////////////////////////////////////////////////////////
 
@@ -88,7 +82,6 @@ class RedSandGLPrimitive
     //------------------------------------------------------------------------
 
     // RedSandGLPrimitive
-    // noinspection JSUnusedGlobalSymbols
     plot(x, y, color)
     {
     }
@@ -104,7 +97,6 @@ class RedSandGLPrimitive
 
     // RedSandGLPrimitive
     // Erases current primitive graphics.
-    // noinspection JSUnusedGlobalSymbols
     erase()
     {
     }

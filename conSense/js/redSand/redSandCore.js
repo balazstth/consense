@@ -63,7 +63,6 @@ class RedSandUtilities
     //      userIdentifier
     //      password
     // Returns "deadbeef" on error.
-    // noinspection JSUnusedGlobalSymbols
     formAuthenticatedURI(uri, params, userId, password)
     {
         let credentialsPackage = this.generateCredentials(password, password);
@@ -95,7 +94,6 @@ class RedSandUtilities
 
     // RedSandUtilities
     // Screen blocker div
-    // noinspection JSUnusedGlobalSymbols
     blockInput(color)
     {
         if (color === undefined) {
@@ -109,7 +107,6 @@ class RedSandUtilities
 
     // RedSandUtilities
     // Remove screen blocker div
-    // noinspection JSUnusedGlobalSymbols
     unblockInput()
     {
         simpleUtils.getDOMElement("inputBlocker").style.display = "none";
@@ -321,7 +318,6 @@ class RedSandHashHandler
 
         this.lastHash = "deadbeef";
 
-        // noinspection JSUnusedGlobalSymbols
         this.defaultHash = "deadbeef";
 
         // onHashChanged() event registry
@@ -396,7 +392,6 @@ class RedSandHashHandler
     // RedSandHashHandler
     setDefaultHash(hash)
     {
-        // noinspection JSUnusedGlobalSymbols
         this.defaultHash = hash;
         if (window.location.hash.length === 0)
         {
@@ -419,7 +414,6 @@ class RedSandHashHandler
     // RedSandHashHandler
     // {param0: "value0", param1: "value1", ...}
     //      --> "#param0=value0;param1=value1;..."
-    // noinspection JSUnusedGlobalSymbols
     array2Hash(params)
     {
         let hash = this.hashSeparator;   // hash = "#"
@@ -602,7 +596,6 @@ class RedSandRegistry
     // RedSandRegistry
     // Returns a two dimensional array of RedSandNodes or undefined if no result.
     // Return format: nodes[menu] --> nodeArray
-    // noinspection JSUnusedGlobalSymbols
     findMenuNodesByLink(link)
     {
         let menuNodes = [];
@@ -860,7 +853,6 @@ class RedSandMenu
         this.menuContainer = simpleUtils.getDOMElement(menuContainer);
 
         // For RedSandHashHandler.updateNodeStyles()
-        // noinspection JSUnusedGlobalSymbols
         this.lastSelectedNode = undefined;
         //////////////////////////////////////////////////////////////////////
     }
@@ -936,7 +928,6 @@ class RedSandWindowlet
         this.DOMContainer = undefined;
         this.id = "RedSandId" + staticRedSandId++;
 
-        // noinspection JSUnusedGlobalSymbols
         this.borderVisible = true;
         //////////////////////////////////////////////////////////////////////
         
@@ -988,7 +979,6 @@ class RedSandWindowlet
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    // noinspection JSUnusedGlobalSymbols
     borderOn()
     {
         this.DOMContainer.style.border = this.border;
@@ -997,7 +987,6 @@ class RedSandWindowlet
     //------------------------------------------------------------------------
 
     // RedSandWindowlet
-    // noinspection JSUnusedGlobalSymbols
     borderOff()
     {
         this.DOMContainer.style.border = "none";
@@ -1056,7 +1045,6 @@ class RedSandWindowletManager
 // GLOBAL
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
 const redSandUtils = new RedSandUtilities();
 // This class is used in ConSense, gives an error if "let" or "const"
 // noinspection ES6ConvertVarToLetConst

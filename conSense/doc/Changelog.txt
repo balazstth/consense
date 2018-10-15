@@ -270,6 +270,8 @@
 //                                  '-' also supported in URLs and email addresses
 //                                  email address pattern fix
 //                              SimpleUtilities.draggable()
+// 1.23         2018-10-15      added SimpleStorage class
+//                              inspection for unused vars project-wide disabled
 //
 //////////////////////////////////////////////////////////////////////////////
 

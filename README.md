@@ -1,13 +1,14 @@
 ConSense
 ===
 
-**2018-10-14: This was done since last checking in**
+**2018-10-15: This was done since last checking in**
 
 - switch to HTML 5
 - switch to EcmaScript 6
 - CSS --> SCSS
 - libraries yanked, libraries added
 - new build system, compiler, compressor
+- SimpleStorage class
 - all documented, many TODOs
 
 **2018-09-22: ConSense is being revived. That means linting and sorting out obvious problems. Using what still can be used. Having a look at what is still working ten years after! I was a very young man when I started working on ConSense - a brat, - let's see how it fares today. A fun project.**

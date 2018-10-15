@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.22";
+const simpleClassesVersion = "1.23";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -88,24 +88,16 @@ class SimpleUtilities
 
         // DOM nodeType-s
         this.DOM_ELEMENT_NODE = 1;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_ATTRIBUTE_NODE = 2;
         this.DOM_TEXT_NODE = 3;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_CDATA_SECTION_NODE = 4;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_ENTITY_REFERENCE_NODE = 5;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_ENTITY_NODE = 6;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_PROCESSING_INSTRUCTION_NODE = 7;
         this.DOM_COMMENT_NODE = 8;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_DOCUMENT_NODE = 9;
         this.DOM_DOCUMENT_TYPE_NODE = 10;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
-        // noinspection JSUnusedGlobalSymbols
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
     }
@@ -143,7 +135,6 @@ class SimpleUtilities
     // Example: onClick="linkTo(formURI('main.jsp', {'lang': 'hun'}))"
 
     // SimpleUtilities
-    // noinspection JSUnusedGlobalSymbols
     linkTo(dest)
     {
         document.location.href = dest;
@@ -332,7 +323,6 @@ class SimpleUtilities
     //   client side version of the useful Server.HtmlDecode method
     //   takes one string (encoded) and returns another (decoded)
     //   by Andy Oakley
-    // noinspection JSUnusedGlobalSymbols
     HTMLDecode(s) {
         let out = "";
         if (s==null) return;
@@ -622,7 +612,6 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a JavaScript source file. Must be called from document head!
-    // noinspection JSUnusedGlobalSymbols
     includeJavaScriptFile(filename)
     {
         document.write('<script charset="UTF-8" type="text/javascript" src="'
@@ -634,7 +623,6 @@ class SimpleUtilities
 
     // SimpleUtilities
     // Includes a CSS file. Must be called from document head!
-    // noinspection JSUnusedGlobalSymbols
     includeCSSFile(filename)
     {
         document.write('<link href="'
@@ -645,7 +633,6 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    // noinspection JSUnusedGlobalSymbols
     isDefined(variable)
     {
         return (typeof(window[variable]) === "undefined") ? false : true;
@@ -654,7 +641,6 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
-    // noinspection JSUnusedGlobalSymbols
     regexpResultLength(regexp, text)
     {
         let len = text.length - text.replace(regexp, "").length;
@@ -666,7 +652,6 @@ class SimpleUtilities
 
     // SimpleUtilities
     // TODO: add more accented characters
-    // noinspection JSUnusedGlobalSymbols
     accented2HTML(str)
     {
         let regexp;
@@ -953,7 +938,7 @@ class SimpleUtilities
         //
         // Something like this might work as well for a pattern:
         // function validateEmail(email) {
-        //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        //     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         //     return re.test(String(email).toLowerCase());
         // }
     while (true)
@@ -1121,7 +1106,6 @@ class SimpleUtilities
     
     // SimpleUtilities
     // Supported params: %s
-    // noinspection JSUnusedGlobalSymbols
     microSprintf(format, ...args)
     {
         let i = 0;
@@ -1213,7 +1197,6 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    // noinspection JSUnusedGlobalSymbols
     base64Decode(input)
     {
         let output = "";
@@ -1306,7 +1289,6 @@ class SimpleCryptography
 
     // SimpleCryptography
     // Apparently RC4 cipher
-    // noinspection JSUnusedGlobalSymbols
     RC4Decrypt(password, data)
     {
         return this.RC4Encrypt(password, data);
@@ -1323,7 +1305,6 @@ class SimpleCryptography
     //------------------------------------------------------------------------
 
     // SimpleCryptography
-    // noinspection JSUnusedGlobalSymbols
     MD5(data)
     {
         return hex_md5(data);
@@ -1350,9 +1331,163 @@ class SimpleCryptography
 }
 
 //----------------------------------------------------------------------------
+// Local storage class
+//----------------------------------------------------------------------------
+
+class SimpleStorage
+{
+    constructor()
+    {
+        this.polyfill();
+
+        //////////////////////////////////////////////////////////////////////
+        // SimpleStorage                                       Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = simpleClassesVersion;
+
+        this.isError = false;
+
+        try {
+            this.localStorage = window.localStorage;
+        } catch(error) {
+            this.isError = true;
+            console.log("Error: window.localStorage is inaccessible.\nSimpleStorage functions will not work.");
+        }
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    polyfill()
+    {
+        //--------------------------------------------------------------------
+        // Polyfill for browsers that do not support or allow local storage.
+        // Local storage simulation form cookies.
+        console.log("Warning: Using polyfill for window.localStorage.");
+        if (!window.localStorage) {
+            Object.defineProperty(window, "localStorage", new (function () {
+                let aKeys = [], oStorage = {};
+                Object.defineProperty(oStorage, "getItem", {
+                    value: function (sKey) { return sKey ? this[sKey] : null; },
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+                Object.defineProperty(oStorage, "key", {
+                    value: function (nKeyId) { return aKeys[nKeyId]; },
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+                Object.defineProperty(oStorage, "setItem", {
+                    value: function (sKey, sValue) {
+                        if(!sKey) { return; }
+                        // noinspection JSDeprecatedSymbols
+                        document.cookie = escape(sKey) + "=" + escape(sValue)
+                            + "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+                    },
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+                Object.defineProperty(oStorage, "length", {
+                    get: function () { return aKeys.length; },
+                    configurable: false,
+                    enumerable: false
+                });
+                Object.defineProperty(oStorage, "removeItem", {
+                    value: function (sKey) {
+                        if(!sKey) { return; }
+                        // noinspection JSDeprecatedSymbols
+                        document.cookie = escape(sKey)
+                            + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+                    },
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+                Object.defineProperty(oStorage, "clear", {
+                    value: function () {
+                        if(!aKeys.length) { return; }
+                        for (let sKey in aKeys) {
+                            // noinspection JSDeprecatedSymbols
+                            document.cookie = escape(sKey)
+                                + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+                        }
+                    },
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+                this.get = function () {
+                    let iThisIndex;
+                    for (let sKey in oStorage) {
+                        // noinspection JSUnfilteredForInLoop
+                        iThisIndex = aKeys.indexOf(sKey);
+                        if (iThisIndex === -1)
+                        {
+                            // noinspection JSUnfilteredForInLoop
+                            oStorage.setItem(sKey, oStorage[sKey]);
+                        }
+                        else { aKeys.splice(iThisIndex, 1); }
+                        // noinspection JSUnfilteredForInLoop
+                        delete oStorage[sKey];
+                    }
+                    for (aKeys; aKeys.length > 0; aKeys.splice(0, 1))
+                    {
+                        oStorage.removeItem(aKeys[0]);
+                    }
+                    for (
+                        let aCouple, iKey, nIdx = 0, aCouples = document.cookie.split(/\s*;\s*/);
+                        nIdx < aCouples.length;
+                        nIdx++)
+                    {
+                        aCouple = aCouples[nIdx].split(/\s*=\s*/);
+                        if (aCouple.length > 1) {
+                            oStorage[iKey = unescape(aCouple[0])] = unescape(aCouple[1]);
+                            aKeys.push(iKey);
+                        }
+                    }
+                    return oStorage;
+                };
+                this.configurable = false;
+                this.enumerable = true;
+            })());
+        }
+        //--------------------------------------------------------------------
+    }
+
+    // SimpleStorage
+    setItem(key, value)
+    {
+        if (this.isError) return;
+        window.localStorage.setItem(key, value);
+    }
+
+    // SimpleStorage
+    getItem(key)
+    {
+        // Returning the same on error as on an empty query
+        if (this.isError) return null;
+        return window.localStorage.getItem(key);
+    }
+
+    // SimpleStorage
+    removeItem(key)
+    {
+        if (this.isError) return;
+        window.localStorage.removeItem(key);
+    }
+
+    // SimpleStorage
+    clear()
+    {
+        if (this.isError) return;
+        window.localStorage.clear();
+    }
+}
+
+//----------------------------------------------------------------------------
 
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function rem(str)
 {
 }
@@ -1361,7 +1496,7 @@ function rem(str)
 // Instances
 //----------------------------------------------------------------------------
 
-// noinspection JSUnusedGlobalSymbols
-const simpleDebug  = new SimpleDebug();
-const simpleUtils  = new SimpleUtilities();
-const simpleCrypto = new SimpleCryptography();
+const simpleDebug   = new SimpleDebug();
+const simpleUtils   = new SimpleUtilities();
+const simpleCrypto  = new SimpleCryptography();
+const simpleStorage = new SimpleStorage();

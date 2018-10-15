@@ -229,7 +229,6 @@ class ConSense
         this.tabPixelSize = 20;
 
         // mapDOMSubtree() variables
-        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer = undefined;
         this.mapTempObjects = undefined;
         this.mapTempObjectCounter = 0;
@@ -385,7 +384,6 @@ class ConSense
 
     // ConSense
     // Not just generic append string!
-    // noinspection JSUnusedGlobalSymbols
     appendInput(str)
     {
         if (this.conSenseIn.value.length === 0)
@@ -871,7 +869,6 @@ class ConSense
     {
         let index = "l" + level + "n" + i + "_" + this.mapTempObjectCounter++;
         this.mapTempObjects[index] = childNode;
-        // noinspection JSUnusedGlobalSymbols
         this.mapResultBuffer
             += this.tabulator(level)
                 + this.highlightLabelledAppendLink(
@@ -891,7 +888,6 @@ class ConSense
         {
             level = 0;
             // *GLOBAL*
-            // noinspection JSUnusedGlobalSymbols
             this.mapResultBuffer = "";
             this.mapTempObjects = [];
             this.mapTempObjectCounter = 0;
@@ -926,7 +922,6 @@ class ConSense
                 }
 
                 // First line to display: tagname, id, class
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight(childNode.nodeName)
                         + id
@@ -938,7 +933,6 @@ class ConSense
                 if (childNode.id === "conSenseContainer"
                     && !this.mapShowConSense)
                 {
-                    // noinspection JSUnusedGlobalSymbols
                     this.mapResultBuffer
                         += this.tabulator(level)
                             + "(...)<br />";
@@ -955,7 +949,6 @@ class ConSense
                             if (childNode.attributes[j].nodeName !== "id"
                                 && childNode.attributes[j].nodeName !== "class")
                             {
-                                // noinspection JSUnusedGlobalSymbols
                                 this.mapResultBuffer
                                     += this.tabulator(level)
                                         + childNode.attributes[j].nodeName
@@ -996,7 +989,6 @@ class ConSense
                 this.mapAppendObjectLink(childNode, level, i);
                 
                 // Show text
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("text");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1010,7 +1002,6 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1024,7 +1015,6 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += this.highlight("comment");
                 
                 if (childNode.nodeValue.length > this.mapExcerptSize)
@@ -1038,7 +1028,6 @@ class ConSense
                     excerpt = childNode.nodeValue;
                 }
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer += " \"" + excerpt + "\"<br />";
             }
 
@@ -1050,7 +1039,6 @@ class ConSense
                 // Temp object link
                 this.mapAppendObjectLink(childNode, level, i);
 
-                // noinspection JSUnusedGlobalSymbols
                 this.mapResultBuffer
                     += this.highlight("DOCTYPE")
                         + " "
@@ -1437,7 +1425,6 @@ const conSense = new ConSense();
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function clear()
 {
     conSense.clearScreen();
@@ -1447,7 +1434,6 @@ function clear()
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function debug(value0, value1)
 {
     conSense.debugLn(value0, value1);
@@ -1457,7 +1443,6 @@ function debug(value0, value1)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function help()
 {
     conSense.help();
@@ -1478,7 +1463,6 @@ function license()
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function list(obj)
 {
     conSense.listObject(obj);
@@ -1486,7 +1470,6 @@ function list(obj)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function inspect(obj)
 {
     conSense.listObject(obj);
@@ -1496,7 +1479,6 @@ function inspect(obj)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function listCSS()
 {
     conSense.listCSS();
@@ -1506,7 +1488,6 @@ function listCSS()
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function listStyle(obj)
 {
     conSense.listObjectStyle(obj);
@@ -1527,7 +1508,6 @@ function load(uri, callback)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function map(obj)
 {
     if (obj === undefined)
@@ -1541,7 +1521,6 @@ function map(obj)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function mapCSS(obj)
 {
     conSense.mapDynamicCSS(obj);
@@ -1551,7 +1530,6 @@ function mapCSS(obj)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function outline(obj)
 {
     conSense.outlineDOMElement(obj);
@@ -1561,7 +1539,6 @@ function outline(obj)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function outlineAll(tagName)
 {
     conSense.outlineDOMElementsByTag(tagName);
@@ -1571,7 +1548,6 @@ function outlineAll(tagName)
 
 // ConSense command
 // GLOBAL
-// noinspection JSUnusedGlobalSymbols
 function outlineSub(obj)
 {
     conSense.outlineDOMSubtree(obj);
