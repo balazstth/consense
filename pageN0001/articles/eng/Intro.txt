@@ -39,7 +39,11 @@
     <br>
     In fact ConSense is already running in this page. Why don't you click the button below and play around with it? Said Wow!? I can understand that. Notice that it can be dragged around and be shown/hidden with its header controls. As a demonstration simply click and run a few of the one-liner examples found later in this paragraph, hopefully you will have fun doing so. Some functions may take their time collecting all the information you need but patience is always its own reward :)<br>
     <br>
-    <a class="toggleButton" href="javascript:conSense.showConsole(conSense.show);conSense.globalShowConsole(conSense.toggle);">Push me to toggle global console visibility</a><br>
+    <a class="toggleButton" href="javascript:
+        conSense.showConsole(conSense.show);
+        conSense.globalShowConsole(conSense.toggle);
+        window.scrollTo(0, 0);
+        ">Push me to toggle global console visibility</a><br>
     <br>
     <a href="javascript:injectCommand(0)">help()</a><br>
     <br>

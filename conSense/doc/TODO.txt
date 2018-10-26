@@ -13,16 +13,25 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0025
+ticket count 0030
 
 TODO
 ----
 
-- [0022] [2018-10-11] add Bootstrap and/or Materialize
 - [0021] [2018-10-09] BUG: when Ctrl+clicking an anchor link the new tab cannot load
                       url#anchor since #... denotes an article to be loaded. Works in
                       the original page though (simple clicking of the link).
+                      ALSO: when reloading url#anchor the page may fail to load (may
+                      think it is a navlink), so: add a prefix to navlinks! e.g. "nl-".
+                      In a nutshell: add better anchor support,
+                          load article,
+                          scroll to anchor after article load
 
++ [0029] [2018-10-25] general one-liner game / demo runner?
++ [0028] [2018-10-25] GAME: some nice fire
++ [0027] [2018-10-25] GAME: spinning CSS cube
++ [0026] [2018-10-25] GAME: 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+                      see 10_PRINT_121114.pdf
 + [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
                       loader. If so, make it invisible through RedSendGenericLoader.
                       That might bring back full IE compatibility, too.
@@ -66,5 +75,7 @@ x [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that
 x [0024] [2018-10-13] add draggable() to SimpleUtilities
 x [0023] [2018-10-13] add Sass/Scss and Bulma
 x [0025] [2018-10-13] add local storage functions to SimpleUtilities
+x [0030] [2018-10-25] standard smooth scroll
+x [0022] [2018-10-11] WONTFIX: add Bootstrap and/or Materialize, Bulma added instead
 
 </pre>

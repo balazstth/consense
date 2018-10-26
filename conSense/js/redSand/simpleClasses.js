@@ -1360,9 +1360,9 @@ class SimpleStorage
     {
         //--------------------------------------------------------------------
         // Polyfill for browsers that do not support or allow local storage.
-        // Local storage simulation from cookies.
-        console.log("Warning: Using polyfill for window.localStorage.");
         if (!window.localStorage) {
+            // Local storage simulation with cookies.
+            console.log("Warning: Using polyfill for window.localStorage.");
             Object.defineProperty(window, "localStorage", new (function () {
                 let aKeys = [], oStorage = {};
                 Object.defineProperty(oStorage, "getItem", {

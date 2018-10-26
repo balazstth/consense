@@ -351,6 +351,7 @@ class RedSandHashHandler
 	    
         for (let i in params) {
 			// Bloody forEach()...
+            // 2018: so many things that do work but might need beautifying
 			if (i === "each" || i === "forEach") continue;
 			for (let j in this.eventRegistry) {
 				if (j === i) {

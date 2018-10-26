@@ -4,7 +4,7 @@ ConSense
 **2018-10-15: This was done since last checking in**
 
 - switch to HTML 5
-- switch to EcmaScript 6
+- switch to EcmaScript 6+
 - CSS --> SCSS
 - libraries yanked, libraries added
 - new build system, compiler, compressor

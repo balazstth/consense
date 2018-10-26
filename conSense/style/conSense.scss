@@ -3,6 +3,11 @@
 /* ------------------------------------------------------------------------ */
 /* ConSense */
 
+/* For smooth scrolling globally */
+html {
+    scroll-behavior: smooth;
+}
+
 $fontStack: Verdana, Arial, Helvetica, sans-serif;
 
 @mixin typography {
