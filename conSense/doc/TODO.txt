@@ -75,7 +75,7 @@ x [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that
 x [0024] [2018-10-13] add draggable() to SimpleUtilities
 x [0023] [2018-10-13] add Sass/Scss and Bulma
 x [0025] [2018-10-13] add local storage functions to SimpleUtilities
-x [0030] [2018-10-25] standard smooth scroll
+x [0030] [2018-10-25] add standard smooth scroll
 x [0022] [2018-10-11] WONTFIX: add Bootstrap and/or Materialize, Bulma added instead
 
 </pre>
