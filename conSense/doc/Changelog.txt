@@ -359,6 +359,9 @@
 //                              redSandId --> staticRedSandId
 //                              'use strict';
 // 0.45         2018-10-13      const redSand*
+// 0.46         2018-10-28      RedSandHashHandler.onHashChanged() fix:
+//                                  setInterval() --> window.onhashchanged()
+//                                  plus compatibility mode
 //
 //////////////////////////////////////////////////////////////////////////////
 

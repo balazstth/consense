@@ -5479,7 +5479,7 @@ const simpleStorage = new SimpleStorage();
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandVersion = "0.45";
+const redSandVersion = "0.46";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -5808,6 +5808,17 @@ class RedSandHashHandler
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
+    callback()
+    {
+        if (redSandHashHandler.changed())
+        {
+            redSandHashHandler.onHashChanged();
+        }
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandHashHandler
     onHashChanged()
     {
 	    let params = this.processCurrentURIHash();
@@ -5835,7 +5846,16 @@ class RedSandHashHandler
 		if (this.firstRun !== undefined || this.firstRun === true)
 		{
 		    this.firstRun = false;
-            window.setInterval(function() { if (redSandHashHandler.changed()) redSandHashHandler.onHashChanged(); }, 100);
+
+            // For IE8+, this is the current mode
+            if (typeof(window.onhashchange) !== "undefined"
+                && (document.documentMode === undefined || document.documentMode > 7))
+            {
+                window.onhashchange = this.callback;
+            } else {
+                // IE8- or IE8 compatibility mode
+                window.setInterval(this.callback, 500);     // Used to be 100
+            }
         }
     }
     

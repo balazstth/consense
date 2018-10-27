@@ -13,7 +13,7 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0030
+ticket count 0031
 
 TODO
 ----
@@ -37,6 +37,8 @@ TODO
 + [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
                       loader. If so, make it invisible through RedSendGenericLoader.
                       That might bring back full IE compatibility, too.
+                      Update:
+                      IFrame loader --> fetch()
 + [0017] [2018-10-04] Load timeout handling
 + [0004] [2018-09-23] Include in an include: the ability to load content from within a loaded
                       content. E.g. load injectCommand.js directly from intro.txt, not from
@@ -77,5 +79,7 @@ x [0023] [2018-10-13] add Sass/Scss and Bulma
 x [0025] [2018-10-13] add local storage functions to SimpleUtilities
 x [0030] [2018-10-25] add standard smooth scroll
 x [0022] [2018-10-11] WONTFIX: add Bootstrap and/or Materialize, added Bulma instead
+x [0031] [2018-10-27] hash change watchdog: setInterval() --> window.onhashchange()
+                      setInterval() stays as compatibility mode
 
 </pre>
