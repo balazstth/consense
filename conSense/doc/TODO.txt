@@ -8,7 +8,7 @@
 
 Legend
 ------
-- severe
+- important / severe
 + nice to have
 ~ future feature
 x closed
@@ -26,6 +26,8 @@ TODO
                       In a nutshell: add better anchor support,
                           load article,
                           scroll to anchor after article load
+- [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
+                      an evolution of windowlets. Materialize? Velocity? Backbone?
 
 + [0029] [2018-10-25] general one-liner game / demo runner?
 + [0028] [2018-10-25] GAME: some nice fire
@@ -45,8 +47,6 @@ TODO
                       framing it."
                       An ability to set encoding and MIME type for loaded files.
 
-~ [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
-                      an evolution of windowlets. Materialize? Velocity? Backbone?
 ~ [0008] [2018-09-23] RedSandText: new feature, text mode windows
                       an old school text mode interface to implement an editor or anything
                       (Maybe BiturboVision?)
