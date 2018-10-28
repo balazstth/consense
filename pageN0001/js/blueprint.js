@@ -1,6 +1,6 @@
 
 //-----------------------------------------------------------------------------
-// Document version 2.07
+// Document version 2.08
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -105,7 +105,9 @@ function contentRenderer(content)
     }
 
     // * Move to the local anchor if there is one specified in the URL (via _=...)
-    window.location.hash = window.location.hash + "";
+    const hash = window.location.hash;
+    window.location.hash = redSandHashHandler.windowHashWithoutAnchor();
+    window.location.hash = hash;
 
     // redSandUtils.unblockInput();
 }

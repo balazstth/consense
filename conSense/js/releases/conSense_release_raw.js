@@ -21090,7 +21090,7 @@ module.exports = tick;
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.25";
+const simpleClassesVersion = "1.26";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -21175,6 +21175,20 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
+    // SimpleUtilities
+    // Returns current vertical scroll percentage on page.
+    getScrollPercent()
+    {
+        const h = document.documentElement,
+              b = document.body,
+              st = 'scrollTop',
+              sh = 'scrollHeight';
+        return Math.floor((h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100);
+    }
+
+    //------------------------------------------------------------------------
+
+    // SimpleUtilities
     // Used for generating random number URL parameters to force fresh loading
     // of content.
     // Generating only if conSense.debug!
@@ -21186,6 +21200,7 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
+    // SimpleUtilities
     // Generate random integer from 1 to limit
     random(limit)
     {
@@ -21195,6 +21210,7 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
+    // SimpleUtilities
     replaceAll(search, replacement)
     {
         let target = this;

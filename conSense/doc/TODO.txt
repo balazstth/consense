@@ -13,7 +13,7 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0033
+ticket count 0034
 
 TODO
 ----
@@ -21,6 +21,8 @@ TODO
 - [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
                       an evolution of windowlets. Materialize? Velocity? Backbone?
 
++ [0034] [2018-10-28] display e.g. poems or paragraphs on dynamically generated background
+                          colors per paragraph, gradient
 + [0033] [2018-10-28] global keyboard shortcuts to navigate on the page
                           0% (top), 10%, 20%... 100% (bottom)
                           also horizontally

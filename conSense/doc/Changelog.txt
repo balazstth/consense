@@ -277,6 +277,7 @@
 // 1.24         2018-10-28      minor fixes
 // 1.25         2018-10-28      added SimpleUtilities.replaceLoop() and
 //                                  a leaner liteDown()
+// 1.26         2018-10-28      SimpleUtilities.getScrollPercent()
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -399,6 +400,7 @@
 // 2.05         2018-10-13      style fix
 // 2.06         2018-10-14      new naming convention
 // 2.07         2018-10-28      full anchor link support
+// 2.08         2018-10-28      anchor navigation fix
 //
 //////////////////////////////////////////////////////////////////////////////
 
