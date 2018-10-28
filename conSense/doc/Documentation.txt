@@ -15,7 +15,7 @@ General documentation
     System requirements
 
 Technical documentation
-    Keyboard shortcut for the ConSense console
+    Keyboard shortcuts
     Loading indicator
     Z-indexes
     RedSand windowlets
@@ -74,10 +74,12 @@ Microsoft Internet Explorer 6.0
 // Technical documentation
 //============================================================================
 
-Keyboard shortcut for the ConSense console
-------------------------------------------
+Keyboard shortcuts
+------------------
 
-Alt+Shift+K
+ConSense console visibility: Alt+Shift+K
+
+Navigate to 10%, 20%... 90% of the page: Alt-1, Alt-2... Alt-9
 
 Loading indicator
 -----------------
@@ -229,6 +231,7 @@ sha1 2.1a              (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
 dom-drag 10.28.2001    (c) Aaron Boodman @ http://www.aaronboodman.com/
 DateFormat 2001        (c) David A. Lindquist @ http://www.gazingus.org
 keydrown v1.2.2        (c) Jeremy Kahn @ http://jeremyckahn.github.com/keydrown
+                           patched by me with key codes _0.._9
 Lodash 4.17.10         (c) JS Foundation and other contributors
                            @ https://js.foundation/
 

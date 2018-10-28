@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.26";
+const simpleClassesVersion = "1.27";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -108,11 +108,25 @@ class SimpleUtilities
     // Returns current vertical scroll percentage on page.
     getScrollPercent()
     {
-        const h = document.documentElement,
-              b = document.body,
-              st = 'scrollTop',
-              sh = 'scrollHeight';
+        const h = document.documentElement;
+        const b = document.body;
+        const st = 'scrollTop';
+        const sh = 'scrollHeight';
         return Math.floor((h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100);
+    }
+
+    //------------------------------------------------------------------------
+
+    // SimpleUtilities
+    // Returns Y coordinate according to a scroll percentage. Used to quickly
+    // position in the page.
+    getYFromScrollPercent(percent)
+    {
+        const h = document.documentElement;
+        const b = document.body;
+        const sh = 'scrollHeight';
+
+        return Math.floor((percent * ((h[sh]||b[sh]) - h.clientHeight)) / 100);
     }
 
     //------------------------------------------------------------------------

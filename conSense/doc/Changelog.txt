@@ -149,6 +149,7 @@
 //                              drag init abstracted out to SimpleUtilities
 // 1.16         2018-10-14      css --> scss
 // 1.17         2018-10-14      css fix
+// 1.18         2018-10-29      keyboard shortcuts for quick page % navigation
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -278,6 +279,7 @@
 // 1.25         2018-10-28      added SimpleUtilities.replaceLoop() and
 //                                  a leaner liteDown()
 // 1.26         2018-10-28      SimpleUtilities.getScrollPercent()
+// 1.27         2018-10-28      SimpleUtilities.getYFromScrollPercent(percent)
 //
 //////////////////////////////////////////////////////////////////////////////
 

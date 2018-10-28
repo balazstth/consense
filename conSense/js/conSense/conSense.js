@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.17";
+        this.version = "1.18";
 
         // Toggle debug operation
         this.debug = true;
@@ -439,6 +439,61 @@ class ConSense
     //------------------------------------------------------------------------
 
     // ConSense
+    initKeyboardShortcuts()
+    {
+        // Keyboard shortcut to show/hide the ConSense console
+        // Alt-Shift-K
+        kd.K.press(function (evt) {
+            if (evt.altKey && evt.shiftKey)
+            {
+                conSense.showConsole(conSense.toggle);
+                conSense.globalShowConsole(conSense.toggle);
+                conSense.scrollToBottomFocusInput();
+            }
+        });
+
+        // Navigate to 10%, 20%... 90% of the page.
+        // Alt-1, Alt-2... Alt-9
+        kd._1.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(10));
+        });
+
+        kd._2.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(20));
+        });
+
+        kd._3.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(30));
+        });
+
+        kd._4.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(40));
+        });
+
+        kd._5.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(50));
+        });
+
+        kd._6.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(60));
+        });
+
+        kd._7.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(70));
+        });
+
+        kd._8.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(80));
+        });
+
+        kd._9.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(90));
+        });
+    }
+
+    //------------------------------------------------------------------------
+
+    // ConSense
     init(show, startXPos, startYPos)
     {
         simpleUtils.checkBrowser();
@@ -547,15 +602,7 @@ class ConSense
 
         //--------------------------------------------------------------------
 
-        // Keyboard shortcut to show/hide the ConSense console
-        kd.K.press(function (evt) {
-            if (evt.altKey && evt.shiftKey)
-            {
-                conSense.showConsole(conSense.toggle);
-                conSense.globalShowConsole(conSense.toggle);
-                conSense.scrollToBottomFocusInput();
-            }
-        });
+        this.initKeyboardShortcuts();
     }
 
     //------------------------------------------------------------------------

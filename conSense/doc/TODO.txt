@@ -23,11 +23,6 @@ TODO
 
 + [0034] [2018-10-28] display e.g. poems or paragraphs on dynamically generated background
                           colors per paragraph, gradient
-+ [0033] [2018-10-28] global keyboard shortcuts to navigate on the page
-                          0% (top), 10%, 20%... 100% (bottom)
-                          also horizontally
-                          also shortcuts to add or remove empty space to the page
-                          maybe re [0019], RedSand/OS
 + [0029] [2018-10-25] general one-liner game / demo runner?
 + [0028] [2018-10-25] GAME: some nice fire
 + [0027] [2018-10-25] GAME: spinning CSS cube
@@ -90,5 +85,10 @@ x [0021] [2018-10-09] Fixxt': now full anchor link support
                           load article,
                           scroll to anchor after article load
 x [0032] [2018-10-28] add "404" page for unknown articles
+x [0033] [2018-10-28] global keyboard shortcuts to navigate on the page
+                          0% (top), 10%, 20%... 100% (bottom)
+                          also horizontally
+                          also shortcuts to add or remove empty space to the page
+                          maybe re [0019], RedSand/OS
 
 </pre>

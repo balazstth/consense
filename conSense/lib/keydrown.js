@@ -141,7 +141,19 @@ var util = (function () {
  * @type {Object.<number>}
  */
 var KEY_MAP = {
-  'A': 65
+  // added for ConSense
+   '_0': 48
+  ,'_1': 49
+  ,'_2': 50
+  ,'_3': 51
+  ,'_4': 52
+  ,'_5': 53
+  ,'_6': 54
+  ,'_7': 55
+  ,'_8': 56
+  ,'_9': 57
+  // original list
+  ,'A': 65
   ,'B': 66
   ,'C': 67
   ,'D': 68
