@@ -1,0 +1,9 @@
+<pre>
+4 0 4
+
+Article not found.
+
+[Make sure article=... points to somewhere valid in the URL.
+ If so, check the corresponding data files on the server.
+ You can look it up in the page blueprint.]
+</pre>

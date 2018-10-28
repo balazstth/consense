@@ -228,12 +228,9 @@ md5 2.1                (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
 sha1 2.1a              (c) Paul Johnston @ http://pajhome.org.uk/crypt/md5
 dom-drag 10.28.2001    (c) Aaron Boodman @ http://www.aaronboodman.com/
 DateFormat 2001        (c) David A. Lindquist @ http://www.gazingus.org
-keydrown v1.2.2        (c) http://jeremyckahn.github.com/keydrown
-// Sass / Scss compilation for debug mode
-Sass 3.5.4             (c) Hampton Catlin, Natalie Weizenbaum, Chris Eppstein,
-                           and numerous contributors. @ https://sass-lang.com/
-// Modified
-browser-scss           (c) Ben Balentine @ https://github.com/myrcutio/browser-scss
+keydrown v1.2.2        (c) Jeremy Kahn @ http://jeremyckahn.github.com/keydrown
+Lodash 4.17.10         (c) JS Foundation and other contributors
+                           @ https://js.foundation/
 
 Optional packages, these are already loaded by the ConSense stub
 -----------------
@@ -250,8 +247,6 @@ Even more optional packages, not loaded by the stub. Include them via
                              folder, or if necessary include stylesheets in the
                              document header.
                              
-Lodash 4.17.10       (c) JS Foundation and other contributors
-                         @ https://js.foundation/
 bulma.io v0.7.1      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 // Full text search
 lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com

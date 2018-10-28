@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandVersion = "0.46";
+const redSandVersion = "0.47";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -315,6 +315,7 @@ class RedSandHashHandler
         this.hashSeparator = "#";
         this.paramSeparator = ";";
         this.equalsString = "=";
+        this.anchorChar = "_";
 
         this.lastHash = "deadbeef";
 
@@ -327,6 +328,56 @@ class RedSandHashHandler
         // Indicate if it is the first RedSandHashHandler.onHashChanged() call
         this.firstRun = true;
         //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandHashHandler
+    windowHashWithoutAnchor()
+    {
+        const hashObject = redSandHashHandler.hash2Object(window.location.hash);
+        let hashObjectWithoutAnchor = {};
+
+        for (const param in hashObject)
+        {
+            // console.log(param, hashObject[param]);
+            if (param !== this.anchorChar)
+            {
+                hashObjectWithoutAnchor[param] = hashObject[param];
+            }
+        }
+
+        return this.object2Hash(hashObjectWithoutAnchor);
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandHashHandler
+    // Local anchor support
+    // For e.g. http://localhost:8000/ConSense/indexN0001.html#article=intro
+    // <a href="#teaser"> --> <a href="#article=intro|teaser">
+    // <a name="teaser">  --> <a name="article=intro|teaser">
+    translateAnchorLinks(text)
+    {
+        let hashWithoutAnchorAndHashMark = this.windowHashWithoutAnchor().substring(1);
+        if (_.startsWith(hashWithoutAnchorAndHashMark, "#"))
+        {
+            hashWithoutAnchorAndHashMark = hashWithoutAnchorAndHashMark.substring(1);
+        }
+
+        let regexp = new RegExp("(.*<\\s*a[^>]+href\\s*=\\s*[\"']#)([^\"'"
+            + this.anchorChar + "]*)([\"'][^>]*>.*)", "");
+        let replacement = "$1" + hashWithoutAnchorAndHashMark + this.paramSeparator
+            + this.anchorChar + "=" + "$2$3";
+        text = simpleUtils.replaceLoop(regexp, replacement, text);
+
+        regexp = new RegExp("(.*<\\s*a[^>]+name\\s*=\\s*[\"'])([^\"'"
+            + this.anchorChar + "]*)([\"'][^>]*>.*)", "");
+        replacement = "$1" + hashWithoutAnchorAndHashMark + this.paramSeparator
+            + this.anchorChar + "=" + "$2$3";
+        text = simpleUtils.replaceLoop(regexp, replacement, text);
+
+        return text;
     }
 
     //------------------------------------------------------------------------
@@ -380,6 +431,7 @@ class RedSandHashHandler
 		    this.firstRun = false;
 
             // For IE8+, this is the current mode
+            // noinspection JSUnresolvedVariable
             if (typeof(window.onhashchange) !== "undefined"
                 && (document.documentMode === undefined || document.documentMode > 7))
             {
@@ -435,7 +487,7 @@ class RedSandHashHandler
     // RedSandHashHandler
     // {param0: "value0", param1: "value1", ...}
     //      --> "#param0=value0;param1=value1;..."
-    array2Hash(params)
+    object2Hash(params)
     {
         let hash = this.hashSeparator;   // hash = "#"
 
@@ -461,7 +513,7 @@ class RedSandHashHandler
     // "#param0=value0;param1=value1;..."
     //      --> {param0: "value0", param1: "value1", ...}
     // TODO: eliminate duplicated parameters
-    hash2Array(hash)
+    hash2Object(hash)
     {
         // remove trailing paramSeparator if present
         if (hash.substr(hash.length - this.paramSeparator.length) === this.paramSeparator)
@@ -489,7 +541,7 @@ class RedSandHashHandler
     //------------------------------------------------------------------------
 
     // RedSandHashHandler
-    // Returns an array of anchors present in the document.
+    // Returns an associative array of anchors present in the document.
     getDocumentAnchors()
     {
         let anchors = [];
@@ -516,8 +568,8 @@ class RedSandHashHandler
 
         if (anchors[window.location.hash] === undefined)
         {
-            // Return array
-            return this.hash2Array(window.location.hash);
+            // Return associative array
+            return this.hash2Object(window.location.hash);
         }
 
         return undefined;
@@ -536,19 +588,19 @@ class RedSandHashHandler
         {
             if (i === "each" || i === "forEach") continue;
             // noinspection JSUnfilteredForInLoop
-            let itemParamArray = this.hash2Array(menu.items[i].link);
-            let linkParamArray = this.hash2Array(link);
+            let itemParamObject = this.hash2Object(menu.items[i].link);
+            let linkParamObject = this.hash2Object(link);
             let itemParamCount = 0;
             let matchCount = 0;
             // Parse through current item params
-            for (let j in itemParamArray) {
+            for (let j in itemParamObject) {
             	if (j === "each"  || j === "forEach") continue;
             	itemParamCount++;
             	// Parse through link params
-	            for (let k in linkParamArray) {
+	            for (let k in linkParamObject) {
 	                if (k === "each" || k === "forEach") continue;
                     // noinspection JSUnfilteredForInLoop
-	                if (j === k && itemParamArray[j] === linkParamArray[k]) {
+	                if (j === k && itemParamObject[j] === linkParamObject[k]) {
 	                	matchCount++;
 	                }
 	            }

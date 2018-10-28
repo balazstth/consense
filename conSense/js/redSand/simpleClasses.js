@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.23";
+const simpleClassesVersion = "1.25";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -789,6 +789,24 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
     // SimpleUtilities
+    // Used for string replace loops
+    replaceLoop(regexp, replacement, text)
+    {
+        while (true)
+        {
+            const text2 = text.replace(regexp, replacement);
+            if (text === text2) {
+                break;
+            } else {
+                text = text2;
+            }
+        }
+        return text;
+    }
+
+    //------------------------------------------------------------------------
+
+    // SimpleUtilities
     // Minimal plaintext --> HTML converter
     //
     // (rel)(str)relativePath --> <a href="relativePath">str</a>
@@ -836,65 +854,33 @@ class SimpleUtilities
         let text2;
 
         // (rel)(str)relativePath --> <a href="relativePath">str</a>
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)\\(rel\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
-            replacement = '$1<a href="$3">$2</a>$4';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)\\(rel\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
+        replacement = '$1<a href="$3">$2</a>$4';
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
         // (rel)relativePath --> <a href="relativePath">relativePath</a>
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)\\(rel\\)([^<\\s]*)(<|\\s|$)", "");
-            replacement = '$1<a href="$2">$2</a>$3';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)\\(rel\\)([^<\\s]*)(<|\\s|$)", "");
+        replacement = '$1<a href="$2">$2</a>$3';
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
         // (str)url --> <a href="url">str</a>
         // Remark: watch out for > and < that are allowed before and after the
         // url string in this current regexp. May cause problems.
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w-\.\\/]+)(<|\\s|$)", "");
-            replacement = '$1<a href="$3">$2</a>$4';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)\\((.*)\\)(\\w+:\\/{2}[\\w-\.\\/]+)(<|\\s|$)", "");
+        replacement = '$1<a href="$3">$2</a>$4';
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
         // url --> <a href="url">url</a>
         // (url) --> <a href="url">url</a>
-        while (true)
-        {
-            regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w-\.\\/]+)(\\)|\\s|$)", "");
-            replacement = '$1<a href="$2">$2</a>$3';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(\\(|\\s|^)(\\w+:\\/{2}[\\w-\.\\/]+)(\\)|\\s|$)", "");
+        replacement = '$1<a href="$2">$2</a>$3';
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
@@ -941,17 +927,9 @@ class SimpleUtilities
         //     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         //     return re.test(String(email).toLowerCase());
         // }
-    while (true)
-        {
-            regexp = new RegExp("(\\s|^)([\\w-.]+@[\\w-.]+)(\\s|$)", "");
-            replacement = '$1<a href="mailto:$2">$2</a>$3';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(\\s|^)([\\w-.]+@[\\w-.]+)(\\s|$)", "");
+        replacement = '$1<a href="mailto:$2">$2</a>$3';
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
@@ -960,17 +938,9 @@ class SimpleUtilities
         //          <tag>*bla habla*<tag>
         // Wrong:   bla *bla habla*.
         //          bla * habla * bla
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)\\*([^\*\\s][^\*]*[^\*\\s]|[^\*\\s])\\*(<|\\s|$)", "");
-            replacement = "$1<em>$2</em>$3";
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)\\*([^\*\\s][^\*]*[^\*\\s]|[^\*\\s])\\*(<|\\s|$)", "");
+        replacement = "$1<em>$2</em>$3";
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
 
@@ -979,17 +949,9 @@ class SimpleUtilities
         //          <tag>_blabla_</tag>
         // Wrong:   bla _bla habla_.
         //          bla _ habla _ bla
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)_([^_\\s][^_]*[^_\\s]|[^_\\s])_(<|\\s|$)", "");
-            replacement = "$1<cite>$2</cite>$3";
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)_([^_\\s][^_]*[^_\\s]|[^_\\s])_(<|\\s|$)", "");
+        replacement = "$1<cite>$2</cite>$3";
+        text = this.replaceLoop(regexp, replacement, text);
 
         //--------------------------------------------------------------------
         // For single-line headers only
@@ -1006,27 +968,19 @@ class SimpleUtilities
         //--------------------------------------------------------------------
         // (image)(CSSClass)relativePath --> <img class="CSSClass" src="relativePath"/>
         // requires a class definition in the document CSS (not mandatory)
-        while (true)
-        {
-            regexp = new RegExp("(>|\\s|^)\\(image\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
-            replacement = '$1<img class="$2" src="$3"/>$4';
-            text2 = text.replace(regexp, replacement);
-            if (text === text2) {
-                break;
-            } else {
-                text = text2;
-            }
-        }
+        regexp = new RegExp("(>|\\s|^)\\(image\\)\\((.*)\\)([^<\\s]*)(<|\\s|$)", "");
+        replacement = '$1<img class="$2" src="$3"/>$4';
+        text = this.replaceLoop(regexp, replacement, text);
 
 		//--------------------------------------------------------------------
 		// (thumbnail)(CSSClass)relativePath >>> target
 		//     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
 		// requires a class definition in the document CSS (not mandatory)
+        regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
+        replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
 		text2 = text;
 		do {
 			text = text2;
-			regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
-			replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
 			text2 = text.replace(regexp, replacement);
 		} while (text2 !== text);
 

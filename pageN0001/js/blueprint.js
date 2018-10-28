@@ -1,6 +1,6 @@
 
 //-----------------------------------------------------------------------------
-// Document version 1.00
+// Document version 2.07
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -72,6 +72,9 @@ function handleArticleEvent(params)
         case "contact":
             redSandGenericLoader.load("pageN0001/articles/eng/Contact.txt", contentRenderer);
             break;
+        default:
+            redSandGenericLoader.load("pageN0001/articles/eng/404.txt", contentRenderer);
+            break;
     }
 }
 
@@ -85,7 +88,9 @@ function contentRenderer(content)
     let domElem = simpleUtils.getDOMElement("contentContainer");
 
     content = simpleUtils.liteDown(content);
-    
+    // * This enables anchor link support inside the loaded article / page content
+    content = redSandHashHandler.translateAnchorLinks(content);
+
     // Firefox
     if (domElem.innerText === undefined) {
         domElem.innerHTML = content;
@@ -98,6 +103,9 @@ function contentRenderer(content)
             domElem.innerHTML = content;
         }
     }
+
+    // * Move to the local anchor if there is one specified in the URL (via _=...)
+    window.location.hash = window.location.hash + "";
 
     // redSandUtils.unblockInput();
 }

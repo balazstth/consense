@@ -13,22 +13,19 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0031
+ticket count 0033
 
 TODO
 ----
 
-- [0021] [2018-10-09] BUG: when Ctrl+clicking an anchor link the new tab cannot load
-                      url#anchor since #... denotes an article to be loaded. Works in
-                      the original page though (simple clicking of the link).
-                      ALSO: when reloading url#anchor the page may fail to load (may
-                      think it is a navlink), so: add a prefix to navlinks! e.g. "nl-".
-                      In a nutshell: add better anchor support,
-                          load article,
-                          scroll to anchor after article load
 - [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
                       an evolution of windowlets. Materialize? Velocity? Backbone?
 
++ [0033] [2018-10-28] global keyboard shortcuts to navigate on the page
+                          0% (top), 10%, 20%... 100% (bottom)
+                          also horizontally
+                          also shortcuts to add or remove empty space to the page
+                          maybe re [0019], RedSand/OS
 + [0029] [2018-10-25] general one-liner game / demo runner?
 + [0028] [2018-10-25] GAME: some nice fire
 + [0027] [2018-10-25] GAME: spinning CSS cube
@@ -81,5 +78,15 @@ x [0030] [2018-10-25] add standard smooth scroll
 x [0022] [2018-10-11] WONTFIX: add Bootstrap and/or Materialize, added Bulma instead
 x [0031] [2018-10-27] hash change watchdog: setInterval() --> window.onhashchange()
                       setInterval() stays as compatibility mode
+x [0021] [2018-10-09] Fixxt': now full anchor link support
+                      When Ctrl+clicking an anchor link the new tab cannot load
+                      url#anchor since #... denotes an article to be loaded. Works in
+                      the original page though (simple clicking of the link).
+                      ALSO: when reloading url#anchor the page may fail to load (may
+                      think it is a navlink), so: add a prefix to navlinks! e.g. "nl-".
+                      In a nutshell: add better anchor support,
+                          load article,
+                          scroll to anchor after article load
+x [0032] [2018-10-28] add "404" page for unknown articles
 
 </pre>

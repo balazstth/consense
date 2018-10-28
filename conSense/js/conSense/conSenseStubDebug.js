@@ -24,7 +24,7 @@ class Stub
         //////////////////////////////////////////////////////////////////////
         // Stub                                                Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.24";
+        this.version = "1.25";
 
         this.relativeConSensePath = relativeConSensePath;
         //////////////////////////////////////////////////////////////////////
@@ -83,6 +83,7 @@ stub.includeJavaScriptFile("conSense/lib/md5.js");
 stub.includeJavaScriptFile("conSense/lib/sha1.js");
 stub.includeJavaScriptFile("conSense/lib/DateFormat.js");
 stub.includeJavaScriptFile("conSense/lib/keydrown.js");
+stub.includeJavaScriptFile("conSense/lib/lodash.js");
 
 stub.includeJavaScriptFile("conSense/lib/sorttable.js");
 stub.includeJavaScriptFile("conSense/lib/cash.js");
