@@ -808,6 +808,16 @@ var KEY_MAP = {
   ,'_7': 55
   ,'_8': 56
   ,'_9': 57
+  ,'Numpad0': 96
+  ,'Numpad1': 97
+  ,'Numpad2': 98
+  ,'Numpad3': 99
+  ,'Numpad4': 100
+  ,'Numpad5': 101
+  ,'Numpad6': 102
+  ,'Numpad7': 103
+  ,'Numpad8': 104
+  ,'Numpad9': 105
   // original list
   ,'A': 65
   ,'B': 66
@@ -23970,7 +23980,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.18";
+        this.version = "1.19";
 
         // Toggle debug operation
         this.debug = true;
@@ -24290,6 +24300,44 @@ class ConSense
         });
 
         kd._9.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(90));
+        });
+
+        // Navigate to 10%, 20%... 90% of the page.
+        // Alt-Numpad1, Alt-Numpad2... Alt-Numpad9
+        kd.Numpad1.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(10));
+        });
+
+        kd.Numpad2.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(20));
+        });
+
+        kd.Numpad3.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(30));
+        });
+
+        kd.Numpad4.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(40));
+        });
+
+        kd.Numpad5.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(50));
+        });
+
+        kd.Numpad6.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(60));
+        });
+
+        kd.Numpad7.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(70));
+        });
+
+        kd.Numpad8.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(80));
+        });
+
+        kd.Numpad9.press(function (evt) {
             if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(90));
         });
     }

@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.18";
+        this.version = "1.19";
 
         // Toggle debug operation
         this.debug = true;
@@ -487,6 +487,44 @@ class ConSense
         });
 
         kd._9.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(90));
+        });
+
+        // Navigate to 10%, 20%... 90% of the page.
+        // Alt-Numpad1, Alt-Numpad2... Alt-Numpad9
+        kd.Numpad1.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(10));
+        });
+
+        kd.Numpad2.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(20));
+        });
+
+        kd.Numpad3.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(30));
+        });
+
+        kd.Numpad4.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(40));
+        });
+
+        kd.Numpad5.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(50));
+        });
+
+        kd.Numpad6.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(60));
+        });
+
+        kd.Numpad7.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(70));
+        });
+
+        kd.Numpad8.press(function (evt) {
+            if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(80));
+        });
+
+        kd.Numpad9.press(function (evt) {
             if (evt.altKey) window.scrollTo(0, simpleUtils.getYFromScrollPercent(90));
         });
     }

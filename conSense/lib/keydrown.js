@@ -152,6 +152,16 @@ var KEY_MAP = {
   ,'_7': 55
   ,'_8': 56
   ,'_9': 57
+  ,'Numpad0': 96
+  ,'Numpad1': 97
+  ,'Numpad2': 98
+  ,'Numpad3': 99
+  ,'Numpad4': 100
+  ,'Numpad5': 101
+  ,'Numpad6': 102
+  ,'Numpad7': 103
+  ,'Numpad8': 104
+  ,'Numpad9': 105
   // original list
   ,'A': 65
   ,'B': 66

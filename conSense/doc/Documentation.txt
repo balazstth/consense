@@ -77,9 +77,11 @@ Microsoft Internet Explorer 6.0
 Keyboard shortcuts
 ------------------
 
-ConSense console visibility: Alt+Shift+K
+ConSense console visibility: Alt-Shift-K
 
-Navigate to 10%, 20%... 90% of the page: Alt-1, Alt-2... Alt-9
+Navigate to 10%, 20%... 90% of the page:
+    Alt-1, Alt-2... Alt-9
+    Alt-Numpad1, Alt-Numpad2... Alt-Numpad9
 
 Loading indicator
 -----------------

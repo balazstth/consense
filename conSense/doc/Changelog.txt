@@ -150,6 +150,7 @@
 // 1.16         2018-10-14      css --> scss
 // 1.17         2018-10-14      css fix
 // 1.18         2018-10-29      keyboard shortcuts for quick page % navigation
+// 1.19         2018-10-29      also added Alt+Numpad numeric keys for navigation
 //
 //////////////////////////////////////////////////////////////////////////////
 
