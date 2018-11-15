@@ -13,16 +13,18 @@ Legend
 ~ future feature
 x closed
 * any
-ticket count 0034
+ticket count 0035
 
 TODO
 ----
 
+- [0035] [2018-11-14] Revisit load(). Which namespace does it load into, what is the
+                      lifespan?
 - [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
                       an evolution of windowlets. Materialize? Velocity? Backbone?
 
 + [0034] [2018-10-28] display e.g. poems or paragraphs on dynamically generated background
-                          colors per paragraph, gradient
+                      colors per paragraph, gradient
 + [0029] [2018-10-25] general one-liner game / demo runner?
 + [0028] [2018-10-25] GAME: some nice fire
 + [0027] [2018-10-25] GAME: spinning CSS cube
@@ -63,7 +65,7 @@ x [0002] [2018-09-23] Fix dynamic content loading in Chrome
 x [0012] [2018-09-30] Won't fix: hasOwnProperty() list() in ConSense, show only own properties
 x [0014] [2018-10-01] Page reload sometimes does not reload the dynamic content
 x [0009] [2018-09-27] Won't fix: Responsive design for mobile screens.
-                          Comes naturally with Materialize or another framework.
+                      Comes naturally with Materialize or another framework.
 x [0016] [2018-10-01] Won't fix, covered in [0019]:
                       Thinking about including Materialize and Velocity
 x [0011] [2018-09-30] Covered in [0008]: BiturboVision as a TurboVision port?

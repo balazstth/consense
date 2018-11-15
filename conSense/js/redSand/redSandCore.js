@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2018
 // For detailed licensing information see conSense.js.
-// See redSandVersion and the changelog for detailed version info.
+// See redSandCoreVersion and the changelog for detailed version info.
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandVersion = "0.47";
+const redSandCoreVersion = "0.48";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -26,7 +26,7 @@ class RedSandUtilities
         //////////////////////////////////////////////////////////////////////
         // RedSandUtilities                                    Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
         //////////////////////////////////////////////////////////////////////
     }
 
@@ -129,7 +129,7 @@ class RedSandGenericLoader
         //////////////////////////////////////////////////////////////////////
         // RedSandGenericLoader                                Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         this.containers = [];
         this.frameNames = [];
@@ -310,7 +310,7 @@ class RedSandHashHandler
         //////////////////////////////////////////////////////////////////////
         // RedSandHashHandler                                  Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         this.hashSeparator = "#";
         this.paramSeparator = ";";
@@ -658,7 +658,7 @@ class RedSandRegistry
         //////////////////////////////////////////////////////////////////////
         // RedSandRegistry                                     Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         this.menus = [];
         //////////////////////////////////////////////////////////////////////
@@ -725,7 +725,7 @@ class RedSandUITextManager
         //////////////////////////////////////////////////////////////////////
         // RedSandRegistry                                     Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         // Private
         // UI text registry with items like "DOMid; field; textId": textTable
@@ -855,7 +855,7 @@ class RedSandNode
         //////////////////////////////////////////////////////////////////////
         // RedSandNode                                         Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         // Constructor parameters
         this.DOMid = DOMid;
@@ -919,7 +919,7 @@ class RedSandMenu
         //////////////////////////////////////////////////////////////////////
         // RedSandMenu                                         Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         this.id = id;
         this.items = items;
@@ -971,7 +971,7 @@ class RedSandWindowlet
         //////////////////////////////////////////////////////////////////////
         // RedSandWindowlet                                    Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         // Constructor params
 
@@ -1079,7 +1079,7 @@ class RedSandWindowletManager
         //////////////////////////////////////////////////////////////////////
         // RedSandWindowletManager                             Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = redSandVersion;
+        this.version = redSandCoreVersion;
 
         this.topmostWindowlet = undefined;
         this.highestZIndex = 1000000;

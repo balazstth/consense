@@ -234,7 +234,11 @@ dom-drag 10.28.2001    (c) Aaron Boodman @ http://www.aaronboodman.com/
 DateFormat 2001        (c) David A. Lindquist @ http://www.gazingus.org
 keydrown v1.2.2        (c) Jeremy Kahn @ http://jeremyckahn.github.com/keydrown
                            patched by me with key codes _0.._9
+// Advanced utility library
 Lodash 4.17.10         (c) JS Foundation and other contributors
+                           @ https://js.foundation/
+// Advanced DateTime library
+Luxon 1.6.2            (c) JS Foundation and other contributors
                            @ https://js.foundation/
 
 Optional packages, these are already loaded by the ConSense stub
@@ -244,6 +248,7 @@ SortTable version 2  (c) Stuart Langridge,
                          @ http://www.kryogenix.org/code/browser/sorttable/
 // jQuery replacement
 Cash 1.0.0           (c) Ken Wheeler @ http://kenwheeler.github.io/cash/
+// Advanced drag and drop
 Dragula              (c) Nicolás Bevacqua
                          @ https://bevacqua.github.io/dragula/
 
@@ -252,6 +257,7 @@ Even more optional packages, not loaded by the stub. Include them via
                              folder, or if necessary include stylesheets in the
                              document header.
                              
+// Like Bootstrap
 bulma.io v0.7.1      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 // Full text search
 lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com

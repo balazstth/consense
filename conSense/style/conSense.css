@@ -7,7 +7,7 @@ html {
 }
 
 .conSenseContainer {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: "Cousine", "IBM Plex Mono", monospace;
   font-size: 12px;
   line-height: 1.5em;
   font-weight: normal;
@@ -79,7 +79,7 @@ html {
   border: 3px solid white;
   margin: 5px 0 5px 10px;
   padding: 0;
-  width: 690px;
+  width: 680px;
   /* Input slot */
 }
 .conSenseContainer .conSenseInnerContainer .conSenseCounter {
@@ -93,7 +93,7 @@ html {
 }
 
 .loadIndicator {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: "Cousine", "IBM Plex Mono", monospace;
   font-size: 12px;
   line-height: 1.5em;
   font-weight: normal;

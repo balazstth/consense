@@ -24,7 +24,7 @@ class Stub
         //////////////////////////////////////////////////////////////////////
         // Stub                                                Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.25";
+        this.version = "1.26";
 
         this.relativeConSensePath = relativeConSensePath;
         //////////////////////////////////////////////////////////////////////
@@ -83,11 +83,12 @@ stub.includeJavaScriptFile("conSense/lib/md5.js");
 stub.includeJavaScriptFile("conSense/lib/sha1.js");
 stub.includeJavaScriptFile("conSense/lib/DateFormat.js");
 stub.includeJavaScriptFile("conSense/lib/keydrown.js");
-stub.includeJavaScriptFile("conSense/lib/lodash.js");
+stub.includeJavaScriptFile("conSense/lib/lodash.js");   // advanced Underscore-like lib
+stub.includeJavaScriptFile("conSense/lib/luxon.js");    // advanced DateTime lib
 
 stub.includeJavaScriptFile("conSense/lib/sorttable.js");
-stub.includeJavaScriptFile("conSense/lib/cash.js");
-stub.includeJavaScriptFile("conSense/lib/dragula.js");
+stub.includeJavaScriptFile("conSense/lib/cash.js");     // jQuery replacement
+stub.includeJavaScriptFile("conSense/lib/dragula.js");  // advanced drag and drop lib
 
 stub.includeJavaScriptFile("conSense/js/redSand/simpleClasses.js");
 stub.includeJavaScriptFile("conSense/js/redSand/redSandCore.js");
