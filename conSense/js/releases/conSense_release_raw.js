@@ -30012,7 +30012,7 @@ const simpleStorage = new SimpleStorage();
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.48";
+const redSandCoreVersion = "0.49";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -30183,8 +30183,8 @@ class RedSandGenericLoader
     {
         this.showIndicator();
 
-        conSense.writeLn("[load request: " + uri + "]");
-        
+        conSense.write("[loading: " + uri + "...");
+
         // Evaluate loaded content as JavaScript source
         if (callback === undefined)
         {
@@ -30226,6 +30226,8 @@ class RedSandGenericLoader
             + ")' src='"
             + uriRandom
             + "' style='width: 0px; height: 0px; border: 0px;'></iframe>";
+
+        conSense.writeLn(" done]");
     }
     
     //------------------------------------------------------------------------
@@ -30289,7 +30291,9 @@ class RedSandGenericLoader
         }
         catch(ex)
         {
-            conSense.writeLn(">>> JavaScript exception: " + ex);
+            conSense.writeLn("{problem while loading file}");
+            conSense.writeLn("{either file not found or invalid statements}");
+            conSense.writeLn("{exception: " + ex + "}");
             conSense.listObject(ex);
         }
 
