@@ -105,11 +105,12 @@ class SimpleUtilities
     //------------------------------------------------------------------------
 
 	// Example:
+    // const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
 	// const newFunc = pipe(fn1, fn2, fn3);
 	// const result = newFunc(arg);
 	pipe(...fns)
 	{
-		x => fns.reduce((y, f) => f(y), x);
+		return x => fns.reduce((y, f) => f(y), x);
 	}
 
     //------------------------------------------------------------------------
