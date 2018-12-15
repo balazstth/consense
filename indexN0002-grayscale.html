@@ -1,0 +1,57 @@
+﻿
+<!--------------------------------------------------------------------
+pageN0002-grayscale
+
+Grayscale (c) Toth, Balazs Aladar, 2018, https://aladar.me/
+
+Document version 1.00
+--------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <title>Grayscale, and oldschool OS interface</title>
+
+        <!-- Normal ConSense stub, either Debug or Release -->
+        <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
+
+        <!-- Page font -->
+        <link href="https://fonts.googleapis.com/css?family=Cousine|IBM+Plex+Mono" rel="stylesheet">
+
+        <!-- Bulma -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="conSense/lib/_optional/bulma.css">
+        
+        <!-- Custom style definitions -->
+        <link href="pageN0002-grayscale/style/page.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript">
+            function init()
+            {
+                //-----------------------------------------------------------------------------
+                // Init ConSense
+                conSense.init(conSense.hide, 40, 40);
+                conSense.debug = true;
+                // Load UI definition
+                load("pageN0002-grayscale/js/blueprint.js");
+                //-----------------------------------------------------------------------------
+            }
+        </script>
+    </head>
+
+    <body onLoad="init()">
+      <section class="section">
+        <div class="container">
+          <h1 class="title">
+            Hello World
+          </h1>
+          <p class="subtitle">
+            My first website with <strong>Bulma</strong>!
+          </p>
+        </div>
+      </section>    
+    </body>
+</html>

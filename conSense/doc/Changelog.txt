@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
 // Changelog
-// v2.03
+// v2.04
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -22,19 +22,22 @@
 // 2.) Minis (a collection of mini utilities that run on ConSense (libs))
 //         calendarMonth
 //
-// 3.) Client side tests (html and corresponding blueprint.js)
+// 3.) Grayscale, OS user interface
+//         indexN0002-grayscale.html
+//
+// 4.) Client side tests (html and corresponding blueprint.js)
 //         indexN0001.html
 //         tests/conSense.html
 //         tests/redSandCoreTest0.html
 //         tests/redSandGLTest0.html
 //
-// 4.) Server side modules
+// 5.) Server side modules
 //         server/php/modules/DBConnector
 //         server/php/modules/Authenticator
 //         server/php/modules/SimpleCriptography
 //         server/php/modules/SimpleUtilities
 //
-// 5.) Server side scripts
+// 6.) Server side scripts
 //         dbSelectJSOutput.php
 //         dbInsert.php
 //         dbUpdate.php
@@ -198,6 +201,7 @@
 // 1.24         2018-10-13      css --> style, for scss
 // 1.25         2018-10-28      Lodash added to mandatory libs
 // 1.26         2018-11-14      Luxon added
+// 1.27         2018-12-14      project structure changed
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -218,6 +222,7 @@
 // 1.24         2018-10-13      build, minify and zip in separate scripts
 // 1.25         2018-10-28      Lodash added to mandatory libs
 // 1.26         2018-11-14      Luxon added
+// 1.27         2018-12-14      project structure changed
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -289,6 +294,7 @@
 // 1.26         2018-10-28      SimpleUtilities.getScrollPercent()
 // 1.27         2018-10-28      SimpleUtilities.getYFromScrollPercent(percent)
 // 1.28         2018-11-14      SimpleUtilities.copyToClipboard(str)
+// 1.29         2018-12-14      SimpleUtilities.pipe()
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -422,7 +428,20 @@
 //////////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------
-// 3.) Client side tests
+// 3.) Grayscale, OS user interface
+//----------------------------------------------------------------------------
+
+//////////////////////////////////////////////////////////////////////////////
+// indexN0002-grayscale.html
+//////////////////////////////////////////////////////////////////////////////
+//
+// version      date            description
+// 1.00         2018-12-14      initial version with Bulma
+//
+//////////////////////////////////////////////////////////////////////////////
+
+//----------------------------------------------------------------------------
+// 4.) Client side tests
 //----------------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////////
@@ -478,7 +497,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------
-// 4.) Server side modules
+// 5.) Server side modules
 //----------------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////////
@@ -543,7 +562,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------
-// 5.) Server side scripts
+// 6.) Server side scripts
 //----------------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////////

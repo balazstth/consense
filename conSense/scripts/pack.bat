@@ -1,11 +1,11 @@
 
 REM ------------------------------------------------------------------
 REM ConSense pack script
-REM 1.25
+REM 1.27
 REM ------------------------------------------------------------------
 
 REM ------------------------------------------------------------------
 REM 7z
-del ..\releases\*.zip
-del ..\releases\*.7z
+del ..\_releases\*.zip
+del ..\_releases\*.7z
 ..\tools\7za a -r -xr!.git ..\releases\ConSense.7z ..\..

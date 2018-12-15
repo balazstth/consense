@@ -151,6 +151,9 @@ class RedSandGenericLoader
         //////////////////////////////////////////////////////////////////////
     }
 
+    //------------------------------------------------------------------------
+
+    // RedSandGenericLoader
     showIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
@@ -162,6 +165,9 @@ class RedSandGenericLoader
         }
     }
 
+    //------------------------------------------------------------------------
+
+    // RedSandGenericLoader
     hideIndicator() {
         if (!redSandGenericLoader.indicate) {
             return;
