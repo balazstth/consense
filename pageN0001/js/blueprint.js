@@ -9,8 +9,8 @@
 let uiEng = [
     {id: "intro",     text: "Intro"},
     {id: "changelog", text: "Changelog"},
-    {id: "todo",      text: "TODO"},
     {id: "docs",      text: "Documentation"},
+    {id: "todo",      text: "TODO"},
     {id: "tests",     text: "Tests"},
     {id: "contact",   text: "Contact"}
 ];
@@ -28,8 +28,8 @@ let items = [];
 
 items.push(new RedSandNode("mainMenuIntro",     "intro",     "mainMenuItem", "mainMenuItemSelected", "#article=intro"));
 items.push(new RedSandNode("mainMenuChangelog", "changelog", "mainMenuItem", "mainMenuItemSelected", "#article=changelog"));
-items.push(new RedSandNode("mainMenuTodo",      "todo",      "mainMenuItem", "mainMenuItemSelected", "#article=todo"));
 items.push(new RedSandNode("mainMenuDocs",      "docs",      "mainMenuItem", "mainMenuItemSelected", "#article=docs"));
+items.push(new RedSandNode("mainMenuTodo",      "todo",      "mainMenuItem", "mainMenuItemSelected", "#article=todo"));
 items.push(new RedSandNode("mainMenuTests",     "tests",     "mainMenuItem", "mainMenuItemSelected", "#article=tests"));
 items.push(new RedSandNode("mainMenuContact",   "contact",   "mainMenuItem", "mainMenuItemSelected", "#article=contact"));
 
@@ -58,13 +58,13 @@ function handleArticleEvent(params)
             redSandGenericLoader.load("pageN0001/articles/eng/Intro.txt", contentRenderer);
             break;
         case "changelog":
-            redSandGenericLoader.load("conSense/doc/Changelog.txt", contentRenderer);
-            break;
-        case "todo":
-            redSandGenericLoader.load("conSense/doc/TODO.txt", contentRenderer);
+            redSandGenericLoader.load("doc/Changelog.txt", contentRenderer);
             break;
         case "docs":
-            redSandGenericLoader.load("conSense/doc/Documentation.txt", contentRenderer);
+            redSandGenericLoader.load("doc/Documentation.txt", contentRenderer);
+            break;
+        case "todo":
+            redSandGenericLoader.load("doc/TODO.txt", contentRenderer);
             break;
         case "tests":
             redSandGenericLoader.load("pageN0001/articles/eng/Tests.txt", contentRenderer);

@@ -1,0 +1,212 @@
+[512] connection accepted
+[512] IP: 127.0.0.1
+Connected clients: 1
+[512] request path: indexN0002-grayscale.html
+[512] 218 bytes sent (218 KB/s)
+[512] 2226 bytes sent (2226 KB/s)
+[512] socket closed after responded for 1 requests
+Connected clients: 1
+[536] connection accepted
+[536] IP: 127.0.0.1
+Connected clients: 1
+[536] request path: conSense/js/conSense/conSenseStubDebug.js
+[536] 233 bytes sent (233 KB/s)
+[536] 3810 bytes sent (3810 KB/s)
+[536] socket closed after responded for 1 requests
+Connected clients: 1
+[512] connection accepted
+[512] IP: 127.0.0.1
+Connected clients: 1
+[520] connection accepted
+[520] IP: 127.0.0.1
+Connected clients: 2
+[512] request path: conSense/lib/_optional/bulma.css
+[512] 219 bytes sent (219 KB/s)
+[520] request path: pageN0002-grayscale/style/page.css
+[512] 131291 bytes sent (131291 KB/s)
+[520] 214 bytes sent (214 KB/s)
+[512] 190497 bytes sent (190497 KB/s)
+[512] socket closed after responded for 1 requests
+Connected clients: 2
+[520] 217 bytes sent (217 KB/s)
+[520] socket closed after responded for 1 requests
+Connected clients: 1
+[520] connection accepted
+[520] IP: 127.0.0.1
+Connected clients: 1
+[520] request path: conSense/lib/dragula.css?random_suffix=3481515180
+[520] 216 bytes sent (216 KB/s)
+[520] 764 bytes sent (764 KB/s)
+[520] socket closed after responded for 1 requests
+Connected clients: 1
+[528] connection accepted
+[528] IP: 127.0.0.1
+Connected clients: 1
+[520] connection accepted
+[520] IP: 127.0.0.1
+Connected clients: 2
+[544] connection accepted
+[544] IP: 127.0.0.1
+Connected clients: 3
+[532] connection accepted
+[532] IP: 127.0.0.1
+Connected clients: 4
+[548] connection accepted
+[548] IP: 127.0.0.1
+Connected clients: 5
+[548] request path: conSense/lib/DateFormat.js?random_suffix=202106183
+[528] request path: conSense/style/conSense.css?random_suffix=2766516049
+[520] request path: conSense/lib/dom-drag.js?random_suffix=3682418839
+[544] request path: conSense/lib/md5.js?random_suffix=707361540
+[532] request path: conSense/lib/sha1.js?random_suffix=1440719150
+[548] 233 bytes sent (233 KB/s)
+[528] 217 bytes sent (217 KB/s)
+[520] 233 bytes sent (233 KB/s)
+[544] 233 bytes sent (233 KB/s)
+[532] 233 bytes sent (233 KB/s)
+[548] 2995 bytes sent (2995 KB/s)
+[548] socket closed after responded for 1 requests
+Connected clients: 5
+[548] connection accepted
+[548] IP: 127.0.0.1
+Connected clients: 5
+[528] 3296 bytes sent (3296 KB/s)
+[528] socket closed after responded for 1 requests
+Connected clients: 5
+[520] 4215 bytes sent (4215 KB/s)
+[520] socket closed after responded for 1 requests
+Connected clients: 4
+[544] 9060 bytes sent (9060 KB/s)
+[544] socket closed after responded for 1 requests
+Connected clients: 3
+[532] 5985 bytes sent (5985 KB/s)
+[532] socket closed after responded for 1 requests
+Connected clients: 2
+[548] request path: conSense/js/redSand/redSandGL.js?random_suffix=36399832
+[548] 233 bytes sent (233 KB/s)
+[548] 3563 bytes sent (3563 KB/s)
+[548] socket closed after responded for 1 requests
+Connected clients: 1
+[560] connection accepted
+[560] IP: 127.0.0.1
+Connected clients: 1
+[560] request path: conSense/lib/keydrown.js?random_suffix=2663356409
+[560] 234 bytes sent (234 KB/s)
+[560] 12410 bytes sent (12410 KB/s)
+[560] socket closed after responded for 1 requests
+Connected clients: 1
+[560] connection accepted
+[560] IP: 127.0.0.1
+Connected clients: 1
+[564] connection accepted
+[564] IP: 127.0.0.1
+Connected clients: 2
+[560] request path: conSense/lib/lodash.js?random_suffix=1219627146
+[560] 235 bytes sent (235 KB/s)
+[564] request path: conSense/lib/luxon.js?random_suffix=274150530
+[560] 131307 bytes sent (131307 KB/s)
+[564] 235 bytes sent (235 KB/s)
+[572] connection accepted
+[572] IP: 127.0.0.1
+Connected clients: 3
+[560] 262379 bytes sent (262379 KB/s)
+[564] 131307 bytes sent (131307 KB/s)
+[572] request path: conSense/lib/sorttable.js?random_suffix=378634181
+[572] 234 bytes sent (234 KB/s)
+[580] connection accepted
+[580] IP: 127.0.0.1
+Connected clients: 4
+[560] 393451 bytes sent (393451 KB/s)
+[572] 16998 bytes sent (16998 KB/s)
+[572] socket closed after responded for 1 requests
+Connected clients: 4
+[572] connection accepted
+[572] IP: 127.0.0.1
+Connected clients: 4
+[572] request path: conSense/lib/dragula.js?random_suffix=596912265
+[580] request path: conSense/lib/cash.js?random_suffix=2773506809
+[560] 524523 bytes sent (524523 KB/s)
+[564] 227427 bytes sent (227427 KB/s)
+[564] socket closed after responded for 1 requests
+Connected clients: 4
+[572] 234 bytes sent (234 KB/s)
+[580] 234 bytes sent (234 KB/s)
+[564] connection accepted
+[564] IP: 127.0.0.1
+Connected clients: 4
+[560] 540073 bytes sent (540073 KB/s)
+[560] socket closed after responded for 1 requests
+Connected clients: 4
+[564] request path: conSense/js/redSand/simpleClasses.js?random_suffix=1668782533
+[572] 65733 bytes sent (65733 KB/s)
+[572] socket closed after responded for 1 requests
+Connected clients: 3
+[580] 35871 bytes sent (35871 KB/s)
+[580] socket closed after responded for 1 requests
+Connected clients: 2
+[580] connection accepted
+[580] IP: 127.0.0.1
+Connected clients: 2
+[580] request path: conSense/js/redSand/redSandCore.js?random_suffix=2624495199
+[564] 234 bytes sent (234 KB/s)
+[580] 234 bytes sent (234 KB/s)
+[564] 63613 bytes sent (63613 KB/s)
+[564] socket closed after responded for 1 requests
+Connected clients: 2
+[580] 37890 bytes sent (37890 KB/s)
+[580] socket closed after responded for 1 requests
+Connected clients: 1
+[580] connection accepted
+[580] IP: 127.0.0.1
+Connected clients: 1
+[580] request path: conSense/js/conSense/conSense.js?random_suffix=596499053
+[580] 234 bytes sent (234 KB/s)
+[580] 53515 bytes sent (53515 KB/s)
+[580] socket closed after responded for 1 requests
+Connected clients: 1
+[532] connection accepted
+[532] IP: 127.0.0.1
+Connected clients: 1
+[532] request path: favicon.ico
+[532] Http file not found
+[532] socket closed after responded for 1 requests
+Connected clients: 1
+[532] connection accepted
+[532] IP: 127.0.0.1
+Connected clients: 1
+[592] connection accepted
+[592] IP: 127.0.0.1
+Connected clients: 2
+[532] request path: conSense/images/loader.gif
+[532] 218 bytes sent (218 KB/s)
+[532] 1862 bytes sent (1862 KB/s)
+[532] socket closed after responded for 1 requests
+Connected clients: 2
+[532] connection accepted
+[532] IP: 127.0.0.1
+Connected clients: 2
+[592] request path: conSense/images/headerBg.png
+[592] 217 bytes sent (217 KB/s)
+[592] 428 bytes sent (428 KB/s)
+[592] socket closed after responded for 1 requests
+Connected clients: 2
+[560] connection accepted
+[560] IP: 127.0.0.1
+Connected clients: 2
+[532] request path: conSense/images/orangeArrow.png
+[532] 217 bytes sent (217 KB/s)
+[532] 386 bytes sent (386 KB/s)
+[532] socket closed after responded for 1 requests
+Connected clients: 2
+[560] request path: pageN0002-grayscale/js/blueprint.js?random_suffix=2669402130
+[560] 231 bytes sent (231 KB/s)
+[560] 257 bytes sent (257 KB/s)
+[560] socket closed after responded for 1 requests
+Connected clients: 1
+[592] connection accepted
+[592] IP: 127.0.0.1
+Connected clients: 1
+[592] socket closed by client
+[592] socket closed after responded for 0 requests
+Connected clients: 1
+Cleaning up...

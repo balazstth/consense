@@ -42,6 +42,7 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
     .conSenseHeader {
         color: black;
         font-weight: bold;
+        margin-top: 3px;
         padding: 0 0 0 10px;
         border: 0;
         width: 700px;   /* 770-710 = 60 pixels are left for Switch */
@@ -54,6 +55,7 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
         color: black;
         text-align: right;
         text-decoration: underline;
+        margin-top: 3px;
         padding: 0 10px 0 0;
         border: 0;
         width: 60px;

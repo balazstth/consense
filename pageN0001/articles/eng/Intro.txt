@@ -1,4 +1,6 @@
 
+<p></p>
+
 <p>
     <b>2018-09-22: ConSense is being revived. That means linting and sorting out obvious problems. Using what still can be used. Having a look at what is still working ten years after! I was a very young man when I started working on ConSense - a brat, - let's see how it fares today. A fun project.</br>
     </br>

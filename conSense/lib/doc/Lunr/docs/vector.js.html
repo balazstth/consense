@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from lunrjs.com/docs/vector.js.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:39:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vector.js</title>
+
+    <script src="https://lunrjs.com/docs/scripts/prettify/prettify.js"> </script>
+    <script src="https://lunrjs.com/docs/scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://lunrjs.com/docs/styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="https://lunrjs.com/docs/styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: vector.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*!
+ * lunr.Vector
+ * Copyright (C) @YEAR Oliver Nightingale
+ */
+
+/**
+ * A vector is used to construct the vector space of documents and queries. These
+ * vectors support operations to determine the similarity between two documents or
+ * a document and a query.
+ *
+ * Normally no parameters are required for initializing a vector, but in the case of
+ * loading a previously dumped vector the raw elements can be provided to the constructor.
+ *
+ * For performance reasons vectors are implemented with a flat array, where an elements
+ * index is immediately followed by its value. E.g. [index, value, index, value]. This
+ * allows the underlying array to be as sparse as possible and still offer decent
+ * performance when being used for vector calculations.
+ *
+ * @constructor
+ * @param {Number[]} [elements] - The flat list of element index and element value pairs.
+ */
+lunr.Vector = function (elements) {
+  this._magnitude = 0
+  this.elements = elements || []
+}
+
+
+/**
+ * Calculates the position within the vector to insert a given index.
+ *
+ * This is used internally by insert and upsert. If there are duplicate indexes then
+ * the position is returned as if the value for that index were to be updated, but it
+ * is the callers responsibility to check whether there is a duplicate at that index
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.positionForIndex = function (index) {
+  // For an empty vector the tuple can be inserted at the beginning
+  if (this.elements.length == 0) {
+    return 0
+  }
+
+  var start = 0,
+      end = this.elements.length / 2,
+      sliceLength = end - start,
+      pivotPoint = Math.floor(sliceLength / 2),
+      pivotIndex = this.elements[pivotPoint * 2]
+
+  while (sliceLength > 1) {
+    if (pivotIndex &lt; index) {
+      start = pivotPoint
+    }
+
+    if (pivotIndex > index) {
+      end = pivotPoint
+    }
+
+    if (pivotIndex == index) {
+      break
+    }
+
+    sliceLength = end - start
+    pivotPoint = start + Math.floor(sliceLength / 2)
+    pivotIndex = this.elements[pivotPoint * 2]
+  }
+
+  if (pivotIndex == index) {
+    return pivotPoint * 2
+  }
+
+  if (pivotIndex > index) {
+    return pivotPoint * 2
+  }
+
+  if (pivotIndex &lt; index) {
+    return (pivotPoint + 1) * 2
+  }
+}
+
+/**
+ * Inserts an element at an index within the vector.
+ *
+ * Does not allow duplicates, will throw an error if there is already an entry
+ * for this index.
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @param {Number} val - The value to be inserted into the vector.
+ */
+lunr.Vector.prototype.insert = function (insertIdx, val) {
+  this.upsert(insertIdx, val, function () {
+    throw "duplicate index"
+  })
+}
+
+/**
+ * Inserts or updates an existing index within the vector.
+ *
+ * @param {Number} insertIdx - The index at which the element should be inserted.
+ * @param {Number} val - The value to be inserted into the vector.
+ * @param {function} fn - A function that is called for updates, the existing value and the
+ * requested value are passed as arguments
+ */
+lunr.Vector.prototype.upsert = function (insertIdx, val, fn) {
+  this._magnitude = 0
+  var position = this.positionForIndex(insertIdx)
+
+  if (this.elements[position] == insertIdx) {
+    this.elements[position + 1] = fn(this.elements[position + 1], val)
+  } else {
+    this.elements.splice(position, 0, insertIdx, val)
+  }
+}
+
+/**
+ * Calculates the magnitude of this vector.
+ *
+ * @returns {Number}
+ */
+lunr.Vector.prototype.magnitude = function () {
+  if (this._magnitude) return this._magnitude
+
+  var sumOfSquares = 0,
+      elementsLength = this.elements.length
+
+  for (var i = 1; i &lt; elementsLength; i += 2) {
+    var val = this.elements[i]
+    sumOfSquares += val * val
+  }
+
+  return this._magnitude = Math.sqrt(sumOfSquares)
+}
+
+/**
+ * Calculates the dot product of this vector and another vector.
+ *
+ * @param {lunr.Vector} otherVector - The vector to compute the dot product with.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.dot = function (otherVector) {
+  var dotProduct = 0,
+      a = this.elements, b = otherVector.elements,
+      aLen = a.length, bLen = b.length,
+      aVal = 0, bVal = 0,
+      i = 0, j = 0
+
+  while (i &lt; aLen &amp;&amp; j &lt; bLen) {
+    aVal = a[i], bVal = b[j]
+    if (aVal &lt; bVal) {
+      i += 2
+    } else if (aVal > bVal) {
+      j += 2
+    } else if (aVal == bVal) {
+      dotProduct += a[i + 1] * b[j + 1]
+      i += 2
+      j += 2
+    }
+  }
+
+  return dotProduct
+}
+
+/**
+ * Calculates the similarity between this vector and another vector.
+ *
+ * @param {lunr.Vector} otherVector - The other vector to calculate the
+ * similarity with.
+ * @returns {Number}
+ */
+lunr.Vector.prototype.similarity = function (otherVector) {
+  return this.dot(otherVector) / this.magnitude() || 0
+}
+
+/**
+ * Converts the vector to an array of the elements within the vector.
+ *
+ * @returns {Number[]}
+ */
+lunr.Vector.prototype.toArray = function () {
+  var output = new Array (this.elements.length / 2)
+
+  for (var i = 1, j = 0; i &lt; this.elements.length; i += 2, j++) {
+    output[j] = this.elements[i]
+  }
+
+  return output
+}
+
+/**
+ * A JSON serializable representation of the vector.
+ *
+ * @returns {Number[]}
+ */
+lunr.Vector.prototype.toJSON = function () {
+  return this.elements
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="https://lunrjs.com/docs/index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="https://lunrjs.com/docs/lunr.Builder.html">lunr.Builder</a></li><li><a href="https://lunrjs.com/docs/lunr.Index.html">lunr.Index</a></li><li><a href="https://lunrjs.com/docs/lunr.MatchData.html">lunr.MatchData</a></li><li><a href="https://lunrjs.com/docs/lunr.Pipeline.html">lunr.Pipeline</a></li><li><a href="https://lunrjs.com/docs/lunr.Query.html">lunr.Query</a></li><li><a href="https://lunrjs.com/docs/lunr.Set.html">lunr.Set</a></li><li><a href="https://lunrjs.com/docs/lunr.Token.html">lunr.Token</a></li><li><a href="https://lunrjs.com/docs/lunr.TokenSet.html">lunr.TokenSet</a></li><li><a href="https://lunrjs.com/docs/lunr.Vector.html">lunr.Vector</a></li></ul><h3>Namespaces</h3><ul><li><a href="https://lunrjs.com/docs/lunr.html">lunr</a></li><li><a href="https://lunrjs.com/docs/lunr.utils.html">lunr.utils</a></li></ul><h3>Interfaces</h3><ul><li><a href="https://lunrjs.com/docs/lunr.PipelineFunction.html">lunr.PipelineFunction</a></li></ul><h3><a href="https://lunrjs.com/docs/global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Sep 03 2018 19:49:14 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="https://lunrjs.com/docs/scripts/linenumber.js"> </script>
+</body>
+
+<!-- Mirrored from lunrjs.com/docs/vector.js.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:39:41 GMT -->
+</html>

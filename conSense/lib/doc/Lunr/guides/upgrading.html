@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  
+<!-- Mirrored from lunrjs.com/guides/upgrading.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:33:25 GMT -->
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Upgrading : Lunr</title>
+
+    <link href="../stylesheets/site-958a0798.css" rel="stylesheet" />
+
+    <script src="../../use.typekit.net/lem3gmz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25695442-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </head>
+
+  <body class="guides guides_upgrading">
+    <div class="container">
+      <nav>
+  <div class="content">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../docs/index.html">Docs</a></li>
+      <li><a href="getting_started.html">Guides</a></li>
+      <li><a href="https://olivernn.github.io/moonwalkers">Demo</a></li>
+      <li><a href="../../github.com/olivernn/lunr.html">Source</a></li>
+  </div>
+</nav>
+
+
+      <div class="content">
+        <div class="sidebar">
+          <ul>
+              <li class="">
+                  <a href="getting_started.html">Getting Started</a>
+                </li>
+              <li class="">
+                  <a href="core_concepts.html">Core Concepts</a>
+                </li>
+              <li class="">
+                  <a href="searching.html">Searching</a>
+                </li>
+              <li class="current">
+                  <a href="upgrading.html">Upgrading</a>
+                    <ul>
+<li>
+<a href="#index-building">Index Building</a>
+</li>
+<li>
+<a href="#searching">Searching</a>
+</li>
+<li>
+<a href="#pipeline-functions">Pipeline Functions</a>
+</li>
+</ul>
+
+                </li>
+              <li class="">
+                  <a href="index_prebuilding.html">Pre-building Indexes</a>
+                </li>
+              <li class="">
+                  <a href="customising.html">Customisation</a>
+                </li>
+              <li class="">
+                  <a href="language_support.html">Language Support</a>
+                </li>
+          </ul>
+        </div>
+
+
+        <article>
+          <h1 id="upgrading">Upgrading</h1>
+
+<p>The 2.x versions of Lunr have a similar interface to previous versions and therefore upgrading shouldn&rsquo;t require large changes in how searches are performed. There are differences in how indexes are built and serialised, and the interface required of pipeline functions. This guide will cover the major differences and show how to upgrade.</p>
+
+<h2 id="index-building">Index Building</h2>
+
+<p>The largest difference between 0.x/1.x and 2.x is that Lunr indexes are now <strong>immutable</strong>. Once they have been built, it is <em>not</em> possible to add, update or remove any documents in the index. All documents must have been added before the definition function exits.</p>
+
+<p>Previously adding documents to an index would look like this:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">ref</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">idx</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'hello'</span> <span class="p">})</span>
+</code></pre></div>
+<p>In 2.x the documents are added before the end of the configuration function:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">ref</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'hello'</span> <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2 id="searching">Searching</h2>
+
+<p>The search interface is backwards compatible with previous versions of Lunr. A search that worked in Lunr 0.x/1.x will continue to work in 2.x.</p>
+
+<p>The <em>behaviour</em> of the search has changed slightly, multi-term searches are now combined with OR, where they used to be combined with AND.</p>
+
+<p>Practically this change means that a given search will return more documents in 2.x than it did previously, with the most relevant results returned first.</p>
+
+<h2 id="pipeline-functions">Pipeline Functions</h2>
+
+<p>Previously, the interface required of pipeline functions was <em>very</em> simple; tokens were just strings. In Lunr 2.x, tokens are now represented by a <code>lunr.Token</code>.</p>
+
+<p>As an example, imagine a pipeline function that converts tokens to lower case (this isn&rsquo;t required but makes a simple example). In previous versions of Lunr this could be implemented like this:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">downcaser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">token</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>With Lunr 2.x this is only slightly more involved:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">downcaser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">token</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For more details on the new <code>lunr.Token</code> object see the API documentation.</p>
+
+        </article>
+      </div>
+    </div>
+  </body>
+
+<!-- Mirrored from lunrjs.com/guides/upgrading.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:33:25 GMT -->
+</html>

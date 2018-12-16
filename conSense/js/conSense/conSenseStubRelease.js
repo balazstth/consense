@@ -2,6 +2,7 @@
 // ConSense by Toth, Balazs Aladar (c) 2005-2018, for detailed licensing
 // information see conSense.js.
 // https://aladar.me/
+// Version in Changelog.txt
 //////////////////////////////////////////////////////////////////////////////
 
 // REDUNDANCY AND INCONSISTENCY WARNING WITH SIBLING STUB!
@@ -24,8 +25,6 @@ class Stub
         //////////////////////////////////////////////////////////////////////
         // Stub                                                Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.27";
-
         this.relativeConSensePath = relativeConSensePath;
         //////////////////////////////////////////////////////////////////////
 

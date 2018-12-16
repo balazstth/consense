@@ -3,8 +3,7 @@
 /* ConSense */
 /* For smooth scrolling globally */
 html {
-  scroll-behavior: smooth;
-}
+  scroll-behavior: smooth; }
 
 .conSenseContainer {
   font-family: "Cousine", "IBM Plex Mono", monospace;
@@ -24,73 +23,64 @@ html {
   filter: alpha(opacity=95);
   opacity: 0.95;
   -moz-opacity: 0.95;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
-}
-.conSenseContainer .conSenseHeader {
-  color: black;
-  font-weight: bold;
-  padding: 0 0 0 10px;
-  border: 0;
-  width: 700px;
-  /* 770-710 = 60 pixels are left for Switch */
-  height: 21px;
-  cursor: move;
-  float: left;
-}
-.conSenseContainer .conSenseHeaderSwitch {
-  color: black;
-  text-align: right;
-  text-decoration: underline;
-  padding: 0 10px 0 0;
-  border: 0;
-  width: 60px;
-  height: 21px;
-  cursor: pointer;
-  float: right;
-}
-.conSenseContainer .conSenseInnerContainer {
-  width: 780px;
-  height: 429px;
-  overflow: auto;
-  float: left;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseOut {
-  margin: 10px 10px 0;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlight {
-  background: #AAAAAA;
-  font-weight: bold;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlightAppendLink {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntry {
-  padding: 0;
-  margin: 0 0 2px 40px;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntryHead {
-  margin-left: -20px;
-}
-.conSenseContainer .conSenseInnerContainer .conSenseIn {
-  background-color: white;
-  color: black;
-  border: 3px solid white;
-  margin: 5px 0 5px 10px;
-  padding: 0;
-  width: 680px;
-  /* Input slot */
-}
-.conSenseContainer .conSenseInnerContainer .conSenseCounter {
-  background-color: white;
-  color: black;
-  border: 3px solid white;
-  margin: 5px 5px 0;
-  padding: 0px;
-  width: 38px;
-  /* Counter slot */
-}
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75); }
+  .conSenseContainer .conSenseHeader {
+    color: black;
+    font-weight: bold;
+    margin-top: 3px;
+    padding: 0 0 0 10px;
+    border: 0;
+    width: 700px;
+    /* 770-710 = 60 pixels are left for Switch */
+    height: 21px;
+    cursor: move;
+    float: left; }
+  .conSenseContainer .conSenseHeaderSwitch {
+    color: black;
+    text-align: right;
+    text-decoration: underline;
+    margin-top: 3px;
+    padding: 0 10px 0 0;
+    border: 0;
+    width: 60px;
+    height: 21px;
+    cursor: pointer;
+    float: right; }
+  .conSenseContainer .conSenseInnerContainer {
+    width: 780px;
+    height: 429px;
+    overflow: auto;
+    float: left; }
+    .conSenseContainer .conSenseInnerContainer .conSenseOut {
+      margin: 10px 10px 0; }
+      .conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlight {
+        background: #AAAAAA;
+        font-weight: bold; }
+      .conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseHighlightAppendLink {
+        color: white;
+        text-decoration: none;
+        font-weight: bold; }
+      .conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntry {
+        padding: 0;
+        margin: 0 0 2px 40px; }
+      .conSenseContainer .conSenseInnerContainer .conSenseOut .conSenseManualEntryHead {
+        margin-left: -20px; }
+    .conSenseContainer .conSenseInnerContainer .conSenseIn {
+      background-color: white;
+      color: black;
+      border: 3px solid white;
+      margin: 5px 0 5px 10px;
+      padding: 0;
+      width: 680px;
+      /* Input slot */ }
+    .conSenseContainer .conSenseInnerContainer .conSenseCounter {
+      background-color: white;
+      color: black;
+      border: 3px solid white;
+      margin: 5px 5px 0;
+      padding: 0px;
+      width: 38px;
+      /* Counter slot */ }
 
 .loadIndicator {
   font-family: "Cousine", "IBM Plex Mono", monospace;
@@ -110,8 +100,7 @@ html {
   left: 0px;
   top: 0px;
   width: 16px;
-  height: 16px;
-}
+  height: 16px; }
 
 .inputBlocker {
   display: none;
@@ -126,8 +115,7 @@ html {
   /* Alpha settings for different browsers */
   filter: alpha(opacity=20);
   opacity: 0.2;
-  -moz-opacity: 0.2;
-}
+  -moz-opacity: 0.2; }
 
 /* ------------------------------------------------------------------------ */
 

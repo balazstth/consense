@@ -6,80 +6,68 @@ body {
   font-weight: normal;
   line-height: 1.5;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 pre {
   font-family: "Cousine", "IBM Plex Mono", monospace;
   font-size: 1em;
   font-weight: normal;
-  line-height: 1.5;
-}
+  line-height: 1.5; }
 
 p {
   margin: 0px 0px 20px;
-  padding: 0px;
-}
+  padding: 0px; }
 
 a {
   color: black;
   text-decoration: none;
-  font-weight: bold;
-}
+  font-weight: bold; }
 
 .wrapper1 {
-  text-align: center;
-}
-.wrapper1 .wrapper2 {
-  text-align: justify;
-  margin: auto;
-  width: 720px;
-}
-.wrapper1 .wrapper2 .left {
-  float: left;
-  width: 572px;
-  margin: 0px;
-  padding: 20px 0px;
-}
-.wrapper1 .wrapper2 .right {
-  float: right;
-  width: 128px;
-  margin: 0px;
-  padding: 20px 0px;
-}
+  text-align: center; }
+  .wrapper1 .wrapper2 {
+    text-align: justify;
+    margin: auto;
+    width: 720px; }
+    .wrapper1 .wrapper2 .left {
+      float: left;
+      width: 572px;
+      margin: 0px;
+      padding: 20px 0px; }
+    .wrapper1 .wrapper2 .right {
+      float: right;
+      width: 128px;
+      margin: 0px;
+      padding: 20px 0px; }
 
 .mainMenuContainer {
   background: white;
   text-align: left;
   margin: 0;
-  padding: 0;
-}
-.mainMenuContainer .mainMenuItem {
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  margin: 0 40px 0 0;
-  padding: 2px;
-  border-left: 2px dotted black;
-  border-bottom: 2px dotted black;
-}
-.mainMenuContainer .mainMenuItemSelected {
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  margin: 0 40px 0 0;
-  padding: 2px;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
-}
+  padding: 0; }
+  .mainMenuContainer .mainMenuItem {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin: 0 40px 0 0;
+    padding: 2px;
+    border-left: 2px dotted black;
+    border-bottom: 2px dotted black; }
+  .mainMenuContainer .mainMenuItemSelected {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin: 0 40px 0 0;
+    padding: 2px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black; }
 
 .contentContainer {
   background: white;
   margin: 20px 0;
   padding: 2px;
   border-top: 2px solid black;
-  border-left: 2px solid black;
-}
+  border-left: 2px solid black; }
 
 .copyright {
   background: white;
@@ -87,11 +75,9 @@ a {
   font-size: 10px;
   text-align: left;
   margin: 0;
-  padding: 0;
-}
-.copyright .copyrightLink {
-  color: silver;
-  font-weight: normal;
-}
+  padding: 0; }
+  .copyright .copyrightLink {
+    color: silver;
+    font-weight: normal; }
 
 /*# sourceMappingURL=page.css.map */

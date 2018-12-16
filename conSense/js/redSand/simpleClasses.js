@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.29";
+const simpleClassesVersion = "1.30";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -881,6 +881,7 @@ class SimpleUtilities
     // (str)x://y --> <a href="x://y">str</a>
     // x://y --> <a href="x://y">x://y</a>
     // x@y   --> <a href="mailto:x@y">x@y</a>
+    // #str# --> <b>str</b>
     // *str* --> <em>str</em>
     // _str_ --> <cite>str</cite>
     // ==> --> <p>
@@ -1000,11 +1001,26 @@ class SimpleUtilities
 
         //--------------------------------------------------------------------
 
+        // # --> bold
+        //
+        // Correct use: bla #bla habla# bla
+        //          	<tag>#bla habla#<tag>
+        // 
+        // Incorrect:   bla #bla habla#.
+        //              bla # habla # bla        
+        regexp = new RegExp("(>|\\s|^)#([^#\\s][^#]*[^#\\s]|[^#\\s])#(<|\\s|$)", "");
+        replacement = "$1<b>$2</b>$3";
+        text = this.replaceLoop(regexp, replacement, text);
+
+        //--------------------------------------------------------------------
+
         // * --> em
-        // Right:   bla *bla habla* bla
-        //          <tag>*bla habla*<tag>
-        // Wrong:   bla *bla habla*.
-        //          bla * habla * bla
+        //
+        // Correct use: bla *bla habla* bla
+        //              <tag>*bla habla*<tag>
+        //
+        // Incorrect:   bla *bla habla*.
+        //              bla * habla * bla
         regexp = new RegExp("(>|\\s|^)\\*([^\*\\s][^\*]*[^\*\\s]|[^\*\\s])\\*(<|\\s|$)", "");
         replacement = "$1<em>$2</em>$3";
         text = this.replaceLoop(regexp, replacement, text);
@@ -1012,10 +1028,12 @@ class SimpleUtilities
         //--------------------------------------------------------------------
 
         // _ --> cite
-        // Right:   bla _bla habla_ bla
-        //          <tag>_blabla_</tag>
-        // Wrong:   bla _bla habla_.
-        //          bla _ habla _ bla
+        //
+        // Correct use: bla _bla habla_ bla
+        //              <tag>_blabla_</tag>
+        //
+        // Incorrect:   bla _bla habla_.
+        //              bla _ habla _ bla
         regexp = new RegExp("(>|\\s|^)_([^_\\s][^_]*[^_\\s]|[^_\\s])_(<|\\s|$)", "");
         replacement = "$1<cite>$2</cite>$3";
         text = this.replaceLoop(regexp, replacement, text);

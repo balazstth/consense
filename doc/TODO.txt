@@ -1,0 +1,96 @@
+<pre>
+//////////////////////////////////////////////////////////////////////////////
+// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
+// TODO
+// v1.01
+// https://aladar.me/
+//////////////////////////////////////////////////////////////////////////////
+
+Legend
+------
+- important / severe
++ nice to have
+~ future feature
+x closed
+* any
+ticket count 0035
+
+TODO
+----
+
+- [0035] [2018-11-14] Revisit load(). Which namespace does it load into, what is the
+                      lifespan?
+- [0019] [2018-10-04] RedSand/OS: Windowing system with text mode or empty windows,
+                      an evolution of windowlets. Materialize? Velocity? Backbone?
+
++ [0034] [2018-10-28] display e.g. poems or paragraphs on dynamically generated background
+                      colors per paragraph, gradient
++ [0029] [2018-10-25] general one-liner game / demo runner?
++ [0028] [2018-10-25] GAME: some nice fire
++ [0027] [2018-10-25] GAME: spinning CSS cube
++ [0026] [2018-10-25] GAME: 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+                      see 10_PRINT_121114.pdf
++ [0015] [2018-10-01] AJAX loader, investigate if it can completely replace the IFrame
+                      loader. If so, make it invisible through RedSendGenericLoader.
+                      That might bring back full IE compatibility, too.
+                      Update:
+                      IFrame loader --> fetch()
++ [0017] [2018-10-04] Load timeout handling
++ [0004] [2018-09-23] Include in an include: the ability to load content from within a loaded
+                      content. E.g. load injectCommand.js directly from intro.txt, not from
+                      index.html
++ [0005] [2018-09-23] Warning message in FF when dynamically loading content:
+                      "The character encoding of a framed document was not declared.
+                      The document may appear different if viewed without the document
+                      framing it."
+                      An ability to set encoding and MIME type for loaded files.
+
+~ [0008] [2018-09-23] RedSandText: new feature, text mode windows
+                      an old school text mode interface to implement an editor or anything
+                      (Maybe BiturboVision?)
+~ [0018] [2018-09-23] RedSandAutoMenu: Dynamically populated navigation menus for RedSand
+~ [0006] [2018-09-23] RedSand/GL: vector and pixel features in windowlets
+~ [0007] [2018-09-23] RedSand/GL: game loop
+~ [0020] [2018-10-04] Dice roller with CSS 3D
+                      URL parameters to determine dice to roll
+
+Done
+----
+x [0003] [2018-09-23] LightDown on loaded pages, e.g. in the Tests article
+x [0010] [2018-09-27] Option / default to skip the cache when dynamically loading !
+x [0001] [2018-09-23] Reloading the page does not reload content
+x [0002] [2018-09-23] Fix dynamic content loading in Chrome
+                      (It was the onLoad callback being called before adding a src URL to the
+                      new IFrame.)
+x [0012] [2018-09-30] Won't fix: hasOwnProperty() list() in ConSense, show only own properties
+x [0014] [2018-10-01] Page reload sometimes does not reload the dynamic content
+x [0009] [2018-09-27] Won't fix: Responsive design for mobile screens.
+                      Comes naturally with Materialize or another framework.
+x [0016] [2018-10-01] Won't fix, covered in [0019]:
+                      Thinking about including Materialize and Velocity
+x [0011] [2018-09-30] Covered in [0008]: BiturboVision as a TurboVision port?
+x [0022] [2018-10-09] Release minifier temporarily disabled, TODO: find one that supports ES6
+x [0024] [2018-10-13] add draggable() to SimpleUtilities
+x [0023] [2018-10-13] add Sass/Scss and Bulma
+x [0025] [2018-10-13] add local storage functions to SimpleUtilities
+x [0030] [2018-10-25] add standard smooth scroll
+x [0022] [2018-10-11] WONTFIX: add Bootstrap and/or Materialize, added Bulma instead
+x [0031] [2018-10-27] hash change watchdog: setInterval() --> window.onhashchange()
+                      setInterval() stays as compatibility mode
+x [0021] [2018-10-09] Fixxt': now full anchor link support
+                      When Ctrl+clicking an anchor link the new tab cannot load
+                      url#anchor since #... denotes an article to be loaded. Works in
+                      the original page though (simple clicking of the link).
+                      ALSO: when reloading url#anchor the page may fail to load (may
+                      think it is a navlink), so: add a prefix to navlinks! e.g. "nl-".
+                      In a nutshell: add better anchor support,
+                          load article,
+                          scroll to anchor after article load
+x [0032] [2018-10-28] add "404" page for unknown articles
+x [0033] [2018-10-28] global keyboard shortcuts to navigate on the page
+                          0% (top), 10%, 20%... 100% (bottom)
+                          also horizontally
+                          also shortcuts to add or remove empty space to the page
+                          maybe re [0019], RedSand/OS
+
+</pre>
