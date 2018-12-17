@@ -104,14 +104,14 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
-	// Example:
+        // Example:
     // const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
-	// const newFunc = pipe(fn1, fn2, fn3);
-	// const result = newFunc(arg);
-	pipe(...fns)
-	{
-		return x => fns.reduce((y, f) => f(y), x);
-	}
+        // const newFunc = pipe(fn1, fn2, fn3);
+        // const result = newFunc(arg);
+        pipe(...fns)
+        {
+                return x => fns.reduce((y, f) => f(y), x);
+        }
 
     //------------------------------------------------------------------------
 
@@ -1004,7 +1004,7 @@ class SimpleUtilities
         // # --> bold
         //
         // Correct use: bla #bla habla# bla
-        //          	<tag>#bla habla#<tag>
+        //              <tag>#bla habla#<tag>
         // 
         // Incorrect:   bla #bla habla#.
         //              bla # habla # bla        
@@ -1061,14 +1061,14 @@ class SimpleUtilities
         // (thumbnail)(CSSClass)relativePath >>> target
         //     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
         // requires a class definition in the document CSS (not mandatory)
-	regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
-	replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
-	text2 = text;
-	do {
-	    text = text2;
-	    text2 = text.replace(regexp, replacement);
-	} while (text2 !== text);
-	
+        regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
+        replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
+        text2 = text;
+        do {
+            text = text2;
+            text2 = text.replace(regexp, replacement);
+        } while (text2 !== text);
+        
         //--------------------------------------------------------------------
 
         return text;
@@ -1288,7 +1288,7 @@ class SimpleCryptography
     // Apparently RC4 cipher
     RC4Encrypt(password, data)
     {
-        let buf = new Array(256);	// 256B cipher buffer
+        let buf = new Array(256);       // 256B cipher buffer
 
         let passwordLength = password.length;
         let dataLength = data.length;
