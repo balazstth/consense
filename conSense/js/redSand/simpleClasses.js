@@ -1057,18 +1057,18 @@ class SimpleUtilities
         replacement = '$1<img class="$2" src="$3"/>$4';
         text = this.replaceLoop(regexp, replacement, text);
 
-	//--------------------------------------------------------------------
-	// (thumbnail)(CSSClass)relativePath >>> target
-	//     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
-	// requires a class definition in the document CSS (not mandatory)
-        regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
-        replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
-        text2 = text;
-        do {
+        //--------------------------------------------------------------------
+        // (thumbnail)(CSSClass)relativePath >>> target
+        //     --> <a href="target"><img class="CSSClass" src="relativePath"/></a>
+        // requires a class definition in the document CSS (not mandatory)
+	regexp = new RegExp("(>|\\s|^)\\(thumbnail\\)\\((.*)\\)([^<\\s]*)\\s+>>>\\s+(.*)(<|\\s|$)", "");
+	replacement = '$1<a href="$4"><img class="$2" src="$3"/></a>$5';
+	text2 = text;
+	do {
 	    text = text2;
 	    text2 = text.replace(regexp, replacement);
-        } while (text2 !== text);
-
+	} while (text2 !== text);
+	
         //--------------------------------------------------------------------
 
         return text;
