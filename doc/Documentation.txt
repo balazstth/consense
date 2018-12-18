@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
 // Documentation
-// v2.06
+// v2.07
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -18,6 +18,8 @@
      o Libraries / Core
      o Libraries / Optional
      o Libraries / Even more optional
+     o Fonts
+     o Themes
 
 () Technical documentation
      o Keyboard shortcuts
@@ -116,7 +118,7 @@ o Libraries / Even more optional (Not loaded by the stub. Load them via
                                   document header.
                              
 // Like Bootstrap
-bulma.io v0.7.1      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
+bulma.io v0.7.2      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 // Full text search
 lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com
 // Animation library
@@ -128,6 +130,19 @@ chiptune2.js         (c) The chiptune2.js contributers
                            @ https://github.com/deskjet/chiptune2.js/
 // Game programming library
 Phaser 3.14.0        (c) Photon Storm Ltd. @ http://phaser.io/
+
+o Fonts
+-------
+
+Fira Code            (c) Various copyright holders 
+                         @ https://github.com/tonsky/FiraCode 
+Hack                 (c) Source Foundry Authors 
+                         @ https://github.com/source-foundry/Hack 
+                         
+o Themes
+--------
+
+Lumen-Bulma          (c) Jenil Gogari @ https://jgog.in/
 
 
 //============================================================================

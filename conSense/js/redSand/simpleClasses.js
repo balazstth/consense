@@ -104,6 +104,7 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
+    // SimpleUtilities
     // Example:
     // const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
     // const newFunc = pipe(fn1, fn2, fn3);

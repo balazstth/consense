@@ -1,0 +1,10 @@
+html {
+  font-size: 15px; }
+
+body {
+  font-family: "Fira Code", "Hack", monospace;
+  text-align: left;
+  font-feature-settings: "calt" 1;
+  text-rendering: optimizeLegibility; }
+
+/*# sourceMappingURL=grayscale.css.map */

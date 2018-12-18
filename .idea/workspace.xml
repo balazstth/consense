@@ -1,0 +1,2430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5bfc0fe3-9a88-48ec-ab58-713b5a6afe8b" name="Default" comment="many changes, project architecture / layout also changed">
+      <change beforePath="$PROJECT_DIR$/.rj/ConSense.data" beforeDir="false" afterPath="$PROJECT_DIR$/.rj/ConSense.data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conSense/js/redSand/simpleClasses.js" beforeDir="false" afterPath="$PROJECT_DIR$/conSense/js/redSand/simpleClasses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conSense/lib/optional/bulma.css" beforeDir="false" afterPath="$PROJECT_DIR$/conSense/lib/optional/bulma.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Documentation.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Documentation.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexN0002-grayscale.html" beforeDir="false" afterPath="$PROJECT_DIR$/indexN0002-grayscale.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pageN0002-grayscale/style/page.css" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>container</find>
+      <find>getBoundingClientRect</find>
+      <find>scroll.to</find>
+      <find>scrollTo</find>
+      <find>RedSandHashHandler</find>
+      <find>setinter</find>
+      <find>iframe</find>
+      <find>3</find>
+      <find>31</find>
+      <find>onhashchan</find>
+      <find>lite</find>
+      <find>teaer</find>
+      <find>simpleclasses</find>
+      <find>hash2Array</find>
+      <find>array2Hash</find>
+      <find>array</find>
+      <find>key</find>
+      <find>EY_MAP</find>
+      <find>kd</find>
+      <find>redSandVersion</find>
+      <find>consense</find>
+      <find>redsandcorever</find>
+      <find>2.)</find>
+      <find>hun</find>
+      <find>tab</find>
+      <find>RedSand</find>
+      <find>redSandGenericLoader</find>
+      <find>&gt;&gt;&gt;</find>
+      <find>load re</find>
+      <find>javaScriptEvaluatorCallback</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>!==</replace>
+      <replace>[]</replace>
+      <replace>edSandGenericLoader</replace>
+      <replace>items</replace>
+      <replace>\</replace>
+      <replace>text === text2</replace>
+      <replace>cool$1 =</replace>
+      <replace>$1(</replace>
+      <replace>}</replace>
+      <replace>$1</replace>
+      <replace>variable</replace>
+      <replace>pageN0001</replace>
+      <replace>let</replace>
+      <replace>hash2Object</replace>
+      <replace>object2Hash</replace>
+      <replace>redSandCoreVersion</replace>
+      <replace>Grayscale</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Code\ConSense</dir>
+      <dir>D:\Code\ConSense</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Code/AladarEdit" value="PREVIEW" />
+        <entry key="$USER_HOME$/Code/AladarToolbox" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/conSense/scripts/build-old.sh" />
+        <option value="$PROJECT_DIR$/page-v2/js/blueprint.js" />
+        <option value="$PROJECT_DIR$/conSense/doc/Tests.txt" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/articles/eng/Intro.txt" />
+        <option value="$PROJECT_DIR$/page/css/page.css" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/page/js/page.js" />
+        <option value="$PROJECT_DIR$/reference/tests/es6Test.js" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/js/blueprint.js" />
+        <option value="$PROJECT_DIR$/conSense/tests/conSense.html" />
+        <option value="$PROJECT_DIR$/conSense/tests/redSandGLTest0.html" />
+        <option value="$PROJECT_DIR$/conSense/tests/redSandCoreTest0.html" />
+        <option value="$PROJECT_DIR$/sandbox/tests/es6Test.js" />
+        <option value="$PROJECT_DIR$/conSense/lib/doc/dom-drag.txt" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/css/page.css" />
+        <option value="$PROJECT_DIR$/conSense/lib/sprintf.js" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/articles/eng/Contact.txt" />
+        <option value="$PROJECT_DIR$/conSense/lib/sass/browser-scss.js" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/style/test.scss" />
+        <option value="$PROJECT_DIR$/index-2018-10-05.html" />
+        <option value="$PROJECT_DIR$/page-2018-10-05/style/page.scss" />
+        <option value="$PROJECT_DIR$/index#0001.html" />
+        <option value="$PROJECT_DIR$/conSense/js/redSand/redSandGL.js" />
+        <option value="$PROJECT_DIR$/testingField/tests/es6Generator.js" />
+        <option value="$PROJECT_DIR$/testingField/tests/es6Test.js" />
+        <option value="$PROJECT_DIR$/testingField/tests/es7Test.js" />
+        <option value="$PROJECT_DIR$/testingField/tests/es8Test.js" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/pageN0001/articles/eng/404.txt" />
+        <option value="$PROJECT_DIR$/conSense/scripts/pack.bat" />
+        <option value="$PROJECT_DIR$/conSense/scripts/minify-sources.bat" />
+        <option value="$PROJECT_DIR$/pageN0001/js/blueprint.js" />
+        <option value="$PROJECT_DIR$/indexN0001.html" />
+        <option value="$PROJECT_DIR$/conSense/lib/keydrown.js" />
+        <option value="$PROJECT_DIR$/pageN0001/articles/eng/Intro.txt" />
+        <option value="$PROJECT_DIR$/conSense/js/conSense/conSenseStubRelease.js" />
+        <option value="$PROJECT_DIR$/conSense/js/micros/monthCal.js" />
+        <option value="$PROJECT_DIR$/conSense/scripts/build.bat" />
+        <option value="$PROJECT_DIR$/conSense/js/conSense/conSenseStubDebug.js" />
+        <option value="$PROJECT_DIR$/conSense/style/conSense.scss" />
+        <option value="$PROJECT_DIR$/conSense/js/minis/monthCal.js" />
+        <option value="$PROJECT_DIR$/conSense/doc/Documentation.txt" />
+        <option value="$PROJECT_DIR$/conSense/doc/TODO.txt" />
+        <option value="$PROJECT_DIR$/conSense/js/conSense/conSense.js" />
+        <option value="$PROJECT_DIR$/conSense/js/redSand/redSandOS.js" />
+        <option value="$PROJECT_DIR$/conSense/js/minis/monthTable.js" />
+        <option value="$PROJECT_DIR$/conSense/js/minis/calendarMonth.js" />
+        <option value="$PROJECT_DIR$/conSense/js/minis/monthlyCalendar.js" />
+        <option value="$PROJECT_DIR$/conSense/js/redSand/redSandCore.js" />
+        <option value="$PROJECT_DIR$/conSense/doc/Changelog.txt" />
+        <option value="$PROJECT_DIR$/conSense/js/redSand/simpleClasses.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ConSense" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConSense" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Code\ConSense\page-2018-10-05\style" />
+      <recent name="C:\Code\ConSense\scripts" />
+      <recent name="C:\Code\ConSense\articles" />
+      <recent name="C:\Code\ConSense" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Code\ConSense\conSense\lib" />
+      <recent name="C:\Code\ConSense\page-2018-10-05\style" />
+      <recent name="C:\Code\ConSense\sandbox" />
+      <recent name="C:\Code\ConSense\page-2018-10-05\articles\eng" />
+      <recent name="C:\Code\ConSense\conSense\doc" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.es6Test.js">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JettyConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Jetty 9.4.12.v201808301" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <file path="$PROJECT_DIR$">
+          <settings DEPLOYMENT_METHOD="contexts" />
+        </file>
+      </deployment>
+      <server-settings>
+        <data>
+          <option name="configFiles">
+            <list>
+              <JettyConfigFile>
+                <option name="path" value="modules\acceptratelimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\annotations.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi1.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\client.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\connectionlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\conscrypt.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\console-capture.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\continuation.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debug.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debuglog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\deploy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ext.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\fcgi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\flight-recorder.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud-datastore.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\global-webapp-common.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gzip.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hawtio.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-embedded-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-remote-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\home-base-warning.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\https.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ipaccess.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaas.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jamon.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaspi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jcl-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jminix.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jndi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jolokia.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jvm.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-access.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jetty.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\lowresources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\mail.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\plus.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol-ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\quickstart.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\requestlog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\resources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-compactpath.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-customizer.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\security.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\server.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlet.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlets.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-hash.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-null.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-cache.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-file.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-jdbc.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-mongo.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\setuid.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-simple-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\spring.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stats.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stop.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadpool.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\transactions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-secure.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\webapp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\websocket.mod" />
+              </JettyConfigFile>
+            </list>
+          </option>
+          <option name="myConfigFiles">
+            <list>
+              <JettyConfigFile>
+                <option name="path" value="modules\acceptratelimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\annotations.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi1.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\client.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\connectionlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\conscrypt.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\console-capture.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\continuation.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debug.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debuglog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\deploy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ext.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\fcgi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\flight-recorder.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud-datastore.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\global-webapp-common.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gzip.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hawtio.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-embedded-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-remote-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\home-base-warning.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\https.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ipaccess.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaas.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jamon.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaspi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jcl-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jminix.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jndi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jolokia.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jvm.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-access.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jetty.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\lowresources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\mail.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\plus.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol-ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\quickstart.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\requestlog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\resources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-compactpath.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-customizer.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\security.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\server.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlet.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlets.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-hash.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-null.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-cache.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-file.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-jdbc.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-mongo.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\setuid.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-simple-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\spring.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stats.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stop.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadpool.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\transactions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-secure.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\webapp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\websocket.mod" />
+              </JettyConfigFile>
+            </list>
+          </option>
+        </data>
+      </server-settings>
+      <predefined_log_file id="Jetty" enabled="true" />
+    </configuration>
+    <configuration name="jetty" type="JettyConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Jetty 9.4.12.v201808301" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <file path="$PROJECT_DIR$">
+          <settings DEPLOYMENT_METHOD="contexts" />
+        </file>
+      </deployment>
+      <server-settings>
+        <data>
+          <option name="configFiles">
+            <list>
+              <JettyConfigFile>
+                <option name="path" value="modules\acceptratelimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\annotations.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi1.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\client.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\connectionlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\conscrypt.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\console-capture.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\continuation.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debug.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debuglog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\deploy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ext.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\fcgi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\flight-recorder.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud-datastore.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\global-webapp-common.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gzip.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hawtio.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-embedded-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-remote-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\home-base-warning.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\https.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ipaccess.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaas.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jamon.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaspi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jcl-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jminix.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jndi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jolokia.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jvm.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-access.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jetty.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\lowresources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\mail.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\plus.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol-ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\quickstart.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\requestlog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\resources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-compactpath.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-customizer.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\security.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\server.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlet.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlets.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-hash.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-null.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-cache.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-file.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-jdbc.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-mongo.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\setuid.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-simple-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\spring.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stats.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stop.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadpool.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\transactions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-secure.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\webapp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\websocket.mod" />
+              </JettyConfigFile>
+            </list>
+          </option>
+          <option name="myConfigFiles">
+            <list>
+              <JettyConfigFile>
+                <option name="path" value="modules\acceptratelimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\alpn.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\annotations.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\apache-jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi1.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\cdi2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\client.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\connectionlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\conscrypt.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\console-capture.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\continuation.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debug.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\debuglog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\deploy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ext.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\fcgi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\flight-recorder.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud-datastore.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\global-webapp-common.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\gzip.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hawtio.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-embedded-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\hazelcast-remote-sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\home-base-warning.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\https.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ipaccess.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaas.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jamon.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jaspi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jcl-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jminix.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jmx.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jndi.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jolokia.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jsp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jstl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jul-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\jvm.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\log4j2-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-access.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logback-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jetty.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\logging-slf4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\lowresources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\mail.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\plus.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol-ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\proxy.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\quickstart.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\requestlog.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\resources.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-compactpath.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite-customizer.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\rewrite.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\security.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\server.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlet.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\servlets.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-hash.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-cache-null.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-cache.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-file.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-gcloud.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-hazelcast-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-embedded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote-910.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-infinispan-remote.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-jdbc.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\session-store-mongo.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\sessions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\setuid.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-api.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-jul.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-log4j2.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-logback.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\slf4j-simple-impl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\spring.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\ssl.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stats.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\stop.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadlimit.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\threadpool.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\transactions.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-forwarded.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-http2c.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-proxy-protocol.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket-secure.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\unixsocket.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\webapp.mod" />
+              </JettyConfigFile>
+              <JettyConfigFile>
+                <option name="path" value="modules\websocket.mod" />
+              </JettyConfigFile>
+            </list>
+          </option>
+        </data>
+      </server-settings>
+      <predefined_log_file id="Jetty" enabled="true" />
+      <ConfigurationWrapper VM_VAR="" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+    </configuration>
+    <configuration name="es6Test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/testingField/tests/es6Test.js" working-dir="$PROJECT_DIR$/testingField/tests" />
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Jetty Server.jetty" />
+      <item itemvalue="Node.js.es6Test.js" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.es6Test.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5bfc0fe3-9a88-48ec-ab58-713b5a6afe8b" name="Default" comment="" />
+      <created>1537575633827</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1537575633827</updated>
+      <workItem from="1537575636385" duration="32000" />
+      <workItem from="1537576663882" duration="59250000" />
+      <workItem from="1538347857931" duration="33858000" />
+      <workItem from="1538606110823" duration="14980000" />
+      <workItem from="1538702370766" duration="53983000" />
+      <workItem from="1539394128362" duration="22474000" />
+      <workItem from="1539471540405" duration="5979000" />
+      <workItem from="1539477958291" duration="73205000" />
+      <workItem from="1541812263796" duration="9638000" />
+      <workItem from="1542192116662" duration="5087000" />
+      <workItem from="1542309263409" duration="607000" />
+      <workItem from="1542378555890" duration="9537000" />
+      <workItem from="1544006508562" duration="4032000" />
+      <workItem from="1544019953838" duration="1363000" />
+      <workItem from="1544036539951" duration="638000" />
+      <workItem from="1544833892313" duration="1150000" />
+      <workItem from="1544839723596" duration="3688000" />
+      <workItem from="1545076249417" duration="161000" />
+      <workItem from="1545090031824" duration="75000" />
+      <workItem from="1545090150537" duration="400000" />
+    </task>
+    <task id="LOCAL-00001" summary="ConSense initial commit">
+      <created>1538588823676</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538588823676</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ConSense added resources">
+      <created>1538601640385</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1538601640385</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ConSense release added">
+      <created>1538605069742</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1538605069742</updated>
+    </task>
+    <task id="LOCAL-00004" summary="7z .git ignore added">
+      <created>1538605544678</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1538605544678</updated>
+    </task>
+    <task id="LOCAL-00005" summary="release">
+      <created>1538606308744</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1538606308744</updated>
+    </task>
+    <task id="LOCAL-00006" summary="changes">
+      <created>1538670014466</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1538670014466</updated>
+    </task>
+    <task id="LOCAL-00007" summary="project structure reorganized, better separation">
+      <created>1538702586533</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1538702586533</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixes">
+      <created>1538774307905</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1538774307905</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixes">
+      <created>1538774695366</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1538774695366</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix">
+      <created>1538774749156</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1538774749157</updated>
+    </task>
+    <task id="LOCAL-00011" summary="--&gt; EcmaScript 6 and various changes">
+      <created>1539107514692</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1539107514692</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Reorganization, minifier temporarily disabled">
+      <created>1539114906125</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1539114906125</updated>
+    </task>
+    <task id="LOCAL-00013" summary="-sprintf, -shortcut, +keydrown, +minify">
+      <created>1539131416983</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1539131416983</updated>
+    </task>
+    <task id="LOCAL-00014" summary="conSense_release_compressed.js">
+      <created>1539131559523</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1539131559523</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update">
+      <created>1539131668500</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1539131668500</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update">
+      <created>1539132926010</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1539132926010</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update">
+      <created>1539132944345</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1539132944345</updated>
+    </task>
+    <task id="LOCAL-00018" summary="move to GitHub Pages">
+      <created>1539164318973</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1539164318973</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fixes, lib refactor, lib doc added, build refactor">
+      <created>1539465605440</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1539465605440</updated>
+    </task>
+    <task id="LOCAL-00020" summary="drag beautify">
+      <created>1539466001986</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1539466001986</updated>
+    </task>
+    <task id="LOCAL-00021" summary="css --&gt; scss, page naming convention changed">
+      <created>1539477898438</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1539477898438</updated>
+    </task>
+    <task id="LOCAL-00022" summary="readme update">
+      <created>1539478035470</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1539478035470</updated>
+    </task>
+    <task id="LOCAL-00023" summary="readme update">
+      <created>1539478108984</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1539478108984</updated>
+    </task>
+    <task id="LOCAL-00024" summary="update">
+      <created>1539478306190</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1539478306190</updated>
+    </task>
+    <task id="LOCAL-00025" summary="css fix">
+      <created>1539515416098</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1539515416098</updated>
+    </task>
+    <task id="LOCAL-00026" summary="css fix">
+      <created>1539515838110</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1539515838111</updated>
+    </task>
+    <task id="LOCAL-00027" summary="css fix">
+      <created>1539517053083</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1539517053083</updated>
+    </task>
+    <task id="LOCAL-00028" summary="SimpleStorage, inspection change">
+      <created>1539565630311</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1539565630311</updated>
+    </task>
+    <task id="LOCAL-00029" summary="typo fix">
+      <created>1539565977502</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1539565977502</updated>
+    </task>
+    <task id="LOCAL-00030" summary="small fix, smooth scroll support added">
+      <created>1540512795933</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1540512795933</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix">
+      <created>1540512895303</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1540512895303</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix">
+      <created>1540512976678</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1540512976678</updated>
+    </task>
+    <task id="LOCAL-00033" summary="TODO">
+      <created>1540645080287</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1540645080287</updated>
+    </task>
+    <task id="LOCAL-00034" summary="RedSandHashHandler.onHashChanged() fix">
+      <created>1540683219148</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1540683219148</updated>
+    </task>
+    <task id="LOCAL-00035" summary="full anchor support, 404, Lodash added as dependecy">
+      <created>1540758865563</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1540758865563</updated>
+    </task>
+    <task id="LOCAL-00036" summary="SimpleUtilities.getScrollPercent(), anchor fix">
+      <created>1540765143175</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1540765143175</updated>
+    </task>
+    <task id="LOCAL-00037" summary="getYFromScrollPercent(percent), page nav kb shortcuts">
+      <created>1540770858792</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1540770858792</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added alt-numpadN navigation shortcuts">
+      <created>1540808963665</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1540808963665</updated>
+    </task>
+    <task id="LOCAL-00039" summary="console font, calendarMonth, Luxon added, copyToClipboard, RedSandOS start">
+      <created>1542241799242</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1542241799242</updated>
+    </task>
+    <task id="LOCAL-00040" summary="loader fix">
+      <created>1544019986101</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1544019986101</updated>
+    </task>
+    <task id="LOCAL-00041" summary="loader fix">
+      <created>1544020043354</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1544020043354</updated>
+    </task>
+    <task id="LOCAL-00042" summary="loader fix">
+      <created>1544020102487</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1544020102487</updated>
+    </task>
+    <task id="LOCAL-00043" summary="structural changes, Grayscale">
+      <created>1544840044161</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1544840044161</updated>
+    </task>
+    <task id="LOCAL-00044" summary="SimpleUtilities.pipe() fix">
+      <created>1544841307422</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1544841307422</updated>
+    </task>
+    <task id="LOCAL-00045" summary="many changes, project architecture / layout also changed">
+      <created>1544980427155</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1544980427155</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="300137000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32905984" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="7" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Application Servers" order="12" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.3295302" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32905984" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.24358974" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.54104847" visible="true" weight="0.25134265" />
+      <window_info anchor="right" id="Database" order="1" weight="0.3295302" />
+      <window_info id="Learn" order="6" />
+      <window_info id="Structure" order="1" sideWeight="0.45895153" side_tool="true" visible="true" weight="0.25134265" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="9" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.24966443" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="Application Servers" order="12" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info id="Image Layers" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32905984" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="9" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.24966443" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.24358974" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.3295302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5555556" visible="true" weight="0.26979867" />
+      <window_info id="Learn" order="6" />
+      <window_info anchor="right" id="Database" order="1" weight="0.3295302" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32905984" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info id="Structure" order="1" sideWeight="0.44444445" side_tool="true" visible="true" weight="0.26979867" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Reorganization, minifier temporarily disabled" />
+    <MESSAGE value="-sprintf, -shortcut, +keydrown, +minify" />
+    <MESSAGE value="conSense_release_compressed.js" />
+    <MESSAGE value="move to GitHub Pages" />
+    <MESSAGE value="fixes, lib refactor, lib doc added, build refactor" />
+    <MESSAGE value="drag beautify" />
+    <MESSAGE value="css --&gt; scss, page naming convention changed" />
+    <MESSAGE value="readme update" />
+    <MESSAGE value="update" />
+    <MESSAGE value="css fix" />
+    <MESSAGE value="SimpleStorage, inspection change" />
+    <MESSAGE value="typo fix" />
+    <MESSAGE value="small fix, smooth scroll support added" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="TODO" />
+    <MESSAGE value="RedSandHashHandler.onHashChanged() fix" />
+    <MESSAGE value="full anchor support, 404, Lodash added as dependecy" />
+    <MESSAGE value="SimpleUtilities.getScrollPercent(), anchor fix" />
+    <MESSAGE value="getYFromScrollPercent(percent), page nav kb shortcuts" />
+    <MESSAGE value="added alt-numpadN navigation shortcuts" />
+    <MESSAGE value="console font, calendarMonth, Luxon added, copyToClipboard, RedSandOS start" />
+    <MESSAGE value="loader fix" />
+    <MESSAGE value="structural changes, Grayscale" />
+    <MESSAGE value="SimpleUtilities.pipe() fix" />
+    <MESSAGE value="many changes, project architecture / layout also changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="many changes, project architecture / layout also changed" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/fox.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/images/conSenseLogo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/scripts/build-old.sh" />
+    <entry file="file://$PROJECT_DIR$/page-2018-10-05/articles/eng/download.txt" />
+    <entry file="file://$PROJECT_DIR$/conSense/lib/cash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/lib/dom-drag.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/tests/conSense.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/tests/redSandGLTest0.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/page/js/page.js" />
+    <entry file="file://$PROJECT_DIR$/sandbox/page/css/page.css" />
+    <entry file="file://$PROJECT_DIR$/conSense/tests/redSandCoreTest0.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/index.html" />
+    <entry file="file://$PROJECT_DIR$/conSense/lib/doc/dom-drag.txt" />
+    <entry file="file://$PROJECT_DIR$/testingField/backboneTutorial/backbone-tutorial.html" />
+    <entry file="file://$PROJECT_DIR$/conSense/lib/shortcut.js" />
+    <entry file="file://$PROJECT_DIR$/conSense/lib/sprintf.js" />
+    <entry file="file://$PROJECT_DIR$/pageN0001/articles/eng/Contact.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/lib/sass/browser-scss.js" />
+    <entry file="file://$PROJECT_DIR$/page-2018-10-05/style/test.css" />
+    <entry file="file://$PROJECT_DIR$/page-2018-10-05/style/test.scss" />
+    <entry file="file://$PROJECT_DIR$/pageN0001/style/page.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/scripts/package-lock.json" />
+    <entry file="file://$PROJECT_DIR$/testingField/tests/es2016(es7)Test.js" />
+    <entry file="file://$PROJECT_DIR$/testingField/tests/es6Generator.js" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="209">
+            <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testingField/tests/es6Test.js" />
+    <entry file="file://$PROJECT_DIR$/testingField/tests/es2017(es8)Test.js" />
+    <entry file="file://$PROJECT_DIR$/conSense/lib/zenscroll.js" />
+    <entry file="file://$PROJECT_DIR$/pageN0001/articles/eng/Tests.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/scripts/pack.bat" />
+    <entry file="file://$PROJECT_DIR$/conSense/scripts/minify-sources.bat" />
+    <entry file="file://$PROJECT_DIR$/pageN0001/articles/eng/404.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indexN0001.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pageN0001/js/blueprint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/lib/keydrown.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="150" column="11" selection-start-line="150" selection-start-column="11" selection-end-line="150" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pageN0001/articles/eng/Intro.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/js/redSand/redSandGL.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/lib/_optional/bulma.css" />
+    <entry file="file://$PROJECT_DIR$/conSense/js/conSense/conSenseStubRelease.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/scripts/build.bat" />
+    <entry file="file://$PROJECT_DIR$/conSense/js/conSense/conSenseStubDebug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pageN0001/style/page.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/doc/TODO.txt" />
+    <entry file="file://$PROJECT_DIR$/conSense/style/conSense.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/js/redSand/redSandOS.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/js/minis/monthlyCalendar.js" />
+    <entry file="file://$PROJECT_DIR$/conSense/js/conSense/conSense.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31760">
+          <caret line="1588" column="45" selection-start-line="1588" selection-start-column="45" selection-end-line="1588" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/js/redSand/redSandCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conSense/doc/Documentation.txt" />
+    <entry file="file://$PROJECT_DIR$/conSense/doc/Changelog.txt" />
+    <entry file="file://$PROJECT_DIR$/conSense/js/redSand/simpleClasses.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="128" column="58" selection-start-line="128" selection-start-column="58" selection-end-line="128" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>groovy-3.0.0-alpha-2</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ConSense</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
