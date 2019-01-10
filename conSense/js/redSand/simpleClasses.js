@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.30";
+const simpleClassesVersion = "1.31";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -100,6 +100,20 @@ class SimpleUtilities
         this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // Returns a boolean to the question: Is a DOM element with elemName present?
+    isPresent(elemName)
+    {
+        if ($("#" + elemName).length === 0) 
+        {
+            return false;
+        } else 
+        {
+            return true;
+        }
     }
 
     //------------------------------------------------------------------------

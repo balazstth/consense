@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.21";
+        this.version = "1.22";
 
         // Toggle debug operation
         this.debug = true;
@@ -543,10 +543,12 @@ class ConSense
         // *ENV* stub.relativeConSensePath
         document.body.innerHTML +=
             '<!-- RedSand -->\
-            <div id="loadIndicator" class="loadIndicator">\
+            <div id="redSandLoadIndicator" class="redSandLoadIndicator">\
                 <img src="' + stub.relativeConSensePath + 'conSense/images/loader.gif" style="border: 0;">\
             </div>\
-            <div id="inputBlocker" class="inputBlocker">\
+            <div id="redSandInputBlocker" class="redSandInputBlocker">\
+            </div>\
+            <div id="redSandTextMeasureBox" class="redSandTextMeasureBox">\
             </div>\
             <!-- End of RedSand -->';
         

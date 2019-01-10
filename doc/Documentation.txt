@@ -137,7 +137,10 @@ o Fonts
 Fira Code            (c) Various copyright holders 
                          @ https://github.com/tonsky/FiraCode 
 Hack                 (c) Source Foundry Authors 
-                         @ https://github.com/source-foundry/Hack 
+                         @ https://github.com/source-foundry/Hack
+BlockZone            (c) Stefan Vogt, Andy Herbert, Frederic Cambus and Brian
+                         Cassidy (https://github.com/ansilove/BlockZone), with
+                         Reserved Font Name BlockZone 
                          
 o Themes
 --------

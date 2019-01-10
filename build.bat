@@ -11,7 +11,8 @@ type conSense\lib\dom-drag.js conSense\lib\md5.js conSense\lib\sha1.js^
  conSense\lib\luxon.js conSense\lib\sorttable.js conSense\lib\cash.js^
  conSense\lib\dragula.js conSense\js\redSand\simpleClasses.js^
  conSense\js\redSand\redSandCore.js conSense\js\redSand\redSandGL.js^
- conSense\js\conSense\conSense.js > conSense\js\release\conSense_release_raw.js
+ conSense\js\redSand\redSandOS.js conSense\js\conSense\conSense.js^
+ > conSense\js\release\conSense_release_raw.js
 @ECHO OFF
 ECHO[
 call script\minify-sources.bat

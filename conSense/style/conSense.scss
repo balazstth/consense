@@ -1,4 +1,4 @@
-/* CSS Document */
+/* CSS Document for ConSense and RedSand*/
 
 /* ------------------------------------------------------------------------ */
 /* ConSense */
@@ -114,7 +114,10 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
     }
 }
 
-.loadIndicator {
+/* ------------------------------------------------------------------------ */
+/* RedSand */
+
+.redSandLoadIndicator {
     @include typography;
     display: none;
     z-index: 2000000000;
@@ -131,7 +134,7 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
     height: 16px;
 }
 
-.inputBlocker {
+.redSandInputBlocker {
     display: none;
     z-index: 1999999999; 
     background-color: blue;
@@ -143,6 +146,16 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
     height: 10000px;
     /* Alpha settings for different browsers */
     @include alpha(0.20);
+}
+
+// Used for measuring text dimensions, e.g. for text mode emulation
+.redSandTextMeasureBox
+{
+    position: absolute;
+    visibility: hidden;
+    height: auto;
+    width: auto;
+    white-space: nowrap;
 }
 
 /* ------------------------------------------------------------------------ */

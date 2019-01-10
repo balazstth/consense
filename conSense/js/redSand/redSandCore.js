@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.49";
+const redSandCoreVersion = "0.50";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -99,8 +99,8 @@ class RedSandUtilities
         if (color === undefined) {
             color = "blue";
         }
-        simpleUtils.getDOMElement("inputBlocker").style.background = color;
-        simpleUtils.getDOMElement("inputBlocker").style.display = "block";
+        simpleUtils.getDOMElement("redSandInputBlocker").style.background = color;
+        simpleUtils.getDOMElement("redSandInputBlocker").style.display = "block";
     }
 
     //------------------------------------------------------------------------
@@ -109,7 +109,7 @@ class RedSandUtilities
     // Remove screen blocker div
     unblockInput()
     {
-        simpleUtils.getDOMElement("inputBlocker").style.display = "none";
+        simpleUtils.getDOMElement("redSandInputBlocker").style.display = "none";
     }
 }
 
@@ -161,7 +161,7 @@ class RedSandGenericLoader
         redSandGenericLoader.loadsInProgress++;
         if (redSandGenericLoader.loadsInProgress === 1)
         {
-            simpleUtils.getDOMElement("loadIndicator").style.display = "block";
+            simpleUtils.getDOMElement("redSandLoadIndicator").style.display = "block";
         }
     }
 
@@ -175,7 +175,7 @@ class RedSandGenericLoader
         redSandGenericLoader.loadsInProgress--;
         if (redSandGenericLoader.loadsInProgress === 0)
         {
-            simpleUtils.getDOMElement("loadIndicator").style.display = "none";
+            simpleUtils.getDOMElement("redSandLoadIndicator").style.display = "none";
         }
     }
 

@@ -15,8 +15,8 @@
 //      o ConSenseStub*, build.*, minify.*, pack.*
 //      o SimpleClasses
 //      o RedSandCore
-//      o RedSandOS
 //      o RedSandGL
+//      o RedSandOS
 //
 // ===========================================================================
 //
@@ -167,6 +167,7 @@
 // 1.19         2018-10-29      also added Alt+Numpad numeric keys for navigation
 // 1.20         2018-11-14      fixed width font in the console
 // 1.21         2018-12-16      CSS fix
+// 1.22         2019-01-10      redSand prefix for relevant DOM elements
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -216,6 +217,7 @@
 // 1.25         2018-10-28      Lodash added to mandatory libs
 // 1.26         2018-11-14      Luxon added
 // 1.27         2018-12-14      project structure changed
+// 1.28         2019-01-10      RedSandOS added
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -289,6 +291,7 @@
 // 1.28         2018-11-14      SimpleUtilities.copyToClipboard(str)
 // 1.29         2018-12-14      SimpleUtilities.pipe()
 // 1.30         2018-12-16      SimpleUtilities.liteDown() #str# for bold
+// 1.31         2019-01-10      SimpleUtilities.isPresent()
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -382,15 +385,7 @@
 // 0.47         2018-10-28      Full anchor link support in loaded articles
 // 0.48         2018-11-10      redSandVersion --> redSandCoreVersion
 // 0.49         2018-12-05      RedSandGenericLoader fix
-//
-//////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////
-// o RedSandOS
-//////////////////////////////////////////////////////////////////////////////
-//
-// version      date            description
-// 0.01         2018-11-10      initial commit
+// 0.50         2019-01-10      redSand prefix for relevant DOM elements
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -405,6 +400,17 @@
 // 0.03         2018-10-09      EcmaScript 6
 //                              'use strict';
 // 0.04         2018-10-13      const
+//
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// o RedSandOS
+//////////////////////////////////////////////////////////////////////////////
+//
+// version      date            description
+// 0.01         2018-11-10      initial commit
+// 0.02         2019-01-10      color palette, text measurement functions for
+//                                  text mode
 //
 //////////////////////////////////////////////////////////////////////////////
 

@@ -92,4 +92,5 @@ stub.includeJavaScriptFile("conSense/lib/dragula.js");  // advanced drag and dro
 stub.includeJavaScriptFile("conSense/js/redSand/simpleClasses.js");
 stub.includeJavaScriptFile("conSense/js/redSand/redSandCore.js");
 stub.includeJavaScriptFile("conSense/js/redSand/redSandGL.js");
+stub.includeJavaScriptFile("conSense/js/redSand/redSandOS.js");
 stub.includeJavaScriptFile("conSense/js/conSense/conSense.js");
