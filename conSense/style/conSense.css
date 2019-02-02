@@ -1,4 +1,6 @@
-/* CSS Document for ConSense and RedSand*/
+/* CSS Document for ConSense and RedSand */
+/* ------------------------------------------------------------------------ */
+@import url(../lib/normalize.css);
 /* ------------------------------------------------------------------------ */
 /* ConSense */
 /* For smooth scrolling globally */
@@ -6,9 +8,9 @@ html {
   scroll-behavior: smooth; }
 
 .conSenseContainer {
-  font-family: "Cousine", "IBM Plex Mono", monospace;
+  font-family: "Hack", "Fira Code", "Cousine", "IBM Plex Mono", monospace;
   font-size: 12px;
-  line-height: 1.5em;
+  line-height: 1.35em;
   font-weight: normal;
   text-align: left;
   background: gray url("../images/headerBg.png") repeat-x;
@@ -18,7 +20,7 @@ html {
   border: 1px solid gray;
   position: absolute;
   width: 780px;
-  height: 450px;
+  height: 452px;
   /* Alpha settings for different browsers */
   filter: alpha(opacity=95);
   opacity: 0.95;
@@ -85,9 +87,9 @@ html {
 /* ------------------------------------------------------------------------ */
 /* RedSand */
 .redSandLoadIndicator {
-  font-family: "Cousine", "IBM Plex Mono", monospace;
+  font-family: "Hack", "Fira Code", "Cousine", "IBM Plex Mono", monospace;
   font-size: 12px;
-  line-height: 1.5em;
+  line-height: 1.35em;
   font-weight: normal;
   text-align: left;
   display: none;

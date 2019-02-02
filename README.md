@@ -1,7 +1,12 @@
 ConSense
 ===
 
-**2018-10-15: This was done since last checking in**
+**2019-02-02: This was done since the last checking in**
+
+- started working on RedSandOS, a character-display-inspired general purpose UI
+- refactored the project architecture in many ways
+
+**2018-10-15: This was done since the last checking in**
 
 - switch to HTML 5
 - switch to EcmaScript 6+

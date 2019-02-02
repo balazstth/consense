@@ -1,6 +1,5 @@
 
-$fontStack: 'Fira Code', 'Hack', monospace;     // fixed width
-// $fontStack: 'Hack', 'Fira Code', monospace;  // fixed width
+$fontStack: 'Hack', 'Fira Code', monospace;  // fixed width
 
 @mixin typography {                                             
     font-family: $fontStack;
@@ -9,6 +8,7 @@ $fontStack: 'Fira Code', 'Hack', monospace;     // fixed width
     text-rendering: optimizeLegibility;         // Force ligatures for Webkit, Blink, Gecko
     // white-space: pre-wrap;
     // word-break: break-all;
+    // text-shadow: 0.05px 0 1px rgba(0,30,255,0.5), -0.05px 0 1px rgba(255,0,80,0.3), 0 0 2px;    
 }
 
 html {
@@ -17,4 +17,11 @@ html {
 
 body {
     @include typography;      
+
+    // Background, original by Praveen Puglia
+    background-image: linear-gradient(45deg, transparent 20%, black 25%, transparent 25%), 
+                      linear-gradient(-45deg, transparent 20%, black 25%, transparent 25%), 
+                      linear-gradient(-45deg, transparent 75%, black 80%, transparent 0),
+                      radial-gradient(gray 1px, transparent 0);
+    background-size: 10px 10px, 10px 10px;
 }

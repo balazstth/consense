@@ -1,4 +1,9 @@
-/* CSS Document for ConSense and RedSand*/
+/* CSS Document for ConSense and RedSand */
+
+/* ------------------------------------------------------------------------ */
+// Reset
+
+@import "../lib/normalize.css";
 
 /* ------------------------------------------------------------------------ */
 /* ConSense */
@@ -9,12 +14,12 @@ html {
 }
 
 // $fontStack: Verdana, Arial, Helvetica, sans-serif;   // proportional
-$fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
+$fontStack: 'Hack', 'Fira Code', 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
 
 @mixin typography {
     font-family: $fontStack;
     font-size: 12px;
-    line-height: 1.5em;
+    line-height: 1.35em;
     font-weight: normal;
     text-align: left;
 }
@@ -34,7 +39,7 @@ $fontStack: 'Cousine', 'IBM Plex Mono', monospace;      // fixed width
     border: 1px solid gray;
     position: absolute;
     width: 780px;
-    height: 450px;
+    height: 452px;  // = conSenseHeader.height + conSenseInnerContainer.height + conSenseContainer.border x 2
     /* Alpha settings for different browsers */
     @include alpha(0.95);
     box-shadow: 10px 10px 5px rgba(0, 0, 0, .75);

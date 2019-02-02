@@ -4,7 +4,7 @@ pageN0002-grayscale
 
 Grayscale (c) Toth, Balazs Aladar, 2018, https://aladar.me/
 
-Document version 1.00
+Document version 1.01
 -------------------------------------------------------------------------- -->
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ Document version 1.00
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
-        <title>Grayscale, and oldschool OS interface</title>
+        <title>Grayscale // And Oldschool OS Interface</title>
 
         <!-- ===================================================================== -->
         <!-- Normal ConSense stub, either Debug or Release -->
@@ -25,12 +25,9 @@ Document version 1.00
         <link rel="stylesheet" href="font/BlockZone/block_zone.css">
 
         <!-- ===================================================================== -->
-        <!-- Bulma -->
+        <!-- Meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="conSense/lib/optional/bulma.css">
-        <!-- Theme -->
-        <link rel="stylesheet" href="pageN0002-grayscale/style/lumen-bulma/bulmaswatch.min.css">
         
         <!-- ===================================================================== -->
         <!-- Grayscale CSS -->
@@ -54,210 +51,7 @@ Document version 1.00
 
     <!-- ===================================================================== -->
     <!-- Body -->
-    <body onLoad="init()">
-    
-      <!-- ===================================================================== -->
-      <!-- Menu -->
-      <nav class="navbar is-light">
-        <div id="navMenuExample10" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item " href="#">
-              Home
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link  is-active" href="#">
-                Docs
-              </a>
-              <div class="navbar-dropdown ">
-                <a class="navbar-item " href="#">
-                  Overview
-                </a>
-                <a class="navbar-item " href="#">
-                  Modifiers
-                </a>
-                <a class="navbar-item " href="#">
-                  Grid
-                </a>
-                <a class="navbar-item " href="#">
-                  Form
-                </a>
-                <a class="navbar-item " href="#">
-                  Elements
-                </a>
-                <a class="navbar-item is-active" href="#">
-                  Components
-                </a>
-                <a class="navbar-item " href="#">
-                  Layout
-                </a>
-                <hr class="navbar-divider">
-                <div class="navbar-item">
-                  <div>version
-                    <p class="has-text-info is-size-6-desktop">0.4.3</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link " href="#blog/">
-                Blog
-              </a>
-              <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
-                <a class="navbar-item" href="https://jenil.github.io/2017/03/10/new-field-element/">
-                  <div class="navbar-content">
-                    <p>
-                      <small class="has-text-info">10 Mar 2017</small>
-                    </p>
-                    <p>New field element (for better controls)</p>
-                  </div>
-                </a>
-                <a class="navbar-item" href="https://jenil.github.io/2016/04/11/metro-ui-css-grid-with-bulma-tiles/">
-                  <div class="navbar-content">
-                    <p>
-                      <small class="has-text-info">11 Apr 2016</small>
-                    </p>
-                    <p>Metro UI CSS grid with Bulma tiles</p>
-                  </div>
-                </a>
-                <a class="navbar-item" href="https://jenil.github.io/2016/02/09/blog-launched-new-responsive-columns-new-helpers/">
-                  <div class="navbar-content">
-                    <p>
-                      <small class="has-text-info">09 Feb 2016</small>
-                    </p>
-                    <p>Blog launched, new responsive columns, new helpers</p>
-                  </div>
-                </a>
-                <a class="navbar-item" href="#blog/">
-                  More posts
-                </a>
-                <hr class="navbar-divider">
-                <div class="navbar-item">
-                  <div class="navbar-content">
-                    <div class="level is-mobile">
-                      <div class="level-left">
-                        <div class="level-item">
-                          <strong>Stay up to date!</strong>
-                        </div>
-                      </div>
-                      <div class="level-right">
-                        <div class="level-item">
-                          <a class="button is-rss is-small" href="#atom.xml">
-                            <span class="icon is-small">
-                              <i class="fa fa-rss"></i>
-                            </span>
-                            <span>Subscribe</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <div class="navbar-link">
-                More
-              </div>
-              <div id="moreDropdown" class="navbar-dropdown ">
-                <a class="navbar-item " href="#extensions/">
-                  <div class="level is-mobile">
-                    <div class="level-left">
-                      <div class="level-item">
-                        <p>
-                          <strong>Extensions</strong>
-                          <br>
-                          <small>Side projects to enhance Bulma</small>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="navbar-end">
-            <a class="navbar-item" href="https://github.com/jgthms/bulma" target="_blank">
-              Github
-            </a>
-            <a class="navbar-item" href="https://twitter.com/jgthms" target="_blank">
-              Twitter
-            </a>
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <a id="twitter" class="button">
-                    <span>Tweet</span>
-                  </a>
-                </p>
-                <p class="control">
-                  <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.4.3.zip">
-                    <span class="icon">
-                      <i class="fa fa-download"></i>
-                    </span>
-                    <span>Download</span>
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="dropdown is-active">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Dropdown button</span>
-            <span class="icon is-small">
-              <i class="fa fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item">
-              Dropdown item
-            </a>
-            <a class="dropdown-item">
-              Other dropdown item
-            </a>
-            <a href="#" class="dropdown-item is-active">
-              Active dropdown item
-            </a>
-            <a href="#" class="dropdown-item">
-              Other dropdown item
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-              With a divider
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===================================================================== -->
-      <!-- Content -->
-      <section class="section">
-        <div class="container">
-          <h1 class="title">
-            Hello World
-          </h1>
-          <p class="subtitle is-size-6">
-My first website with <strong>Bulma</strong>! 
-Lorem Ipsum vivendo dignissim option graece partiendo proin probo ante
-pertinax tractatos electram has es aperiri graece imperdiet princp 
-volutpat, dolorem; Aliquando! Suas quando aperiam, ante, vituperatoribus.
-Adipiscing. Eripuit moderatius integer sodales, concludaturque eligendi
-causae cibo nobis; Efficiendi fierent venenatis mnesarchum duis lacus;
-Brute dolorum consectetuer molestie sodales docendi error melius? Novum
-accusata senserit convallis egestas apeirian petentium senectus ius 
-efficiendi nascetur dissentias nibh? Magnis bibendum nominati docendi 
-gubergren oratio. Tristique sensibus luctus congue aeque pro! Lobortis;
-Orci elaboraret? Accusam nascetur felis epicuri; Eius pulvinar integer
-appetere suas scripta euis incorrupte contentiones. Ligula alienum quam
-consul eleifend tractatos impetus repudiandae.
-          </p>
-        </div>
-      </section>    
+    <body onLoad="init()" class="crt">
 
     </body>
 </html>

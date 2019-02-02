@@ -11,10 +11,10 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandOSVersion = "0.02";
+const redSandOSVersion = "0.03";
 
 //----------------------------------------------------------------------------
-// RedSandDesktop
+// redSandDesktop
 //----------------------------------------------------------------------------
 
 class RedSandDesktop 
@@ -73,23 +73,19 @@ class RedSandDesktop
         this.palette.CGA_yellow      = "#FFFF55";
         this.palette.CGA_white       = "#FFFFFF";
 
-        // A map of all elements in the page
-        this.blueprint = {};
         //////////////////////////////////////////////////////////////////////
     }
 
     //------------------------------------------------------------------------
 
     // RedSandDesktop
-    // Returns text size in pixels.
-    // Params: fontSize: font size to use
-    //         text: string to measure
+    // Returns text size in pixels, and counts with this.windowStyle.
     // Returns {width: __, height: __} in pixels
-    getTextDimensions(fontSize, text) 
+    getTextDimensions(text) 
     {
         // redSandTextMeasureBox is already present, was created in conSense.js
         const textMeasureBox = document.getElementById("redSandTextMeasureBox");
-        textMeasureBox.style.fontSize = fontSize;
+        textMeasureBox.style = this.windowStyle;
         textMeasureBox.innerHTML = text;
 
         let ret = {};
@@ -104,13 +100,12 @@ class RedSandDesktop
     //------------------------------------------------------------------------
 
     // RedSandDesktop
-    // Returns the size of a monospaced character in pixels.
-    // Params: fontSize: font size to use
+    // Returns the size of a monospaced character in pixels. (The page's font is
+    // supposed to be monospaced for this.)
     // Returns {width: __, height: __} in pixels
-    getCharDimensions(fontSize) 
+    getCharDimensions() 
     {
         let dim = this.getTextDimensions(
-            fontSize,
             "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
             "<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W" +
             "<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W<br>W" +
@@ -127,20 +122,110 @@ class RedSandDesktop
     //------------------------------------------------------------------------
 
     // RedSandDesktop
-    // Returns elem (typically div) size in characters.
+    // Returns desktop size in characters.
     // Returns {width: __, height: __} in characters
     getDimensions(elem) 
     {
         // TODO
     }
 
+}
+
+//----------------------------------------------------------------------------
+// RedSandLauncher - to launch and dock windows
+//----------------------------------------------------------------------------
+
+class RedSandLauncher
+{
     //------------------------------------------------------------------------
 
-    // RedSandDesktop
-    // Renders the desktop according to the blueprint
-    render() 
+    constructor() 
     {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandLauncher                                     Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandOSVersion;
 
+        // CONST
+        // These are to define different window decoration arts
+        this.WIN_TYPE_0 = 0;
+
+        // Window registry
+        this.blueprint = {};
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    addWindow(x, y, width, height, title = "", type = this.WIN_TYPE_0)
+    {
+        const window = new RedSandWindow(x, y, width, height, title, type);
+
+        // TODO: add to blueprint
+    }
+
+}
+
+//----------------------------------------------------------------------------
+// RedSandWindow
+//----------------------------------------------------------------------------
+
+class RedSandWindow
+{
+    //------------------------------------------------------------------------
+
+    constructor(x, y, width, height, title, type) 
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandWindow                                       Class variables
+        //////////////////////////////////////////////////////////////////////
+        this.version = redSandOSVersion;
+
+        //--------------------------------------------------------------------
+        // Config
+
+        this.title = title;
+        this.charWidth  = width;
+        this.charHeight = height;
+        this.type = type;
+
+        // Generated in createCharacterWindow() after drawing window decoration
+        this.clientCharWidth  = 0;
+        this.clientCharHeight = 0;
+
+        this.window = this.createCharacterWindow(x, y, width, height, title, type);
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // Creates a window, sets size in characters.
+    createCharacterWindow(x, y, width, height, title, type) 
+    {
+        const charDim = redSandDesktop.getCharDimensions();
+        const window = new RedSandWindowlet(x, y, charDim.width * width, charDim.height * height, "default", "default", true);
+        // Same character proportions for the shadow as in the 90s
+        // INTERMEDIATE
+        window.DOMContainer.style["box-shadow"] = `${charDim.width}px ${charDim.height}px 2px rgba(0, 0, 0, .75)`;
+
+        // TODO: render window according to title, type
+        // TODO: client area in window, and according this.clientChar* setting
+        // TODO: refactor as necessary: in the future drag should be with a handle / header only, 
+        //       maybe RedSandWindowlet refactor also necessary
+
+        return window;
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // Sets new window title
+    setTitle(title) 
+    {
+        this.title = title;
+
+        // TODO: display
     }
 
 }
@@ -150,6 +235,7 @@ class RedSandDesktop
 // GLOBAL
 //----------------------------------------------------------------------------
 
-const redSandDesktop = new RedSandDesktop();
+const redSandDesktop  = new RedSandDesktop();
+const redSandLauncher = new RedSandLauncher();
 
 //----------------------------------------------------------------------------

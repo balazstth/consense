@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.50";
+const redSandCoreVersion = "0.51";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -155,11 +155,8 @@ class RedSandGenericLoader
 
     // RedSandGenericLoader
     showIndicator() {
-        if (!redSandGenericLoader.indicate) {
-            return;
-        }
         redSandGenericLoader.loadsInProgress++;
-        if (redSandGenericLoader.loadsInProgress === 1)
+        if (redSandGenericLoader.indicate && (redSandGenericLoader.loadsInProgress === 1))
         {
             simpleUtils.getDOMElement("redSandLoadIndicator").style.display = "block";
         }
@@ -169,10 +166,8 @@ class RedSandGenericLoader
 
     // RedSandGenericLoader
     hideIndicator() {
-        if (!redSandGenericLoader.indicate) {
-            return;
-        }
         redSandGenericLoader.loadsInProgress--;
+        // redSandGenericLoader.indicate check irrelevant here
         if (redSandGenericLoader.loadsInProgress === 0)
         {
             simpleUtils.getDOMElement("redSandLoadIndicator").style.display = "none";

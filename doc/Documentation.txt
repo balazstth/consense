@@ -98,6 +98,7 @@ Lodash 4.17.10       (c) JS Foundation and other contributors
 // Advanced DateTime library
 Luxon 1.6.2          (c) JS Foundation and other contributors
                          @ https://js.foundation/
+normalize.css 8.0.1  (c) Nicolas Gallagher and Jonathan Neal
 
 
 o Libraries / Optional (these are already loaded by the ConSense stub)
@@ -117,8 +118,6 @@ o Libraries / Even more optional (Not loaded by the stub. Load them via
                                   folder, or by including stylesheets in the 
                                   document header.
                              
-// Like Bootstrap
-bulma.io v0.7.2      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 // Full text search
 lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com
 // Animation library
@@ -130,6 +129,8 @@ chiptune2.js         (c) The chiptune2.js contributers
                            @ https://github.com/deskjet/chiptune2.js/
 // Game programming library
 Phaser 3.14.0        (c) Photon Storm Ltd. @ http://phaser.io/
+// Like Bootstrap
+bulma.io v0.7.2      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
 
 o Fonts
 -------
@@ -142,11 +143,6 @@ BlockZone            (c) Stefan Vogt, Andy Herbert, Frederic Cambus and Brian
                          Cassidy (https://github.com/ansilove/BlockZone), with
                          Reserved Font Name BlockZone 
                          
-o Themes
---------
-
-Lumen-Bulma          (c) Jenil Gogari @ https://jgog.in/
-
 
 //============================================================================
 // () Technical documentation
