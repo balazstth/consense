@@ -5,6 +5,7 @@ ConSense
 
 - started working on RedSandOS, a character-display-inspired general purpose UI
 - refactored the project architecture in many ways
+- new RedSandOS demo site index coming 
 
 **2018-10-15: This was done since the last checking in**
 
