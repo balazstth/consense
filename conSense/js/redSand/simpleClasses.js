@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.31";
+const simpleClassesVersion = "1.32";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -104,6 +104,7 @@ class SimpleUtilities
 
     //------------------------------------------------------------------------
 
+    // SimpleUtilities
     // Returns a boolean to the question: Is a DOM element with elemName present?
     isPresent(elemName)
     {
@@ -1544,6 +1545,16 @@ class SimpleStorage
 // GLOBAL
 function rem(str)
 {
+}
+
+//----------------------------------------------------------------------------
+
+// GLOBAL
+// Ex.: var hello = "Hello World";
+//      alert(hello.replaceAt(2, "!!"));    // Should display "He!!o World"
+String.prototype.replaceAt = function(index, replacement)
+{
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
 //----------------------------------------------------------------------------

@@ -293,6 +293,7 @@
 // 1.29         2018-12-14      SimpleUtilities.pipe()
 // 1.30         2018-12-16      SimpleUtilities.liteDown() #str# for bold
 // 1.31         2019-01-10      SimpleUtilities.isPresent()
+// 1.32         2019-02-03      String.prototype.replaceAt()
 //
 //////////////////////////////////////////////////////////////////////////////
 

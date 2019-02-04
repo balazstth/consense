@@ -1,5 +1,5 @@
 
-$fontStack: 'Hack', 'Fira Code', monospace;  // fixed width
+$fontStack: 'Fira Code', 'Hack', monospace;  // fixed width
 
 @mixin typography {                                             
     font-family: $fontStack;
@@ -23,5 +23,5 @@ body {
                       linear-gradient(-45deg, transparent 20%, black 25%, transparent 25%), 
                       linear-gradient(-45deg, transparent 75%, black 80%, transparent 0),
                       radial-gradient(gray 1px, transparent 0);
-    background-size: 10px 10px, 10px 10px;
+    background-size: 11px 11px, 11px 11px;
 }
