@@ -31450,10 +31450,7 @@ class RedSandLauncher
                 headerColor:    redSandDesktop.palette.CGA_white,
                 contentBgColor: redSandDesktop.palette.CGA_white,
                 contentColor:   redSandDesktop.palette.CGA_black,
-                statusBgColor:  redSandDesktop.palette.CGA_black,
-                statusColor:    redSandDesktop.palette.CGA_white,
                 decoration:     "↑↓↕■",
-                status:         false,   // Does it have a status line?
             }            
         };
         //////////////////////////////////////////////////////////////////////
@@ -31532,24 +31529,9 @@ class RedSandWindow
             + _.pad("", this.width, this.NBSP) 
             + "</span><br>";
 
-        for (let i = 1; i < this.height - 1; i++)
+        for (let i = 1; i < this.height; i++)
         {
             this.buffer2D[i]
-                = `<span style='background-color: ${this.art.contentBgColor}; color: ${this.art.contentColor};'>` 
-                + _.pad("", this.width, this.NBSP) 
-                + "</span><br>";
-        }
-
-        if (this.art.status)
-        {
-            this.buffer2D[this.height - 1]
-                = `<span style='background-color: ${this.art.statusBgColor}; color: ${this.art.statusColor};'>` 
-                + _.pad("", this.width, this.NBSP) 
-                + "</span><br>";
-        } 
-        else 
-        {
-            this.buffer2D[this.height - 1]
                 = `<span style='background-color: ${this.art.contentBgColor}; color: ${this.art.contentColor};'>` 
                 + _.pad("", this.width, this.NBSP) 
                 + "</span><br>";
@@ -31610,11 +31592,12 @@ class RedSandWindow
 
 }
 
+// TODO: more specialized windows
+// E.g.:
+
 //----------------------------------------------------------------------------
 // RedSandPalette - A specialized RedSandWindow
 //----------------------------------------------------------------------------
-
-// TODO, and here come many more specialized windows
 
 //----------------------------------------------------------------------------
 // Instances
