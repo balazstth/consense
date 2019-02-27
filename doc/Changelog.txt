@@ -456,6 +456,7 @@
 // 2.07         2018-10-28      full anchor link support
 // 2.08         2018-10-28      anchor navigation fix
 // 2.09         2019-02-01      fonts
+// 2.10         2019-02-27      fonts revisited again
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -470,6 +471,7 @@
 // version      date            description
 // 1.00         2018-12-14      initial version with Bulma
 // 1.01         2019-02-01      no Bulma, just own CSS
+// 1.02         2019-02-27      fonts revisited
 //
 //////////////////////////////////////////////////////////////////////////////
 
