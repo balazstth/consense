@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// ConSense by Toth, Balazs Aladar (c) 2005-2018, comes under the terms of the
+// ConSense by Toth, Balazs Aladar (c) 2005-2019, comes under the terms of the
 // MIT License (http://www.opensource.org/licenses/mit-license.html)
 // See conSense.version and the Changelog for detailed version info.
 // Currently supported browsers: latest Firefox, Chrome, Edge and probably all
@@ -1493,8 +1493,8 @@ class ConSense
         this.writeLn("Otherwise all JavaScript expressions are accepted.");
         this.writeLn(this.highlight("This") + " style is used for simple highlighting and " + this.highlightAppendLink("this") + " is a clickable autoappend input string.");
         this.writeLn("Doubleclicking the output area focuses the input line. Up/down arrow keys control command history.");
-        this.writeLn("Works best with Firefox 1.5+ and IE 6.0+.");
-        this.writeLn("ConSense is (c) 2005-2007 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
+        this.writeLn("Works best with any modern browser.");
+        this.writeLn("ConSense is (c) 2005-2019 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
     }
 
 }

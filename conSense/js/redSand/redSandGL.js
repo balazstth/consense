@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// RedSand/GL by Toth, Balazs Aladar (c) 2005-2018
+// RedSand/GL by Toth, Balazs Aladar (c) 2005-2019
 // For detailed licensing information see conSense.js.
 // See redSandGLVersion and the changelog for detailed version info.
 // https://aladar.me/

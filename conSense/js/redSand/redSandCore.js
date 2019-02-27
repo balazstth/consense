@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2018
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
 // For detailed licensing information see conSense.js.
 // See redSandCoreVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.51";
+const redSandCoreVersion = "0.52";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -971,7 +971,7 @@ class RedSandWindowlet
 
     //------------------------------------------------------------------------
 
-    constructor(left, top, width, height, background, border, draggable)
+    constructor(left, top, width, height, background, border, draggable, handleHeight = 0)
     {
         //////////////////////////////////////////////////////////////////////
         // RedSandWindowlet                                    Class variables
@@ -980,7 +980,7 @@ class RedSandWindowlet
 
         // Constructor params
 
-        // Defaults
+        // Defaults (pre modern EcmaScript)
         if (background === undefined || background === "default")
         {
             background = "white";
@@ -1001,9 +1001,11 @@ class RedSandWindowlet
         this.height = height;
         this.background = background;
         this.border = border;
-        this.draggable = draggable;     // Flag
+        this.draggable = draggable;         // Flag
+        this.handleHeight = handleHeight;
 
         this.DOMContainer = undefined;
+        this.handleDOMContainer = undefined;
         this.id = "RedSandId" + staticRedSandId++;
 
         this.borderVisible = true;
@@ -1011,31 +1013,96 @@ class RedSandWindowlet
         
         this.DOMContainer = document.createElement('div');
 
-        this.DOMContainer.id = this.id;
-        this.DOMContainer.style.display = "block";
-        this.DOMContainer.style.position = "absolute";
-        this.DOMContainer.style.overflow = "auto";
-        this.DOMContainer.style.width  = this.width  + "px";    // "px" for HTML5
-        this.DOMContainer.style.height = this.height + "px";
-        this.DOMContainer.style.left   = this.left   + "px";
-        this.DOMContainer.style.top    = this.top    + "px";
+        this.DOMContainer.id               = this.id;
+        this.DOMContainer.style.display    = "block";
+        this.DOMContainer.style.position   = "absolute";
+        this.DOMContainer.style.overflow   = "auto";
+        this.DOMContainer.style.width      = this.width  + "px";    // "px" for HTML5
+        this.DOMContainer.style.height     = this.height + "px";
+        this.DOMContainer.style.left       = this.left   + "px";
+        this.DOMContainer.style.top        = this.top    + "px";
         this.DOMContainer.style.background = background;
-        this.DOMContainer.style.border = this.border;
-        redSandWindowletManager.initZIndex(this);
+        this.DOMContainer.style.border     = this.border;
 
         document.body.appendChild(this.DOMContainer);
+
+        //--------------------------------------------------------------------
+
+        if (this.handleHeight > 0)
+        {
+            this.handleDOMContainer = document.createElement('div');
+
+            this.handleDOMContainer.id             = this.id + "Handle";
+            this.handleDOMContainer.style.display  = "block";
+            this.handleDOMContainer.style.position = "absolute";
+            this.handleDOMContainer.style.width    = this.width        + "px";    // "px" for HTML5
+            this.handleDOMContainer.style.height   = this.handleHeight + "px";
+            this.handleDOMContainer.style.opacity  = "0.0";
+
+            this.render();
+        }
+
+        //--------------------------------------------------------------------
+
+        redSandWindowletManager.initZIndex(this);
+        
+        //--------------------------------------------------------------------
 
         if (this.draggable)
         {
             // Make it draggable
-            simpleUtils.draggable(this.DOMContainer);
+            if (this.handleHeight > 0)
+            {
+                simpleUtils.draggable(this.handleDOMContainer, this.DOMContainer);
+            } 
+            else 
+            {
+                simpleUtils.draggable(this.DOMContainer);
+            }
             // Update Z-index
-            let windowlet = this;
+            const windowlet = this;
             this.DOMContainer.onDragStart = function()
             {
                 redSandWindowletManager.updateZIndex(windowlet);
             }
         }
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindowlet
+    // Use this instead of innerHTML = when using a handle!!
+    render(innerHTML = "")
+    {
+        this.DOMContainer.innerHTML = innerHTML;
+        if (this.handleDOMContainer) 
+        {
+            this.DOMContainer.insertAdjacentElement("afterbegin", this.handleDOMContainer);
+        } 
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindowlet
+    // Enable selection in windowlet.
+    selectOn()
+    {
+        this.DOMContainer.style["-webkit-user-select"] = "auto";
+        this.DOMContainer.style["-moz-user-select"]    = "auto";
+        this.DOMContainer.style["-ms-user-select"]     = "auto";
+        this.DOMContainer.style["user-select"]         = "auto";
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindowlet
+    // Disable selection in windowlet.
+    selectOff()
+    {
+        this.DOMContainer.style["-webkit-user-select"] = "none";
+        this.DOMContainer.style["-moz-user-select"]    = "none";
+        this.DOMContainer.style["-ms-user-select"]     = "none";
+        this.DOMContainer.style["user-select"]         = "none";
     }
 
     //------------------------------------------------------------------------
@@ -1099,6 +1166,10 @@ class RedSandWindowletManager
     {
         // Set new z-index
         windowlet.DOMContainer.style.zIndex = "" + this.highestZIndex++;
+        if (windowlet.handleDOMContainer) 
+        {
+            windowlet.handleDOMContainer.style.zIndex = "" + this.highestZIndex++;
+        }
         // Set topmost windowlet
         this.topmostWindowlet = windowlet;
     }
@@ -1108,12 +1179,29 @@ class RedSandWindowletManager
     // RedSandWindowletManager
     updateZIndex(windowlet)
     {
+        // TODO: bugfix this, order between the windowlets should be maintained, not just switching with the upmost windowlet
+
         // Switch z-index with that of the topmost windowlet and update
         // topmostWindowlet to windowlet
-        let windowletZIndex = windowlet.DOMContainer.style.zIndex;
-        windowlet.DOMContainer.style.zIndex
-            = this.topmostWindowlet.DOMContainer.style.zIndex;
+        const windowletZIndex = windowlet.DOMContainer.style.zIndex;
+        let windowletHandleZIndex;
+        if (windowlet.handleDOMContainer) 
+        {
+            windowletHandleZIndex = windowlet.handleDOMContainer.style.zIndex;
+        }
+
+        windowlet.DOMContainer.style.zIndex = this.topmostWindowlet.DOMContainer.style.zIndex;
+        if (windowlet.handleDOMContainer) 
+        {
+            windowlet.handleDOMContainer.style.zIndex = this.topmostWindowlet.handleDOMContainer.style.zIndex;
+        }
+        
         this.topmostWindowlet.DOMContainer.style.zIndex = windowletZIndex;
+        if (windowlet.handleDOMContainer) 
+        {
+            this.topmostWindowlet.handleDOMContainer.style.zIndex = windowletHandleZIndex;
+        }
+        
         this.topmostWindowlet = windowlet;
     }
 }

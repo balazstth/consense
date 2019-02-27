@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2018
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
 // For detailed licensing information see conSense.js.
 // See redSandOSVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -147,15 +147,41 @@ class RedSandLauncher
         this.version = redSandOSVersion;
 
         // Window registry
-        this.blueprint = {};
+        this.blueprint = new Set();
 
         this.ART = {
-            0: {
-                headerBgColor:  redSandDesktop.palette.CGA_black,
-                headerColor:    redSandDesktop.palette.CGA_white,
+            "bw": {
+                // Handle or header
+                handleBgColor:  redSandDesktop.palette.CGA_black,
+                handleColor:    redSandDesktop.palette.CGA_white,
+                // Content
                 contentBgColor: redSandDesktop.palette.CGA_white,
                 contentColor:   redSandDesktop.palette.CGA_black,
-                decoration:     "↑↓↕■",
+                // Selection
+                selectBgColor:  redSandDesktop.palette.CGA_light_red,
+                selectColor:    redSandDesktop.palette.CGA_white
+            },            
+            "indigo": {
+                // Handle or header
+                handleBgColor:  redSandDesktop.palette.PICO_indigo,
+                handleColor:    redSandDesktop.palette.PICO_white,
+                // Content
+                contentBgColor: redSandDesktop.palette.PICO_white,
+                contentColor:   redSandDesktop.palette.PICO_dark_gray,
+                // Selection
+                selectBgColor:  redSandDesktop.palette.PICO_red,
+                selectColor:    redSandDesktop.palette.PICO_white
+            },
+            "blue": {
+                // Handle or header
+                handleBgColor:  redSandDesktop.palette.PICO_blue,
+                handleColor:    redSandDesktop.palette.PICO_white,
+                // Content
+                contentBgColor: redSandDesktop.palette.PICO_white,
+                contentColor:   redSandDesktop.palette.PICO_dark_gray,
+                // Selection
+                selectBgColor:  redSandDesktop.palette.PICO_red,
+                selectColor:    redSandDesktop.palette.PICO_white
             }            
         };
         //////////////////////////////////////////////////////////////////////
@@ -163,11 +189,13 @@ class RedSandLauncher
 
     //------------------------------------------------------------------------
 
-    addWindow(x, y, width, height, title = "", art = this.ART[0])
+    addWindow(x, y, width, height, title = "", art = this.ART["bw"])
     {
         const window = new RedSandWindow(x, y, width, height, title, art);
+        
+        this.blueprint.add(window);
 
-        // TODO: add to blueprint
+        return window;
     }
 
 }
@@ -195,19 +223,23 @@ class RedSandWindow
         this.clientWidth  = this.width  - 2;    // Valid >= 0
         this.clientHeight = this.height - 2;    // Valid >= 0
         this.title = title;
+        
+        // 2D arrays, initialized in this.createCharacterWindow()
+        this.charBuffer = [];
+        this.bgcBuffer  = [];
+        this.colBuffer  = [];
 
-        // Character buffer for the whole page
-        this.buffer      = "";    // 1D variant
-        this.buffer2D    = [];    // 2D variant
-        // Color of each char
-        this.cBuffer     = "";    
-        this.cBuffer2D   = [];   
-        // Background color of each char
-        this.bgcBuffer   = "";    
-        this.bgcBuffer2D = [];   
+        // Actual render buffer, built up from the above three buffers in HTML
+        this.renderBuffer = "";
+
+        // RedSandWindowlet that holds the character window        
+        this.windowlet = undefined;
+        // Initialized in createCharacterWindow()
+        this.lineBorder = undefined;
+        this.lineHeight = undefined;
+        //////////////////////////////////////////////////////////////////////
 
         this.createCharacterWindow(x, y);
-        //////////////////////////////////////////////////////////////////////
     }
 
     //------------------------------------------------------------------------
@@ -223,26 +255,58 @@ class RedSandWindow
         }
 
         const charDim = redSandDesktop.getCharDimensions();
-        this.window = new RedSandWindowlet(
-            x, y, charDim.width * this.width, charDim.height * this.height, "default", "default", true);
+        this.lineBorder = Math.floor(charDim.height / 4);
+        this.lineHeight = charDim.height + 2 * this.lineBorder;
+
+        // TODO: scaling issue here when zooming the page, fix the size setting
+        this.windowlet = new RedSandWindowlet(
+            x, y, charDim.width * this.width, this.lineHeight * this.height, "default", "default", true, this.lineHeight);
+
+        console.log(this.lineHeight);
+        console.log(this.height);
+        console.log(this.lineHeight * this.height);
+
         // Same character proportions for the shadow as in the 90s
-        this.window.DOMContainer.style["box-shadow"] = `${charDim.width}px ${charDim.height}px 2px rgba(0, 0, 0, .75)`;
+        this.windowlet.DOMContainer.style["box-shadow"] 
+            = `${2 * charDim.width}px ${this.lineHeight}px 2px rgba(0, 0, 0, .75)`;
+        this.windowlet.DOMContainer.style["overflow-x"] = "hidden";
+        this.windowlet.DOMContainer.style["overflow-y"] = "hidden";
+        this.windowlet.DOMContainer.style["display"] = "flex";
+        this.windowlet.DOMContainer.style["flex-direction"] = "row";
+        this.windowlet.DOMContainer.style["flex-wrap"] = "wrap";
+        this.windowlet.DOMContainer.style["align-content"] = "flex-start";
+        // TODO: custom select color, already defined in art
 
-        // Render colors
-        this.buffer2D[0]
-            = `<span style='background-color: ${this.art.headerBgColor}; color: ${this.art.headerColor};'>` 
-            + _.pad("", this.width, this.NBSP) 
-            + "</span><br>";
-
-        for (let i = 1; i < this.height; i++)
+        for (let i = 0; i < this.height; i++)
         {
-            this.buffer2D[i]
-                = `<span style='background-color: ${this.art.contentBgColor}; color: ${this.art.contentColor};'>` 
-                + _.pad("", this.width, this.NBSP) 
-                + "</span><br>";
+            this.charBuffer[i] = [];
+            this.bgcBuffer[i] = [];
+            this.colBuffer[i] = [];
+
+            // Handle
+            if (i === 0)
+            {
+                for (let j = 0; j < this.width; j++) 
+                {
+                    this.charBuffer[i][j] = this.NBSP;
+                    this.bgcBuffer[i][j] = this.art.handleBgColor;
+                    this.colBuffer[i][j] = this.art.handleColor;
+                }
+            }
+            // Content
+            else
+            {
+                for (let j = 0; j < this.width; j++) 
+                {
+                    this.charBuffer[i][j] = this.NBSP;
+                    this.bgcBuffer[i][j] = this.art.contentBgColor;
+                    this.colBuffer[i][j] = this.art.contentColor;
+                }
+            }
         }
 
-        this.render2D();
+        this.setTitle(" C:\\> " + this.title);
+        this.render();
     }
 
     //------------------------------------------------------------------------
@@ -256,33 +320,80 @@ class RedSandWindow
             return;
         }
 
-        this.buffer2D = _.split(this.buffer, "<br>");
+        this.renderBuffer = "<div>";
+        let bgc = "init";
+        let col = "init";
+
+        let style = "";
+
         for (let i = 0; i < this.height; i++)
         {
-            this.buffer2D[i] += "<br>";
+            for (let j = 0; j < this.width; j++) 
+            {
+                // A change in style = new div
+                if (this.bgcBuffer[i][j] !== bgc || this.colBuffer[i][j] !== col)
+                {
+                    bgc = this.bgcBuffer[i][j];
+                    col = this.colBuffer[i][j];
+                    style = `background-color: ${bgc}; color: ${col};`
+                        + ` border-top: ${this.lineBorder}px solid ${bgc};`
+                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};>`;
+                    this.renderBuffer += `</div><div style="${style}">`;
+                }
+                // Write cell content
+                this.renderBuffer += this.charBuffer[i][j];
+            }
+            this.renderBuffer += `</div><br><div style="${style}">`;
         }
-        this.window.DOMContainer.innerHTML = this.buffer;
+        // Close the last span
+        this.renderBuffer += "</div>";
+
+        this.windowlet.render(this.renderBuffer);
     }
 
     //------------------------------------------------------------------------
 
     // RedSandWindow
-    // Renders this.buffer2D to the window. Updates this.buffer accordingly.
-    render2D() 
+    // TODO:
+    //     Clipping and wrapping write
+    write(x, y, str)
     {
-        if (this.width < 2 || this.height < 2)
+        for (let i = 0; i < str.length; i++)
         {
-            return;
-        }
+            let chr = str.charAt(i);
 
-        this.buffer = _.map(this.buffer2D).join('');
-        this.window.DOMContainer.innerHTML = this.buffer;
+            switch (chr)
+            {
+                case " ":
+                    chr = "&nbsp;";
+                    break;
+                case "\t":
+                    chr = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    break;
+            }
+
+            this.charBuffer[y][x + i] = chr;
+        }
     }
 
     //------------------------------------------------------------------------
 
     // RedSandWindow
-    // Sets new window title
+    // TODO: fix according to write()
+    colorWrite(x, y, str, bgc, col)
+    {
+        for (let i = 0; i < str.length; i++)
+        {
+            this.charBuffer[y][x + i] = str.charAt(i);
+            this.bgcBuffer[y][x + i] = bgc;
+            this.colBuffer[y][x + i] = col;
+        }
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // Sets and displays a new window title
     setTitle(title) 
     {
         if (this.width < 2 || this.height < 2)
@@ -292,17 +403,14 @@ class RedSandWindow
 
         this.title = title;
 
-        // TODO: display
+        this.write(0, 0, title);
     }
 
 }
 
-// TODO: more specialized windows
-// E.g.:
-
-//----------------------------------------------------------------------------
-// RedSandPalette - A specialized RedSandWindow
-//----------------------------------------------------------------------------
+// TODO: 
+//     Visual window launcher / dock
+//     Specialized windows, e.g.: RedSandPalette
 
 //----------------------------------------------------------------------------
 // Instances

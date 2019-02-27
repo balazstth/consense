@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// ConSense by Toth, Balazs Aladar (c) 2005-2018, for detailed licensing
+// ConSense by Toth, Balazs Aladar (c) 2005-2019, for detailed licensing
 // information see conSense.js.
 // https://aladar.me/
 // Version in Changelog.txt

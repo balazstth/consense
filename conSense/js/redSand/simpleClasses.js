@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// Simple Classes by Toth, Balazs Aladar (c) 2005-2018
+// Simple Classes by Toth, Balazs Aladar (c) 2005-2019
 // For detailed licensing information see conSense.js.
 // See simpleClassesVersion and the changelog for detailed version info.
 // https://aladar.me/

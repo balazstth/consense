@@ -1,10 +1,12 @@
 <pre>
 //////////////////////////////////////////////////////////////////////////////
-// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2018
+// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2019
 // TODO
-// v1.01
+// v1.02
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
+
+This list is not actively maintained at the moment.
 
 Legend
 ------
