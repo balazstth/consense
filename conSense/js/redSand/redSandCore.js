@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.52";
+const redSandCoreVersion = "0.53";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -1153,8 +1153,9 @@ class RedSandWindowletManager
         //////////////////////////////////////////////////////////////////////
         this.version = redSandCoreVersion;
 
-        this.topmostWindowlet = undefined;
+        this.windowlets = [];
         this.highestZIndex = 1000000;
+        // Each windowlet increments by 2 (content n + optional handle n + 1)
         //////////////////////////////////////////////////////////////////////
     }
 
@@ -1170,8 +1171,12 @@ class RedSandWindowletManager
         {
             windowlet.handleDOMContainer.style.zIndex = "" + this.highestZIndex++;
         }
-        // Set topmost windowlet
-        this.topmostWindowlet = windowlet;
+        else 
+        {
+            this.highestZIndex++;
+        }
+        // Add to windowlet array
+        this.windowlets.push(windowlet);
     }
 
     //------------------------------------------------------------------------
@@ -1179,31 +1184,53 @@ class RedSandWindowletManager
     // RedSandWindowletManager
     updateZIndex(windowlet)
     {
-        // TODO: bugfix this, order between the windowlets should be maintained, not just switching with the upmost windowlet
-
-        // Switch z-index with that of the topmost windowlet and update
-        // topmostWindowlet to windowlet
-        const windowletZIndex = windowlet.DOMContainer.style.zIndex;
-        let windowletHandleZIndex;
-        if (windowlet.handleDOMContainer) 
+        for (let i = 0; i < this.windowlets.length; i++)
         {
-            windowletHandleZIndex = windowlet.handleDOMContainer.style.zIndex;
+            // The one we clicked
+            if (this.windowlets[i] === windowlet)
+            {
+                this.windowlets[i].DOMContainer.style.zIndex = "" + (this.highestZIndex - 2);
+                if (this.windowlets[i].handleDOMContainer)
+                {
+                    this.windowlets[i].handleDOMContainer.style.zIndex = "" + (this.highestZIndex - 1);
+                }
+            }
+            // The rest
+            else
+            {
+                this.windowlets[i].DOMContainer.style.zIndex = this.windowlets[i].DOMContainer.style.zIndex - 2;
+                if (this.windowlets[i].handleDOMContainer)
+                {
+                    this.windowlets[i].handleDOMContainer.style.zIndex 
+                        = "" + (this.windowlets[i].handleDOMContainer.style.zIndex - 2);
+                }
+            }
         }
-
-        windowlet.DOMContainer.style.zIndex = this.topmostWindowlet.DOMContainer.style.zIndex;
-        if (windowlet.handleDOMContainer) 
-        {
-            windowlet.handleDOMContainer.style.zIndex = this.topmostWindowlet.handleDOMContainer.style.zIndex;
-        }
-        
-        this.topmostWindowlet.DOMContainer.style.zIndex = windowletZIndex;
-        if (windowlet.handleDOMContainer) 
-        {
-            this.topmostWindowlet.handleDOMContainer.style.zIndex = windowletHandleZIndex;
-        }
-        
-        this.topmostWindowlet = windowlet;
     }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindowletManager
+    // TODO
+    // delete(windowlet)
+    // {
+    //     const z = windowlet.DOMContainer.style.zIndex;
+    //     windowlet.DOMContainer.remove();
+    //     this.windowlets.splice(windowlet, 1);
+    //     for (let i = 0; i < this.windowlets.length; i++)
+    //     {
+    //         if (this.windowlets[i].DOMContainer.style.zIndex > z)
+    //         {
+    //             this.windowlets[i].DOMContainer.style.zIndex = "" + (this.windowlets[i].DOMContainer.style.zIndex - 2);
+    //             if (this.windowlets[i].handleDOMContainer)
+    //             {
+    //                 this.windowlets[i].handleDOMContainer.style.zIndex 
+    //                     = "" + (this.windowlets[i].handleDOMContainer.style.zIndex - 2);
+    //             }
+    //         }
+    //     }
+    //     this.highestZIndex -= 2;
+    // }
 }
 
 //----------------------------------------------------------------------------

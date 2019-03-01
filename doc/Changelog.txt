@@ -294,6 +294,7 @@
 // 1.30         2018-12-16      SimpleUtilities.liteDown() #str# for bold
 // 1.31         2019-01-10      SimpleUtilities.isPresent()
 // 1.32         2019-02-03      String.prototype.replaceAt()
+// 1.33         2019-02-28      SimpleUtilities.draggable() range fix
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -394,6 +395,7 @@
 //                                  render(), selectOn(), selectOff()
 //                              RedSandWindowletManager
 //                                  window handle support
+// 0.53         2019-02-28      RedSandWindowletManager.updateZIndex() fix
 //
 //////////////////////////////////////////////////////////////////////////////
 

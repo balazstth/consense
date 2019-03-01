@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.32";
+const simpleClassesVersion = "1.33";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -1176,7 +1176,7 @@ class SimpleUtilities
     // Drag range: [(0, 0), (infinite, infinite))
     draggable(handle, container = null)
     {
-        Drag.init(handle, container, 0, 1000000000, 0, 1000000000);
+        Drag.init(handle, container, -1000000000, 1000000000, 0, 1000000000);
     }
 
 }

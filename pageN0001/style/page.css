@@ -1,7 +1,7 @@
 body {
   background: white url("../images/bg_760_white_shadow.png") center repeat-y;
   color: black;
-  font-family: "Cousine", "IBM Plex Mono", monospace;
+  font-family: "Cousine", "Hack", "FiraCode", "IBM Plex Mono", monospace;
   font-size: 0.75em;
   font-weight: normal;
   line-height: 1.5;
@@ -9,7 +9,7 @@ body {
   padding: 0; }
 
 pre {
-  font-family: "Cousine", "IBM Plex Mono", monospace;
+  font-family: "Cousine", "Hack", "FiraCode", "IBM Plex Mono", monospace;
   font-size: 1em;
   font-weight: normal;
   line-height: 1.5; }

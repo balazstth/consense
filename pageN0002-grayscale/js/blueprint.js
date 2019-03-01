@@ -12,3 +12,5 @@ const win3 = redSandLauncher.addWindow(300, 300, 40, 10, "Norton", redSandLaunch
 // win2.colorWrite(10, 2, "Quick brown fox", "green", "grey");
 win2.write(10, 2, "Quick brown fox");
 win2.render();
+
+// redSandWindowletManager.delete(win2.windowlet);

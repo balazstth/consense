@@ -1,5 +1,5 @@
 
-$fontStack: 'Cousine', 'IBM Plex Mono', monospace;
+$fontStack: 'Cousine', 'Hack', 'FiraCode', 'IBM Plex Mono', monospace;
 
 @mixin typography($fontSize) {
     font-family: $fontStack;
