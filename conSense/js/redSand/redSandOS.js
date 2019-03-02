@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandOSVersion = "0.05";
+const redSandOSVersion = "0.06";
 
 //----------------------------------------------------------------------------
 // redSandDesktop
@@ -158,10 +158,7 @@ class RedSandLauncher
                 handleColor:    redSandDesktop.palette.CGA_white,
                 // Content
                 contentBgColor: redSandDesktop.palette.CGA_white,
-                contentColor:   redSandDesktop.palette.CGA_black,
-                // Selection
-                selectBgColor:  redSandDesktop.palette.CGA_light_red,
-                selectColor:    redSandDesktop.palette.CGA_white
+                contentColor:   redSandDesktop.palette.CGA_black
             },            
             "indigo": {
                 // Handle or header
@@ -169,10 +166,7 @@ class RedSandLauncher
                 handleColor:    redSandDesktop.palette.PICO_white,
                 // Content
                 contentBgColor: redSandDesktop.palette.PICO_white,
-                contentColor:   redSandDesktop.palette.PICO_dark_gray,
-                // Selection
-                selectBgColor:  redSandDesktop.palette.PICO_red,
-                selectColor:    redSandDesktop.palette.PICO_white
+                contentColor:   redSandDesktop.palette.PICO_dark_gray
             },
             "blue": {
                 // Handle or header
@@ -180,10 +174,7 @@ class RedSandLauncher
                 handleColor:    redSandDesktop.palette.PICO_white,
                 // Content
                 contentBgColor: redSandDesktop.palette.PICO_white,
-                contentColor:   redSandDesktop.palette.PICO_dark_gray,
-                // Selection
-                selectBgColor:  redSandDesktop.palette.PICO_red,
-                selectColor:    redSandDesktop.palette.PICO_white
+                contentColor:   redSandDesktop.palette.PICO_dark_gray
             }            
         };
         //////////////////////////////////////////////////////////////////////
@@ -276,31 +267,13 @@ class RedSandWindow
         // TODO: In Chrome div widths are somehow different by a fraction from normal (Firefox) sizes.
         // That causes a problem with the flex layout used by the renderer at he moment in Chrome. 
 
+        // Some settings here, some in conSense.scss/.redSandWindow
+        this.windowlet.DOMContainer.classList.add("redSandWindow");
         // Remove height to reset RedSandWindowlet default
         this.windowlet.DOMContainer.style["height"] = "";
         // Same character proportions for the shadow as in the 90s
         this.windowlet.DOMContainer.style["box-shadow"] 
             = `${2 * charDim.width}px ${this.lineHeight}px 2px rgba(0, 0, 0, .75)`;
-        // Overflow (per axis definition for later adjustability here)
-        this.windowlet.DOMContainer.style["overflow-x"] = "hidden";
-        this.windowlet.DOMContainer.style["overflow-y"] = "hidden";
-        // Flex layout
-        // Maybe set these as well in a CSS. For now, flex alone should do it.
-        // -ms-box-orient: horizontal;
-        // display: -webkit-box;
-        // display: -moz-box;
-        // display: -ms-flexbox;
-        // display: -moz-flex;
-        // display: -webkit-flex;
-        // display: flex;
-        this.windowlet.DOMContainer.style["display"] = "flex";
-        this.windowlet.DOMContainer.style["-webkit-flex-direction"] = "row"; 
-        this.windowlet.DOMContainer.style["flex-direction"] = "row";
-        this.windowlet.DOMContainer.style["-webkit-flex-wrap"] = "wrap";
-        this.windowlet.DOMContainer.style["flex-wrap"] = "wrap";
-        this.windowlet.DOMContainer.style["-webkit-align-content"] = "flex-start";
-        this.windowlet.DOMContainer.style["align-content"] = "flex-start";
-        // TODO: custom select color, already defined in art
 
         // Populate buffers
         for (let i = 0; i < this.height; i++)
@@ -393,7 +366,7 @@ class RedSandWindow
                 // Write cell content
                 this.renderBuffer += this.charBuffer[i][j];
             }
-            this.renderBuffer += `</div>`;
+            this.renderBuffer += "</div>";
         }
         // Close the last div
         this.renderBuffer += "</div>";
@@ -404,9 +377,12 @@ class RedSandWindow
     //------------------------------------------------------------------------
 
     // RedSandWindow
-    // TODO: clipping or wrapping write
     write(x, y, str, col = "init", bgc = "init")
     {
+        // Exit if obiously out of bounds
+        if (y >= this.height || x >= this.width) return;
+
+        // Process chars and colors
         for (let i = 0; i < str.length; i++)
         {
             let chr = str.charAt(i);
@@ -414,21 +390,41 @@ class RedSandWindow
             switch (chr)
             {
                 case " ":
-                    chr = "&nbsp;";
+                    chr = ["&nbsp;"];
                     break;
                 case "\t":
-                    chr = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    // TODO: maybe make tab size configurable
+                    //       and / or use an external detab() function on the str
+                    //       and / or remove tab support from here then for performance
+                    chr = ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"];
+                    break;
+                default:
+                    chr = [chr];
                     break;
             }
 
-            this.charBuffer[y][x + i] = chr;
-            if (col !== "init")
+            // Support for multiple chars, e.g. for tab
+            for (let k = 0; k < chr.length; k++)
             {
-                this.colBuffer[y][x + i] = col;
-            }
-            if (bgc !== "init")
-            {
-                this.bgcBuffer[y][x + i] = bgc;
+                // Clip invisible areas - no scrolling by default
+                if (x + k + i < this.width)
+                {
+                    this.charBuffer[y][x + k + i] = chr[k];
+                    if (col !== "init")
+                    {
+                        this.colBuffer[y][x + k + i] = col;
+                    }
+                    if (bgc !== "init")
+                    {
+                        this.bgcBuffer[y][x + k + i] = bgc;
+                    }
+                    if (k > 0) x++;
+                }
+                // Out of bounds
+                else
+                {
+                    return;
+                }
             }
         }
     }

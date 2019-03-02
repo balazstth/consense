@@ -128,6 +128,22 @@ html {
   width: auto;
   white-space: nowrap; }
 
+.redSandWindow {
+  overflow: hidden;
+  -ms-box-orient: horizontal !important;
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -moz-flex !important;
+  display: -webkit-flex !important;
+  display: flex !important;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: flex-start;
+  align-content: flex-start; }
+
 /* ------------------------------------------------------------------------ */
 
 /*# sourceMappingURL=conSense.css.map */

@@ -163,4 +163,26 @@ $fontStack: 'Hack', 'Fira Code', 'Cousine', 'IBM Plex Mono', monospace;      // 
     white-space: nowrap;
 }
 
+.redSandWindow
+{
+    // Some settings here, some in RedSandLauncher.createCharacterWindow()
+
+    // Overflow (can be defined per axis)
+    overflow: hidden;
+    // Flex layout
+    -ms-box-orient: horizontal !important;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -moz-flex !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-flex-direction: row; 
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: flex-start;
+    align-content: flex-start;
+}
+  
 /* ------------------------------------------------------------------------ */

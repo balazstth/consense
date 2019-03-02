@@ -424,6 +424,8 @@
 // 0.03         2019-02-02      work in progress
 // 0.04         2019-02-27      a lot of changes
 // 0.05         2019-03-01      RedSandWindow zoom fix, render() fix, write() fix
+// 0.06         2019-03-02      RedSandWindow.write() clipping and tab suport
+//                              RedSandWindow.createCharacterWindow() styling fix
 //
 //////////////////////////////////////////////////////////////////////////////
 

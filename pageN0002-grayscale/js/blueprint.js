@@ -12,6 +12,9 @@ win2.write(10, 2, "Quick brown fox");
 win2.write(10, 3, "jumps over a lazy dog", redSandDesktop.palette.PICO_red);
 win2.write(10, 5, "TEST", redSandDesktop.palette.PICO_white, redSandDesktop.palette.PICO_red);
 win2.write(10, 6, "TEST", redSandDesktop.palette.PICO_white, redSandDesktop.palette.PICO_black);
+win2.write(0, 22, "Tab\ttest");
+win2.write(74, 1, "Clip_test");
+win2.write(67, 24, "Tab\tedge\ttest");
 win2.render();
 
 for (let i = 0; i < 40; i++)
