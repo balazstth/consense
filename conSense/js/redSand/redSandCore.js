@@ -1211,26 +1211,28 @@ class RedSandWindowletManager
     //------------------------------------------------------------------------
 
     // RedSandWindowletManager
-    // TODO
-    // delete(windowlet)
-    // {
-    //     const z = windowlet.DOMContainer.style.zIndex;
-    //     windowlet.DOMContainer.remove();
-    //     this.windowlets.splice(windowlet, 1);
-    //     for (let i = 0; i < this.windowlets.length; i++)
-    //     {
-    //         if (this.windowlets[i].DOMContainer.style.zIndex > z)
-    //         {
-    //             this.windowlets[i].DOMContainer.style.zIndex = "" + (this.windowlets[i].DOMContainer.style.zIndex - 2);
-    //             if (this.windowlets[i].handleDOMContainer)
-    //             {
-    //                 this.windowlets[i].handleDOMContainer.style.zIndex 
-    //                     = "" + (this.windowlets[i].handleDOMContainer.style.zIndex - 2);
-    //             }
-    //         }
-    //     }
-    //     this.highestZIndex -= 2;
-    // }
+    delete(windowlet)
+    {
+        console.log("ERROR: Implement me: RedSandWindowletManager.delete()");
+        // TODO
+
+        // const z = windowlet.DOMContainer.style.zIndex;
+        // windowlet.DOMContainer.remove();
+        // this.windowlets.splice(windowlet, 1);
+        // for (let i = 0; i < this.windowlets.length; i++)
+        // {
+        //     if (this.windowlets[i].DOMContainer.style.zIndex > z)
+        //     {
+        //         this.windowlets[i].DOMContainer.style.zIndex = "" + (this.windowlets[i].DOMContainer.style.zIndex - 2);
+        //         if (this.windowlets[i].handleDOMContainer)
+        //         {
+        //             this.windowlets[i].handleDOMContainer.style.zIndex 
+        //                 = "" + (this.windowlets[i].handleDOMContainer.style.zIndex - 2);
+        //         }
+        //     }
+        // }
+        // this.highestZIndex -= 2;
+    }
 }
 
 //----------------------------------------------------------------------------
