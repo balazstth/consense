@@ -31747,7 +31747,7 @@ class RedSandWindow
                     col = this.colBuffer[i][j];
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
-                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};>`;
+                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
                     this.renderBuffer += `</div><div style="${style}">`;
                 }
                 // Column 0 and no changed color
@@ -31762,7 +31762,7 @@ class RedSandWindow
                     col = this.colBuffer[i][j];
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
-                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};>`;
+                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
                     this.renderBuffer += `<div style="${style}">`;
                 }
                 // Any other column and changed color
@@ -31772,7 +31772,7 @@ class RedSandWindow
                     col = this.colBuffer[i][j];
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
-                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};>`;
+                        + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
                     this.renderBuffer += `</div><div style="${style}">`;
                 }
                 // Write cell content
