@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandOSVersion = "0.06";
+const redSandOSVersion = "0.07";
 
 //----------------------------------------------------------------------------
 // redSandDesktop
@@ -264,9 +264,6 @@ class RedSandWindow
         this.windowlet = new RedSandWindowlet(
             x, y, charDim.width * this.width, this.lineHeight * this.height, "default", "default", true, this.lineHeight);
 
-        // TODO: In Chrome div widths are somehow different by a fraction from normal (Firefox) sizes.
-        // That causes a problem with the flex layout used by the renderer at he moment in Chrome. 
-
         // Some settings here, some in conSense.scss/.redSandWindow
         this.windowlet.DOMContainer.classList.add("redSandWindow");
         // Remove height to reset RedSandWindowlet default
@@ -312,6 +309,10 @@ class RedSandWindow
 
     // RedSandWindow
     // Renders this.renderBuffer to the window.
+    //
+    // This routine needs a counter built in just for Chrome. Firefox behaves standards-compliant
+    // and fine, a simple wrapping flex row layout would fit. Not for Chrome, where div sizing
+    // seems to be off by a fraction. Tried box-sizing: border-box; as well, to no avail.
     render() 
     {
         if (this.width < 2 || this.height < 2)
@@ -323,6 +324,13 @@ class RedSandWindow
         let bgc = "init";
         let col = "init";
         let style = "";
+
+        let tempBuf = "";
+        // Because tempBuf.length does not cut it this time, unfortunately.
+        // (Think &nbsp; for instance, one HTML entity = six chars in the string.)
+        let count = 0;
+
+        const charDim = redSandDesktop.getCharDimensions();
 
         for (let i = 0; i < this.height; i++)
         {
@@ -336,12 +344,16 @@ class RedSandWindow
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
                         + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
-                    this.renderBuffer += `</div><div style="${style}">`;
+                    this.renderBuffer += `</div><div style="${style} `;
+                    tempBuf = "";
+                    count = 0;
                 }
                 // Column 0 and no changed color
                 else if (j === 0 && this.bgcBuffer[i][j] === bgc && this.colBuffer[i][j] === col)
                 {
-                    this.renderBuffer += `<div style="${style}">`;
+                    this.renderBuffer += `<div style="${style} `;
+                    tempBuf = "";
+                    count = 0;
                 }
                 // Column 0 and changed color
                 else if (j === 0 && (this.bgcBuffer[i][j] !== bgc || this.colBuffer[i][j] !== col))
@@ -351,7 +363,9 @@ class RedSandWindow
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
                         + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
-                    this.renderBuffer += `<div style="${style}">`;
+                    this.renderBuffer += `<div style="${style} `;
+                    tempBuf = "";
+                    count = 0;
                 }
                 // Any other column and changed color
                 else if (j !== 0 && (this.bgcBuffer[i][j] !== bgc || this.colBuffer[i][j] !== col))
@@ -361,15 +375,18 @@ class RedSandWindow
                     style = `background-color: ${bgc}; color: ${col};`
                         + ` border-top: ${this.lineBorder}px solid ${bgc};`
                         + ` border-bottom: ${this.lineBorder}px solid ${bgc};`;
-                    this.renderBuffer += `</div><div style="${style}">`;
+                    this.renderBuffer += `max-width: ${charDim.width * count}px;">${tempBuf}</div><div style="${style} `;
+                    tempBuf = "";
+                    count = 0;
                 }
                 // Write cell content
-                this.renderBuffer += this.charBuffer[i][j];
+                tempBuf += this.charBuffer[i][j];
+                count++;
             }
-            this.renderBuffer += "</div>";
+            this.renderBuffer += `max-width: ${charDim.width * count}px;">${tempBuf}</div>`;
+            tempBuf = "";
+            count = 0;
         }
-        // Close the last div
-        this.renderBuffer += "</div>";
 
         this.windowlet.render(this.renderBuffer);
     }

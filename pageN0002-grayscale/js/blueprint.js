@@ -15,6 +15,11 @@ win2.write(10, 6, "TEST", redSandDesktop.palette.PICO_white, redSandDesktop.pale
 win2.write(0, 22, "Tab\ttest");
 win2.write(74, 1, "Clip_test");
 win2.write(67, 24, "Tab\tedge\ttest");
+
+for (let i = 0; i < 80; i++)
+{
+    win2.write(i, 10, "W", "rgb(" + (255 - i * 6) + ", " + i * 6 + ", " + 0 + ")");
+}
 win2.render();
 
 for (let i = 0; i < 40; i++)

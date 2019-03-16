@@ -153,6 +153,8 @@ $fontStack: 'Hack', 'Fira Code', 'Cousine', 'IBM Plex Mono', monospace;      // 
     @include alpha(0.20);
 }
 
+/* ------------------------------------------------------------------------ */
+
 // Used for measuring text dimensions, e.g. for text mode emulation
 .redSandTextMeasureBox
 {
@@ -163,12 +165,11 @@ $fontStack: 'Hack', 'Fira Code', 'Cousine', 'IBM Plex Mono', monospace;      // 
     white-space: nowrap;
 }
 
+// Some settings here, some in RedSandLauncher.createCharacterWindow()
 .redSandWindow
 {
-    // Some settings here, some in RedSandLauncher.createCharacterWindow()
-
     // Overflow (can be defined per axis)
-    overflow: hidden;
+    overflow: hidden !important;
     // Flex layout
     -ms-box-orient: horizontal !important;
     display: -webkit-box !important;
@@ -183,6 +184,8 @@ $fontStack: 'Hack', 'Fira Code', 'Cousine', 'IBM Plex Mono', monospace;      // 
     flex-wrap: wrap;
     -webkit-align-content: flex-start;
     align-content: flex-start;
+    -webkit-justify-content: left;
+    justify-content: left;
 }
   
 /* ------------------------------------------------------------------------ */

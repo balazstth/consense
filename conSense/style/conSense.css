@@ -121,6 +121,7 @@ html {
   opacity: 0.2;
   -moz-opacity: 0.2; }
 
+/* ------------------------------------------------------------------------ */
 .redSandTextMeasureBox {
   position: absolute;
   visibility: hidden;
@@ -129,7 +130,7 @@ html {
   white-space: nowrap; }
 
 .redSandWindow {
-  overflow: hidden;
+  overflow: hidden !important;
   -ms-box-orient: horizontal !important;
   display: -webkit-box !important;
   display: -moz-box !important;
@@ -142,7 +143,9 @@ html {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   -webkit-align-content: flex-start;
-  align-content: flex-start; }
+  align-content: flex-start;
+  -webkit-justify-content: left;
+  justify-content: left; }
 
 /* ------------------------------------------------------------------------ */
 
