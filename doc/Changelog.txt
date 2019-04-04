@@ -427,6 +427,8 @@
 // 0.06         2019-03-02      RedSandWindow.write() clipping and tab suport
 //                              RedSandWindow.createCharacterWindow() styling fix
 // 0.07         2019-03-16      RedSandWindow.render() fix
+// 0.08         2019-04-04      RedSandWindow / cursor preparation
+//                              RedSandTimer preparation
 //
 //////////////////////////////////////////////////////////////////////////////
 

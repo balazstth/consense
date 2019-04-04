@@ -31423,7 +31423,7 @@ class RedSandGLPrimitive
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandOSVersion = "0.07";
+const redSandOSVersion = "0.08";
 
 //----------------------------------------------------------------------------
 // redSandDesktop
@@ -31438,6 +31438,7 @@ class RedSandDesktop
         //////////////////////////////////////////////////////////////////////
         // RedSandDesktop                                      Class variables
         //////////////////////////////////////////////////////////////////////
+        
         this.version = redSandOSVersion;
 
         this.palette = {};
@@ -31484,10 +31485,13 @@ class RedSandDesktop
         this.palette.CGA_pink         = "#FF55FF";
         this.palette.CGA_yellow       = "#FFFF55";
         this.palette.CGA_white        = "#FFFFFF";
+        
         //////////////////////////////////////////////////////////////////////
     }
 
-    //------------------------------------------------------------------------
+    //========================================================================
+
+    // Utility functions
 
     // RedSandDesktop
     // Returns text size in pixels, and counts with this.windowStyle.
@@ -31592,7 +31596,9 @@ class RedSandLauncher
         //////////////////////////////////////////////////////////////////////
     }
 
-    //------------------------------------------------------------------------
+    //========================================================================
+
+    // Window functions
 
     // RedSandLauncher
     addWindow(x, y, width, height, title = "", art = this.ART["bw"])
@@ -31628,6 +31634,7 @@ class RedSandWindow
         //////////////////////////////////////////////////////////////////////
         // RedSandWindow                                       Class variables
         //////////////////////////////////////////////////////////////////////
+        
         this.version = redSandOSVersion;
 
         this.NBSP = "\u00A0";
@@ -31652,6 +31659,14 @@ class RedSandWindow
         // Initialized in createCharacterWindow()
         this.lineBorder = undefined;
         this.lineHeight = undefined;
+
+        // Cursor
+        this.cursorVisible = false;
+        this.cursorX = 0;
+        this.cursorY = 1;
+        this.cursorPhase = 0;   // 0, 1
+        this.cursorTimer = undefined;
+
         //////////////////////////////////////////////////////////////////////
 
         this.createCharacterWindow(x, y);
@@ -31874,17 +31889,101 @@ class RedSandWindow
         this.write(0, 0, title);
     }
 
+    //========================================================================
+
+    // Cursor functions 
+
+    // RedSandWindow
+    cursorOn() 
+    {
+        if (this.cursorTimer === undefined)
+        {
+            this.cursorTimer = new RedSandTimer(1000, this.cursorAnim);
+        }
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    cursorOff() 
+    {
+        this.cursorTimer.off();
+        this.cursorTimer = undefined;
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // (Maybe an option for a custom anim callback will be added in the future.)
+    cursorAnim() 
+    {
+    }
+
 }
 
+//----------------------------------------------------------------------------
+// RedSandTimer
+//----------------------------------------------------------------------------
+
+class RedSandTimer
+{
+    //------------------------------------------------------------------------
+
+    // interval: in milliseconds
+    // callback: to call when tick
+    constructor(interval, callback) 
+    {
+        //////////////////////////////////////////////////////////////////////
+        // RedSandTimer                                        Class variables
+        //////////////////////////////////////////////////////////////////////
+
+        this.interval = interval;
+        this.callback = callback;
+
+        this.timeout = setTimeout(callback, interval);
+
+        //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandTimer
+    on()
+    {
+        if (this.timeout === undefined)
+        {
+            this.timeout = setTimeout(this.callback, this.interval);
+        }
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandTimer
+    off()
+    {
+        clearTimeout(this.timeout);
+        this.timeout = undefined;
+    }
+
+}
+
+//----------------------------------------------------------------------------
+
 // TODO: 
+//
 //     Window launcher / dock window
-//     Unscrollable textmode window
+//     Virtual cursor, insert and overwrite
+//     Buttons
+//     Arbitrary editable boxes and areas in the window - input areas
+//
+//     About window
 //     Scrollable textmode window w/ textmode scrollbar
 //     Maybe graphical window / canvas
 //     Textmode Tetris
 //     Specialized windows like a color palette
 //     Character table
 //     Calculator
+//     Card game
 
 //----------------------------------------------------------------------------
 // Instances
