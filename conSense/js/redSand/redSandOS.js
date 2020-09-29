@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2020
 // For detailed licensing information see conSense.js.
 // See redSandOSVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -486,7 +486,7 @@ class RedSandWindow
     {
         if (this.cursorTimer === undefined)
         {
-            this.cursorTimer = new RedSandTimer(1000, this.cursorAnim);
+            this.cursorTimer = new RedSandTimer(this, this.cursorAnim, 1000);
         }
     }
 
@@ -505,6 +505,10 @@ class RedSandWindow
     // (Maybe an option for a custom anim callback will be added in the future.)
     cursorAnim() 
     {
+        this.write(this.cursorX, this.cursorY, "#");
+        // TODO: Change this into a blinking cursor. Blink background (and foreground?)
+        // color at he given position. Black and white or inverted colors.
+        this.render();
     }
 
 }
@@ -517,18 +521,20 @@ class RedSandTimer
 {
     //------------------------------------------------------------------------
 
-    // interval: in milliseconds
+    // context: context class
     // callback: to call when tick
-    constructor(interval, callback) 
+    // interval: in milliseconds
+    constructor(context, callback, interval) 
     {
         //////////////////////////////////////////////////////////////////////
         // RedSandTimer                                        Class variables
         //////////////////////////////////////////////////////////////////////
 
-        this.interval = interval;
+        this.context = context;
         this.callback = callback;
+        this.interval = interval;
 
-        this.timeout = setTimeout(callback, interval);
+        this.on();  // It is on by default at creation
 
         //////////////////////////////////////////////////////////////////////
     }
@@ -540,7 +546,8 @@ class RedSandTimer
     {
         if (this.timeout === undefined)
         {
-            this.timeout = setTimeout(this.callback, this.interval);
+            let that = this.context;
+            this.timeout = setTimeout(this.callback.bind(that), this.interval);
         }
     }
 

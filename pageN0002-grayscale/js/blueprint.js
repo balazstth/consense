@@ -29,3 +29,5 @@ for (let i = 0; i < 40; i++)
 win3.render();
 
 // redSandWindowletManager.delete(win2.windowlet);
+
+// win3.cursorOn();

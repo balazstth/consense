@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// ConSense by Toth, Balazs Aladar (c) 2005-2019, comes under the terms of the
+// ConSense by Toth, Balazs Aladar (c) 2005-2020, comes under the terms of the
 // MIT License (http://www.opensource.org/licenses/mit-license.html)
 // See conSense.version and the Changelog for detailed version info.
 // Currently supported browsers: latest Firefox, Chrome, Edge and probably all
@@ -167,7 +167,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.23";
+        this.version = "1.24";
 
         // Toggle debug operation
         this.debug = true;
@@ -1458,7 +1458,7 @@ class ConSense
     {
         this.writeLn("The ConSense MIT-like license:<br />");
         this.writeLn("---license---");
-        this.writeLn("Copyright (c) 2005-2008 Bal&aacute;zs T&oacute;th (contact dot consense at gmail dot com)<br />");
+        this.writeLn("Copyright (c) 2005-2020 Bal&aacute;zs T&oacute;th (contact dot consense at gmail dot com)<br />");
         this.writeLn("Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />");
         this.writeLn("The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />");
         this.writeLn("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
@@ -1494,7 +1494,7 @@ class ConSense
         this.writeLn(this.highlight("This") + " style is used for simple highlighting and " + this.highlightAppendLink("this") + " is a clickable autoappend input string.");
         this.writeLn("Doubleclicking the output area focuses the input line. Up/down arrow keys control command history.");
         this.writeLn("Works best with any modern browser.");
-        this.writeLn("ConSense is (c) 2005-2019 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
+        this.writeLn("ConSense is (c) 2005-2020 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
     }
 
 }
