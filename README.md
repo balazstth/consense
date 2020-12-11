@@ -3,7 +3,7 @@ ConSense
 
 **2020-12-11: News**
 
-- RedSandOS changes, RedSandWindows are text-based, but feature a canvas or div graphics layer now
+- RedSandOS changes, RedSandWindows are text-based, but feature a canvas or a div graphics layer now
 - New feature demo: **[n0003-portal](https://balazstth.github.io/consense/indexN0003-portal.html)**
 - Previous, text-based feature demo: **[n0002-grayscale](https://balazstth.github.io/consense/indexN0002-grayscale.html)**
 
