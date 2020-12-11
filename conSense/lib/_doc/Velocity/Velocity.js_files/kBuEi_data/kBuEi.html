@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+  <title>CodePen - Velocity.js - Command: Scroll w/ Container Option</title>
+  
+  
+  
+  
+      <style>
+      body {
+  font-family: "Helvetica Neue", Helvetica;
+  width: 90%;
+  font-weight: 200;
+  letter-spacing: 1px;
+  margin: 25px auto 0 auto;
+  background: rgb(234, 235, 235);
+  color: rgb(25, 25, 25);
+}
+
+div, p {
+  margin: 0 auto;
+}
+
+p {
+  color: rgb(125, 125, 125);
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 17px;
+}
+
+#container {
+  border: 1px solid gray;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Remember that a scrolling container element must have a position set. */
+  position: relative;
+  width: 50%;
+}
+
+#container div {
+  padding-bottom: 10px;
+}
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no">
+
+  <p>
+  Refresh this page to re-run the demo.
+</p>
+
+<div id="container">
+    <div id="element1">
+      First element. Lorem ipsum dolor sit amet, consectetur adipisicing
+ elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+aliqua. Ut enim ad minim veniam, quis nostrud.
+    </div>
+    <div id="element2">
+      Second element. Lorem ipsum dolor sit amet, consectetur 
+adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+    </div>
+    <div id="element3" class="">
+      Third element. Lorem ipsum dolor sit amet, consectetur adipisicing
+ elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+aliqua. Ut enim ad minim veniam, quis nostrud.
+    </div>
+    <div id="element4">
+      Fourth element. Lorem ipsum dolor sit amet, consectetur 
+adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+magna aliqua. Ut enim ad minim veniam, quis nostrud.
+    </div>
+    <div id="element5">
+      Fifth element. Lorem ipsum dolor sit amet, consectetur adipisicing
+ elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+aliqua. Ut enim ad minim veniam, quis nostrud.
+    </div>
+    <div id="element6">
+      Sixth element. Lorem ipsum dolor sit amet, consectetur adipisicing
+ elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+aliqua. Ut enim ad minim veniam, quis nostrud.
+    </div>
+</div>
+    <script src="../jaBgm_data/jaBgm_data/stopExecutionOnTimeout-41c52890748cd7143004e05d3c5f786c66b199.js"></script>
+
+  <script src="../jaBgm_data/jaBgm_data/jquery.js"></script>
+<script src="../jaBgm_data/jaBgm_data/velocity.js"></script>
+<script src="../jaBgm_data/jaBgm_data/velocity_002.js"></script>
+
+  
+
+    <script>
+       /* jquery.js */
+/* jquery.velocity.js */
+
+// Use scroll with the container option.
+// Note: When you want to scroll the browser window itself, do not pass in a container.
+$("#element3").velocity("scroll", {
+  container: $("#container"),
+  duration: 800,
+  delay: 500 });
+      //# sourceURL=pen.js
+    </script>
+
+
+
+  
+  
+
+
+
+
+ </body></html>

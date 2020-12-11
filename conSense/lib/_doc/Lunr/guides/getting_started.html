@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  
+<!-- Mirrored from lunrjs.com/guides/getting_started.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:29:53 GMT -->
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Getting Started : Lunr</title>
+
+    <link href="../stylesheets/site-958a0798.css" rel="stylesheet" />
+
+    <script src="../../use.typekit.net/lem3gmz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25695442-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </head>
+
+  <body class="guides guides_getting_started">
+    <div class="container">
+      <nav>
+  <div class="content">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../docs/index.html">Docs</a></li>
+      <li><a href="getting_started.html">Guides</a></li>
+      <li><a href="https://olivernn.github.io/moonwalkers">Demo</a></li>
+      <li><a href="../../github.com/olivernn/lunr.html">Source</a></li>
+  </div>
+</nav>
+
+
+      <div class="content">
+        <div class="sidebar">
+          <ul>
+              <li class="current">
+                  <a href="getting_started.html">Getting Started</a>
+                    <ul>
+<li>
+<a href="#installation">Installation</a>
+</li>
+<li>
+<a href="#creating-an-index">Creating an Index</a>
+</li>
+<li>
+<a href="#conclusion">Conclusion</a>
+</li>
+</ul>
+
+                </li>
+              <li class="">
+                  <a href="core_concepts.html">Core Concepts</a>
+                </li>
+              <li class="">
+                  <a href="searching.html">Searching</a>
+                </li>
+              <li class="">
+                  <a href="upgrading.html">Upgrading</a>
+                </li>
+              <li class="">
+                  <a href="index_prebuilding.html">Pre-building Indexes</a>
+                </li>
+              <li class="">
+                  <a href="customising.html">Customisation</a>
+                </li>
+              <li class="">
+                  <a href="language_support.html">Language Support</a>
+                </li>
+          </ul>
+        </div>
+
+
+        <article>
+          <h1 id="getting-started">Getting Started</h1>
+
+<p>This guide will walk you through setting up your first search index with Lunr. It assumes you have some familiarity with JavaScript. After finishing this guide you will have a script that will be able to perform a search on a collection of documents.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Install Lunr with npm:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>npm install <span class="nt">-g</span> lunr
+</code></pre></div>
+<p>Lunr is also available as a single file for use in browsers using script tags. It can be included from the unpkg CDN like this:</p>
+<div class="highlight"><pre class="highlight html"><code>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/lunr/lunr.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p>The following examples will use node.js for simplicity; the same code will work in any JavaScript environment.</p>
+
+<h2 id="creating-an-index">Creating an Index</h2>
+
+<p>We will create a simple index on a collection of documents and then perform searches on those documents.</p>
+
+<p>First, we need a collection of documents. A document is a JavaScript object. It should have an identifier field that Lunr will use to tell us which documents in the collection matched a search, as well as any other fields that we want to search on.</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">documents</span> <span class="o">=</span> <span class="p">[{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Lunr"</span><span class="p">,</span>
+  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Like Solr, but much smaller, and not as bright."</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"React"</span><span class="p">,</span>
+  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"A JavaScript library for building user interfaces."</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Lodash"</span><span class="p">,</span>
+  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"A modern JavaScript utility library delivering modularity, performance &amp; extras."</span>
+<span class="p">}]</span>
+</code></pre></div>
+<p>We will use the above array of documents to build our index. We want to search the <code>text</code> field, and the <code>name</code> field will be our identifier. Let&rsquo;s define our index and add these documents to it.</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">ref</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+
+  <span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span>
+  <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Now that we have created our index we can try out a search:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">idx</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s2">"bright"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The above example shows how to quickly get full text search with Lunr. From here you can learn more about the <a href="core_concepts.html">core concepts</a> involved in a Lunr index, explore the <a href="searching.html">advanced search capability</a> provided by Lunr and see <a href="customising.html">how to customise Lunr</a> to provide a great search experience.</p>
+
+        </article>
+      </div>
+    </div>
+  </body>
+
+<!-- Mirrored from lunrjs.com/guides/getting_started.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:29:54 GMT -->
+</html>

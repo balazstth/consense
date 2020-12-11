@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+  
+<!-- Mirrored from lunrjs.com/guides/customising.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:33:25 GMT -->
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Customisation : Lunr</title>
+
+    <link href="../stylesheets/site-958a0798.css" rel="stylesheet" />
+
+    <script src="../../use.typekit.net/lem3gmz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25695442-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </head>
+
+  <body class="guides guides_customising">
+    <div class="container">
+      <nav>
+  <div class="content">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../docs/index.html">Docs</a></li>
+      <li><a href="getting_started.html">Guides</a></li>
+      <li><a href="https://olivernn.github.io/moonwalkers">Demo</a></li>
+      <li><a href="../../github.com/olivernn/lunr.html">Source</a></li>
+  </div>
+</nav>
+
+
+      <div class="content">
+        <div class="sidebar">
+          <ul>
+              <li class="">
+                  <a href="getting_started.html">Getting Started</a>
+                </li>
+              <li class="">
+                  <a href="core_concepts.html">Core Concepts</a>
+                </li>
+              <li class="">
+                  <a href="searching.html">Searching</a>
+                </li>
+              <li class="">
+                  <a href="upgrading.html">Upgrading</a>
+                </li>
+              <li class="">
+                  <a href="index_prebuilding.html">Pre-building Indexes</a>
+                </li>
+              <li class="current">
+                  <a href="customising.html">Customisation</a>
+                    <ul>
+<li>
+<a href="#plugins">Plugins</a>
+</li>
+<li>
+<a href="#pipeline-functions">Pipeline Functions</a>
+</li>
+<li>
+<a href="#token-meta-data">Token Meta-data</a>
+</li>
+<li>
+<a href="#similarity-tuning">Similarity Tuning</a>
+</li>
+</ul>
+
+                </li>
+              <li class="">
+                  <a href="language_support.html">Language Support</a>
+                </li>
+          </ul>
+        </div>
+
+
+        <article>
+          <h1 id="customisation">Customisation</h1>
+
+<p>Lunr ships with sensible defaults that will produce good results for most use cases. Lunr also provides the ability to customise the index to provide extra features and allow more control over how documents are indexed and scored.</p>
+
+<h2 id="plugins">Plugins</h2>
+
+<p>Any customisation, or extensions, can be packaged as a plugin. This makes it easier to share your customisations between indexes and other people, and provides a single, supported, way of customising Lunr.</p>
+
+<p>A plugin is just a function that Lunr executes in the context of an index builder. For example, a plugin that adds some default fields to the index would look like this:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">articleIndex</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This plugin can then be used when defining an index:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">articleIndex</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Plugin functions have their context set to the index builder, and the builder is also passed as the first argument to the plugin. Additional parameters can also be passed to the plugin when using it in an index. For example, taking the above plugin and passing it fields to add to the index could look like this:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">parameterisedPlugin</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">builder</span><span class="p">,</span> <span class="nx">fields</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fields</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">builder</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">parameterisedPlugin</span><span class="p">,</span> <span class="p">[</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'body'</span><span class="p">])</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2 id="pipeline-functions">Pipeline Functions</h2>
+
+<p>The most commonly customised part of Lunr is the text processing pipeline. For example, if you wanted to support searching on either British or American spelling, you could add a pipeline function to normalise certain words. Let&rsquo;s say we want to normalise the term &ldquo;grey&rdquo; so users can search by either British spelling &ldquo;grey&rdquo; or American spelling &ldquo;gray&rdquo;. To do this we can add a pipeline function to do the normalisation:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">normaliseSpelling</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// Define a pipeline function that converts 'gray' to 'grey'</span>
+  <span class="kd">var</span> <span class="nx">pipelineFunction</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"gray"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">token</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">"grey"</span> <span class="p">})</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">token</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Register the pipeline function so the index can be serialised</span>
+  <span class="nx">lunr</span><span class="p">.</span><span class="nx">Pipeline</span><span class="p">.</span><span class="nx">registerFunction</span><span class="p">(</span><span class="nx">pipelineFunction</span><span class="p">,</span> <span class="s1">'normaliseSpelling'</span><span class="p">)</span>
+
+  <span class="c1">// Add the pipeline function to both the indexing pipeline and the</span>
+  <span class="c1">// searching pipeline</span>
+  <span class="nx">builder</span><span class="p">.</span><span class="nx">pipeline</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">lunr</span><span class="p">.</span><span class="nx">stemmer</span><span class="p">,</span> <span class="nx">pipelineFunction</span><span class="p">)</span>
+  <span class="nx">builder</span><span class="p">.</span><span class="nx">searchPipeline</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">lunr</span><span class="p">.</span><span class="nx">stemmer</span><span class="p">,</span> <span class="nx">pipelineFunction</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As before, this plugin can then be used in an index:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">normaliseSpelling</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>A pipeline is run on all fields in a document during indexing. Each token passed to the pipeline functions includes <a href="#token-meta-data">meta-data</a> that indicates which field the token came from, this can be used to control which fields are processed by a particular pipeline function. The below example will skip <a href="core_concepts.html#stemming">stemming</a> on tokens from the &ldquo;name&rdquo; field of a document.</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Define a function that will skip a pipeline function for a specified field</span>
+<span class="kd">var</span> <span class="nx">skipField</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">metadata</span><span class="p">[</span><span class="s2">"fields"</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">token</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Create a stemmer that ignores tokens from the field "name"</span>
+<span class="kd">var</span> <span class="nx">selectiveStemmer</span> <span class="o">=</span> <span class="nx">skipField</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="nx">lunr</span><span class="p">.</span><span class="nx">stemmer</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="token-meta-data">Token Meta-data</h2>
+
+<p>Pipeline functions in Lunr are able to attach metadata to a token. An example of this is the token&rsquo;s position data, i.e. the location of the token in the indexed document. By default, no metadata is stored in the index; this is to reduce the size of the index. It is possible to whitelist certain token metadata. Whitelisted meta-data will be returned with search results and it can also be used by other pipeline functions.</p>
+
+<p>A <code>lunr.Token</code> has support for adding meta-data. For example, the following plugin will attach the length of a token as meta-data with key <code>tokenLength</code>. For it to be available in search results, this meta-data key is also added to the meta-data whitelist:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">tokenLengthMetadata</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Define a pipeline function that stores the token length as metadata</span>
+  <span class="kd">var</span> <span class="nx">pipelineFunction</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">token</span><span class="p">.</span><span class="nx">metadata</span><span class="p">[</span><span class="s1">'tokenLength'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span>
+    <span class="k">return</span> <span class="nx">token</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Register the pipeline function so the index can be serialised</span>
+  <span class="nx">lunr</span><span class="p">.</span><span class="nx">Pipeline</span><span class="p">.</span><span class="nx">registerFunction</span><span class="p">(</span><span class="nx">pipelineFunction</span><span class="p">,</span> <span class="s1">'tokenLenghtMetadata'</span><span class="p">)</span>
+
+  <span class="c1">// Add the pipeline function to the indexing pipeline</span>
+  <span class="nx">builder</span><span class="p">.</span><span class="nx">pipeline</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">lunr</span><span class="p">.</span><span class="nx">stemmer</span><span class="p">,</span> <span class="nx">pipelineFunction</span><span class="p">)</span>
+
+  <span class="c1">// Whitelist the tokenLength metadata key</span>
+  <span class="nx">builder</span><span class="p">.</span><span class="nx">metadataWhitelist</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'tokenLength'</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As with all plugins, using it in an index is simple:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">tokenLengthMetadata</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2 id="similarity-tuning">Similarity Tuning</h2>
+
+<p>The algorithm used by Lunr to calculate similarity between a query and a document can be tuned using two parameters. Lunr ships with sensible defaults, and these can be adjusted to provide the best results for a given collection of documents.</p>
+
+<dl>
+  <div>
+    <dt><code>b</code></dt>
+    <dd>
+      This parameter controls the importance given to the length of a document and its fields. This value must be between 0 and 1, and by default it has a value of 0.75. Reducing this value reduces the effect of different length documents on a term&rsquo;s importance to that document.
+    </dd>
+  </div>
+
+  <div>
+    <dt><code>k1</code></dt>
+    <dd>
+      This controls how quickly the boost given by a common word reaches saturation. Increasing it will slow down the rate of saturation and lower values result in quicker saturation. The default value is 1.2. If the collection of documents being indexed have high occurrences of words that are not covered by a stop word filter, these words can quickly dominate any similarity calculation. In these cases, this value can be reduced to get more balanced results.
+    </dd>
+  </div>
+</dl>
+
+<p>Both of these parameters can be adjusted when building the index:</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">lunr</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">k1</span><span class="p">(</span><span class="mf">1.3</span><span class="p">)</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">b</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+        </article>
+      </div>
+    </div>
+  </body>
+
+<!-- Mirrored from lunrjs.com/guides/customising.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Oct 2018 11:33:25 GMT -->
+</html>
