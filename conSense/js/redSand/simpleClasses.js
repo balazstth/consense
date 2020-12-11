@@ -19,7 +19,7 @@
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.33";
+const simpleClassesVersion = "1.34";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -100,6 +100,14 @@ class SimpleUtilities
         this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // SimpleUtilities
+    // Used for adjusting coordinates according to devicePixelRatio (magnification)
+    fixDPI(value) {
+        return value * window.devicePixelRatio;
     }
 
     //------------------------------------------------------------------------

@@ -1,0 +1,68 @@
+﻿
+<!-- -------------------------------------------------------------------------
+pageN0003-portal
+
+(c) Toth, Balazs Aladar, 2020, https://aladar.me/
+
+Document version 1.00
+-------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- ===================================================================== -->
+        <!-- Meta -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>... Portal ...</title>
+
+        <!-- ===================================================================== -->
+        <!-- Normal ConSense stub, either Debug or Release -->
+        <script charset="UTF-8" type="text/javascript" src="conSense/js/conSense/conSenseStubDebug.js"></script>
+        <!-- For graphics -->
+        <script>
+            // Fonts
+            stub.includeCSSFile("conSense/font/FiraCode/fira_code.css");
+            stub.includeCSSFile("conSense/font/Hack/web/hack.css");
+            stub.includeCSSFile("conSense/font/BlockZone/block_zone.css");
+            stub.includeCSSFile("conSense/font/Cousine/cousine.css");
+            stub.includeCSSFile("conSense/font/IBMPlexMono/ibm-plex-mono.css");
+
+            // CSS
+            stub.includeCSSFile("pages/n0003-portal/style/portal.css");
+
+            // Further libs
+            stub.includeJavaScriptFile("conSense/lib/optional/phaser.js");
+            stub.includeJavaScriptFile("pages/n0003-portal/js/curve.js");
+            stub.includeJavaScriptFile("conSense/lib/optional/mermaid.js");
+            stub.includeJavaScriptFile("conSense/lib/optional/anime.min.js");
+            stub.includeJavaScriptFile("conSense/lib/optional/raphael.js");
+
+            // Resources for demos
+            stub.includeJavaScriptFile("pages/n0003-portal/js/taiwan.js");
+
+        </script>
+
+        <!-- ===================================================================== -->
+        <!-- Startup -->
+        <script type="text/javascript">
+            function init()
+            {
+                //----------------------------------------------------------------------------
+                // Init ConSense
+                conSense.init(conSense.hide, 40, 40);
+                conSense.debug = true;
+                // Load UI definition
+                load("pages/n0003-portal/js/blueprint.js");
+                //----------------------------------------------------------------------------
+            }
+        </script>
+    </head>
+
+    <!-- ===================================================================== -->
+    <!-- Body -->
+    <body onLoad="init()">
+    </body>
+</html>

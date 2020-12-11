@@ -1,8 +1,8 @@
 <pre>
 //////////////////////////////////////////////////////////////////////////////
-// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2019
+// ConSense, RedSand and SimpleClasses by Toth, Balazs Aladar (c) 2005-2020
 // Documentation
-// v2.07
+// v2.08
 // https://aladar.me/
 //////////////////////////////////////////////////////////////////////////////
 
@@ -123,14 +123,24 @@ lunr 2.3.3           (c) Oliver Nightingale @ http://lunrjs.com
 // Animation library
 Velocity 1.0.0       (c) Julian Shapiro @ http://velocityjs.org/
 // Music players, wave and mods
-howler.js v2.0.15    (c) James Simpson of GoldFire Studios
+howler.js v2.2.1     (c) James Simpson of GoldFire Studios
                            @ https://goldfirestudios.com
 chiptune2.js         (c) The chiptune2.js contributers
                            @ https://github.com/deskjet/chiptune2.js/
 // Game programming library
-Phaser 3.14.0        (c) Photon Storm Ltd. @ http://phaser.io/
+Phaser 3.24.1        (c) Photon Storm Ltd. @ http://phaser.io/
 // Like Bootstrap
-bulma.io v0.7.2      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
+bulma.io v0.9.1      (c) Jeremy Thomas @ https://github.com/jgthms/bulma
+// Mermaid lets you represent diagrams using text and code
+mermaid 8.8.4        (c) Knut Sveidqvist & Contributors 
+                         @ https://mermaid-js.github.io/mermaid/#/
+// HTML5 creation engine
+pixi.js v4.4.5       (c) Goodboy Digital Ltd. @ https://www.pixijs.com/
+// Animation engine
+Anime.js v3.2.1      (c) Julian Garnier @ https://animejs.com/
+// SVG graphics library
+Raphael 2.3.0        (c) Dmitry Baranovskiy 
+                         @ https://dmitrybaranovskiy.github.io/raphael/
 
 o Fonts
 -------

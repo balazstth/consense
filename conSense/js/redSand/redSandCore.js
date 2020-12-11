@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2020
 // For detailed licensing information see conSense.js.
 // See redSandCoreVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -11,7 +11,7 @@
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.53";
+const redSandCoreVersion = "0.54";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -144,7 +144,7 @@ class RedSandGenericLoader
         // Load indication
 
         // Trigger
-        this.indicate = true;
+        this.indicate = false;
 
         // Number of loading processes in queue
         this.loadsInProgress = 0;
@@ -1021,7 +1021,7 @@ class RedSandWindowlet
         this.DOMContainer.style.height     = this.height + "px";
         this.DOMContainer.style.left       = this.left   + "px";
         this.DOMContainer.style.top        = this.top    + "px";
-        this.DOMContainer.style.background = background;
+        this.DOMContainer.style.background = this.background;
         this.DOMContainer.style.border     = this.border;
 
         document.body.appendChild(this.DOMContainer);

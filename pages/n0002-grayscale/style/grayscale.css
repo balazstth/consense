@@ -1,0 +1,14 @@
+html {
+  font-size: 15px;
+  overflow: hidden; }
+
+body {
+  font-family: "Cousine", "Hack", "Fira Code", "IBM Plex Mono", "BlockZone", monospace;
+  text-align: left;
+  font-feature-settings: "calt" 1;
+  font-feature-settings: "liga" 1;
+  text-rendering: optimizeLegibility;
+  background-image: linear-gradient(45deg, transparent 20%, black 25%, transparent 25%), linear-gradient(-45deg, transparent 20%, black 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, black 80%, transparent 0), radial-gradient(gray 1px, transparent 0);
+  background-size: 11px 11px, 11px 11px; }
+
+/*# sourceMappingURL=grayscale.css.map */

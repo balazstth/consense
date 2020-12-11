@@ -28508,7 +28508,7 @@ module.exports = tick;
 // Version
 //----------------------------------------------------------------------------
 
-const simpleClassesVersion = "1.33";
+const simpleClassesVersion = "1.34";
 
 //----------------------------------------------------------------------------
 // Debug class
@@ -28589,6 +28589,14 @@ class SimpleUtilities
         this.DOM_DOCUMENT_FRAGMENT_NODE = 11;
         this.DOM_NOTATION_NODE = 12;
         //////////////////////////////////////////////////////////////////////
+    }
+
+    //------------------------------------------------------------------------
+
+    // SimpleUtilities
+    // Used for adjusting coordinates according to devicePixelRatio (magnification)
+    fixDPI(value) {
+        return value * window.devicePixelRatio;
     }
 
     //------------------------------------------------------------------------
@@ -30055,7 +30063,7 @@ const simpleUtils   = new SimpleUtilities();
 const simpleCrypto  = new SimpleCryptography();
 const simpleStorage = new SimpleStorage();
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2020
 // For detailed licensing information see conSense.js.
 // See redSandCoreVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -30067,7 +30075,7 @@ const simpleStorage = new SimpleStorage();
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandCoreVersion = "0.53";
+const redSandCoreVersion = "0.54";
 
 //----------------------------------------------------------------------------
 // RedSandUtilities
@@ -30200,7 +30208,7 @@ class RedSandGenericLoader
         // Load indication
 
         // Trigger
-        this.indicate = true;
+        this.indicate = false;
 
         // Number of loading processes in queue
         this.loadsInProgress = 0;
@@ -31077,7 +31085,7 @@ class RedSandWindowlet
         this.DOMContainer.style.height     = this.height + "px";
         this.DOMContainer.style.left       = this.left   + "px";
         this.DOMContainer.style.top        = this.top    + "px";
-        this.DOMContainer.style.background = background;
+        this.DOMContainer.style.background = this.background;
         this.DOMContainer.style.border     = this.border;
 
         document.body.appendChild(this.DOMContainer);
@@ -31411,7 +31419,7 @@ class RedSandGLPrimitive
     
 }
 //////////////////////////////////////////////////////////////////////////////
-// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2019
+// RedSand dynamic JavaScript toolkit by Toth, Balazs Aladar (c) 2005-2020
 // For detailed licensing information see conSense.js.
 // See redSandOSVersion and the changelog for detailed version info.
 // https://aladar.me/
@@ -31423,7 +31431,7 @@ class RedSandGLPrimitive
 // Globals
 //----------------------------------------------------------------------------
 
-const redSandOSVersion = "0.08";
+const redSandOSVersion = "0.09";
 
 //----------------------------------------------------------------------------
 // redSandDesktop
@@ -31459,33 +31467,47 @@ class RedSandDesktop
         this.palette.PICO_indigo      = "rgb(131, 118, 156)";
         this.palette.PICO_pink        = "rgb(255, 119, 168)";
         this.palette.PICO_peach       = "rgb(255, 204, 170)";
-        // Bulma grayscale colors (grey = gray in my notation)
-        this.palette.black_bis        = "hsl(0, 0%,  7%)";
-        this.palette.black_ter        = "hsl(0, 0%, 14%)";
-        this.palette.gray_darker      = "hsl(0, 0%, 21%)";
-        this.palette.gray_dark        = "hsl(0, 0%, 29%)";
-        this.palette.gray_light       = "hsl(0, 0%, 71%)";
-        this.palette.gray_lighter     = "hsl(0, 0%, 86%)";
-        this.palette.white_ter        = "hsl(0, 0%, 96%)";
-        this.palette.white_bis        = "hsl(0, 0%, 98%)";
-        // CGA colors (DOS
-        this.palette.CGA_black        = "#000000";
-        this.palette.CGA_blue         = "#0000AA";
-        this.palette.CGA_green        = "#00AA00";
-        this.palette.CGA_cyan         = "#00AAAA";
-        this.palette.CGA_red          = "#AA0000";
-        this.palette.CGA_magenta      = "#AA00AA";
-        this.palette.CGA_brown        = "#AA5500";
-        this.palette.CGA_silver       = "#AAAAAA";
-        this.palette.CGA_gray         = "#555555";
-        this.palette.CGA_light_blue   = "#5555FF";
-        this.palette.CGA_light_green  = "#55FF55";
-        this.palette.CGA_light_cyan   = "#55FFFF";
-        this.palette.CGA_light_red    = "#FF5555";
-        this.palette.CGA_pink         = "#FF55FF";
-        this.palette.CGA_yellow       = "#FFFF55";
-        this.palette.CGA_white        = "#FFFFFF";
         
+        // Bulma colors (grey = gray in my notation)
+        this.palette.BULMA_black         = "hsl(0, 0%, 4%)";
+        this.palette.BULMA_black_bis     = "hsl(0, 0%, 7%)";
+        this.palette.BULMA_black_ter     = "hsl(0, 0%, 14%)";
+        this.palette.BULMA_gray_darker   = "hsl(0, 0%, 21%)";
+        this.palette.BULMA_gray_dark     = "hsl(0, 0%, 29%)";
+        this.palette.BULMA_gray          = "hsl(0, 0%, 48%)";
+        this.palette.BULMA_gray_light    = "hsl(0, 0%, 71%)";
+        this.palette.BULMA_gray_lighter  = "hsl(0, 0%, 86%)";
+        this.palette.BULMA_gray_lightest = "hsl(0, 0%, 93%)";
+        this.palette.BULMA_white_ter     = "hsl(0, 0%, 96%)";
+        this.palette.BULMA_white_bis     = "hsl(0, 0%, 98%)";
+        this.palette.BULMA_white         = "hsl(0, 0%, 100%)";
+        this.palette.BULMA_orange        = "hsl(14, 100%, 53%)";
+        this.palette.BULMA_yellow        = "hsl(48, 100%, 67%)";
+        this.palette.BULMA_green         = "hsl(141, 53%, 53%)";
+        this.palette.BULMA_turquoise     = "hsl(171, 100%, 41%)";
+        this.palette.BULMA_cyan          = "hsl(204, 71%, 53%)";
+        this.palette.BULMA_blue          = "hsl(217, 71%, 53%)";
+        this.palette.BULMA_purple        = "hsl(271, 100%, 71%)";
+        this.palette.BULMA_red           = "hsl(348, 86%, 61%)";
+
+        // CGA colors (DOS
+        this.palette.CGA_black       = "#000000";
+        this.palette.CGA_blue        = "#0000AA";
+        this.palette.CGA_green       = "#00AA00";
+        this.palette.CGA_cyan        = "#00AAAA";
+        this.palette.CGA_red         = "#AA0000";
+        this.palette.CGA_magenta     = "#AA00AA";
+        this.palette.CGA_brown       = "#AA5500";
+        this.palette.CGA_silver      = "#AAAAAA";
+        this.palette.CGA_gray        = "#555555";
+        this.palette.CGA_light_blue  = "#5555FF";
+        this.palette.CGA_light_green = "#55FF55";
+        this.palette.CGA_light_cyan  = "#55FFFF";
+        this.palette.CGA_light_red   = "#FF5555";
+        this.palette.CGA_pink        = "#FF55FF";
+        this.palette.CGA_yellow      = "#FFFF55";
+        this.palette.CGA_white       = "#FFFFFF";
+            
         //////////////////////////////////////////////////////////////////////
     }
 
@@ -31531,7 +31553,7 @@ class RedSandDesktop
         dim.width  /= 100;
         dim.height /= 100;
 
-        dim.width = Math.ceil(dim.width);
+        dim.width = Math.floor(dim.width);
 
         return dim;
     }
@@ -31567,6 +31589,8 @@ class RedSandLauncher
         // Window registry
         this.blueprint = new Set();
 
+        // This is merely a demo of possibe art styles, define your own according
+        // to the structure of the records below.
         this.ART = {
             "bw": {
                 // Handle or header
@@ -31576,7 +31600,7 @@ class RedSandLauncher
                 contentBgColor: redSandDesktop.palette.CGA_white,
                 contentColor:   redSandDesktop.palette.CGA_black
             },            
-            "indigo": {
+            "PICO_indigo": {
                 // Handle or header
                 handleBgColor:  redSandDesktop.palette.PICO_indigo,
                 handleColor:    redSandDesktop.palette.PICO_white,
@@ -31584,14 +31608,30 @@ class RedSandLauncher
                 contentBgColor: redSandDesktop.palette.PICO_white,
                 contentColor:   redSandDesktop.palette.PICO_dark_gray
             },
-            "blue": {
+            "PICO_blue": {
                 // Handle or header
                 handleBgColor:  redSandDesktop.palette.PICO_blue,
                 handleColor:    redSandDesktop.palette.PICO_white,
                 // Content
                 contentBgColor: redSandDesktop.palette.PICO_white,
                 contentColor:   redSandDesktop.palette.PICO_dark_gray
-            }            
+            },
+            "BULMA_green": {
+                // Handle or header
+                handleBgColor:  redSandDesktop.palette.BULMA_green,
+                handleColor:    redSandDesktop.palette.BULMA_white_bis,
+                // Content
+                contentBgColor: redSandDesktop.palette.BULMA_white_bis,
+                contentColor:   redSandDesktop.palette.BULMA_black
+            },
+            "BULMA_turquoise": {
+                // Handle or header
+                handleBgColor:  redSandDesktop.palette.BULMA_turquoise,
+                handleColor:    redSandDesktop.palette.BULMA_white_bis,
+                // Content
+                contentBgColor: redSandDesktop.palette.BULMA_white_bis,
+                contentColor:   redSandDesktop.palette.BULMA_black
+            },
         };
         //////////////////////////////////////////////////////////////////////
     }
@@ -31601,9 +31641,9 @@ class RedSandLauncher
     // Window functions
 
     // RedSandLauncher
-    addWindow(x, y, width, height, title = "", art = this.ART["bw"])
+    addWindow(x, y, width, height, title = "", art = this.ART["bw"], hasGraphics = false)
     {
-        const window = new RedSandWindow(x, y, width, height, title, art);
+        const window = new RedSandWindow(x, y, width, height, title, art, hasGraphics);
         
         this.blueprint.add(window);
 
@@ -31625,11 +31665,17 @@ class RedSandLauncher
 // RedSandWindow
 //----------------------------------------------------------------------------
 
+// These are windows made out of RedSandWindowlets.
+// Key features:
+//     o a textmode handle line
+//     o textmode-emulated contents
+//     o an optional graphics mode for the contents instead of text
+
 class RedSandWindow
 {
     //------------------------------------------------------------------------
 
-    constructor(x, y, width, height, title, art) 
+    constructor(x, y, width, height, title, art, hasGraphics) 
     {
         //////////////////////////////////////////////////////////////////////
         // RedSandWindow                                       Class variables
@@ -31638,13 +31684,27 @@ class RedSandWindow
         this.version = redSandOSVersion;
 
         this.NBSP = "\u00A0";
-        this.art = art;
+        this.art = art;                   // Window decoration, color, etc.
+        this.hasGraphics = hasGraphics;   // Tells if the window is in graphics mode
+                                          // rather than text.
+                                          // *** This overrides content-text rendering!
 
+        this.canvas = undefined;          // Only defined if graphics mode + a canvas was
+                                          // added with addCanvas()
+        this.ctx = undefined;             // 2D context of the canvas
+
+        this.div = undefined;             // Only defined if graphics mode + a div was
+                                          // added with addDiv()
+
+        // Dimensions of the whole window, in characters
         this.width  = width;                    // Valid >= 2
-        this.height = height;                   // Valid >= 2
-        this.clientWidth  = this.width  - 2;    // Valid >= 0
-        this.clientHeight = this.height - 2;    // Valid >= 0
+        this.height = height;                   // Valid >= 1 (minimum a header)
+        // Usable space for text contents, in characters
+        this.clientWidth  = this.width;         // Valid >= 2
+        this.clientHeight = this.height - 1;    // Valid >= 0
+
         this.title = title;
+        this.titlePrefix = " C:\\> ";     // Window decoration 
         
         // 2D arrays, initialized in this.createCharacterWindow()
         this.charBuffer = [];
@@ -31676,6 +31736,8 @@ class RedSandWindow
 
     // RedSandWindow
     // Creates a window, sets size in characters.
+    // Importantly, the rendered text output is valid HTML, so selectable text.
+    // Windows have an optional graphics mode as well (with a text title bar).
     // Returns undefined on invalid params.
     createCharacterWindow(x, y) 
     {
@@ -31683,6 +31745,10 @@ class RedSandWindow
         {
             return;
         }
+
+        // This here is a character-based process, window dimensions will be
+        // multiples of character dimensions. That is a shortcoming of this approach,
+        // beside its benefits.
 
         const charDim = redSandDesktop.getCharDimensions();
         this.lineBorder = Math.floor(charDim.height / 4);
@@ -31699,7 +31765,12 @@ class RedSandWindow
         this.windowlet.DOMContainer.style["box-shadow"] 
             = `${2 * charDim.width}px ${this.lineHeight}px 2px rgba(0, 0, 0, .75)`;
 
-        // Populate buffers
+        // ***
+        // In case of graphics mode only the tile bar will be rendered
+        if (this.hasGraphics) this.height = 1;
+
+        // ***
+        // Populate text buffers
         for (let i = 0; i < this.height; i++)
         {
             this.charBuffer[i] = [];
@@ -31728,7 +31799,7 @@ class RedSandWindow
             }
         }
 
-        this.setTitle(" C:\\> " + this.title);
+        this.setTitle(this.titlePrefix + this.title);
         this.render();
     }
 
@@ -31742,7 +31813,7 @@ class RedSandWindow
     // seems to be off by a fraction. Tried box-sizing: border-box; as well, to no avail.
     render() 
     {
-        if (this.width < 2 || this.height < 2)
+        if (this.width < 2 || this.height < 1)
         {
             return;
         }
@@ -31879,7 +31950,7 @@ class RedSandWindow
     // Sets and displays a new window title.
     setTitle(title) 
     {
-        if (this.width < 2 || this.height < 2)
+        if (this.width < 2 || this.height < 1)
         {
             return;
         }
@@ -31887,6 +31958,79 @@ class RedSandWindow
         this.title = title;
 
         this.write(0, 0, title);
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // DPI fix for the canvas
+    // Private
+    fixCanvasDPI() {    
+        const height = window.getComputedStyle(this.canvas).getPropertyValue('height').slice(0, -2);
+        const width = window.getComputedStyle(this.canvas).getPropertyValue('width').slice(0, -2);
+        
+        this.canvas.setAttribute('width', simpleUtils.fixDPI(width));
+        this.canvas.setAttribute('height', simpleUtils.fixDPI(height));
+    }
+    
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // ***
+    // Utility function
+    // Add canvas in case of graphics mode
+    addCanvas(width, height) {
+        this.canvas = document.createElement('canvas');
+
+        this.canvas.id               = this.windowlet.DOMContainer.id + "Canvas";
+        this.canvas.style.width      = width  + "px";    // "px" for HTML5
+        this.canvas.style.height     = height + "px";
+        this.canvas.style.background = this.art.contentBgColor;
+
+        this.ctx = this.canvas.getContext("2d");
+        
+        this.windowlet.DOMContainer.insertAdjacentElement('beforeend', this.canvas);
+
+        this.fixCanvasDPI();
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // ***
+    // Utility function
+    // Add canvas in case of graphics mode
+    // with the correct size according to the original window dimensions
+    addSizedCanvas() {
+        this.addCanvas(this.windowlet.width, this.windowlet.height - this.windowlet.handleHeight);
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // ***
+    // Utility function
+    // Add a general-purpose div in case of graphics mode
+    addDiv(width, height) {
+        this.div = document.createElement('div');
+
+        this.div.id               = this.windowlet.DOMContainer.id + "Div";
+        this.div.style.width      = width  + "px";    // "px" for HTML5
+        this.div.style.height     = height + "px";
+        this.div.style.background = this.art.contentBgColor;
+
+        this.windowlet.DOMContainer.insertAdjacentElement('beforeend', this.div);
+    }
+
+    //------------------------------------------------------------------------
+
+    // RedSandWindow
+    // ***
+    // Utility function
+    // Add a general-purpose div in case of graphics mode
+    // with the correct size according to the original window dimensions
+    addSizedDiv() {
+        this.addDiv(this.windowlet.width, this.windowlet.height - this.windowlet.handleHeight);
     }
 
     //========================================================================
@@ -31898,7 +32042,7 @@ class RedSandWindow
     {
         if (this.cursorTimer === undefined)
         {
-            this.cursorTimer = new RedSandTimer(1000, this.cursorAnim);
+            this.cursorTimer = new RedSandTimer(this, this.cursorAnim, 1000);
         }
     }
 
@@ -31917,6 +32061,10 @@ class RedSandWindow
     // (Maybe an option for a custom anim callback will be added in the future.)
     cursorAnim() 
     {
+        this.write(this.cursorX, this.cursorY, "#");
+        // TODO: Change this into a blinking cursor. Blink background (and foreground?)
+        // color at he given position. Black and white or inverted colors.
+        this.render();
     }
 
 }
@@ -31929,18 +32077,20 @@ class RedSandTimer
 {
     //------------------------------------------------------------------------
 
-    // interval: in milliseconds
+    // context: context class
     // callback: to call when tick
-    constructor(interval, callback) 
+    // interval: in milliseconds
+    constructor(context, callback, interval) 
     {
         //////////////////////////////////////////////////////////////////////
         // RedSandTimer                                        Class variables
         //////////////////////////////////////////////////////////////////////
 
-        this.interval = interval;
+        this.context = context;
         this.callback = callback;
+        this.interval = interval;
 
-        this.timeout = setTimeout(callback, interval);
+        this.on();  // It is on by default at creation
 
         //////////////////////////////////////////////////////////////////////
     }
@@ -31952,7 +32102,8 @@ class RedSandTimer
     {
         if (this.timeout === undefined)
         {
-            this.timeout = setTimeout(this.callback, this.interval);
+            let that = this.context;
+            this.timeout = setTimeout(this.callback.bind(that), this.interval);
         }
     }
 
@@ -31995,7 +32146,7 @@ const redSandLauncher = new RedSandLauncher();
 
 //----------------------------------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////
-// ConSense by Toth, Balazs Aladar (c) 2005-2019, comes under the terms of the
+// ConSense by Toth, Balazs Aladar (c) 2005-2020, comes under the terms of the
 // MIT License (http://www.opensource.org/licenses/mit-license.html)
 // See conSense.version and the Changelog for detailed version info.
 // Currently supported browsers: latest Firefox, Chrome, Edge and probably all
@@ -32163,7 +32314,7 @@ class ConSense
         //////////////////////////////////////////////////////////////////////
         // ConSense                                            Class variables
         //////////////////////////////////////////////////////////////////////
-        this.version = "1.23";
+        this.version = "1.24";
 
         // Toggle debug operation
         this.debug = true;
@@ -33454,7 +33605,7 @@ class ConSense
     {
         this.writeLn("The ConSense MIT-like license:<br />");
         this.writeLn("---license---");
-        this.writeLn("Copyright (c) 2005-2008 Bal&aacute;zs T&oacute;th (contact dot consense at gmail dot com)<br />");
+        this.writeLn("Copyright (c) 2005-2020 Bal&aacute;zs T&oacute;th (contact dot consense at gmail dot com)<br />");
         this.writeLn("Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br />");
         this.writeLn("The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br />");
         this.writeLn("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
@@ -33490,7 +33641,7 @@ class ConSense
         this.writeLn(this.highlight("This") + " style is used for simple highlighting and " + this.highlightAppendLink("this") + " is a clickable autoappend input string.");
         this.writeLn("Doubleclicking the output area focuses the input line. Up/down arrow keys control command history.");
         this.writeLn("Works best with any modern browser.");
-        this.writeLn("ConSense is (c) 2005-2019 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
+        this.writeLn("ConSense is (c) 2005-2020 Bal&aacute;zs T&oacute;th. See " + this.highlightAppendLink("license()") + " for details.");
     }
 
 }

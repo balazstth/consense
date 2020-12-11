@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAcA,IAAK;EACD,SAAS,EAAE,IAAI;EACf,QAAQ,EAAE,MAAM;;AAGpB,IAAK;EAfD,WAAW,EAHH,uEAAuE;EAI/E,UAAU,EAAE,IAAI;EAChB,qBAAqB,EAAE,QAAQ;EAC/B,qBAAqB,EAAE,QAAQ;EAC/B,cAAc,EAAE,kBAAkB;EAelC,gBAAgB,EAAE,uPAGwC;EAC1D,eAAe,EAAE,oBAAoB",
-"sources": ["grayscale.scss"],
-"names": [],
-"file": "grayscale.css"
-}
